@@ -1,0 +1,72 @@
+%banner-bg-gr-1 {
+  background: linear-gradient(
+    90deg,
+    $color-primary-dark,
+    rgba($color-primary-dark, 1),
+    rgba($color-primary-dark, .9),
+    rgba($color-primary-dark, .8),
+    rgba($color-primary-dark, .6)
+  ),$banner-bg-1;
+}
+
+%path-bg-gr-1 {
+  background: linear-gradient(
+    90deg,
+    white,
+    rgba(white, 1),
+    rgba(white, .9),
+    rgba(white, .8),
+    rgba(white, .9),
+    rgba(white, 1)
+  ),$banner-bg-1;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+%banner-bg-gr-2 {
+  background: linear-gradient(
+    90deg,
+    $color-primary-dark,
+    rgba($color-primary-dark, 1),
+    rgba($color-primary-dark, .9),
+    rgba($color-primary-dark, .8),
+    rgba($color-primary-dark, .6)
+  ),$banner-bg-2;
+}
+
+%banner-bg-gr-3 {
+  background: linear-gradient(
+    90deg,
+    $color-primary-dark,
+    rgba($color-primary-dark, 1),
+    rgba($color-primary-dark, .9),
+    rgba($color-primary-dark, .8),
+    rgba($color-primary-dark, .6)
+  ),$banner-bg-3;
+  // background-position: right;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+%product-bg-gr-1 {
+  background: linear-gradient(
+    90deg,
+    $sColor,
+    rgba($sColor, 1),
+    rgba($sColor, .9),
+    rgba($sColor, .8),
+    rgba($sColor, .6)
+  ),$products-bg-1;
+}
+
+
+%login-bg-gr-1 {
+  background: linear-gradient(
+    90deg,
+    rgba($sColor, .9),
+    rgba($sColor, .7),
+    rgba($sColor, .6),
+    rgba($sColor, .4)
+  ),$banner-bg-1;
+}
