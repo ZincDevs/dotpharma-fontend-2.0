@@ -1,17 +1,30 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { createRoot } from 'react-dom/client';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import './assets/css/style.css';
+import { Provider } from 'react-redux';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import App from './components/App';
+import { store } from './app/store';
+import { AuthProvider } from './context/AuthProvider';
+// import ContactUs from './views/communication/contactus/ContactUs';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const container = document.getElementById('root');
+const root = createRoot(container);
 root.render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+    <BrowserRouter>
+      <AuthProvider>
+        <Provider store={store}>
+          {/* <ContactUs /> */}
+          <Routes>
+            <Route path="/*" element={<App />} />
+          </Routes>
+        </Provider>
+      </AuthProvider>
+    </BrowserRouter>
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+  </React.StrictMode>
+  ,
+);
