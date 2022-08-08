@@ -1,0 +1,57 @@
+
+.toolbar-links {
+  position: relative;
+
+  a {
+    line-height: 1;
+    color: $textColor-1;
+  }
+
+  .tl-icon-count-holder {
+    position: relative;
+    display: inline-block;
+    color: #21a06a;
+
+    .tl-icon {
+      display: inline-block;
+      font-size: 3em;
+      vertical-align: middle;
+    }
+
+    .tl-count {
+      font-size: 15px;
+      line-height: 20px;
+      width: 24px;
+      height: 24px;
+      text-align: center;
+      background-color: #f8f8f8;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      position: absolute;
+      top: -4px;
+      right: -6px;
+    }
+  }
+
+  .tl-text-holder {
+    font-size: 15px;
+    margin-left: 17px;
+
+    .tl-title {
+      font-family: Roboto, sans-serif;
+      letter-spacing: 0;
+      color: #2c2c2c;
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .tl-subtitle {}
+  }
+
+  &:hover {
+    a {
+      color: $color_accent_3;
+    }
+  }
+}
