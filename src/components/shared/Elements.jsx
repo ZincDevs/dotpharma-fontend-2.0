@@ -34,11 +34,11 @@ function ToolBarTDP({
   );
 }
 
-function Price({ discount, price }) {
+function Price({ discount, price, center }) {
   const discountPrice = (discount * price) / 100;
   const finalPrice = (!discount || discount === 0) ? price : price - discount;
   return (
-    <div>
+    <div className={`d-flex ${center && 'justify-content-center align-items-center'}`}>
       <div className="qodef-woo-product-price price">
         {discount && (
           <del aria-hidden="true">
@@ -54,6 +54,21 @@ function Price({ discount, price }) {
             {finalPrice}
           </span>
         </ins>
+      </div>
+    </div>
+  );
+}
+
+function ItemFotter({ center }) {
+  return (
+    <div className={`d-flex  item-fotter ${center && 'justify-content-center align-items-center'}`}>
+      <div className="d-flex footer-child">
+        <i className="bi bi-eye px-1" />
+        <a href="#" className="button yith-wcqv-button" data-product_id="3211">Quick View</a>
+      </div>
+      <div className="d-flex justify-content-center align-items-center">
+        <i className="bi bi-heart px-1" />
+        <a href="#" className="button yith-wcqv-button" data-product_id="3211">Quick View</a>
       </div>
     </div>
   );
@@ -100,4 +115,5 @@ export {
   ProgressBar,
   ToolBarTDP,
   Price,
+  ItemFotter,
 };

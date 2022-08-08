@@ -1,10 +1,12 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import { ButtonLink, Button, FloatingButton } from './Buttons';
-import { ToolBarTDP, Price } from './Elements';
+import { ToolBarTDP, Price, ItemFotter } from './Elements';
+import ProductItem, { ProductItemHor } from './ProductItem';
 
 export default function Index() {
   return (
-    <div className="container mt-5">
+    <div className="container my-5">
       <div className="row">
         <hr />
         <h4>Buttons</h4>
@@ -36,7 +38,7 @@ export default function Index() {
               <Button link="/" text="Add to cart" />
             </div>
           </div>
-          <h6>Loating Buttons</h6>
+          <h6>Floating Buttons</h6>
           <div className="d-flex">
             <div className="px-1">
               <FloatingButton link="/" text="-2%" icon="bi bi-bag" />
@@ -105,6 +107,62 @@ export default function Index() {
               <Price
                 price={100}
               />
+            </div>
+          </div>
+        </div>
+        <div>
+          <hr />
+          <h6>More</h6>
+          <div className="d-flex flex-column">
+            <div className="px-1">
+              Width discount
+              <ItemFotter />
+            </div>
+          </div>
+        </div>
+        <div className="mt-5">
+          <hr />
+          <h6>Items</h6>
+          <div className="d-flex flex-column">
+            <div className="px-1">
+              <div className="item-list d-flex col-12 flex-wrap">
+                <div className="col-3 p-1">
+                  <ProductItem />
+                </div>
+                <div className="col-3 p-1">
+                  <ProductItem />
+                </div>
+                <div className="col-3 p-1">
+                  <ProductItem />
+                </div>
+                <div className="col-3 p-1">
+                  <ProductItem />
+                </div>
+                <div className="col-3 p-1">
+                  <ProductItem />
+                </div>
+                <div className="col-3 p-1">
+                  <ProductItem />
+                </div>
+                <div className="col-3 p-1">
+                  <ProductItem />
+                </div>
+                <div className="col-3 p-1">
+                  <ProductItem />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="d-flex flex-column mt-5">
+            <div className="px-1">
+              <div className="item-list d-flex col-12 flex-wrap">
+                <div className="col-10 p-1">
+                  <ProductItemHor />
+                </div>
+                <div className="col-10 p-1">
+                  <ProductItemHor />
+                </div>
+              </div>
             </div>
           </div>
         </div>

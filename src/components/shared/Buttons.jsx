@@ -27,7 +27,7 @@ function ButtonLink({ link, text, icon }) {
   return (
     <div className="py-2 w-auto">
       <Link to={link} className="btn-1">
-        <div className="w-100 py-2 px-3 d-flex justify-content-center align-items-center">
+        <div className="w-100 py-1 px-1 d-flex justify-content-center align-items-center">
           <div className="d-flex justify-content-center align-items-center">
             <div className="px-1 d-flex justify-content-center align-items-center">
               {icon && (<i className={icon} />)}
