@@ -1,4 +1,4 @@
-@import "https://fonts.googleapis.com/css2?family=Dosis:wght@700&family=Poppins:wght@700&family=Roboto&display=swap";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
 @import "./theme";
 @import "./abstracts/screens";
 @import './abstracts/font_face';
@@ -19,9 +19,9 @@
 @import "./login";
 @import "./signup";
 // @import "./doctor";
-// @import "./layouts/header";
-// @import "./layouts/banner";
-// @import "./layouts/products";
+@import "./layouts/header.scss";
+@import "./layouts/banner";
+@import "./layouts/products";
 // @import "./layouts/contactus";
 // @import "./layouts/home";
 

@@ -8,6 +8,7 @@ import Signup from './auth/Signup';
 import ForgotPassword from './auth/ForgotPassword';
 import ApplyPasswordReset from './auth/ApplyPasswordReset';
 import NotFound from './shared/NotFound';
+import Home from './Pages/Home';
 // import Empty from './shared/Empty';
 import Verification from './auth/VerificationComplete';
 import TermsAndConditions from './settings/TermsAndConditions';
@@ -38,6 +39,7 @@ function App() {
       <Route path="/" key={key()} element={<Layout />}>
 
         {/* Public Routes for users */}
+        <Route path="/" key={key()} element={<Home />} />
         <Route path="/login" key={key()} element={<Login />} />
         <Route path="/forgot-password" key={key()} element={<ForgotPassword />} />
         <Route path="/reset-password" key={key()} element={<ApplyPasswordReset />} />

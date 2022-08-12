@@ -1,4 +1,4 @@
-@import "https://fonts.googleapis.com/css2?family=Dosis:wght@700&family=Poppins:wght@700&family=Roboto&display=swap";
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Quicksand&display=swap");
 @font-face {
   font-family: "valken";
@@ -166,10 +166,10 @@
 }
 @keyframes ripple {
   0% {
-    box-shadow: 0 0 0 0rem rgba(106, 191, 140, 0.2), 0 0 0 5px rgba(106, 191, 140, 0.2), 0 0 0 10px rgba(106, 191, 140, 0.2);
+    box-shadow: 0 0 0 0rem rgba(106, 190, 140, 0.2), 0 0 0 5px rgba(106, 190, 140, 0.2), 0 0 0 10px rgba(106, 190, 140, 0.2);
   }
   100% {
-    box-shadow: 0 0 0 1rem rgba(106, 191, 140, 0.2), 0 0 0 5px rgba(106, 191, 140, 0.2), 0 0 0 10px rgba(106, 191, 140, 0);
+    box-shadow: 0 0 0 1rem rgba(106, 190, 140, 0.2), 0 0 0 5px rgba(106, 190, 140, 0.2), 0 0 0 10px rgba(106, 190, 140, 0);
   }
 }
 @-webkit-keyframes wheel-up-down {
@@ -245,11 +245,12 @@
   }
 }
 .btn-1 {
+  cursor: pointer;
   display: inline-block;
   font-size: 0.7em !important;
   font-family: disis;
   font-weight: 10;
-  background-color: #66BD89;
+  background-color: #66BC89;
   font-size: 8px;
   color: white;
   padding: 8px 15px;
@@ -265,13 +266,15 @@
   font-size: larger;
   padding-right: 8px;
 }
-.btn-1 span {
-  font-size: small;
+.btn-1 label {
+  font-size: 1.3em;
+  font-weight: 700;
+  font-family: "Dosis", sans-serif;
+  cursor: pointer;
 }
 .btn-1:hover {
   color: white;
-  box-shadow: 0px 0px 6px rgba(171, 171, 171, 0.401);
-  background-color: #48a86f;
+  background-color: #49a66f;
 }
 
 .btn-2 {
@@ -280,7 +283,7 @@
   border-radius: 50px;
   font-weight: 10;
   font-family: dosis !important;
-  border: 1px solid #66BD89;
+  border: 1px solid #66BC89;
   font-size: 8px;
   color: white !important;
   -o-transition: all 0.4s ease-in-out;
@@ -336,7 +339,7 @@
 .toolbar-links .tl-icon-count-holder {
   position: relative;
   display: inline-block;
-  color: #21a06a;
+  color: #66BC89;
 }
 .toolbar-links .tl-icon-count-holder .tl-icon {
   display: inline-block;
@@ -420,7 +423,7 @@
   color: #2d2d2d !important;
 }
 .product-item:hover {
-  outline: 1px dashed #66BD89;
+  outline: 1px dashed #66BC89;
 }
 .product-item:hover h5 a {
   text-decoration: underline;
@@ -428,11 +431,108 @@
 }
 
 body {
-  background-color: #F5F5F5;
+  background-color: white;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+a,
+abbr,
+acronym,
+address,
+applet,
+b,
+big,
+blockquote,
+body,
+caption,
+center,
+cite,
+code,
+dd,
+del,
+dfn,
+div,
+dl,
+dt,
+em,
+fieldset,
+font,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+html,
+i,
+iframe,
+ins,
+kbd,
+label,
+legend,
+li,
+object,
+ol,
+p,
+pre,
+q,
+s,
+samp,
+small,
+span,
+strike,
+strong,
+sub,
+sup,
+table,
+tbody,
+td,
+tfoot,
+th,
+thead,
+tr,
+tt,
+u,
+ul,
+var {
+  vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+  background: 0 0;
+  border: 0;
+  outline: 0;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+main,
+nav,
+section {
+  display: block;
+}
+
+ul {
+  display: block;
+  list-style-type: disc;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+}
+
+li {
+  display: list-item;
+  text-align: -webkit-match-parent;
 }
 
 h1,
@@ -442,6 +542,13 @@ h4,
 h5,
 h6 {
   font-family: "Poppins", sans-serif;
+}
+
+ul,
+li {
+  list-style: none;
+  padding: 0;
+  margin-left: 0 !important;
 }
 
 a {
@@ -1021,6 +1128,14 @@ input {
   text-decoration: none;
 }
 
+.small-gray-text a {
+  font-size: 0.9em;
+  color: rgb(134, 134, 134);
+}
+.small-gray-text a:hover {
+  color: #66BC89;
+}
+
 .shared-container {
   background-color: #F5F5F5;
 }
@@ -1225,7 +1340,7 @@ input {
   display: flex;
   margin-left: 4px;
   font-weight: 800;
-  color: #66BD89;
+  color: #66BC89;
 }
 .splash h3 strong::before, .splash h3 strong::after {
   content: ".";
@@ -1255,6 +1370,38 @@ input {
   padding-left: 0.5em;
   opacity: 0.5;
   cursor: pointer;
+}
+
+.alert-alert {
+  background-color: #efefef;
+}
+.alert-alert small,
+.alert-alert span {
+  color: #3d3d3d;
+}
+.alert-alert a {
+  text-decoration: underline;
+  font-size: small;
+  color: black;
+  font-weight: 900;
+  text-decoration: none;
+  margin-left: 10px;
+  font-family: "Roboto", sans-serif;
+}
+.alert-alert small {
+  font-family: "Roboto", sans-serif;
+}
+.alert-alert .close {
+  border-color: #3d3d3d;
+  color: #66BC89;
+}
+.alert-alert .close i {
+  font-size: 1em;
+}
+
+.close-cont {
+  position: absolute;
+  right: 13px;
 }
 
 .simple-alert {
@@ -1558,7 +1705,7 @@ input {
 }
 
 .email-sent h1 {
-  color: #66BD89;
+  color: #66BC89;
 }
 .email-sent h1 i {
   font-size: 2em;
@@ -1578,6 +1725,356 @@ input {
 .v-c-failed {
   background-color: white;
   box-shadow: 0 0 7px 0 #e1e1e1;
+}
+
+.logo {
+  height: 40px;
+  position: relative;
+}
+.logo span {
+  color: #2FA06A;
+  text-transform: uppercase;
+  font-size: 1.2em;
+  margin-left: 10px;
+}
+.logo span:after {
+  position: absolute;
+  top: 10px;
+  right: -5px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  content: "";
+  background: #7dbae4;
+  animation: pulse-a 2s infinite;
+}
+
+.header-top {
+  border-bottom: 1px solid #ededed;
+}
+.header-top .container {
+  margin: 0 !important;
+  padding-bottom: 0 !important;
+}
+.header-top .container div {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+
+.qodef-message-free-shipping {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #21a06a;
+  text-align: center;
+  line-height: 1.556em;
+  margin: 0;
+}
+
+.toolbar-container {
+  background-color: #66BC89;
+}
+.toolbar-container .links {
+  position: relative;
+}
+.toolbar-container .links ul li {
+  position: relative;
+  margin-right: 25px;
+  color: white;
+  font-weight: 800;
+  font-family: "Dosis", sans-serif;
+  cursor: pointer;
+}
+.toolbar-container .links .right a {
+  color: white !important;
+  font-weight: 800;
+  font-family: "Dosis", sans-serif;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+.toolbar-container .links .down-down-menu {
+  margin-top: 15.6px;
+  position: absolute;
+  display: block;
+  border: 1px solid #efefef;
+  width: 400px;
+  height: 200px;
+  z-index: 3;
+}
+.toolbar-container .links .dropdown-menu-arrow {
+  top: -19px;
+  left: 20px;
+  width: 0;
+  height: 0;
+  position: relative;
+}
+.toolbar-container .links .dropdown-menu-arrow span {
+  color: #21a06a;
+}
+.toolbar-container .links .dropdown-menu-arrow:before,
+.toolbar-container .links .dropdown-menu-arrow:after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  border-width: 9px 10px;
+  border-style: solid;
+  border-color: transparent;
+  z-index: 1001;
+}
+.toolbar-container .links .dropdown-menu-arrow:after {
+  bottom: -18px;
+  right: -8px;
+  border-bottom-color: #fff;
+}
+.toolbar-container .links .dropdown-menu-arrow:before {
+  bottom: -17px;
+  right: -8px;
+  border-bottom-color: rgba(0, 0, 0, 0.15);
+}
+
+.banner-content .banner1 {
+  height: 100%;
+  padding-right: 10px;
+}
+.banner-content .banner1 img {
+  width: 100%;
+  height: inherit;
+}
+.banner-content .banner1 .banner1-inner {
+  background-image: url("https://pharmacare.qodeinteractive.com/wp-content/uploads/2021/04/H-2-slider-img-3.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.banner-content .banner2,
+.banner-content .banner3 {
+  width: 100%;
+  height: calc((100vh - 350px) / 2);
+  overflow: hidden;
+}
+.banner-content .banner2 img,
+.banner-content .banner3 img {
+  width: 100%;
+  height: 100%;
+  height: inherit;
+}
+.banner-content .banner2 {
+  padding-bottom: 10px;
+}
+.banner-content .banner3 {
+  padding-top: 10px;
+}
+
+.banner {
+  position: inherit;
+  z-index: 2;
+}
+.banner .slider-text .bread {
+  font-weight: 500 !important;
+  position: relative;
+}
+.banner h3 {
+  position: relative;
+  color: #cecece;
+  text-transform: uppercase;
+  font-family: s-s-regular;
+  font-weight: 300;
+  letter-spacing: 5px;
+  display: flex;
+  animation: intro1 0.4s forwards linear;
+  font-size: 1.5vw;
+}
+.banner h3 strong {
+  display: flex;
+  font-family: s-s-regular;
+  margin-left: 10px;
+  font-weight: 800;
+  color: #66BC89;
+}
+.banner h3 strong::before, .banner h3 strong::after {
+  content: ".";
+  display: flex;
+  font-family: dosis !important;
+}
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+  .banner h3 {
+    font-size: 1.9vw;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .banner h3 {
+    font-size: 1.9vw;
+  }
+}
+.banner h1 {
+  position: relative;
+  font-family: Lato, sans-serif;
+  margin-top: 30px;
+  text-transform: capitalize;
+  color: white;
+  font-size: 1.5em;
+}
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+  .banner h1 {
+    font-size: 3.5vw;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .banner h1 {
+    font-size: 3.5vw;
+  }
+}
+.banner a {
+  margin-top: 70px;
+  text-decoration: none !important;
+  border-radius: 2px !important;
+  font-size: 1.2em !important;
+  padding: 10px 35px !important;
+  transition: all 0.5s ease-in-out !important;
+}
+@media only screen and (min-width: 421px) and (max-width: 575px) {
+  .banner a {
+    font-size: 3.5vw !important;
+  }
+}
+@media (max-width: 420px) {
+  .banner a {
+    font-size: 3.5vw !important;
+  }
+}
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+  .banner a {
+    font-size: 2vw !important;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .banner a {
+    font-size: 2vw !important;
+  }
+}
+.banner .mouse {
+  height: 80px !important;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 20px;
+  z-index: 3 !important;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.banner .fix-mouse {
+  position: fixed !important;
+  top: 0;
+  z-index: 6 !important;
+  margin-top: 50px;
+}
+.banner .fix-mouse .mouse-icon {
+  box-shadow: 0 0 6px 1px #7dbae4;
+  border: 1px solid white;
+}
+.banner .fix-mouse .mouse-wheel {
+  animation: 1.6s ease infinite wheel-up-down-1 !important;
+}
+.banner .fix-mouse .mouse-wheel span {
+  font-size: 17px;
+  bottom: 0 !important;
+}
+.banner .mouse-icon {
+  width: 70px;
+  height: 70px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  text-align: center;
+  margin: 0 auto;
+  display: block;
+}
+.banner .mouse-wheel {
+  height: 80px;
+  margin: 35px auto 0;
+  display: block;
+  width: 30px;
+  background: transparent;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  border-radius: 50%;
+  -webkit-animation: 1.6s ease infinite wheel-up-down;
+  -moz-animation: 1.6s ease infinite wheel-up-down;
+  animation: 1.6s ease infinite wheel-up-down;
+  color: white;
+}
+.banner .mouse-wheel span {
+  font-size: 24px;
+  font-weight: 900;
+  position: relative;
+  bottom: 0 !important;
+}
+.banner .carousel-item {
+  height: calc(100vh - 350px);
+}
+.banner .carousel-item .carousel-captions {
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 15%;
+  left: 15%;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  color: #fff;
+  text-align: center;
+}
+
+.carousel-fade .carousel-item {
+  opacity: 0;
+  transition: opacity ease-in-out 0.2s;
+}
+
+.carousel-fade .carousel-item.active,
+.carousel-fade .carousel-item-next.carousel-item-left,
+.carousel-fade .carousel-item-prev.carousel-item-right {
+  opacity: 1;
+}
+
+.carousel-fade .active.carousel-item-left,
+.carousel-fade .active.carousel-item-right {
+  opacity: 0;
+}
+
+.carousel-fade .carousel-item-next,
+.carousel-fade .carousel-item-prev,
+.carousel-fade .carousel-item.active,
+.carousel-fade .active.carousel-item-left,
+.carousel-fade .active.carousel-item-prev {
+  transform: translateX(0);
+  transform: translate3d(0, 0, 0);
+}
+
+.product-home .product-filter {
+  box-sizing: border-box;
+}
+.product-home .product-filter .p-filter-item {
+  cursor: pointer;
+  box-sizing: border-box;
+  border: 1px solid rgb(255, 255, 255);
+  background-color: #efefef;
+  color: #606060;
+  font-weight: 700;
+}
+.product-home .product-filter .p-filter-item:hover {
+  border: 1px solid #66BC89;
+}
+.product-home .product-filter .p-filter-item.active {
+  background-color: #66BC89;
+  color: white;
 }
 
 /*# sourceMappingURL=style.css.map */

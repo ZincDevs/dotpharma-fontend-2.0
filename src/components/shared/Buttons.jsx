@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable react/prop-types */
 /* eslint-disable import/prefer-default-export */
@@ -31,9 +32,7 @@ function ButtonLink({ link, text, icon }) {
           <div className="d-flex justify-content-center align-items-center">
             <div className="px-1 d-flex justify-content-center align-items-center">
               {icon && (<i className={icon} />)}
-              <span>
-                {text}
-              </span>
+              <label>{text}</label>
             </div>
           </div>
         </div>

@@ -1,0 +1,29 @@
+.product-home {
+  // border: 1px  solid red;
+
+  .product-filter {
+    // border: 1px solid blue;
+    box-sizing: border-box;
+
+
+    .p-filter-item {
+      cursor: pointer;
+      box-sizing: border-box;
+      border: 1px solid rgb(255, 255, 255);
+      background-color: $color-gray-2;
+      color: $textColor-4;
+      font-weight: 700;
+
+      &:hover {
+        border: 1px solid $color_accent_2;
+      }
+
+    }
+    .p-filter-item.active {
+      background-color: $color_accent_2;
+      color: white;
+    }
+
+
+  }
+}

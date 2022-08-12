@@ -57,7 +57,7 @@ export default function Alert({ info: { type, message, action }, handleCloseAler
             </div>
           </div>
 
-        ) : (
+        ) : type === 'info' ? (
           <div className="alert info-alert d-flex">
             <div className="d-flex ico">
               <span><i className="bi bi-info-circle" /></span>
@@ -73,6 +73,18 @@ export default function Alert({ info: { type, message, action }, handleCloseAler
             </div>
           </div>
 
+        ) : (
+          <div className="py-2 alert-alert d-flex justify-content-center align-items-center">
+            <div className="d-flex">
+              <div>
+                <small>{message}</small>
+                { action && (<Link to={action.to}>{action.text}</Link>) }
+              </div>
+              <div className="close-cont">
+                <span className="close" onClick={handleCloseAlert}><i className="bi bi-x-circle-fill" /></span>
+              </div>
+            </div>
+          </div>
         )}
     </>
   );
