@@ -54,6 +54,10 @@
     "stylelint-csstree-validator": "^2.0.0",
     "stylelint-scss": "^4.2.0"
   },
+  "engines": {
+    "node": "16.16.0",
+    "npm": "8.11.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
