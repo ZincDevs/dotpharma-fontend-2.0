@@ -59,7 +59,7 @@
     "stylelint-scss": "^4.2.0"
   },
   "scripts": {
-    "heroku-postbuild": "npm install -f --production",
+    "heroku-postbuild": "npm install --production --legacy-peer-deps",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
