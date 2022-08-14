@@ -9,9 +9,9 @@ import BannerItem from './items/Banner.item';
 
 function Banner({ slides }) {
   return (
-    <div className="banner-content banner">
+    <div className="banner-content">
       <div className="container d-flex">
-        <div className="banner1 py-3 col-8">
+        <div className="bann-1 py-3 col-8">
           <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
             <ol className="carousel-indicators">
               <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active" />
@@ -63,8 +63,8 @@ function Banner({ slides }) {
           {/* <img src="https://pharmacare.qodeinteractive.com/wp-content/uploads/2021/04/H-2-slider-img-3.jpg" alt="image" /> */}
         </div>
         <div className="d-flex flex-column py-3 col-4 banner-bottom">
-          <div className="banner2"><img src="https://pharmacare.qodeinteractive.com/wp-content/uploads/2021/04/H-2-banner-img-1.jpg" alt="image" /></div>
-          <div className="banner3"><img src="https://pharmacare.qodeinteractive.com/wp-content/uploads/2021/03/H-2-banner-img-2.jpg" alt="image" /></div>
+          <div className="bann-2"><img src="https://pharmacare.qodeinteractive.com/wp-content/uploads/2021/04/H-2-banner-img-1.jpg" alt="image" /></div>
+          <div className="bann-3"><img src="https://pharmacare.qodeinteractive.com/wp-content/uploads/2021/03/H-2-banner-img-2.jpg" alt="image" /></div>
         </div>
       </div>
     </div>

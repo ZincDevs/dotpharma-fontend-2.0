@@ -38,7 +38,7 @@ function Home({ alert: defaultAlert }) {
         <HeaderTop />
         <Header profile={profile} />
         <ToolBar />
-        <Banner />
+        <div><Banner /></div>
         <div><ProductsHome /></div>
         <div><ADsOne /></div>
         <div><ProductsHomeHor /></div>
