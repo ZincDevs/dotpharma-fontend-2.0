@@ -39,7 +39,7 @@ function Home({ alert: defaultAlert }) {
         <Header profile={profile} />
         <ToolBar />
         <Banner />
-        {/* <div><ProductsHome /></div> */}
+        <div><ProductsHome /></div>
         <div><ADsOne /></div>
         <div><ProductsHomeHor /></div>
         <div><HealthTips /></div>
