@@ -5,7 +5,7 @@ import ad1Image from '../../assets/images/H-2-banner-img-3.jpeg';
 
 export function ADsOne() {
   return (
-    <div className="d-flex py-5 ads-1">
+    <div className="d-flex py-5 adf-1">
       <div className="container d-flex col-12">
         <img src={ad1Image} alt="ADs" />
         <div className="content m-4">

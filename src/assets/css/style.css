@@ -2246,37 +2246,37 @@ a:hover {
   color: #bbdbf5;
 }
 
-.ads-1 {
+.adf-1 {
   position: relative;
   position: relative;
 }
-.ads-1 .container {
+.adf-1 .container {
   overflow: hidden;
   position: relative;
 }
-.ads-1 .container .content {
+.adf-1 .container .content {
   position: absolute;
   top: 0;
 }
-.ads-1 .container .content h4, .ads-1 .container .content h3 {
+.adf-1 .container .content h4, .adf-1 .container .content h3 {
   color: #2d2d2d;
   font-weight: 800;
 }
-.ads-1 .container .content a {
+.adf-1 .container .content a {
   columns: #62ade8;
   font-family: "Dosis", sans-serif;
 }
 
-.ads-2 {
+.adf-2 {
   box-sizing: border-box;
   border: 1px dashed #efefef;
 }
-.ads-2 .content {
+.adf-2 .content {
   box-sizing: border-box;
   height: 100%;
   background-color: rgba(239, 239, 239, 0.6);
 }
-.ads-2 .content h4 {
+.adf-2 .content h4 {
   color: #797979;
 }
 

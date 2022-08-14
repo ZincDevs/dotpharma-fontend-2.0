@@ -6,7 +6,7 @@ export function ProductsHomeHor() {
   return (
     <div className="product-home">
       <div className="container d-flex col-12">
-        <div className="col-4 ads-2 p-1">
+        <div className="col-4 adf-2 p-1">
           <div className="content p-3 d-flex justify-content-center align-items-center">
             <div><h4>Ads</h4></div>
           </div>
