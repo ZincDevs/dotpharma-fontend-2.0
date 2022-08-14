@@ -59,6 +59,7 @@
     "stylelint-scss": "^4.2.0"
   },
   "scripts": {
+    "heroku-postbuild": "npm install -f --production",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
