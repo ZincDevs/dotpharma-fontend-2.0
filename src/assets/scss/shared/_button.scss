@@ -12,7 +12,7 @@
   text-transform: uppercase;
   background-size: 300% 100%;
   border: 0;
-
+  text-decoration: none !important;
 
   i
   {
@@ -84,4 +84,38 @@
     font-size: 12px;
     margin-left: 11px;
   }
+}
+
+.btn-4 {
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-block;
+  font-size: .7em !important;
+  font-family: disis;
+  background-color: $color_accent_2;
+  color: white;
+  padding: 16px;
+  @include ease-transition(all, 0.4s, ease-in-out);
+  text-transform: uppercase;
+  border: 0;
+  text-decoration: none !important;
+    font-weight: 700;
+    font-size: larger;
+
+  i
+  {
+    font-weight: 700;
+    font-size: 1.5em;
+  }
+  // label {
+  //   font-size: 1.3em;
+  //   font-weight: 700;
+  //   font-family: $dosis;
+  //   cursor: pointer;
+  // }
+
+  // &:hover {
+  //   color: white;
+  //   background-color: darken($color_accent_2, $amount: 10);
+  // }
 }

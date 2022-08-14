@@ -21,7 +21,7 @@ import Layout from './layouts/Layout';
 // import RequireAuthAdmin from './routes/RequireAuthAdmin';
 // import UserHome from './home/fragments/home/UserHome';
 
-// import PersistLogin from './auth/PersistLogin';
+import PersistLogin from './auth/PersistLogin';
 // import Empty from './shared/Empty';
 
 // Admin components
@@ -39,7 +39,6 @@ function App() {
       <Route path="/" key={key()} element={<Layout />}>
 
         {/* Public Routes for users */}
-        <Route path="/" key={key()} element={<Home />} />
         <Route path="/login" key={key()} element={<Login />} />
         <Route path="/forgot-password" key={key()} element={<ForgotPassword />} />
         <Route path="/reset-password" key={key()} element={<ApplyPasswordReset />} />
@@ -52,32 +51,9 @@ function App() {
         <Route path="/elms" key={key()} element={<Elements />} />
 
         {/* Private Routes */}
-        {/* <Route element={<PersistLogin />}>
-          <Route element={<RequireAuthHome />}>
-            <Route path="/" key={key()} element={<UserHome />}>
-              <Route path="/clinics" key={key()} element={<Empty />} />
-              <Route path="/medicines" key={key()} element={<Empty />} />
-              <Route path="/services" key={key()} element={<Empty />} />
-            </Route>
-          </Route>
-
-          <Route element={<RequireAuth />}>
-            <Route path="/cart" key={key()} element={<Empty />} />
-            <Route path="/orders" key={key()} element={<Empty />} />
-            <Route path="/health-tips" key={key()} element={<Empty />} />
-          </Route>
-
-          <Route path="/dashboard" key={key()} element={<Dashboard />}>
-            <Route element={<RequireAuthAdmin />}>
-              <Route path="/dashboard/home" key={key()} element={<AdminHome />} />
-              <Route path="/dashboard/users" key={key()} element={<AdminUsers />} />
-              <Route path="/dashboard/medicines" key={key()} element={<AdminMedicines />} />
-              <Route path="/dashboard/pharmacies" key={key()} element={<AdminPharmacies />} />
-              <Route path="/dashboard/orders" key={key()} element={<AdminOrders />} />
-            </Route>
-          </Route>
-
-        </Route> */}
+        <Route element={<PersistLogin />}>
+          <Route path="/" key={key()} element={<Home />} />
+        </Route>
 
         <Route path="*" key={key()} element={<NotFound />} />
         {/* <Route path="/unauthorized" key={key()} element={<NotFound />} /> */}

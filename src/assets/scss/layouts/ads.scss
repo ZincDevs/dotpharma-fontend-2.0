@@ -1,0 +1,41 @@
+.ads-1 {
+  position: relative;
+  // border: 1px solid red;
+  position: relative;
+  .container {
+    // border: 1px solid blue;
+    overflow: hidden;
+    position: relative;
+    .content  {
+      
+      // border: 1px solid green;
+      position: absolute;
+      top: 0;
+
+      h4, h3 {
+        color: $textColor-3;
+        font-weight: 800;
+      }
+      a {
+        columns: $pColor;
+        font-family: $dosis;
+      }
+    }
+  }
+}
+
+.ads-2 {
+  box-sizing: border-box;
+  border: 1px dashed $color-gray-2;
+  .content {
+    box-sizing: border-box;
+    // border: 1px solid red;
+    height: 100%;
+    // border: 1px solid $color-gray-2;
+    background-color: transparentize($color-gray-2, $amount: .4);
+
+    h4 {
+      color: $textColor-1;
+    }
+  }
+}

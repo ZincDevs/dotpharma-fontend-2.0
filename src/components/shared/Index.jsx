@@ -2,7 +2,8 @@
 import React from 'react';
 import { ButtonLink, Button, FloatingButton } from './Buttons';
 import { ToolBarTDP, Price, ItemFotter } from './Elements';
-import ProductItem, { ProductItemHor } from './ProductItem';
+import ProductItem from './ProductItem';
+import ProductItemHor from './ProductItemHor';
 
 export default function Index() {
   return (

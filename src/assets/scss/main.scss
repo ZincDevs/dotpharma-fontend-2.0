@@ -5,6 +5,7 @@
 @import "./abstracts/extends";
 @import "./abstracts/mixins";
 @import "./abstracts/keyframes";
+@import "./abstracts/breakpoints";
 @import "./shared/button";
 @import "./shared/toolbar";
 @import "./shared/productItem";
@@ -22,7 +23,9 @@
 @import "./layouts/header.scss";
 @import "./layouts/banner";
 @import "./layouts/products";
-// @import "./layouts/contactus";
+@import "./layouts/footer.scss";
+@import "./layouts/ads.scss";
+@import "./layouts/tips";
 // @import "./layouts/home";
 
 // // admin scss

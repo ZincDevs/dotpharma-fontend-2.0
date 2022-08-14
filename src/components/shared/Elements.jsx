@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable react/prop-types */
 import React from 'react';
@@ -7,6 +8,7 @@ import { googleIcon } from '../../assets';
 function ToolBarTDP({
   link, icon, title, subtitle, count,
 }) {
+  console.log('Count', count);
   return (
     <div className="toolbar-links d-flex justify-content-center align-items-center">
       <div>
@@ -15,7 +17,7 @@ function ToolBarTDP({
             <div>
               <span className="tl-icon-count-holder">
                 <span className="tl-icon"><i className={icon} /></span>
-                {count && (<span className="tl-count" style={{ zoom: 1 }}>1</span>)}
+                {((count === 0) || !count) || (<span className="tl-count" style={{ zoom: 1 }}>{count}</span>)}
               </span>
             </div>
 
@@ -50,8 +52,8 @@ function Price({ discount, price, center }) {
         )}
         <ins>
           <span className="woocommerce-Price-amount amount">
-            <span className="woocommerce-Price-currencySymbol">$</span>
             {finalPrice}
+            <span className="woocommerce-Price-currencySymbol px-1">RWF</span>
           </span>
         </ins>
       </div>

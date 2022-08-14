@@ -1,0 +1,175 @@
+{
+  "general": {
+    "contactBtnTxt": "Talk To Us",
+    "socialMedia": [
+      {
+        "name": "Facebook",
+        "icon": "fab fa-facebook-f",
+        "link": "https://fb.me/sourcedevs "
+      },
+      {
+        "name": "Twitter",
+        "icon": "fab fa-twitter",
+        "link": "https://twitter.com/SourceDev2"
+      },
+      {
+        "name": "Instagram",
+        "icon": "fab fa-instagram"
+      }
+    ]
+  },
+  "banner": {
+    "introTxt": "We are",
+    "nameTxt": "SourceDev",
+    "bannertxt": "Solution for Web & Mobile Software Application Development"
+  },
+  "about": {
+    "sectionName": "About Us",
+    "section1": {
+      "title": "Our Mission & goal",
+      "description": "We Have more than 7 years of production experience in software development and our mission is to bring originality and innovation by designing and develop software applications that fit your brand."
+    },
+    "section2": {
+      "title": "Why Chose Us",
+      "items": [
+        {
+          "icon": "flaticon-quality",
+          "title": "Get quality product",
+          "description": "We have experienced developers to help provide you a quality product according to your wish.",
+          "animation": {
+            "name": "fade-up",
+            "easing": "ease-in-out",
+            "delay": "300",
+            "duration": "1000"
+          }
+        },
+        {
+          "icon": "flaticon-stopwatch",
+          "title": "Save time with qualified Developers",
+          "description": "Our Engineers do their best to deliver your product in short time possible.",
+          "animation": {
+            "name": "fade-up",
+            "easing": "ease-in-out",
+            "delay": "600",
+            "duration": "1000"
+          }
+        }
+      ]
+    }
+  },
+  "sIntro": {
+    "title": "We are here to help you bring your product to life",
+    "section1": {
+      "title": "Front-End",
+      "description": "We use the front-end development frameworks below to ensure the flexibility and usability of your application.",
+      "techList": [
+        {
+          "name": "Reactjs",
+          "icon": "cust-reactjs"
+        },
+        {
+          "name": "Angulajs",
+          "icon": "cust-angular"
+        },
+        {
+          "name": "Vue",
+          "icon": "cust-vue"
+        },
+
+        {
+          "name": "Jquery",
+          "icon": "cust-jquery"
+        }
+      ]
+    },
+    "section2": {
+      "title": "Back-End",
+      "description": "We Are Here To Solve Your Problems and Deliver Your Needs",
+      "techList": [
+        {
+          "name": "Nodejs",
+          "icon": "cust-nodejs"
+        },
+        {
+          "name": "Ruby on rails",
+          "icon": "cust-rails"
+        },
+        {
+          "name": "Java",
+          "icon": "cust-java"
+        }
+      ]
+    }
+  },
+  "services": {
+    "sectionName": "Services",
+    "title": "Meet Our Best Services",
+    "subtitle": " We can help you bring your product to life - whether it's a Minimum Viable Product(MVP), UX/UI Services or API integration.",
+    "items": [
+      {
+        "icon": "flaticon-graphic-designer",
+        "iconStyle": "ServiceIcon",
+        "title": "Web Design",
+        "description": "Design an engaging product that is easy-to-use and attractive",
+        "animation": {
+          "name": "zoom-in-up",
+          "easing": "ease-in-out",
+          "delay": "300",
+          "duration": "1000"
+        }
+      },
+      {
+        "icon": "flaticon-computer",
+        "iconStyle": "ServiceIcon",
+        "title": "Front-End Development",
+        "description": "Implement a product that is attractive and functional.",
+        "animation": {
+          "name": "zoom-in-up",
+          "easing": "ease-in-out",
+          "delay": "300",
+          "duration": "1000"
+        }
+      },
+      {
+        "icon": "flaticon-app-development",
+        "iconStyle": "ServiceIcon",
+        "title": "Mobile Application Development",
+        "description": "Design and implement mobile application",
+        "animation": {
+          "name": "zoom-in-up",
+          "easing": "ease-in-out",
+          "delay": "300",
+          "duration": "1000"
+        }
+      },
+      {
+        "icon": "flaticon-api-1",
+        "iconStyle": "ServiceIcon",
+        "title": "Back-End Development",
+        "description": "Solve your problem and deliver your needs",
+        "animation": {
+          "name": "zoom-in-up",
+          "easing": "ease-in-out",
+          "delay": "300",
+          "duration": "1000"
+        }
+      }
+    ]
+  },
+  "portifolio": {
+    "sectionName": "Portfolio",
+    "title": "Explore our best practice area"
+  },
+  "testmony": {
+    "sectionName": "Testimonial",
+    "title": "Our Clients Are Saying"
+  },
+  "pricing": {
+    "sectionName": "PRICE & PLANS",
+    "title": "Affordable Packages"
+  },
+  "blog": {
+    "sectionName": "Blog",
+    "title": "Updates From Blog"
+  }
+}

@@ -14,14 +14,20 @@ function Button({ text, icon, handleOnclick }) {
           <div className="d-flex justify-content-center align-items-center">
             <div className="px-1 d-flex justify-content-center align-items-center">
               {icon && (<i className={icon} />)}
-              <span>
-                {text}
-              </span>
+              {text && (<label>{text}</label>)}
             </div>
           </div>
         </div>
       </button>
     </div>
+  );
+}
+function ButtonIcon({ icon, handleOnclick }) {
+  return (
+    <button type="button" className="btn-4" onClick={handleOnclick}>
+      {icon && (<i className={icon} />)}
+      {/* {text && (<label>{text}</label>)} */}
+    </button>
   );
 }
 function ButtonLink({ link, text, icon }) {
@@ -67,4 +73,5 @@ export {
   GoogleBtn,
   ButtonLink,
   FloatingButton,
+  ButtonIcon,
 };

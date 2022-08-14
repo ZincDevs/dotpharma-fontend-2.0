@@ -3,6 +3,8 @@ import { createRoot } from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import './assets/css/style.css';
+import './plugins/index';
+import './plugins/fontawesome/css/all.css';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from './components/App';

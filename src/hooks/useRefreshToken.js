@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable camelcase */
 /* eslint-disable import/no-cycle */
-import { useNavigate, useLocation } from 'react-router-dom';
 import useAuth from './useAuth';
 import { Constants } from '../helpers';
 import axios from '../api/_axios';
@@ -9,14 +8,7 @@ import axios from '../api/_axios';
 const { refresh_token_api } = Constants;
 
 function useRefreshToken() {
-  const { setAuth, auth } = useAuth();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const goToLogin = () => {
-    setTimeout(() => {
-      auth?.access_token ? navigate('/login', { state: { from: location }, replace: true }) : navigate('/');
-    }, 3000);
-  };
+  const { setAuth } = useAuth();
   const refresh = async () => {
     try {
       const res = await axios.get(refresh_token_api);
@@ -27,7 +19,7 @@ function useRefreshToken() {
       }));
       return res.data.access_token;
     } catch (error) {
-      goToLogin();
+      setAuth(() => ({}));
       return error.status;
     }
   };

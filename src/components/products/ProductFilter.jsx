@@ -3,6 +3,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState } from 'react';
+import key from 'uniqid';
 
 export default function ProductFilter({ handleOnClick }) {
   const [activeFilter, setActiveFilter] = useState('Show All');
@@ -31,7 +32,7 @@ export default function ProductFilter({ handleOnClick }) {
     <div className="product-filter">
       <div className="d-flex col-12">
         {filters.map(({ text, active }) => (
-          <div onClick={handleOnClick} className={`px-3 py-3 p-filter-item col-2 d-flex justify-content-center align-items-center  ${active && 'active'}`}>
+          <div key={key()} onClick={handleOnClick} className={`px-3 py-3 p-filter-item col-2 d-flex justify-content-center align-items-center  ${active && 'active'}`}>
             <span>{text}</span>
           </div>
         ))}
