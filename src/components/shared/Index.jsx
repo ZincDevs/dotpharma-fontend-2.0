@@ -2,7 +2,6 @@
 import React from 'react';
 import { ButtonLink, Button, FloatingButton } from './Buttons';
 import { ToolBarTDP, Price, ItemFotter } from './Elements';
-import FormTextInput from './FormTextInput';
 import ProductItem, { ProductItemHor } from './ProductItem';
 import Form from './Form';
 
@@ -50,13 +49,12 @@ export default function Index() {
             </div>
           </div>
         </div>
-
       </div>
       <div className="row">
         <h4>From controls</h4>
         <hr />
         <div className="form-container">
-          <Form controls={[{ label: 'Firstname', Control: FormTextInput }, { label: 'Last name', Control: FormTextInput }]} />
+          <Form />
         </div>
       </div>
       <div className="row">
@@ -95,7 +93,6 @@ export default function Index() {
             </div>
           </div>
         </div>
-
       </div>
       <div className="row">
         <hr />
@@ -106,16 +103,11 @@ export default function Index() {
           <div className="d-flex flex-column">
             <div className="px-1">
               Width discount
-              <Price
-                discount={10}
-                price={100}
-              />
+              <Price discount={10} price={100} />
             </div>
             <div className="px-1">
               Without discount
-              <Price
-                price={100}
-              />
+              <Price price={100} />
             </div>
           </div>
         </div>
@@ -175,7 +167,6 @@ export default function Index() {
             </div>
           </div>
         </div>
-
       </div>
     </div>
   );

@@ -1,14 +1,15 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 
-export default function FormTextInput({ value, placeholder, onChange }) {
+export default function FormTextAreaInput({ value, placeholder, onChange }) {
   return (
-    <input
+    <textarea
       type="text"
       onChange={onChange}
-      placeholder={placeholder}
       className="input-control"
       value={value}
-    />
+    >
+      {placeholder}
+    </textarea>
   );
 }

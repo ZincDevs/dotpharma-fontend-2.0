@@ -1,14 +1,15 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 
-export default function FormTextInput({ value, placeholder, onChange }) {
+export default function FormFileInput({
+  placeholder, onChange,
+}) {
   return (
     <input
-      type="text"
+      type="file"
       onChange={onChange}
       placeholder={placeholder}
       className="input-control"
-      value={value}
     />
   );
 }
