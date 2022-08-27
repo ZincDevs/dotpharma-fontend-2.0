@@ -16,7 +16,7 @@ export default function AddMedicineForm() {
   const [shortDescription, setShortDescription] = useState('');
   const [fullDescription, setFullDescription] = useState('');
   const [price, setPrice] = useState();
-  const [category, setCategory] = useState(''); // Here we use m_type in backed.
+  const [category, setCategory] = useState('');
   const [image, setImage] = useState();
 
   // Must be changed to actual categories

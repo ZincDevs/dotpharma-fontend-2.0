@@ -17,7 +17,7 @@ export default function AddDoctorForm() {
   const [clinic, setClinic] = useState('');
   const [image, setImage] = useState();
 
-  // Must be changed to actual categories
+  // Must be changed to actual specialities
   const specialities = [
     'Speciality1',
     'Speciality2',
