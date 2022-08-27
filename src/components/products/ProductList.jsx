@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { Suspense, useEffect } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
@@ -12,16 +13,14 @@ import { getMedicines, getMedicinesHor } from '../../app/features/medicine';
 const ProductItem = React.lazy(() => import('../shared/ProductItem'));
 const ProductItemHor = React.lazy(() => import('../shared/ProductItemHor'));
 
-export function ProductListHor() {
+export function ProductListHor({
+  handleAddToCart,
+  handleRemoveFromCart,
+  profile,
+}) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const products = useSelector(state => state?.medicine?.medicinesHor, shallowEqual);
-  const handleAddToCart = () => {
-    navigate('/login');
-  };
-  const handleRemoveFromCart = () => {
-    navigate('/login');
-  };
   useEffect(() => { getMedicinesHor({ limit: 2, page: 2 }, dispatch); }, []);
   return (
     <div className="d-flex flex-column">
@@ -34,6 +33,7 @@ export function ProductListHor() {
                   handleAddToCart={handleAddToCart}
                   handleRemooveFromCart={handleRemoveFromCart}
                   productDetails={product}
+                  profile={profile}
                 />
               </Suspense>
             </div>
@@ -54,18 +54,16 @@ export function ProductListHor() {
   );
 }
 
-export default function ProductList() {
+export default function ProductList({
+  handleAddToCart,
+  handleRemoveFromCart,
+  profile,
+}) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const products = useSelector(state => state?.medicine?.medicines, shallowEqual);
   // const mProducts = products?.length > 2 ? [products[0], products[1]] : products;
 
-  const handleAddToCart = () => {
-    navigate('/login');
-  };
-  const handleRemoveFromCart = () => {
-    navigate('/login');
-  };
   useEffect(() => { getMedicines({ limit: 8 }, dispatch); }, []);
   return (
     <div className="product-lis">
@@ -79,6 +77,7 @@ export default function ProductList() {
                     handleAddToCart={handleAddToCart}
                     handleRemooveFromCart={handleRemoveFromCart}
                     productDetails={product}
+                    profile={profile}
                   />
                 </Suspense>
               </div>

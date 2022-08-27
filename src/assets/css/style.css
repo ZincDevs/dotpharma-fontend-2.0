@@ -571,6 +571,10 @@ li {
   text-align: -webkit-match-parent;
 }
 
+a {
+  cursor: pointer !important;
+}
+
 h1,
 h2,
 h3,
@@ -1177,6 +1181,21 @@ a {
 }
 a:hover {
   text-decoration: none;
+}
+
+.menu a {
+  color: white !important;
+}
+.menu a:hover {
+  color: white !important;
+}
+
+.force-main-color-bg {
+  background-color: #62ade8 !important;
+}
+
+.force-main-color {
+  color: #62ade8 !important;
 }
 
 .shared-container {

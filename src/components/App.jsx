@@ -16,7 +16,7 @@ import PrivacyPolicy from './settings/PrivacyPolicy';
 // import Services from './home/fragments/Services';
 // import HealthTips from './home/fragments/HealthTips';
 import Layout from './layouts/Layout';
-// import RequireAuth from './routes/RequireAuth';
+import RequireAuth from '../routes/RequireAuth';
 // import RequireAuthHome from './routes/RequireAuthHome';
 // import RequireAuthAdmin from './routes/RequireAuthAdmin';
 // import UserHome from './home/fragments/home/UserHome';
@@ -35,9 +35,7 @@ import PersistLogin from './auth/PersistLogin';
 function App() {
   return (
     <Routes>
-
       <Route path="/" key={key()} element={<Layout />}>
-
         {/* Public Routes for users */}
         <Route path="/login" key={key()} element={<Login />} />
         <Route path="/forgot-password" key={key()} element={<ForgotPassword />} />
@@ -53,6 +51,10 @@ function App() {
         {/* Private Routes */}
         <Route element={<PersistLogin />}>
           <Route path="/" key={key()} element={<Home />} />
+          <Route element={<RequireAuth />}>
+            <Route path="/cart" key={key()} element={<Home />} />
+            <Route path="/orders" key={key()} element={<Home />} />
+          </Route>
         </Route>
 
         <Route path="*" key={key()} element={<NotFound />} />

@@ -1,15 +1,19 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable react/prop-types */
 /* eslint-disable import/prefer-default-export */
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { key } from 'uniqid';
 import { googleIcon } from '../../assets';
 
-function Button({ text, icon, handleOnclick }) {
+function Button({
+  id, text, icon, handleOnclick,
+}) {
   return (
     <div className="py-2 w-auto">
-      <button type="button" className="btn-1" onClick={handleOnclick}>
+      <button id={id} type="button" className="btn-1" onClick={handleOnclick}>
         <div className="w-100 py-2 px-3 d-flex justify-content-center align-items-center">
           <div className="d-flex justify-content-center align-items-center">
             <div className="px-1 d-flex justify-content-center align-items-center">

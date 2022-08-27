@@ -115,6 +115,9 @@ li {
   text-align: -webkit-match-parent;
 }
 
+a {
+  cursor:  pointer !important;
+}
 h1,
 h2,
 h3,
@@ -603,4 +606,27 @@ a {
   &:hover {
     text-decoration: none;
   }
+}
+
+.menu {
+
+  a {
+    color: white !important;
+    &:hover {
+      color: white !important;
+    }
+  }
+}
+
+.slide-d-f-1 {
+
+}
+
+.force-main-color-bg {
+  background-color: $pColor !important;
+  // color: $pColor !important;
+}
+
+.force-main-color {
+  color: $pColor !important;
 }

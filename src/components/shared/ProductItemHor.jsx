@@ -2,16 +2,26 @@
 /* eslint-disable camelcase */
 /* eslint-disable react/prop-types */
 /* eslint-disable max-len */
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ButtonLink, FloatingButton } from './Buttons';
+import { Button, FloatingButton } from './Buttons';
 import { ItemFotter, Price } from './Elements';
 
 export default function ProductItemHor({
+  handleAddToCart,
+  handleRemoveFromCart,
+  profile,
   productDetails: {
-    m_price, m_discount, m_name, m_image, m_desciption,
+    m_id, m_price, m_discount, m_name, m_image, m_desciption,
   },
 }) {
+  const [status, setStatus] = useState();
+  const productBotton = useRef();
+  // const cart = profile?.cart || [];
+  // const cart_item = _.find(cart, item => item?.medicine?.m_id === m_id);
+  const changeStatus = status => {
+    setStatus(status);
+  };
   return (
     <div className="product-item hor d-flex py-4">
       <div className="top col-5">
@@ -35,7 +45,7 @@ export default function ProductItemHor({
           <Price discount={m_discount} price={m_price} />
         </div>
         <div className="py-2">
-          <ButtonLink link="/" text="Add to cart" icon="bi bi-bag" />
+          <Button id={m_id} handleOnclick={e => { handleAddToCart(m_id, changeStatus); }} text="Add to cart" icon="bi bi-bag" />
         </div>
         <div className="py-1">
           <ItemFotter />
