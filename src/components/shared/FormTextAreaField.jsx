@@ -8,6 +8,7 @@ export default function FormTextAreaInput({ value, placeholder, onChange }) {
       onChange={onChange}
       className="input-control"
       value={value}
+      required
     >
       {placeholder}
     </textarea>

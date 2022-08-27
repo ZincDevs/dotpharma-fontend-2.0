@@ -3,7 +3,8 @@ import React from 'react';
 import { ButtonLink, Button, FloatingButton } from './Buttons';
 import { ToolBarTDP, Price, ItemFotter } from './Elements';
 import ProductItem, { ProductItemHor } from './ProductItem';
-import Form from './Form';
+import AddMedicineForm from './AddMedicineForm';
+import AddDoctorForm from './AddDoctorForm';
 
 export default function Index() {
   return (
@@ -54,7 +55,10 @@ export default function Index() {
         <h4>From controls</h4>
         <hr />
         <div className="form-container">
-          <Form />
+          <AddMedicineForm />
+        </div>
+        <div className="form-container">
+          <AddDoctorForm />
         </div>
       </div>
       <div className="row">

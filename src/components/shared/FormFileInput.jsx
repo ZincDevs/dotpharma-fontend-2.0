@@ -10,6 +10,7 @@ export default function FormFileInput({
       onChange={onChange}
       placeholder={placeholder}
       className="input-control"
+      required
     />
   );
 }

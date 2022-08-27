@@ -6,7 +6,7 @@ export default function FormSelectInput({
 }) {
   return (
     <div>
-      <select placeholder={placeholder} className="input-control" onChange={onChange}>
+      <select placeholder={placeholder} className="input-control" onChange={onChange} required>
         {options.map(option => (<option value={option}>{option}</option>))}
       </select>
     </div>

@@ -1,6 +1,6 @@
 .form-container {
   border: 1px solid rgb(13, 13, 86) !important;
-  width: 600px;
+  width: 820px;
   height: 60%;
   margin: 2rem;
   padding: 2rem;
@@ -23,7 +23,6 @@
   border-radius: 0;
   box-sizing: border-box;
   outline: 0;
-  cursor: pointer;
   -webkit-appearance: none;
   transition: color 0.2s ease-out, background-color 0.2s ease-out,
     border-color 0.2s ease-out;
@@ -51,4 +50,8 @@
   background-color: #66bc89;
   border: 1px solid transparent;
   cursor: pointer;
+}
+
+.button-submit:hover {
+  background-color: #399b60 ;
 }
