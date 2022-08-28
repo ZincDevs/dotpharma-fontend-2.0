@@ -9,8 +9,11 @@ export const medicineSlice = createSlice({
     setMedicines: (state, action) => {
       state.medicines = action?.payload?.medicines;
     },
+    setMedicinesHor: (state, action) => {
+      state.medicinesHor = action?.payload?.medicines;
+    },
   },
 });
 
-export const { setMedicines } = medicineSlice.actions;
+export const { setMedicines, setMedicinesHor } = medicineSlice.actions;
 export default medicineSlice.reducer;

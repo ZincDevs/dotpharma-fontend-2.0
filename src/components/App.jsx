@@ -8,6 +8,7 @@ import Signup from './auth/Signup';
 import ForgotPassword from './auth/ForgotPassword';
 import ApplyPasswordReset from './auth/ApplyPasswordReset';
 import NotFound from './shared/NotFound';
+import Home from './Pages/Home';
 // import Empty from './shared/Empty';
 import Verification from './auth/VerificationComplete';
 import TermsAndConditions from './settings/TermsAndConditions';
@@ -15,12 +16,12 @@ import PrivacyPolicy from './settings/PrivacyPolicy';
 // import Services from './home/fragments/Services';
 // import HealthTips from './home/fragments/HealthTips';
 import Layout from './layouts/Layout';
-// import RequireAuth from './routes/RequireAuth';
+import RequireAuth from '../routes/RequireAuth';
 // import RequireAuthHome from './routes/RequireAuthHome';
 // import RequireAuthAdmin from './routes/RequireAuthAdmin';
 // import UserHome from './home/fragments/home/UserHome';
 
-// import PersistLogin from './auth/PersistLogin';
+import PersistLogin from './auth/PersistLogin';
 // import Empty from './shared/Empty';
 
 // Admin components
@@ -34,9 +35,7 @@ import Layout from './layouts/Layout';
 function App() {
   return (
     <Routes>
-
       <Route path="/" key={key()} element={<Layout />}>
-
         {/* Public Routes for users */}
         <Route path="/login" key={key()} element={<Login />} />
         <Route path="/forgot-password" key={key()} element={<ForgotPassword />} />
@@ -50,32 +49,13 @@ function App() {
         <Route path="/elms" key={key()} element={<Elements />} />
 
         {/* Private Routes */}
-        {/* <Route element={<PersistLogin />}>
-          <Route element={<RequireAuthHome />}>
-            <Route path="/" key={key()} element={<UserHome />}>
-              <Route path="/clinics" key={key()} element={<Empty />} />
-              <Route path="/medicines" key={key()} element={<Empty />} />
-              <Route path="/services" key={key()} element={<Empty />} />
-            </Route>
-          </Route>
-
+        <Route element={<PersistLogin />}>
+          <Route path="/" key={key()} element={<Home />} />
           <Route element={<RequireAuth />}>
-            <Route path="/cart" key={key()} element={<Empty />} />
-            <Route path="/orders" key={key()} element={<Empty />} />
-            <Route path="/health-tips" key={key()} element={<Empty />} />
+            <Route path="/cart" key={key()} element={<Home />} />
+            <Route path="/orders" key={key()} element={<Home />} />
           </Route>
-
-          <Route path="/dashboard" key={key()} element={<Dashboard />}>
-            <Route element={<RequireAuthAdmin />}>
-              <Route path="/dashboard/home" key={key()} element={<AdminHome />} />
-              <Route path="/dashboard/users" key={key()} element={<AdminUsers />} />
-              <Route path="/dashboard/medicines" key={key()} element={<AdminMedicines />} />
-              <Route path="/dashboard/pharmacies" key={key()} element={<AdminPharmacies />} />
-              <Route path="/dashboard/orders" key={key()} element={<AdminOrders />} />
-            </Route>
-          </Route>
-
-        </Route> */}
+        </Route>
 
         <Route path="*" key={key()} element={<NotFound />} />
         {/* <Route path="/unauthorized" key={key()} element={<NotFound />} /> */}

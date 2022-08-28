@@ -1,39 +1,88 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
-.alert{
-  position:relative;
-  border-radius:0 !important;
+
+.alert {
+  position: relative;
+  border-radius: 0 !important;
+
   .ico {
     padding-right: .5em;
   }
 }
-.close{
+
+.close {
   padding-left: .5em;
-  opacity:0.5;
-  cursor:pointer;
+  opacity: 0.5;
+  cursor: pointer;
 }
-@mixin alert($name,$bgColor){
-  $accentColor:darken($bgColor, 35);
-  .#{$name}{
+
+@mixin alert($name, $bgColor) {
+  $accentColor: darken($bgColor, 35);
+
+  .#{$name} {
     background-color: transparentize($bgColor, $amount: .6);
     border: 0.3px solid darken($bgColor, 10);
+
     small,
     span {
-      color:$accentColor;
+      color: $accentColor;
     }
+
     a {
       text-decoration: underline;
       font-size: small;
       color: darken($bgColor, 40);
       margin-left: 10px;
     }
-    .close{
-      border-color:$accentColor;
-      color:$accentColor;
+
+    .close {
+      border-color: $accentColor;
+      color: $accentColor;
     }
   }
 }
-@include alert(simple-alert,#ebebeb);
-@include alert(success-alert,#65cfa1);
+
+.alert-alert {
+  $bgColor: $color-gray-2;
+  $accentColor: darken($bgColor, 70);
+  background-color: $bgColor;
+
+  small,
+  span {
+    color: $accentColor;
+  }
+
+  a {
+    text-decoration: underline;
+    font-size: small;
+    color: darken($bgColor, 100);
+    font-weight: 900;
+    text-decoration: none;
+    margin-left: 10px;
+    font-family: 'Roboto', sans-serif;;
+  }
+  small {
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .close {
+    border-color: $accentColor;
+    color: $color_accent_2;
+    i {
+      font-size: 1em;
+    }
+  }
+}
+
+.close-cont {
+  position: absolute;
+  right: 13px;
+}
+
+
+
+@include alert(simple-alert, #ebebeb);
+@include alert(success-alert, #65cfa1);
 @include alert(danger-alert, rgb(253, 168, 168));
-@include alert(warning-alert,rgb(243, 219, 166));
-@include alert(info-alert,#6abcf6);
+@include alert(warning-alert, rgb(243, 219, 166));
+@include alert(info-alert, #6abcf6);
+// @include alert(alert-alert,#ececec);

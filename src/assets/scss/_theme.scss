@@ -1,4 +1,4 @@
-$pColor: #2B8DD0;
+$pColor: #62ade8;
 $sColor: #F5F5F5;
 $tColor: white;
 $pColor-2: #62ade8;
@@ -13,19 +13,24 @@ $waringColor: rgb(231, 189, 98);
 $dangerColor: rgb(196, 99, 99);
 $successColor: rgb(65, 157, 90);
 $color_accent_1: lighten($pColor, 20%);
-$color_accent_2: #66BD89;
-$color_accent_3: #66BB94;
+$color_accent_2: $pColor;
+$color_accent_3: $pColor;
+$color-gray-2: #efefef;
+
+$color_primary: #021422;
+$color_primary_1: #021422ee;
+$color_primary_2: #021e2ea7;
 
 //Fonts
 $poppins: "Poppins", sans-serif;
 $roboto: "Roboto", sans-serif;
 $dosis: "Dosis", sans-serif;
 
-$color_primary: $pColor;
-$color_primary_dark: rgb(35, 60, 113);;
+// $color_primary: $pColor;
+$color_primary_dark: $color_primary;
 $color_primary_1: ligthen($pColor, 10%);
 $color_primary_2: $pColor;
-$color_primary_light:#9CD1FF;
+$color_primary_light: $color_primary;
 
 $color_white: #FFFF;
 $color_white_1: #ffffff8e;
