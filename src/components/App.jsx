@@ -9,6 +9,8 @@ import ForgotPassword from './auth/ForgotPassword';
 import ApplyPasswordReset from './auth/ApplyPasswordReset';
 import NotFound from './shared/NotFound';
 import Home from './Pages/Home';
+import HomeSection from './appSections/HomeSection';
+import Cart from './Cart/CartHome';
 // import Empty from './shared/Empty';
 import Verification from './auth/VerificationComplete';
 import TermsAndConditions from './settings/TermsAndConditions';
@@ -50,16 +52,17 @@ function App() {
 
         {/* Private Routes */}
         <Route element={<PersistLogin />}>
-          <Route path="/" key={key()} element={<Home />} />
-          <Route element={<RequireAuth />}>
-            <Route path="/cart" key={key()} element={<Home />} />
-            <Route path="/orders" key={key()} element={<Home />} />
+          <Route path="/" key={key()} element={<Home />}>
+            <Route path="/" key={key()} element={<HomeSection />} />
+            <Route element={<RequireAuth />}>
+              <Route path="/cart" key={key()} element={<Cart />} />
+              <Route path="/orders" key={key()} element={<Home />} />
+            </Route>
           </Route>
         </Route>
 
         <Route path="*" key={key()} element={<NotFound />} />
         {/* <Route path="/unauthorized" key={key()} element={<NotFound />} /> */}
-
       </Route>
     </Routes>
   );
