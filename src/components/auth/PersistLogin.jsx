@@ -11,12 +11,10 @@ function PersistLogin() {
   const refresh = useRefreshToken();
   const { auth } = useAuth();
 
-  console.log('Hello there');
-
   const stopLoading = () => {
     setTimeout(() => {
       setIsLoading(false);
-    }, 3000);
+    }, 1000);
   };
 
   useEffect(() => {
