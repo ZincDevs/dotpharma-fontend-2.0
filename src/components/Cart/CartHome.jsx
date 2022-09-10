@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { Link } from 'react-router-dom';
 import _ from 'lodash';
 import CartHomeItem from './CartHomeItem';
 
@@ -137,13 +138,13 @@ export default function CartHome() {
 
                         <div className="wc-proceed-to-checkout">
 
-                          <a
-                            href="https://pharmacare.qodeinteractive.com/checkout/"
+                          <Link
+                            to="/checkout"
                             className="checkout-button button alt wc-forward"
                           >
                             Proceed to checkout
 
-                          </a>
+                          </Link>
                         </div>
 
                       </div>

@@ -3,7 +3,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default function CartMenuItem({ item }) {
-  console.log(item);
   const medecineinfo = item?.medicine;
   const name = medecineinfo?.m_name;
   const image = medecineinfo?.m_image;

@@ -20,12 +20,12 @@ export default function CartHomeItem({ item, handleTotalPrice }) {
           data-product_id="5575"
           data-product_sku="089"
         >
-          ×
+          X
 
         </a>
       </td>
 
-      <td className="d-flex justift-content-center align-items-center">
+      <td className="justift-content-center align-items-center">
         <img
           src={item?.medicine?.m_image}
           alt="a"

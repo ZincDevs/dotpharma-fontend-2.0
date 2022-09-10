@@ -24,6 +24,7 @@ import RequireAuth from '../routes/RequireAuth';
 // import UserHome from './home/fragments/home/UserHome';
 
 import PersistLogin from './auth/PersistLogin';
+import OrderHome from './order/OrderHome';
 // import Empty from './shared/Empty';
 
 // Admin components
@@ -57,6 +58,7 @@ function App() {
             <Route element={<RequireAuth />}>
               <Route path="/cart" key={key()} element={<Cart />} />
               <Route path="/orders" key={key()} element={<Home />} />
+              <Route path="/checkout" key={key()} element={<OrderHome />} />
             </Route>
           </Route>
         </Route>
