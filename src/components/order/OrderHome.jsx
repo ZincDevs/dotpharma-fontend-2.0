@@ -10,32 +10,43 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect } from 'react';
-import { useSelector, shallowEqual } from 'react-redux';
+import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import _ from 'lodash';
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { data } from '../../data/addresses';
+import key from 'uniqid';
+import { ColorRing } from 'react-loader-spinner';
+import { ToastContainer, toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import data from '../../data/addresses.json';
+import FormButtonSubmit from '../shared/FormButtonSubmit';
+import { createOrder } from '../../app/features/order/_orderAction';
+import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 
 function OrderHome() {
-  const [name, setName] = useState([]);
-  const [email, setEmail] = useState([]);
+  const [prescription, setPrescription] = useState('');
   const [phone, setPhone] = useState([]);
   const [districts, setDistricts] = useState([]);
+  const [district, setDistrict] = useState('');
+  const [province, setProvince] = useState('');
+  const [sector, setSector] = useState('');
+  const [cell, setCell] = useState('');
+  const [village, setVillage] = useState('');
   const [provinces, setProvinces] = useState([]);
   const [sectors, setSectors] = useState([]);
   const [cells, setCells] = useState([]);
   const [vilages, setVilages] = useState([]);
+  const [streetNumber, setStreetNumber] = useState('');
+  const [name, setName] = useState('');
   const [sum, setSum] = useState(0);
   let subtitle;
   const [modalIsOpen, setIsOpen] = React.useState(false);
+  const dispatch = useDispatch();
+  const axios = useAxiosPrivate();
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   function openModal() {
     setIsOpen(true);
-  }
-
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    subtitle.style.color = '#f00';
   }
 
   function closeModal() {
@@ -52,41 +63,51 @@ function OrderHome() {
     setSum(mSum);
   };
 
-  const mapDataToSelects = (levels, leveltype) => {
+  const mapDataToSelects = (levels, leveltype, level) => {
     switch (leveltype) {
       case 'districts':
         setDistricts(levels);
+        setDistrict(level);
         break;
       case 'sectors':
         setSectors(levels);
+        setSector(level);
         break;
       case 'cells':
         setCells(levels);
+        setCell(level);
         break;
       case 'villages':
         setVilages(levels);
+        setVillage(level);
         break;
       default:
     }
   };
 
-  const customStyles = {
-    content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-    },
-  };
-
   const createOption = (value, key) => <option key={key}>{value}</option>;
 
   const changeHandler = (levelName, dataList, leveType) => {
+    if (
+      levelName === 'EAST'
+      || levelName === 'WEST'
+      || levelName === 'SOUTH'
+      || levelName === 'KIGALI'
+      || levelName === 'NORTH'
+    ) {
+      setProvince(levelName);
+      dataList.forEach(level => {
+        if (levelName === level.name) {
+          mapDataToSelects(level.children, leveType, level.name);
+        }
+      });
+      return;
+    }
     dataList.forEach(level => {
       if (levelName === level.name) {
-        mapDataToSelects(level.children, leveType);
+        mapDataToSelects(level.children, leveType, levelName);
+      } else {
+        mapDataToSelects([], 'none', levelName);
       }
     });
   };
@@ -95,29 +116,35 @@ function OrderHome() {
     setName(e.target.value);
   };
 
-  const handleEmailChange = e => {
-    setEmail(e.target.value);
+  const handlePrescription = e => {
+    setPrescription(e.target.value);
   };
 
   const handlePhoneChange = e => {
     setPhone(e.target.value);
   };
 
+  const handleStreetChange = e => {
+    setStreetNumber(e.target.value);
+  };
+
   useEffect(() => {
     setProvinces(data);
+    // setProvince(data[0].name);
   }, [provinces, districts, sectors, cells, vilages]);
 
   useEffect(() => {
     getTotalPrice();
   }, [sum]);
 
-  const createOrder = e => {
+  const createOrderEvent = e => {
     e.preventDefault();
     openModal();
   };
 
   return (
     <div className="order-home-container">
+      <ToastContainer />
       <div>
         <div id="qodef-page-inner" className="qodef-content-grid">
           <main
@@ -137,53 +164,17 @@ function OrderHome() {
                         </div>
                       </div>
                     </div>
+                    <hr className="form-separator" />
                     <div className="clean" />
                     <div className="clean" />
-                    <form
-                      className="checkout_coupon woocommerce-form-coupon"
-                    >
-                      <div className="woocommerce-form-coupon-toggle">
-                        <div className="">
-                          <div className="woocommerce-billing-fields">
-                            <h5>Personal information</h5>
-                            <div className="woocommerce-billing-fields__field-wrapper" />
-                          </div>
-                        </div>
-                      </div>
-                      <hr className="form-separator" />
-
-                      <p
-                        className="form-row form-row-first validate-required"
-                        id="billing_first_name_field"
-                        data-priority="10"
-                      >
-                        <label htmlFor="billing_first_name" className="">
-                          Full name&nbsp;
-                          <abbr className="required" title="required">
-                            *
-                          </abbr>
-                        </label>
-                        <span className="woocommerce-input-wrapper">
-                          <input
-                            type="text"
-                            className="input-text "
-                            name="billing_first_name"
-                            id="billing_first_name"
-                            placeholder=""
-                            autoComplete="given-name"
-                            onChange={handleNameChange}
-                            value={name}
-                          />
-                        </span>
-                      </p>
-
+                    <form className="checkout_coupon woocommerce-form-coupon">
                       <p
                         className="form-row form-row-last validate-required"
                         id="billing_last_name_field"
                         data-priority="20"
                       >
                         <label htmlFor="billing_last_name" className="">
-                          Email&nbsp;
+                          Name&nbsp;
                           <abbr className="required" title="required">
                             *
                           </abbr>
@@ -191,13 +182,13 @@ function OrderHome() {
                         <span className="woocommerce-input-wrapper">
                           <input
                             type="text"
-                            className="input-text "
+                            className="input-text"
                             name="billing_last_name"
                             id="billing_last_name"
-                            placeholder=""
-                            value={email}
-                            onChange={handleEmailChange}
+                            placeholder="Receiver name"
+                            value={name}
                             autoComplete="family-name"
+                            onChange={handleNameChange}
                           />
                         </span>
                       </p>
@@ -214,26 +205,41 @@ function OrderHome() {
                         </label>
                         <span className="woocommerce-input-wrapper">
                           <input
-                            type="text"
+                            type="tel"
                             className="input-text"
                             name="billing_last_name"
                             id="billing_last_name"
-                            placeholder=""
+                            placeholder="Receiver phone number"
                             value={phone}
                             autoComplete="family-name"
                             onChange={handlePhoneChange}
                           />
                         </span>
                       </p>
-                      <div className="woocommerce-form-coupon-toggle">
-                        <div className="">
-                          <div className="woocommerce-billing-fields">
-                            <h5>Address information</h5>
-                            <div className="woocommerce-billing-fields__field-wrapper" />
-                          </div>
-                        </div>
-                      </div>
-                      <hr className="form-separator" />
+                      <p
+                        className="form-row form-row-last validate-required"
+                        id="billing_last_name_field"
+                        data-priority="20"
+                      >
+                        <label htmlFor="billing_last_name" className="">
+                          Prescription&nbsp;
+                          <abbr className="required" title="required">
+                            *
+                          </abbr>
+                        </label>
+                        <span className="woocommerce-input-wrapper">
+                          <input
+                            type="text"
+                            className="input-text"
+                            name="billing_last_name"
+                            id="billing_last_name"
+                            placeholder="Enter prescription"
+                            value={prescription}
+                            autoComplete="family-name"
+                            onChange={handlePrescription}
+                          />
+                        </span>
+                      </p>
                       <p
                         className="form-row form-row-last validate-required"
                         id="billing_last_name_field"
@@ -355,9 +361,12 @@ function OrderHome() {
                             name="billing_last_name"
                             id="billing_last_name"
                             aria-label="Default select example"
-                            onChange={e => changeHandler(e.target.value, [], 'none')}
+                            onChange={e => {
+                              console.log(e.target.value);
+                              changeHandler(e.target.value, ['no-child'], 'none');
+                            }}
                           >
-                            <option>Select district</option>
+                            <option>Select village</option>
                             {vilages.map((village, index) => createOption(village.name, index))}
                           </select>
                         </span>
@@ -380,7 +389,8 @@ function OrderHome() {
                             name="billing_last_name"
                             id="billing_last_name"
                             placeholder=""
-                            value=""
+                            value={streetNumber}
+                            onChange={handleStreetChange}
                             autoComplete="family-name"
                           />
                         </span>
@@ -468,7 +478,7 @@ function OrderHome() {
                               id="place_order"
                               value="Place order"
                               data-value="Place order"
-                              onClick={createOrder}
+                              onClick={createOrderEvent}
                             >
                               Place order
                             </button>
@@ -501,12 +511,76 @@ function OrderHome() {
         </Modal.Header>
         <Modal.Body>Please choose payment mode</Modal.Body>
         <Modal.Footer>
-          <button className="button alt" onClick={e => {}}>
-            Pay on delivery
-          </button>
-          <button className="button alt" onClick={e => {}}>
-            Pay with MoMo
-          </button>
+          {loading ? (
+            <div className="loading-container">
+              {' '}
+              <ColorRing
+                visible
+                height="40"
+                width="40"
+                ariaLabel="blocks-loading"
+                wrapperStyle={{}}
+                wrapperClass="blocks-wrapper"
+                colors={[
+                  '#66bc89',
+                  '#66bc89',
+                  '#66bc89',
+                  '#66bc89',
+                  '#66bc89',
+                  '#66bc89',
+                ]}
+              />
+            </div>
+          ) : (
+            <div className="butns-ordery-pay-mode">
+              <FormButtonSubmit
+                onClick={async e => {
+                  console.log([
+                    phone,
+                    province,
+                    district,
+                    sector,
+                    cell,
+                    village,
+                    streetNumber,
+                    name,
+                  ].join(','));
+                  setLoading(true);
+                  const refCode = profile.cart
+                    .map(e => e.medicine.m_id)
+                    .join('/');
+                  const data = {
+                    p_id: profile.u_id,
+                    prescription,
+                    refcode: refCode,
+                    name,
+                    address: [
+                      phone,
+                      province,
+                      district,
+                      sector,
+                      cell,
+                      village,
+                      streetNumber,
+                    ].join(','),
+                  };
+                  await createOrder(axios, data, (e, data) => {
+                    setLoading(false);
+                    setIsOpen(false);
+                    if (e) {
+                      toast.error('Could not create order!');
+                    } else {
+                      toast.success('Your order was submitted successfully!');
+                    }
+                    setTimeout(() => navigate('/'), 5500);
+                  });
+                }}
+                value="Pay on delivery"
+              />
+              <div className="horizontal-separator" />
+              <FormButtonSubmit onSubmit={e => {}} value="Pay with MOMO" />
+            </div>
+          )}
         </Modal.Footer>
       </Modal>
     </div>

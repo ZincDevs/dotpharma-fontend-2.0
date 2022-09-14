@@ -2,12 +2,16 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-export default function CartHomeItem({ item, handleTotalPrice }) {
+export default function CartHomeItem({
+  item, handleTotalPrice, handleChange,
+}) {
   const price = item?.medicine?.m_price;
   const discount = item?.medicine?.m_discount;
   const discountPrice = (discount * price) / 100;
   const finalPrice = (!discount || discount === 0) ? price : price - discountPrice;
+  const dispatch = useDispatch();
   // handleTotalPrice(finalPrice);
   return (
     <tr className="woocommerce-cart-form__cart-item cart_item">
@@ -60,22 +64,20 @@ export default function CartHomeItem({ item, handleTotalPrice }) {
             Tablets quantity
 
           </label>
-          <span className="qodef-quantity-minus" />
           <input
-            type="text"
+            type="number"
             id="quantity_631a397b80b73"
-            className="input-text qty text qodef-quantity-input"
+            className="input-text"
             data-step="1"
             data-min="0"
             data-max=""
             name="cart[daea32adcae6abcb548134fa98f139f9][qty]"
-            value="1"
+            value={item.quantity}
             title="Qty"
             size="4"
+            onChange={handleChange}
             placeholder=""
-            inputMode="numeric"
           />
-          <span className="qodef-quantity-plus" />
         </div>
       </td>
 
@@ -85,9 +87,9 @@ export default function CartHomeItem({ item, handleTotalPrice }) {
             <span
               className="woocommerce-Price-currencySymbol"
             >
-              $
+              RWF
             </span>
-            25.00
+            {Number(item?.medicine?.m_price) * item.quantity}
           </bdi>
 
         </span>

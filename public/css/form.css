@@ -7,3 +7,17 @@
     background: none;
     border: 1px solid black;
 }
+
+.horizontal-separator {
+    width: 1rem;
+}
+
+.butns-ordery-pay-mode {
+    display: flex;
+}
+
+.loading-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}

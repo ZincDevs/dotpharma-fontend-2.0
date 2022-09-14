@@ -9,6 +9,7 @@ export default {
   get_all_users_api: '/user/allusers',
   r_psw_rese_api: '/user/request-password-reset',
   r_r_psw_rese_api: '/user/resend-password-reset',
+  create_order: '/orders/createorder',
   apply_psw_reset_api: session => `/user/apply-password-reset/${session}`,
   verify_user_api: session => `/user/activateuser/${session}`,
   resend_verification_api: '/user/resendverification',
@@ -17,4 +18,5 @@ export default {
   medicines_api: ({ page = 1, limit = 10 }) => `/medicine/getallmedicines?page=${page}&limit=${limit}`,
 
   my_profile_api: '/user/myprofile',
+  doctors_api: '/doctor/findall',
 };

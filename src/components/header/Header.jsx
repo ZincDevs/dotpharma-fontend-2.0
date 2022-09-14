@@ -108,7 +108,7 @@ export function ToolbarOne() {
             <li
               className="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-221 qodef--hide-link qodef-menu-item--narrow"
             >
-              <Link to="/order">
+              <Link to="/orders">
                 <span className="qodef-menu-item-text">
                   Order medicine
                 </span>
@@ -117,13 +117,13 @@ export function ToolbarOne() {
             <li
               className="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-221 qodef--hide-link qodef-menu-item--narrow"
             >
-              <Link to="/doctor">
+              <Link to="/doctors">
                 <span className="qodef-menu-item-text">
                   Meet Specialist
                 </span>
               </Link>
             </li>
-            <li
+            {/* <li
               className="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-221 qodef--hide-link qodef-menu-item--narrow"
             >
               <Link to="/appointment">
@@ -131,7 +131,7 @@ export function ToolbarOne() {
                   Book Appointment
                 </span>
               </Link>
-            </li>
+            </li> */}
           </ul>
         </nav>
         <div className="qodef-widget-holder">
@@ -139,7 +139,7 @@ export function ToolbarOne() {
             <div id="text-2" className="widget widget_text qodef-header-widget-area-two" data-area="header-widget-two">
               <div className="textwidget">
                 <h6 className="qodef-ask-widget">
-                  <Link to="/whatsapp">
+                  <a href="https://wa.me/250790696369" target="_blank" rel="noreferrer">
                     <span
                       style={{ color: '#ffffff', fontSize: '15px', letterSpacing: '0.15em' }}
                     >
@@ -147,7 +147,7 @@ export function ToolbarOne() {
                       {' '}
                       <i className="bi bi-whatsapp" />
                     </span>
-                  </Link>
+                  </a>
 
                 </h6>
               </div>

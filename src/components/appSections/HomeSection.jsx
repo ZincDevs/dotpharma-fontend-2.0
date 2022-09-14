@@ -21,7 +21,6 @@ export default function Home({ alert: defaultAlert }) {
   const handleAddToCart = (m_id, changeStatus) => {
     // const m_id = e.target?.id;
     changeStatus('pending');
-    console.log(m_id);
     addToCart(axios, m_id, err => {
       if (err) {
         changeStatus('fail');

@@ -2,8 +2,10 @@
 import React from 'react';
 import { ButtonLink, Button, FloatingButton } from './Buttons';
 import { ToolBarTDP, Price, ItemFotter } from './Elements';
-import ProductItem from './ProductItem';
 import ProductItemHor from './ProductItemHor';
+import ProductItem from './ProductItem';
+import AddMedicineForm from './AddMedicineForm';
+import AddDoctorForm from './AddDoctorForm';
 
 export default function Index() {
   return (
@@ -49,7 +51,16 @@ export default function Index() {
             </div>
           </div>
         </div>
-
+      </div>
+      <div className="row">
+        <h4>From controls</h4>
+        <hr />
+        <div className="form-container">
+          <AddMedicineForm />
+        </div>
+        <div className="form-container">
+          <AddDoctorForm />
+        </div>
       </div>
       <div className="row">
         <hr />
@@ -87,7 +98,6 @@ export default function Index() {
             </div>
           </div>
         </div>
-
       </div>
       <div className="row">
         <hr />
@@ -98,16 +108,11 @@ export default function Index() {
           <div className="d-flex flex-column">
             <div className="px-1">
               Width discount
-              <Price
-                discount={10}
-                price={100}
-              />
+              <Price discount={10} price={100} />
             </div>
             <div className="px-1">
               Without discount
-              <Price
-                price={100}
-              />
+              <Price price={100} />
             </div>
           </div>
         </div>
@@ -167,7 +172,6 @@ export default function Index() {
             </div>
           </div>
         </div>
-
       </div>
     </div>
   );
