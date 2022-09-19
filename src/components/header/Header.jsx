@@ -26,7 +26,7 @@ export function TopHeader() {
             <div id="text-3" className="widget widget_text qodef-top-bar-widget">
               <div className="textwidget">
                 <p>
-                  <a className="qodef-top-header-link"> Info : +250 788 625 375</a>
+                  <a className="qodef-top-header-link"> Info : +250 790 696 369</a>
                   <span
                     className="qodef-separator-top-header"
                   />

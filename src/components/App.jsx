@@ -27,6 +27,7 @@ import PersistLogin from './auth/PersistLogin';
 import OrderHome from './order/OrderHome';
 import Doctors from './doctors/Doctors';
 import Appointment from './appointment/Appointment';
+import MakeOrdder from './order/MakeOrdder';
 // import Empty from './shared/Empty';
 
 // Admin components
@@ -59,7 +60,7 @@ function App() {
             <Route path="/doctors" key={key()} element={<Doctors />} />
             <Route element={<RequireAuth />}>
               <Route path="/cart" key={key()} element={<Cart />} />
-              <Route path="/orders" key={key()} element={<Home />} />
+              <Route path="/orders" key={key()} element={<MakeOrdder />} />
               <Route path="/checkout" key={key()} element={<OrderHome />} />
               <Route path="/appointment" key={key()} element={<Appointment />} />
             </Route>

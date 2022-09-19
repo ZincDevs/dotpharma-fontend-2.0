@@ -535,16 +535,6 @@ function OrderHome() {
             <div className="butns-ordery-pay-mode">
               <FormButtonSubmit
                 onClick={async e => {
-                  console.log([
-                    phone,
-                    province,
-                    district,
-                    sector,
-                    cell,
-                    village,
-                    streetNumber,
-                    name,
-                  ].join(','));
                   setLoading(true);
                   const refCode = profile.cart
                     .map(e => e.medicine.m_id)

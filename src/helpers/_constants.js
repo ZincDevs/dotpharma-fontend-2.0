@@ -19,4 +19,5 @@ export default {
 
   my_profile_api: '/user/myprofile',
   doctors_api: '/doctor/findall',
+  appointment_api: '/appointments/makeappointment',
 };

@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 import _ from 'lodash';
 import key from 'uniqid';
 import CartHomeItem from './CartHomeItem';
-import { quantityChangeAction } from '../../app/features/cart/_cartActions';
 
 export default function CartHome() {
   const [totPrice, setTotPrice] = useState(0);
@@ -29,9 +28,6 @@ export default function CartHome() {
   const count = cart?.length || 0;
   const handleTotalPrice = p => {
     setTotPrice(p);
-  };
-  const quantityChangeHandler = e => {
-    dispatch(quantityChangeAction(e.target.value));
   };
 
   return (
@@ -93,9 +89,9 @@ export default function CartHome() {
                         </thead>
                         <tbody>
                           {_.map(cart, item => item).map(item => {
-                            const mItem = { ...item, quantity };
+                            const mItem = { ...item };
                             // mItem.quantity = quantity;
-                            return (<CartHomeItem item={mItem} handleChange={quantityChangeHandler} key={key()} />);
+                            return (<CartHomeItem item={mItem} key={key()} />);
                           })}
                         </tbody>
                       </table>

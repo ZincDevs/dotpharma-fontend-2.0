@@ -16,33 +16,24 @@ import Modal from 'react-bootstrap/Modal';
 import key from 'uniqid';
 import { ColorRing } from 'react-loader-spinner';
 import { ToastContainer, toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import data from '../../data/addresses.json';
 import FormButtonSubmit from '../shared/FormButtonSubmit';
 import { createOrder } from '../../app/features/order/_orderAction';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
+import { createAppointment } from '../../api/_appointment';
 
 function Appointment() {
-  const [prescription, setPrescription] = useState('');
-  const [phone, setPhone] = useState([]);
-  const [name, setName] = useState([]);
-  const [districts, setDistricts] = useState([]);
-  const [district, setDistrict] = useState('');
-  const [province, setProvince] = useState('');
-  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [message, setMessage] = useState('');
+  const [phone, setPhone] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const dispatch = useDispatch();
   const axios = useAxiosPrivate();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-
-  function openModal() {
-    setIsOpen(true);
-  }
-
-  function closeModal() {
-    setIsOpen(false);
-  }
-
+  let { search } = useLocation();
+  const query = new URLSearchParams(search);
   const profile = useSelector(state => state?.user?.MyProfile, shallowEqual);
   const cart = profile?.cart;
 
@@ -53,15 +44,38 @@ function Appointment() {
   };
 
   const handlePrescription = e => {
-    setPrescription(e.target.value);
+    setMessage(e.target.value);
   };
 
   const handlePhoneChange = e => {
     setPhone(e.target.value);
   };
-  const createOrderEvent = e => {
+
+  const handleEmailChange = e => {
+    setEmail(e.target.value);
+  };
+
+  const createApointmentEvent = async e => {
     e.preventDefault();
-    openModal();
+    const docid = query.get('doctor');
+    const data = {
+      patid: profile?.patients[0]?.p_id,
+      docid,
+      deasese: message,
+      name,
+      phone,
+      email,
+    };
+    setLoading(true);
+    await createAppointment(axios, data, (err, data) => {
+      setLoading(false);
+      if (err) {
+        toast.error('Could not create appointment!');
+      } else {
+        toast.success('Your\'ve successfully created appointment!');
+      }
+      setTimeout(() => navigate('/'), 5500);
+    });
   };
 
   return (
@@ -107,7 +121,7 @@ function Appointment() {
                             className="input-text"
                             name="billing_last_name"
                             id="billing_last_name"
-                            placeholder="Receiver name"
+                            placeholder="Patient name"
                             value={name}
                             autoComplete="family-name"
                             onChange={handleNameChange}
@@ -131,7 +145,7 @@ function Appointment() {
                             className="input-text"
                             name="billing_last_name"
                             id="billing_last_name"
-                            placeholder="Receiver phone number"
+                            placeholder="Patient phone number"
                             value={phone}
                             autoComplete="family-name"
                             onChange={handlePhoneChange}
@@ -144,22 +158,48 @@ function Appointment() {
                         data-priority="20"
                       >
                         <label htmlFor="billing_last_name" className="">
-                          Prescription&nbsp;
+                          Email&nbsp;
                           <abbr className="required" title="required">
                             *
                           </abbr>
                         </label>
                         <span className="woocommerce-input-wrapper">
                           <input
-                            type="text"
+                            type="tel"
                             className="input-text"
                             name="billing_last_name"
                             id="billing_last_name"
-                            placeholder="Enter prescription"
-                            value={prescription}
+                            placeholder="Patient email"
+                            value={email}
                             autoComplete="family-name"
-                            onChange={handlePrescription}
+                            onChange={handleEmailChange}
                           />
+                        </span>
+                      </p>
+                      <p
+                        className="form-row form-row-last validate-required"
+                        id="billing_last_name_field"
+                        data-priority="20"
+                      >
+                        <label htmlFor="billing_last_name" className="">
+                          Message&nbsp;
+                          <abbr className="required" title="required">
+                            *
+                          </abbr>
+                        </label>
+                        <span className="woocommerce-input-wrapper">
+                          <textarea
+                            className="input-text"
+                            name="billing_last_name"
+                            id="billing_last_name"
+                            placeholder="Enter message"
+                            autoComplete="family-name"
+                            rows={5}
+                            onChange={handlePrescription}
+                          >
+                            {message}
+
+                          </textarea>
                         </span>
                       </p>
                     </form>
@@ -169,7 +209,6 @@ function Appointment() {
                         name="checkout"
                         method="post"
                         className="checkout woocommerce-checkout"
-                        action="https://pharmacare.qodeinteractive.com/checkout/"
                         encType="multipart/form-data"
                         noValidate="novalidate"
                       >
@@ -185,9 +224,9 @@ function Appointment() {
                               id="place_order"
                               value="Place order"
                               data-value="Place order"
-                              onClick={createOrderEvent}
+                              onClick={createApointmentEvent}
                             >
-                              Request an appointment
+                              {!loading ? 'Request an appointment' : 'Creating appointment...'}
                             </button>
 
                             <input
@@ -212,70 +251,6 @@ function Appointment() {
           </main>
         </div>
       </div>
-      <Modal show={modalIsOpen} onHide={closeModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Payment mode</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Please choose payment mode</Modal.Body>
-        <Modal.Footer>
-          {loading ? (
-            <div className="loading-container">
-              {' '}
-              <ColorRing
-                visible
-                height="40"
-                width="40"
-                ariaLabel="blocks-loading"
-                wrapperStyle={{}}
-                wrapperClass="blocks-wrapper"
-                colors={[
-                  '#66bc89',
-                  '#66bc89',
-                  '#66bc89',
-                  '#66bc89',
-                  '#66bc89',
-                  '#66bc89',
-                ]}
-              />
-            </div>
-          ) : (
-            <div className="butns-ordery-pay-mode">
-              <FormButtonSubmit
-                onClick={async e => {
-                  setLoading(true);
-                  const refCode = profile.cart
-                    .map(e => e.medicine.m_id)
-                    .join('/');
-                  const data = {
-                    p_id: profile.u_id,
-                    prescription,
-                    refcode: refCode,
-                    name,
-                    address: [
-                      phone,
-                      province,
-                      district,
-                    ].join(','),
-                  };
-                  await createOrder(axios, data, (e, data) => {
-                    setLoading(false);
-                    setIsOpen(false);
-                    if (e) {
-                      toast.error('Could not create order!');
-                    } else {
-                      toast.success('Your order was submitted successfully!');
-                    }
-                    setTimeout(() => navigate('/'), 5500);
-                  });
-                }}
-                value="Pay on delivery"
-              />
-              <div className="horizontal-separator" />
-              <FormButtonSubmit onSubmit={e => {}} value="Pay with MOMO" />
-            </div>
-          )}
-        </Modal.Footer>
-      </Modal>
     </div>
   );
 }
