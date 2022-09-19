@@ -11,7 +11,12 @@ export default function ProductFilter({ handleOnClick }) {
   const filters = [{
     text: 'Show all',
     active: (activeFilter === 'Show All'),
-  }, {
+  },
+  {
+    text: 'Categories',
+    active: (activeFilter === 'Gift Packaging'),
+  },
+  {
     text: 'Gift Packaging',
     active: (activeFilter === 'Gift Packaging'),
   }, {
@@ -24,10 +29,8 @@ export default function ProductFilter({ handleOnClick }) {
     text: 'Popular',
     active: (activeFilter === 'Popular'),
   },
-  {
-    text: 'Recommendation',
-    active: (activeFilter === 'Recommendation'),
-  }];
+  ];
+
   return (
     <div className="product-filter">
       <div className="d-flex col-12">

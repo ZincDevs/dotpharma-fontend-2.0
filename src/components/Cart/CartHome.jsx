@@ -1,13 +1,20 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { Link } from 'react-router-dom';
 import _ from 'lodash';
+import key from 'uniqid';
 import CartHomeItem from './CartHomeItem';
 
 export default function CartHome() {
   const [totPrice, setTotPrice] = useState(0);
   const profile = useSelector(state => state?.user?.MyProfile, shallowEqual);
+  const quantity = useSelector(state => state.cart.data.quantity);
+  const dispatch = useDispatch();
+
   const cart = profile?.cart;
   const totalPrice = items => {
     if (!items) return 0;
@@ -22,6 +29,7 @@ export default function CartHome() {
   const handleTotalPrice = p => {
     setTotPrice(p);
   };
+
   return (
     <div id="qodef-page-wrapper" className="">
       <div id="qodef-page-outer">
@@ -80,9 +88,11 @@ export default function CartHome() {
                           </tr>
                         </thead>
                         <tbody>
-                          {_.map(cart, item => (
-                            <CartHomeItem item={item} />
-                          ))}
+                          {_.map(cart, item => item).map(item => {
+                            const mItem = { ...item };
+                            // mItem.quantity = quantity;
+                            return (<CartHomeItem item={mItem} key={key()} />);
+                          })}
                         </tbody>
                       </table>
                     </form>
@@ -90,60 +100,15 @@ export default function CartHome() {
                     <div className="cart-collaterals">
                       <div className="cart_totals ">
 
-                        <h2>Cart totals</h2>
-
-                        <table cellSpacing="0" className="shop_table shop_table_responsive">
-
-                          <tbody>
-                            <tr className="cart-subtotal">
-                              <th>Subtotal</th>
-                              <td data-title="Subtotal">
-                                <span className="woocommerce-Price-amount amount">
-                                  <bdi>
-                                    <span
-                                      className="woocommerce-Price-currencySymbol"
-                                    >
-                                      $
-                                    </span>
-                                    57.00
-                                  </bdi>
-                                </span>
-
-                              </td>
-                            </tr>
-
-                            <tr className="order-total">
-                              <th>Total</th>
-                              <td data-title="Total">
-                                <strong>
-                                  <span className="woocommerce-Price-amount amount">
-                                    <bdi>
-                                      <span
-                                        className="woocommerce-Price-currencySymbol"
-                                      >
-                                        $
-                                      </span>
-                                      57.00
-                                    </bdi>
-                                  </span>
-                                </strong>
-                                {' '}
-
-                              </td>
-                            </tr>
-
-                          </tbody>
-                        </table>
-
                         <div className="wc-proceed-to-checkout">
 
-                          <a
-                            href="https://pharmacare.qodeinteractive.com/checkout/"
+                          <Link
+                            to="/checkout"
                             className="checkout-button button alt wc-forward"
                           >
                             Proceed to checkout
 
-                          </a>
+                          </Link>
                         </div>
 
                       </div>

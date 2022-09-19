@@ -1,17 +1,39 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import useAxiosPrivate from '../../hooks/useAxiosPrivate';
+import { updateCart } from '../../api';
 
-export default function CartHomeItem({ item, handleTotalPrice }) {
+export default function CartHomeItem({ item, handleTotalPrice, handleChange }) {
+  // console.log(item?.medicine.m_id);
   const price = item?.medicine?.m_price;
   const discount = item?.medicine?.m_discount;
   const discountPrice = (discount * price) / 100;
-  const finalPrice = (!discount || discount === 0) ? price : price - discountPrice;
-  // handleTotalPrice(finalPrice);
+  const finalPrice = !discount || discount === 0 ? price : price - discountPrice;
+  const [quantity, setQuantity] = useState(item.c_quantity);
+  const axios = useAxiosPrivate();
+  const dispatch = useDispatch();
+  const quatityHandler = e => {
+    if (parseInt(e.target.value, 10)) {
+      setQuantity(parseInt(e.target.value, 10));
+      item.c_quantity = parseInt(e.target.value, 10);
+      updateCart(axios, item?.medicine.m_id, parseInt(e.target.value, 10), (err, data) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(data);
+        }
+      });
+    }
+
+    // console.log(e.target.value);
+  };
+
   return (
     <tr className="woocommerce-cart-form__cart-item cart_item">
-
       <td className="product-remove">
         <a
           href="https://pharmacare.qodeinteractive.com/cart/?remove_item=daea32adcae6abcb548134fa98f139f9&amp;_wpnonce=b0b79b91ee"
@@ -20,12 +42,11 @@ export default function CartHomeItem({ item, handleTotalPrice }) {
           data-product_id="5575"
           data-product_sku="089"
         >
-          ×
-
+          X
         </a>
       </td>
 
-      <td className="d-flex justift-content-center align-items-center">
+      <td className="justift-content-center align-items-center">
         <img
           src={item?.medicine?.m_image}
           alt="a"
@@ -41,55 +62,44 @@ export default function CartHomeItem({ item, handleTotalPrice }) {
       <td className="product-price" data-title="Price">
         <span className="woocommerce-Price-amount amount">
           <bdi>
-            <span
-              className="woocommerce-Price-currencySymbol"
-            >
-              RWF
-            </span>
+            <span className="woocommerce-Price-currencySymbol">RWF</span>
             {item?.medicine?.m_price}
           </bdi>
-
         </span>
       </td>
 
       <td className="product-quantity" data-title="Quantity">
         <span className="qodef-quantity-label">Quantity</span>
         <div className="qodef-quantity-buttons quantity">
-          <label className="screen-reader-text" htmlFor="quantity_631a397b80b73">
-            Cetirizine 45mg Film-coated
-            Tablets quantity
-
+          <label
+            className="screen-reader-text"
+            htmlFor="quantity_631a397b80b73"
+          >
+            Cetirizine 45mg Film-coated Tablets quantity
           </label>
-          <span className="qodef-quantity-minus" />
           <input
-            type="text"
+            type="number"
             id="quantity_631a397b80b73"
-            className="input-text qty text qodef-quantity-input"
+            className="input-text"
             data-step="1"
             data-min="0"
             data-max=""
             name="cart[daea32adcae6abcb548134fa98f139f9][qty]"
-            value="1"
+            value={quantity}
             title="Qty"
             size="4"
+            onChange={quatityHandler}
             placeholder=""
-            inputMode="numeric"
           />
-          <span className="qodef-quantity-plus" />
         </div>
       </td>
 
       <td className="product-subtotal" data-title="Subtotal">
         <span className="woocommerce-Price-amount amount">
           <bdi>
-            <span
-              className="woocommerce-Price-currencySymbol"
-            >
-              $
-            </span>
-            25.00
+            <span className="woocommerce-Price-currencySymbol">RWF</span>
+            {Number(item?.medicine?.m_price) * item.c_quantity}
           </bdi>
-
         </span>
       </td>
     </tr>

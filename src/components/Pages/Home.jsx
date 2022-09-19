@@ -17,7 +17,6 @@ function Home({ alert: defaultAlert }) {
   const [showAlert, setShowAlert] = useState(true);
 
   const profile = useSelector(state => state?.user?.MyProfile, shallowEqual);
-  console.log(profile, 'Hello there');
 
   const handleCloseAlert = () => {
     setShowAlert(false);
