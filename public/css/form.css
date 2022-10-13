@@ -1,23 +1,39 @@
 .form-separator {
-    max-width: 100% !important;
+  max-width: 100% !important;
 }
 
 .address-select {
-    width: 100%;
-    background: none;
-    border: 1px solid black;
+  width: 100%;
+  background: none;
+  border: 1px solid black;
 }
 
 .horizontal-separator {
-    width: 1rem;
+  width: 1rem;
 }
 
 .butns-ordery-pay-mode {
-    display: flex;
+  display: flex;
 }
 
 .loading-container {
-    display: flex;
-    justify-content: center;
-    width: 100%;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.dropdowntex {
+  background: none !important;
+  cursor: pointer;
+  border-radius: none !important;
+  box-sizing: border-box;
+  border: none !important;
+  background-color: #efefef !important;
+  color: #606060 !important;
+  font-weight: 700 !important;
+}
+
+.dropdowntex:focus {
+  outline: none !important;
+  box-shadow: none !important;
 }

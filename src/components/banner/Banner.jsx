@@ -6,11 +6,21 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-indent */
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import React from 'react';
+import React, { useState } from 'react';
 import key from 'uniqid';
+import Carousel from 'react-bootstrap/Carousel';
 import BannerItem from './items/Banner.item';
+import slider1 from '../../assets/images/slider1.jpg';
+import slider2 from '../../assets/images/slider2.jpg';
+import slider3 from '../../assets/images/slider3.jpg';
+import slider4 from '../../assets/images/slider4.jpg';
 
 function Banner({ slides }) {
+  const [index, setIndex] = useState(0);
+
+  const handleSelect = (selectedIndex, e) => {
+    setIndex(selectedIndex);
+  };
   return (
     <section
       className="elementor-section elementor-top-section elementor-element elementor-element-9262bb8 elementor-section-full_width qodef-elementor-content-grid elementor-section-height-default elementor-section-height-default"
@@ -33,98 +43,34 @@ function Banner({ slides }) {
                   data-widget_type="pharmacare_core_fixed_background_slider.default"
                 >
                   <div className="elementor-widget-container">
-                    <div
-                      className="qodef-shortcode qodef-m  qodef-fixed-background-slider swiper-container-horizontal"
-                    >
+                    <div className="qodef-shortcode qodef-m  qodef-fixed-background-slider swiper-container-horizontal">
                       <div className="qodef-m-items clear qodef-swiper--initialized">
-                        <div
-                          className="qodef-m-swiper swiper-container-fade swiper-container-initialized swiper-container-horizontal"
-                        >
-                          <div className="swiper-wrapper" style={{ transitionDuration: '0ms' }}>
-                            <div
-                              className="qodef-m-item swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active"
-                              data-swiper-slide-index="2"
-                            >
+                        <div className="qodef-m-swiper swiper-container-fade swiper-container-initialized swiper-container-horizontal">
+
+                          <Carousel activeIndex={index} onSelect={handleSelect}>
+                            <Carousel.Item>
                               <img
-                                src="https://pharmacare.qodeinteractive.com/wp-content/uploads/2021/04/H-2-slider-img-3.jpg"
-                                className="attachment-full size-full"
-                                alt="a"
-                                loading="lazy"
-                                srcSet="https://pharmacare.qodeinteractive.com/wp-content/uploads/2021/04/H-2-slider-img-3.jpg 856w, https://pharmacare.qodeinteractive.com/wp-content/uploads/2021/04/H-2-slider-img-3-300x221.jpg 300w, https://pharmacare.qodeinteractive.com/wp-content/uploads/2021/04/H-2-slider-img-3-768x565.jpg 768w, https://pharmacare.qodeinteractive.com/wp-content/uploads/2021/04/H-2-slider-img-3-600x442.jpg 600w, https://pharmacare.qodeinteractive.com/wp-content/uploads/2021/04/H-2-slider-img-3-800x589.jpg 800w"
-                                sizes="(max-width: 856px) 100vw, 856px"
-                                width="856"
-                                height="630"
+                                className="d-block w-100"
+                                src={slider1}
+                                alt="First slide"
                               />
-                                <a className="qodef-m-item-link" href="#" target="_self" />
-                                <div className="qodef-e-content">
-                                  <h1 className="qodef-e-title entry-title" itemProp="name">
-                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati dolorum eligendi repellendus.
-                                  </h1>
-                                </div>
-                            </div>
-                            <div
-                              className="qodef-m-item swiper-slide swiper-slide-duplicate-next"
-                              data-swiper-slide-index="0"
-                            >
+                            </Carousel.Item>
+                            <Carousel.Item>
                               <img
-                                src="https://pharmacare.qodeinteractive.com/wp-content/uploads/2021/03/H-2-slider-img-1.jpg"
-                                className="attachment-full size-full"
-                                alt="a"
-                                loading="lazy"
-                                srcSet="https://pharmacare.qodeinteractive.com/wp-content/uploads/2021/03/H-2-slider-img-1.jpg 856w, https://pharmacare.qodeinteractive.com/wp-content/uploads/2021/03/H-2-slider-img-1-300x221.jpg 300w, https://pharmacare.qodeinteractive.com/wp-content/uploads/2021/03/H-2-slider-img-1-768x565.jpg 768w, https://pharmacare.qodeinteractive.com/wp-content/uploads/2021/03/H-2-slider-img-1-600x442.jpg 600w, https://pharmacare.qodeinteractive.com/wp-content/uploads/2021/03/H-2-slider-img-1-800x589.jpg 800w"
-                                sizes="(max-width: 856px) 100vw, 856px"
-                                width="856"
-                                height="630"
+                                className="d-block w-100"
+                                src={slider4}
+                                alt="Second slide"
                               />
-                                <a className="qodef-m-item-link" href="#" target="_self" />
-                                <div className="qodef-e-content">
-                                  <h1 className="qodef-e-title entry-title" itemProp="name">
-                                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati dolorum eligendi repellendus.
-                                  </h1>
-                                </div>
-                            </div>
-                            <div
-                              className="qodef-m-item swiper-slide swiper-slide-prev"
-                              data-swiper-slide-index="1"
-                            >
+                            </Carousel.Item>
+                            <Carousel.Item>
                               <img
-                                src="https://pharmacare.qodeinteractive.com/wp-content/uploads/2021/04/H-2-slider-img-2.jpg"
-                                className="attachment-full size-full"
-                                alt="a"
-                                loading="lazy"
-                                srcSet="https://pharmacare.qodeinteractive.com/wp-content/uploads/2021/04/H-2-slider-img-2.jpg 856w, https://pharmacare.qodeinteractive.com/wp-content/uploads/2021/04/H-2-slider-img-2-300x221.jpg 300w, https://pharmacare.qodeinteractive.com/wp-content/uploads/2021/04/H-2-slider-img-2-768x565.jpg 768w, https://pharmacare.qodeinteractive.com/wp-content/uploads/2021/04/H-2-slider-img-2-600x442.jpg 600w, https://pharmacare.qodeinteractive.com/wp-content/uploads/2021/04/H-2-slider-img-2-800x589.jpg 800w"
-                                sizes="(max-width: 856px) 100vw, 856px"
-                                width="856"
-                                height="630"
+                                className="d-block w-100"
+                                src={slider3}
+                                alt="Third slide"
                               />
-                                <a className="qodef-m-item-link" href="#" target="_self" />
-                                <div className="qodef-e-content">
-                                  <h1 className="qodef-e-title entry-title" itemProp="name">
-                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati dolorum eligendi repellendus.
-                                  </h1>
-                                </div>
-                            </div>
-                          </div>
-                          <span
-                            className="swiper-notification"
-                            aria-live="assertive"
-                            aria-atomic="true"
-                          />
+                            </Carousel.Item>
+                          </Carousel>
                         </div>
-                      </div>
-                      <div className="swiper-navigation">
-                        <div
-                          className="swiper-button-next"
-                          tabIndex="0"
-                          role="button"
-                          aria-label="Next slide"
-                        />
-                        <div
-                          className="swiper-button-prev"
-                          tabIndex="0"
-                          role="button"
-                          aria-label="Previous slide"
-                        />
                       </div>
                     </div>
                   </div>
@@ -146,9 +92,7 @@ function Banner({ slides }) {
                   data-widget_type="pharmacare_core_banner.default"
                 >
                   <div className="elementor-widget-container">
-                    <div
-                      className="qodef-shortcode qodef-m qodef-mobile-custom-margin-80 qodef-banner qodef-layout--link-button qodef-banner--light "
-                    >
+                    <div className="qodef-shortcode qodef-m qodef-mobile-custom-margin-80 qodef-banner qodef-layout--link-button qodef-banner--light ">
                       <div className="qodef-m-image">
                         <img
                           src="https://pharmacare.qodeinteractive.com/wp-content/uploads/2021/04/H-2-banner-img-1.jpg"
@@ -163,10 +107,12 @@ function Banner({ slides }) {
                       </div>
                       <div className="qodef-m-content">
                         <div className="qodef-m-content-inner">
-                          <h3 className="qodef-m-title" style={{ marginTop: '110px', maxWidth: '190px' }}>
+                          <h3
+                            className="qodef-m-title"
+                            style={{ marginTop: '110px', maxWidth: '190px' }}
+                          >
                             Your New Daily Routine
-{' '}
-
+                           {' '}
                           </h3>
                           <div className="qodef-m-button">
                             <a
@@ -174,9 +120,8 @@ function Banner({ slides }) {
                               href="https://pharmacare.qodeinteractive.com/product/vichy-liftactiv-supreme-serum-10/"
                               target="_self"
                             >
-{' '}
-<span className="qodef-m-text">Buy Now</span>
-
+                              {' '}
+                              <span className="qodef-m-text">Buy Now</span>
                             </a>
                           </div>
                         </div>
@@ -194,11 +139,10 @@ function Banner({ slides }) {
                     <div className="qodef-shortcode qodef-m  qodef-banner qodef-layout--link-overlay  ">
                       <div className="qodef-m-image">
                         <img
-                          src="https://pharmacare.qodeinteractive.com/wp-content/uploads/2021/03/H-2-banner-img-2.jpg"
+                          src={slider2}
                           className="attachment-full size-full"
                           alt="a"
                           loading="lazy"
-                          srcSet="https://pharmacare.qodeinteractive.com/wp-content/uploads/2021/03/H-2-banner-img-2.jpg 824w, https://pharmacare.qodeinteractive.com/wp-content/uploads/2021/03/H-2-banner-img-2-300x218.jpg 300w, https://pharmacare.qodeinteractive.com/wp-content/uploads/2021/03/H-2-banner-img-2-768x559.jpg 768w, https://pharmacare.qodeinteractive.com/wp-content/uploads/2021/03/H-2-banner-img-2-600x437.jpg 600w, https://pharmacare.qodeinteractive.com/wp-content/uploads/2021/03/H-2-banner-img-2-800x583.jpg 800w"
                           sizes="(max-width: 824px) 100vw, 824px"
                           width="824"
                           height="600"
@@ -207,7 +151,13 @@ function Banner({ slides }) {
                       <div className="qodef-m-content">
                         <div className="qodef-m-content-inner" />
                       </div>
-                      <a itemProp="url" href="" className="qodef-m-banner-link" target="_self" />
+                      <a
+                        itemProp="url"
+                        href="https://wa.me/250790696369"
+                        className="qodef-m-banner-link"
+                        target="_blank"
+                        rel="noreferrer"
+                      />
                     </div>
                   </div>
                 </div>
@@ -287,13 +237,16 @@ function Banner({ slides }) {
 Banner.defaultProps = {
   slides: [
     {
-      content: 'Order medecine and other health care products with just one click 🤞',
+      content:
+        'Order medecine and other health care products with just one click 🤞',
     },
     {
-      content: 'Order medecine and other health care products with just one click 🤞',
+      content:
+        'Order medecine and other health care products with just one click 🤞',
     },
     {
-      content: 'Monitor your health by staying connected to your doctor anytime 😊',
+      content:
+        'Monitor your health by staying connected to your doctor anytime 😊',
     },
   ],
 };

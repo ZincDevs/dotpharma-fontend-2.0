@@ -1,3 +1,4 @@
+/* eslint-disable no-unsafe-optional-chaining */
 /* eslint-disable react/button-has-type */
 /* eslint-disable no-return-assign */
 /* eslint-disable react/jsx-no-bind */
@@ -21,6 +22,7 @@ import data from '../../data/addresses.json';
 import FormButtonSubmit from '../shared/FormButtonSubmit';
 import { createOrder } from '../../app/features/order/_orderAction';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
+import FormTextInput from '../shared/FormTextInput';
 
 function OrderHome() {
   const [prescription, setPrescription] = useState('');
@@ -38,7 +40,6 @@ function OrderHome() {
   const [streetNumber, setStreetNumber] = useState('');
   const [name, setName] = useState('');
   const [sum, setSum] = useState(0);
-  let subtitle;
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const dispatch = useDispatch();
   const axios = useAxiosPrivate();
@@ -58,7 +59,7 @@ function OrderHome() {
   const getTotalPrice = () => {
     let mSum = 0;
     _.forEach(cart, value => {
-      mSum += Number(value.medicine.m_price);
+      mSum += Number(value.medicine.m_price * value.c_quantity);
     });
     setSum(mSum);
   };
@@ -168,8 +169,8 @@ function OrderHome() {
                     <div className="clean" />
                     <div className="clean" />
                     <form className="checkout_coupon woocommerce-form-coupon">
-                      <p
-                        className="form-row form-row-last validate-required"
+                      {/* <p
+                        className=" form-row-last validate-required"
                         id="billing_last_name_field"
                         data-priority="20"
                       >
@@ -180,20 +181,14 @@ function OrderHome() {
                           </abbr>
                         </label>
                         <span className="woocommerce-input-wrapper">
-                          <input
-                            type="text"
-                            className="input-text"
-                            name="billing_last_name"
-                            id="billing_last_name"
-                            placeholder="Receiver name"
+                          <FormTextInput
                             value={name}
-                            autoComplete="family-name"
                             onChange={handleNameChange}
                           />
                         </span>
-                      </p>
+                      </p> */}
                       <p
-                        className="form-row form-row-last validate-required"
+                        className=" form-row-last validate-required"
                         id="billing_last_name_field"
                         data-priority="20"
                       >
@@ -217,7 +212,7 @@ function OrderHome() {
                         </span>
                       </p>
                       <p
-                        className="form-row form-row-last validate-required"
+                        className="form-row-last validate-required"
                         id="billing_last_name_field"
                         data-priority="20"
                       >
@@ -241,7 +236,7 @@ function OrderHome() {
                         </span>
                       </p>
                       <p
-                        className="form-row form-row-last validate-required"
+                        className="form-row-last validate-required"
                         id="billing_last_name_field"
                         data-priority="20"
                       >
@@ -269,7 +264,7 @@ function OrderHome() {
                         </span>
                       </p>
                       <p
-                        className="form-row form-row-last validate-required"
+                        className="form-row-last validate-required"
                         id="billing_last_name_field"
                         data-priority="20"
                       >
@@ -297,7 +292,7 @@ function OrderHome() {
                         </span>
                       </p>
                       <p
-                        className="form-row form-row-last validate-required"
+                        className="form-row-last validate-required"
                         id="billing_last_name_field"
                         data-priority="20"
                       >
@@ -321,7 +316,7 @@ function OrderHome() {
                         </span>
                       </p>
                       <p
-                        className="form-row form-row-last validate-required"
+                        className="form-row-last validate-required"
                         id="billing_last_name_field"
                         data-priority="20"
                       >
@@ -345,7 +340,7 @@ function OrderHome() {
                         </span>
                       </p>
                       <p
-                        className="form-row form-row-last validate-required"
+                        className="form-row-last validate-required"
                         id="billing_last_name_field"
                         data-priority="20"
                       >
@@ -362,7 +357,6 @@ function OrderHome() {
                             id="billing_last_name"
                             aria-label="Default select example"
                             onChange={e => {
-                              console.log(e.target.value);
                               changeHandler(e.target.value, ['no-child'], 'none');
                             }}
                           >
@@ -372,7 +366,7 @@ function OrderHome() {
                         </span>
                       </p>
                       <p
-                        className="form-row form-row-last validate-required"
+                        className="form-row-last validate-required"
                         id="billing_last_name_field"
                         data-priority="20"
                       >
@@ -436,7 +430,7 @@ function OrderHome() {
                                         <span className="woocommerce-Price-currencySymbol">
                                           RWF
                                         </span>
-                                        {item?.medicine?.m_price}
+                                        {Number(item?.medicine?.m_price) * item?.c_quantity}
                                       </bdi>
                                     </span>
                                     {' '}
@@ -507,9 +501,9 @@ function OrderHome() {
       </div>
       <Modal show={modalIsOpen} onHide={closeModal}>
         <Modal.Header closeButton>
-          <Modal.Title>Payment mode</Modal.Title>
+          <Modal.Title>Place order</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Please choose payment mode</Modal.Body>
+        <Modal.Body>Are you sure you want to proceed?</Modal.Body>
         <Modal.Footer>
           {loading ? (
             <div className="loading-container">
@@ -533,8 +527,9 @@ function OrderHome() {
             </div>
           ) : (
             <div className="butns-ordery-pay-mode">
+              <div className="horizontal-separator" />
               <FormButtonSubmit
-                onClick={async e => {
+                onSubmit={async e => {
                   setLoading(true);
                   const refCode = profile.cart
                     .map(e => e.medicine.m_id)
@@ -565,10 +560,8 @@ function OrderHome() {
                     setTimeout(() => navigate('/'), 5500);
                   });
                 }}
-                value="Pay on delivery"
+                value="Pay with MOMO"
               />
-              <div className="horizontal-separator" />
-              <FormButtonSubmit onSubmit={e => {}} value="Pay with MOMO" />
             </div>
           )}
         </Modal.Footer>

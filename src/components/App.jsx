@@ -28,6 +28,8 @@ import OrderHome from './order/OrderHome';
 import Doctors from './doctors/Doctors';
 import Appointment from './appointment/Appointment';
 import MakeOrdder from './order/MakeOrdder';
+import Admin from './admin/Admin';
+// import Medicine from './admin/Medicine';
 // import Empty from './shared/Empty';
 
 // Admin components
@@ -52,6 +54,9 @@ function App() {
         <Route path="/terms-and-conditions" key={key()} element={<TermsAndConditions />} />
         <Route path="/privacy-policy" key={key()} element={<PrivacyPolicy />} />
         <Route path="/elms" key={key()} element={<Elements />} />
+        <Route path="/admin" key={key()} element={<Admin />} />
+        {/* <Route path="/medicine" key={key()} element={<Medicine />} />
+        </Route> */}
 
         {/* Private Routes */}
         <Route element={<PersistLogin />}>

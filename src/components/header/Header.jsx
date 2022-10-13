@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
@@ -10,6 +11,7 @@
 import React, { useEffect } from 'react';
 import $ from 'jquery';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Logo from '../shared/Logo';
 import { ToolBarTDP } from '../shared/Elements';
 import { ButtonIcon } from '../shared/Buttons';
@@ -166,7 +168,8 @@ export function HeaderContent({ profile }) {
           <LogoH />
           <div className="qodef-widget-holder">
             <div className="qodef-widget-holder qodef--one">
-              <div
+
+              {/* <div
                 id="search-3"
                 className="widget widget_search qodef-header-widget-area-one"
                 data-area="header-widget-one"
@@ -200,26 +203,40 @@ export function HeaderContent({ profile }) {
                     </button>
                   </div>
                 </form>
-              </div>
+              </div> */}
               <div
                 id="pharmacare_membership_login_opener-3"
                 className="widget widget_pharmacare_membership_login_opener qodef-header-widget-area-one"
                 data-area="header-widget-one"
               >
                 <div className="qodef-login-opener-widget qodef-user-logged--out">
-                  <Link to="/login" className="qodef-login-opener">
-                    <span className="qodef-m-opener-icon force-main-color">
-                      <span className="qodef-icon-fontkiko kiko-user" />
-                      <i className="bi bi-person" style={{ fontSize: '50px' }} />
-                    </span>
-                    <span className="qodef-login-text-holder">
-                      <span className="qodef-login-opener-title">Account</span>
-                      <span className="qodef-login-opener-text">
-                        Login / Register
-
+                  {profile ? (
+                    <Link to="/myprofile" className="qodef-login-opener">
+                      <span className="qodef-m-opener-icon force-main-color">
+                        <span className="qodef-icon-fontkiko kiko-user" />
+                        <i className="bi bi-person" style={{ fontSize: '50px' }} />
                       </span>
-                    </span>
-                  </Link>
+                      <span className="qodef-login-text-holder">
+                        <span className="qodef-login-opener-title">Account</span>
+                        <span className="qodef-login-opener-text">
+                          {profile.u_email?.slice(0, profile.u_email.indexOf('@'))}
+                        </span>
+                      </span>
+                    </Link>
+                  ) : (
+                    <Link to="/login" className="qodef-login-opener">
+                      <span className="qodef-m-opener-icon force-main-color">
+                        <span className="qodef-icon-fontkiko kiko-user" />
+                        <i className="bi bi-person" style={{ fontSize: '50px' }} />
+                      </span>
+                      <span className="qodef-login-text-holder">
+                        <span className="qodef-login-opener-title">Account</span>
+                        <span className="qodef-login-opener-text">
+                          Login/ Sign up
+                        </span>
+                      </span>
+                    </Link>
+                  )}
                 </div>
               </div>
               <CartMenu profile={profile} />

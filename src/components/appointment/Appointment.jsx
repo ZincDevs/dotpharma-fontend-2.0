@@ -95,7 +95,7 @@ function Appointment() {
                     <div className="woocommerce-form-coupon-toggle">
                       <div className="">
                         <div className="woocommerce-billing-fields">
-                          <h3>Patient information</h3>
+                          <h3>Personal information</h3>
                           <div className="woocommerce-billing-fields__field-wrapper" />
                         </div>
                       </div>
@@ -105,7 +105,7 @@ function Appointment() {
                     <div className="clean" />
                     <form className="checkout_coupon woocommerce-form-coupon">
                       <p
-                        className="form-row form-row-last validate-required"
+                        className="form-row-last validate-required"
                         id="billing_last_name_field"
                         data-priority="20"
                       >
@@ -129,7 +129,7 @@ function Appointment() {
                         </span>
                       </p>
                       <p
-                        className="form-row form-row-last validate-required"
+                        className=" form-row-last validate-required"
                         id="billing_last_name_field"
                         data-priority="20"
                       >
@@ -153,7 +153,7 @@ function Appointment() {
                         </span>
                       </p>
                       <p
-                        className="form-row form-row-last validate-required"
+                        className="form-row-last validate-required"
                         id="billing_last_name_field"
                         data-priority="20"
                       >
@@ -177,12 +177,12 @@ function Appointment() {
                         </span>
                       </p>
                       <p
-                        className="form-row form-row-last validate-required"
+                        className="form-row-last validate-required"
                         id="billing_last_name_field"
                         data-priority="20"
                       >
                         <label htmlFor="billing_last_name" className="">
-                          Message&nbsp;
+                          How can we help you&nbsp;
                           <abbr className="required" title="required">
                             *
                           </abbr>
