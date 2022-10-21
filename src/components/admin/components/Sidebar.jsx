@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Sidebar() {
   return (
@@ -8,7 +9,7 @@ function Sidebar() {
       <div className="adminx-sidebar expand-hover push">
         <ul className="sidebar-nav">
           <li className="sidebar-nav-item">
-            <a href="index.html" className="sidebar-nav-link active">
+            <Link to="medicines" className="sidebar-nav-link active">
               <span className="sidebar-nav-icon">
                 <i className="fa-solid fa-prescription-bottle-medical" />
               </span>
@@ -16,11 +17,11 @@ function Sidebar() {
                 Medicines
               </span>
               <span className="sidebar-nav-end" />
-            </a>
+            </Link>
           </li>
 
           <li className="sidebar-nav-item">
-            <a href="#" className="sidebar-nav-link">
+            <Link to="appointments" className="sidebar-nav-link">
               <span className="sidebar-nav-icon">
                 {/* <i class="fa-solid fa-hospital"></i> */}
                 <i className="fa-solid fa-hospital" />
@@ -31,11 +32,11 @@ function Sidebar() {
               <span className="sidebar-nav-end">
                 <span className="badge badge-info">4</span>
               </span>
-            </a>
+            </Link>
           </li>
 
           <li className="sidebar-nav-item">
-            <a className="sidebar-nav-link collapsed" data-toggle="collapse" href="#example" aria-expanded="false" aria-controls="example">
+            <Link className="sidebar-nav-link collapsed" data-toggle="collapse" to="orders" aria-expanded="false" aria-controls="example">
               <span className="sidebar-nav-icon">
                 {/* <i class="fa-solid fa-cart-shopping"></i> */}
                 <i className="fa-solid fa-cart-shopping" />
@@ -46,11 +47,11 @@ function Sidebar() {
               <span className="sidebar-nav-end">
                 <i data-feather="chevron-right" className="nav-collapse-icon" />
               </span>
-            </a>
+            </Link>
           </li>
 
           <li className="sidebar-nav-item">
-            <a className="sidebar-nav-link collapsed" data-toggle="collapse" href="#navTables" aria-expanded="false" aria-controls="navTables">
+            <Link className="sidebar-nav-link collapsed" data-toggle="collapse" to="clinics" aria-expanded="false" aria-controls="navTables">
               <span className="sidebar-nav-icon">
                 <i className="fa-solid fa-circle-h" />
               </span>
@@ -60,11 +61,11 @@ function Sidebar() {
               <span className="sidebar-nav-end">
                 <i data-feather="chevron-right" className="nav-collapse-icon" />
               </span>
-            </a>
+            </Link>
           </li>
 
           <li className="sidebar-nav-item">
-            <a className="sidebar-nav-link collapsed" data-toggle="collapse" href="#navForms" aria-expanded="false" aria-controls="navForms">
+            <Link className="sidebar-nav-link collapsed" data-toggle="collapse" to="pharmacies" aria-expanded="false" aria-controls="navForms">
               <span className="sidebar-nav-icon">
                 <i className="fa-solid fa-house-chimney-medical" />
               </span>
@@ -74,21 +75,7 @@ function Sidebar() {
               <span className="sidebar-nav-end">
                 <i data-feather="chevron-right" className="nav-collapse-icon" />
               </span>
-            </a>
-          </li>
-
-          <li className="sidebar-nav-item">
-            <a className="sidebar-nav-link collapsed" data-toggle="collapse" href="#navUI" aria-expanded="false" aria-controls="navUI">
-              <span className="sidebar-nav-icon">
-                <i className="fa-solid fa-users" />
-              </span>
-              <span className="sidebar-nav-name">
-                UI Elements
-              </span>
-              <span className="sidebar-nav-end">
-                <i data-feather="chevron-right" className="nav-collapse-icon" />
-              </span>
-            </a>
+            </Link>
           </li>
         </ul>
       </div>

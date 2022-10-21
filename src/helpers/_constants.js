@@ -20,4 +20,7 @@ export default {
   my_profile_api: '/user/myprofile',
   doctors_api: '/doctor/findall',
   appointment_api: '/appointments/makeappointment',
+  tag_get_api: '/tags/getall',
+  create_medicine_api: '/medicine/createnew',
+  get_pharmacy__api: '/pharmacy/findall',
 };

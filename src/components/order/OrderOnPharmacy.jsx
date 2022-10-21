@@ -10,7 +10,7 @@ import Modal from 'react-bootstrap/Modal';
 import key from 'uniqid';
 import { ColorRing } from 'react-loader-spinner';
 import { ToastContainer, toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import data from '../../data/addresses.json';
 import FormButtonSubmit from '../shared/FormButtonSubmit';
 import { createOrder } from '../../app/features/order/_orderAction';
@@ -18,7 +18,7 @@ import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 import FormTextInput from '../shared/FormTextInput';
 import { uploadMedicineImage } from '../../helpers';
 
-function MakeOrdder() {
+function MakeOrdderOnPharmacy() {
   const [prescription, setPrescription] = useState('');
   const [phone, setPhone] = useState([]);
   const [districts, setDistricts] = useState([]);
@@ -38,6 +38,7 @@ function MakeOrdder() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [isUploadingImage, setIsUploadingImage] = useState(false);
+  const { pharmacyid } = useParams();
 
   function openModal() {
     setIsOpen(true);
@@ -141,7 +142,7 @@ function MakeOrdder() {
                     <div className="woocommerce-form-coupon-toggle">
                       <div className="">
                         <div className="woocommerce-billing-fields">
-                          <h3>Derivery information</h3>
+                          <h3>Order on pharmacy / Derivery information</h3>
                           <div className="woocommerce-billing-fields__field-wrapper" />
                         </div>
                       </div>
@@ -150,24 +151,6 @@ function MakeOrdder() {
                     <div className="clean" />
                     <div className="clean" />
                     <form className="checkout_coupon woocommerce-form-coupon">
-                      {/* <p
-                        className=" form-row-last validate-required"
-                        id="billing_last_name_field"
-                        data-priority="20"
-                      >
-                        <label htmlFor="billing_last_name" className="">
-                          Name&nbsp;
-                          <abbr className="required" title="required">
-                            *
-                          </abbr>
-                        </label>
-                        <span className="woocommerce-input-wrapper">
-                          <FormTextInput
-                            value={name}
-                            onChange={handleNameChange}
-                          />
-                        </span>
-                      </p> */}
                       <p
                         className=" form-row-last validate-required"
                         id="billing_last_name_field"
@@ -205,16 +188,6 @@ function MakeOrdder() {
                         </label>
                         <br />
                         <span className="woocommerce-input-wrapper">
-                          {/* <input
-                            type="text"
-                            className="input-text"
-                            name="billing_last_name"
-                            id="billing_last_name"
-                            placeholder="Enter prescription"
-                            value={prescription}
-                            autoComplete="family-name"
-                            onChange={handlePrescription}
-                          /> */}
 
                           <input
                             type="file"
@@ -489,6 +462,7 @@ function MakeOrdder() {
                     setIsOpen(false);
                     return;
                   }
+
                   setLoading(true);
                   const refCode = `ORDER-${Math.random(10000, 99999)}-${Date.now().toString().substring(Date.now().toString().length - 4, Date.now().toString().length - 1)}`;
                   const medicines = profile.cart
@@ -505,15 +479,17 @@ function MakeOrdder() {
 
                   const data = {
                     patid: profile.u_id,
+                    phid: pharmacyid,
                     refcode: refCode,
                     prescription,
                     medicines,
                     address,
                     totalamount: 0,
-                    type: 'Prescription-Order',
+                    type: 'Pharmacy-Order',
                   };
 
                   await createOrder(axios, data, (e, data) => {
+                    console.log('hellllllllllloooo');
                     setLoading(false);
                     setIsOpen(false);
                     if (e) {
@@ -534,4 +510,4 @@ function MakeOrdder() {
   );
 }
 
-export default MakeOrdder;
+export default MakeOrdderOnPharmacy;

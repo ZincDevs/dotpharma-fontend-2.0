@@ -24,7 +24,7 @@ export default function Home({ alert: defaultAlert }) {
     addToCart(axios, m_id, err => {
       if (err) {
         changeStatus('fail');
-        toast.error('Could not add to cart!');
+        toast.error('Could not add to cart, please sign in first!');
       } else {
         setTimeout(() => {
           changeStatus('success');

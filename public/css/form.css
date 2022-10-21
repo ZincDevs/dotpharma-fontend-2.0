@@ -33,7 +33,22 @@
   font-weight: 700 !important;
 }
 
+.dropdowntex-header {
+    background: none !important;
+    cursor: pointer;
+    border-radius: none !important;
+    box-sizing: border-box;
+    border: none !important;
+    background-color: transparent !important;
+    color: #606060 !important;
+    font-weight: 700 !important;
+}
+
 .dropdowntex:focus {
   outline: none !important;
   box-shadow: none !important;
+}
+
+.select-category {
+  width: 100% !important;
 }

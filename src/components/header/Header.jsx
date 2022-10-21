@@ -12,6 +12,8 @@ import React, { useEffect } from 'react';
 import $ from 'jquery';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import _ from 'lodash';
+import Dropdown from 'react-bootstrap/Dropdown';
 import Logo from '../shared/Logo';
 import { ToolBarTDP } from '../shared/Elements';
 import { ButtonIcon } from '../shared/Buttons';
@@ -25,18 +27,29 @@ export function TopHeader() {
       <div id="qodef-top-area-inner" className="qodef-content-grid">
         <div className="qodef-widget-holder qodef-top-area-left">
           <div className="qodef-widget-holder qodef--one">
-            <div id="text-3" className="widget widget_text qodef-top-bar-widget">
+            <div
+              id="text-3"
+              className="widget widget_text qodef-top-bar-widget"
+            >
               <div className="textwidget">
                 <p>
-                  <a className="qodef-top-header-link"> Info : +250 790 696 369</a>
-                  <span
-                    className="qodef-separator-top-header"
-                  />
-                  <Link to="/about" className="qodef-top-header-link"> About</Link>
-                  <span
-                    className="qodef-separator-top-header"
-                  />
-                  <Link to="/delivery-information" className="qodef-top-header-link"> Delivery information</Link>
+                  <a className="qodef-top-header-link">
+                    {' '}
+                    Info : +250 790 696 369
+                  </a>
+                  <span className="qodef-separator-top-header" />
+                  <Link to="/about" className="qodef-top-header-link">
+                    {' '}
+                    About
+                  </Link>
+                  <span className="qodef-separator-top-header" />
+                  <Link
+                    to="/delivery-information"
+                    className="qodef-top-header-link"
+                  >
+                    {' '}
+                    Delivery information
+                  </Link>
                 </p>
               </div>
             </div>
@@ -44,19 +57,31 @@ export function TopHeader() {
         </div>
         <div className="qodef-widget-holder qodef-top-area-center">
           <div className="qodef-widget-holder qodef--one">
-            <div id="text-6" className="widget widget_text qodef-top-bar-widget">
+            <div
+              id="text-6"
+              className="widget widget_text qodef-top-bar-widget"
+            >
               <div className="textwidget">
-                <p><span className="qodef-message-free-shipping">– FREE SHIPPING FOR ORDERS OVER $30 –</span></p>
+                <p>
+                  <span className="qodef-message-free-shipping">
+                    – FREE SHIPPING FOR ORDERS OVER $30 –
+                  </span>
+                </p>
               </div>
             </div>
           </div>
         </div>
         <div className="qodef-widget-holder qodef-top-area-right">
           <div className="qodef-widget-holder qodef--one">
-            <div id="text-8" className="widget widget_text qodef-top-bar-widget">
+            <div
+              id="text-8"
+              className="widget widget_text qodef-top-bar-widget"
+            >
               <div className="textwidget">
                 <p>
-                  <Link to="/" className="qodef-top-header-link">FAQ</Link>
+                  <Link to="/" className="qodef-top-header-link">
+                    FAQ
+                  </Link>
                 </p>
               </div>
             </div>
@@ -68,10 +93,7 @@ export function TopHeader() {
 }
 export function LogoH() {
   return (
-    <Link
-      className="qodef-header-logo-link qodef-height--set"
-      to="/"
-    >
+    <Link className="qodef-header-logo-link qodef-height--set" to="/">
       <img
         src={LogoOg}
         className="qodef-header-logo-image qodef--main"
@@ -87,42 +109,30 @@ export function ToolbarOne() {
   return (
     <div className="qodef-standard-header-bottom-wrapper force-main-color-bg">
       <div className="qodef-standard-header-bottom-inner qodef-content-grid ">
-        <nav className="qodef-header-navigation" role="navigation" aria-label="Top Menu">
+        <nav
+          className="qodef-header-navigation"
+          role="navigation"
+          aria-label="Top Menu"
+        >
           <ul id="menu-main-menu-1" className="menu">
-            <li
-              className="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-221 qodef--hide-link qodef-menu-item--narrow"
-            >
+            <li className="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-221 qodef--hide-link qodef-menu-item--narrow">
               <Link to="/">
-                <span className="qodef-menu-item-text">
-                  Home
-                </span>
+                <span className="qodef-menu-item-text">Home</span>
               </Link>
             </li>
-            <li
-              className="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-221 qodef--hide-link qodef-menu-item--narrow"
-            >
-              <Link to="/pharmacy">
-                <span className="≈≈">
-                  Pharmacy
-                </span>
+            <li className="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-221 qodef--hide-link qodef-menu-item--narrow">
+              <Link to="/dot-pharmacies">
+                <span className="≈≈">Pharmacy</span>
               </Link>
             </li>
-            <li
-              className="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-221 qodef--hide-link qodef-menu-item--narrow"
-            >
+            <li className="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-221 qodef--hide-link qodef-menu-item--narrow">
               <Link to="/orders">
-                <span className="qodef-menu-item-text">
-                  Order medicine
-                </span>
+                <span className="qodef-menu-item-text">Order medicine</span>
               </Link>
             </li>
-            <li
-              className="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-221 qodef--hide-link qodef-menu-item--narrow"
-            >
+            <li className="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-221 qodef--hide-link qodef-menu-item--narrow">
               <Link to="/doctors">
-                <span className="qodef-menu-item-text">
-                  Meet Specialist
-                </span>
+                <span className="qodef-menu-item-text">Meet Specialist</span>
               </Link>
             </li>
             {/* <li
@@ -138,19 +148,30 @@ export function ToolbarOne() {
         </nav>
         <div className="qodef-widget-holder">
           <div className="qodef-widget-holder qodef--two">
-            <div id="text-2" className="widget widget_text qodef-header-widget-area-two" data-area="header-widget-two">
+            <div
+              id="text-2"
+              className="widget widget_text qodef-header-widget-area-two"
+              data-area="header-widget-two"
+            >
               <div className="textwidget">
                 <h6 className="qodef-ask-widget">
-                  <a href="https://wa.me/250790696369" target="_blank" rel="noreferrer">
+                  <a
+                    href="https://wa.me/250790696369"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     <span
-                      style={{ color: '#ffffff', fontSize: '15px', letterSpacing: '0.15em' }}
+                      style={{
+                        color: '#ffffff',
+                        fontSize: '15px',
+                        letterSpacing: '0.15em',
+                      }}
                     >
                       ORDER ON WHATSAPP
                       {' '}
                       <i className="bi bi-whatsapp" />
                     </span>
                   </a>
-
                 </h6>
               </div>
             </div>
@@ -168,7 +189,6 @@ export function HeaderContent({ profile }) {
           <LogoH />
           <div className="qodef-widget-holder">
             <div className="qodef-widget-holder qodef--one">
-
               {/* <div
                 id="search-3"
                 className="widget widget_search qodef-header-widget-area-one"
@@ -210,27 +230,55 @@ export function HeaderContent({ profile }) {
                 data-area="header-widget-one"
               >
                 <div className="qodef-login-opener-widget qodef-user-logged--out">
-                  {profile ? (
-                    <Link to="/myprofile" className="qodef-login-opener">
-                      <span className="qodef-m-opener-icon force-main-color">
-                        <span className="qodef-icon-fontkiko kiko-user" />
-                        <i className="bi bi-person" style={{ fontSize: '50px' }} />
-                      </span>
-                      <span className="qodef-login-text-holder">
-                        <span className="qodef-login-opener-title">Account</span>
-                        <span className="qodef-login-opener-text">
-                          {profile.u_email?.slice(0, profile.u_email.indexOf('@'))}
+                  {!_.isEmpty(profile) ? (
+                    <Dropdown>
+                      <Dropdown.Toggle
+                        className="dropdowntex-header"
+                        id="dropdown-basic"
+                      >
+                        <span className="qodef-m-opener-icon force-main-color">
+                          {/* <span className="qodef-icon-fontkiko kiko-user" /> */}
+                          <i className="bi bi-person" style={{ fontSize: '50px' }} />
                         </span>
-                      </span>
-                    </Link>
+                        <span className="qodef-login-text-holder">
+                          <span className="qodef-login-opener-title">Account</span>
+                          <br />
+                          <span className="qodef-login-opener-text">
+                            {profile.u_email?.slice(0, profile.u_email.indexOf('@'))}
+                          </span>
+                        </span>
+                      </Dropdown.Toggle>
+                      <Dropdown.Menu>
+                        <Dropdown.Item href="#/">Logout</Dropdown.Item>
+                        <Dropdown.Item href="#/">My profile</Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
                   ) : (
+                  // <Link to="/myprofile" className="qodef-login-opener">
+                  //   <span className="qodef-m-opener-icon force-main-color">
+                  //     <span className="qodef-icon-fontkiko kiko-user" />
+                  //     <i className="bi bi-person" style={{ fontSize: '50px' }} />
+                  //   </span>
+                  //   <span className="qodef-login-text-holder">
+                  //     <span className="qodef-login-opener-title">Account</span>
+                  //     <span className="qodef-login-opener-text">
+                  //       {profile.u_email?.slice(0, profile.u_email.indexOf('@'))}
+                  //     </span>
+                  //   </span>
+                  // </Link>
+
                     <Link to="/login" className="qodef-login-opener">
                       <span className="qodef-m-opener-icon force-main-color">
                         <span className="qodef-icon-fontkiko kiko-user" />
-                        <i className="bi bi-person" style={{ fontSize: '50px' }} />
+                        <i
+                          className="bi bi-person"
+                          style={{ fontSize: '50px' }}
+                        />
                       </span>
                       <span className="qodef-login-text-holder">
-                        <span className="qodef-login-opener-title">Account</span>
+                        <span className="qodef-login-opener-title">
+                          Account
+                        </span>
                         <span className="qodef-login-opener-text">
                           Login/ Sign up
                         </span>
@@ -256,7 +304,6 @@ export default function Header({ profile }) {
       <TopHeader profile={profile} />
       {/* Header */}
       <HeaderContent profile={profile} />
-
     </div>
   );
 }

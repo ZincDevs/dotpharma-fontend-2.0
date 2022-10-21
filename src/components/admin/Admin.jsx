@@ -3,10 +3,11 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 import '../../assets/css/admin/adminx.css';
 import LogoOg from '../../assets/images/logoOg.png';
 import Sidebar from './components/Sidebar';
-import Medicine from './Medicine';
+// import Medicine from './Medicine';
 
 function Admin() {
   return (
@@ -49,7 +50,7 @@ function Admin() {
             </div>
             <div className="row">
               <div className="col">
-                <Medicine />
+                <Outlet />
               </div>
             </div>
           </div>
