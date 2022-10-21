@@ -4,8 +4,10 @@ import thunk from 'redux-thunk';
 import userReducer from './features/user/_userSlice';
 import medicineReducer from './features/medicine/_medicineSlice';
 import doctorReducer from './features/doctors/_doctorSlice';
+import tagRedicer from './features/tags/_tagSlice';
 import cart from './features/cart';
 import order from './features/order';
+import pharmacyReducer from './features/pharmacy/_pharmacySlice';
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +16,8 @@ export const store = configureStore({
     cart,
     order,
     doctor: doctorReducer,
+    tag: tagRedicer,
+    pharmacy: pharmacyReducer,
   },
   logger: true,
 }, applyMiddleware(thunk));

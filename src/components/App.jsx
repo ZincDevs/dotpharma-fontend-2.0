@@ -28,6 +28,17 @@ import OrderHome from './order/OrderHome';
 import Doctors from './doctors/Doctors';
 import Appointment from './appointment/Appointment';
 import MakeOrdder from './order/MakeOrdder';
+import MakeOrdderOnPharmacy from './order/OrderOnPharmacy';
+import Admin from './admin/Admin';
+import Medicine from './admin/Medicine';
+import Orders from './admin/Orders';
+import Appointments from './admin/Appointments';
+import Clinics from './admin/Clinics';
+import Pharmacies from './admin/Pharmacies';
+import RequireAuthAdmin from '../routes/RequireAuthAdmin';
+import AdminLogin from './auth/AdminLogin';
+import Pharmacy from './pharmacies/Pharmacy';
+
 // import Empty from './shared/Empty';
 
 // Admin components
@@ -44,25 +55,57 @@ function App() {
       <Route path="/" key={key()} element={<Layout />}>
         {/* Public Routes for users */}
         <Route path="/login" key={key()} element={<Login />} />
-        <Route path="/forgot-password" key={key()} element={<ForgotPassword />} />
-        <Route path="/reset-password" key={key()} element={<ApplyPasswordReset />} />
+        <Route path="/adminlogin" key={key()} element={<AdminLogin />} />
+        <Route
+          path="/forgot-password"
+          key={key()}
+          element={<ForgotPassword />}
+        />
+        <Route
+          path="/reset-password"
+          key={key()}
+          element={<ApplyPasswordReset />}
+        />
 
         <Route path="/signup" key={key()} element={<Signup />} />
         <Route path="/verify" key={key()} element={<Verification />} />
-        <Route path="/terms-and-conditions" key={key()} element={<TermsAndConditions />} />
+        <Route
+          path="/terms-and-conditions"
+          key={key()}
+          element={<TermsAndConditions />}
+        />
         <Route path="/privacy-policy" key={key()} element={<PrivacyPolicy />} />
         <Route path="/elms" key={key()} element={<Elements />} />
 
         {/* Private Routes */}
         <Route element={<PersistLogin />}>
+          <Route element={<RequireAuthAdmin />}>
+            <Route path="/admin" key={key()} element={<Admin />}>
+              <Route path="medicines" key={key()} element={<Medicine />} />
+              <Route path="orders" key={key()} element={<Orders />} />
+              <Route path="clinics" key={key()} element={<Clinics />} />
+              <Route path="Pharmacies" key={key()} element={<Pharmacies />} />
+              <Route
+                path="appointments"
+                key={key()}
+                element={<Appointments />}
+              />
+            </Route>
+          </Route>
           <Route path="/" key={key()} element={<Home />}>
             <Route path="/" key={key()} element={<HomeSection />} />
             <Route path="/doctors" key={key()} element={<Doctors />} />
+            <Route path="/dot-pharmacies" key={key()} element={<Pharmacy />} />
             <Route element={<RequireAuth />}>
               <Route path="/cart" key={key()} element={<Cart />} />
               <Route path="/orders" key={key()} element={<MakeOrdder />} />
+              <Route path="/orderpharmacy/:pharmacyid" key={key()} element={<MakeOrdderOnPharmacy />} />
               <Route path="/checkout" key={key()} element={<OrderHome />} />
-              <Route path="/appointment" key={key()} element={<Appointment />} />
+              <Route
+                path="/appointment"
+                key={key()}
+                element={<Appointment />}
+              />
             </Route>
           </Route>
         </Route>

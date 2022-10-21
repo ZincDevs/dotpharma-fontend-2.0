@@ -15,3 +15,12 @@ export const getMedicines = async (pagination, callback) => {
     callback(error);
   }
 };
+
+export const createMedicine = async (axios, payload, callback) => {
+  try {
+    const { data } = await axios.post(Constants.create_medicine_api, payload);
+    callback(null, data);
+  } catch (error) {
+    callback(error);
+  }
+};

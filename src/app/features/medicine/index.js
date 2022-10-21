@@ -1,6 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import { setMedicines, setMedicinesHor } from './_medicineSlice';
 import { getMedicines as getMedicinesApi } from '../../../api';
+import { sortMedines } from '../../../helpers';
 
 export const getMedicines = ({ page, limit }, dispatch) => {
   dispatch(setMedicines({ status: 'pending' }));
@@ -8,7 +9,7 @@ export const getMedicines = ({ page, limit }, dispatch) => {
     if (err) {
       dispatch(setMedicines({ status: 'fail', message: 'Something went wrong.😞' }));
     } else {
-      dispatch(setMedicines({ medicines: [...data], status: 'success' }));
+      dispatch(setMedicines({ medicines: [...data.sort(sortMedines)], status: 'success' }));
     }
   });
 };
@@ -19,7 +20,7 @@ export const getMedicinesHor = ({ page, limit }, dispatch) => {
     if (err) {
       dispatch(setMedicinesHor({ status: 'fail', message: 'Something went wrong.😞' }));
     } else {
-      dispatch(setMedicinesHor({ medicines: [...data], status: 'success' }));
+      dispatch(setMedicinesHor({ medicines: [...data.sort(sortMedines)], status: 'success' }));
     }
   });
 };

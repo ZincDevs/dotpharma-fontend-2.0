@@ -115,6 +115,12 @@ function Login({ alert: defaultAlert }) {
                 <Link to="/signup">Sign Up</Link>
               </div>
             </div>
+            <div className="f-c-link-b w-auto py-3 d-flex justify-content-center align-items-center">
+              <div className="d-flex flex-row">
+                <span className="px-1">Not interested? </span>
+                <Link to="/">Return to home page</Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>

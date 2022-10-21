@@ -21,6 +21,7 @@ export function ProductListHor({
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const products = useSelector(state => state?.medicine?.medicinesHor, shallowEqual);
+  // products;
   useEffect(() => { getMedicinesHor({ limit: 2, page: 2 }, dispatch); }, []);
   return (
     <div className="d-flex flex-column">
