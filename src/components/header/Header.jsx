@@ -132,7 +132,7 @@ export function ToolbarOne() {
             </li>
             <li className="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-221 qodef--hide-link qodef-menu-item--narrow">
               <Link to="/dot-clinics">
-                <span className="qodef-menu-item-text">Make appointments</span>
+                <span className="qodef-menu-item-text">Book appointment</span>
               </Link>
             </li>
             {/* <li className="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-221 qodef--hide-link qodef-menu-item--narrow">

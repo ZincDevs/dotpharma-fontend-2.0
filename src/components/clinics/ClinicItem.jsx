@@ -35,7 +35,7 @@ c_phonenumber: "+(250) 788381219"
             <a href="#" className="button yith-wcqv-button">{`${clinic.c_email}, ${clinic.c_phonenumber}`}</a>
           </div>
           {' '}
-          <Link to={`/appointment?toid=${clinic.c_id}&type=${'clinic'}`} data-quantity="1" className="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_id="384" data-product_sku="017" aria-label="Add “Hair Oil Serum 30ml Drops” to your cart" rel="nofollow">Make appointment</Link>
+          <Link to={`/appointment?toid=${clinic.c_id}&type=${'clinic'}`} data-quantity="1" className="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_id="384" data-product_sku="017" aria-label="Add “Hair Oil Serum 30ml Drops” to your cart" rel="nofollow">Book appointment</Link>
           {' '}
         </div>
       </div>
