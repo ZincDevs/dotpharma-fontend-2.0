@@ -57,14 +57,17 @@ function Appointment() {
 
   const createApointmentEvent = async e => {
     e.preventDefault();
-    const docid = query.get('doctor');
+    const toid = query.get('toid');
+    const type = query.get('type');
     const data = {
       patid: profile?.patients[0]?.p_id,
-      docid,
+      docid: type === 'doctor' ? toid : null,
+      clid: type === 'clinic' ? toid : null,
       deasese: message,
       name,
       phone,
       email,
+      atype: type === 'clinic' ? 'Clinic-appointment' : 'Doctor-appointment',
     };
     setLoading(true);
     await createAppointment(axios, data, (err, data) => {

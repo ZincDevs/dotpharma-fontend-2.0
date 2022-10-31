@@ -25,7 +25,7 @@ import RequireAuth from '../routes/RequireAuth';
 
 import PersistLogin from './auth/PersistLogin';
 import OrderHome from './order/OrderHome';
-import Doctors from './doctors/Doctors';
+// import Doctors from './doctors/Doctors';
 import Appointment from './appointment/Appointment';
 import MakeOrdder from './order/MakeOrdder';
 import MakeOrdderOnPharmacy from './order/OrderOnPharmacy';
@@ -38,6 +38,7 @@ import Pharmacies from './admin/Pharmacies';
 import RequireAuthAdmin from '../routes/RequireAuthAdmin';
 import AdminLogin from './auth/AdminLogin';
 import Pharmacy from './pharmacies/Pharmacy';
+import ClinicsList from './clinics/Clinics';
 
 // import Empty from './shared/Empty';
 
@@ -94,8 +95,9 @@ function App() {
           </Route>
           <Route path="/" key={key()} element={<Home />}>
             <Route path="/" key={key()} element={<HomeSection />} />
-            <Route path="/doctors" key={key()} element={<Doctors />} />
+            {/* <Route path="/doctors" key={key()} element={<Doctors />} /> */}
             <Route path="/dot-pharmacies" key={key()} element={<Pharmacy />} />
+            <Route path="/dot-clinics" key={key()} element={<ClinicsList />} />
             <Route element={<RequireAuth />}>
               <Route path="/cart" key={key()} element={<Cart />} />
               <Route path="/orders" key={key()} element={<MakeOrdder />} />

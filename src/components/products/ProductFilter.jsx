@@ -5,6 +5,7 @@
 import React, { useState } from 'react';
 import key from 'uniqid';
 import Dropdown from 'react-bootstrap/Dropdown';
+import categories from '../../data/categories.json';
 
 export default function ProductFilter({ handleOnClick }) {
   const [activeFilter, setActiveFilter] = useState('Show All');
@@ -44,11 +45,12 @@ export default function ProductFilter({ handleOnClick }) {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                  <Dropdown.Item href="#/">Hygyene</Dropdown.Item>
-                  <Dropdown.Item href="#/">Malaria</Dropdown.Item>
+                  {categories.map(category => (<Dropdown.Item href="#/">{category}</Dropdown.Item>))}
+
+                  {/* <Dropdown.Item href="#/">Malaria</Dropdown.Item>
                   <Dropdown.Item href="#/">Cancer</Dropdown.Item>
                   <Dropdown.Item href="#/">Stomac diseases</Dropdown.Item>
-                  <Dropdown.Item href="#/">Diabetic</Dropdown.Item>
+                  <Dropdown.Item href="#/">Diabetic</Dropdown.Item> */}
                 </Dropdown.Menu>
               </Dropdown>
             ) : <span>{text}</span>}

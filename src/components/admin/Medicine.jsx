@@ -10,15 +10,17 @@ import { ToastContainer, toast } from 'react-toastify';
 import { getMedicinesHor } from '../../app/features/medicine';
 import { getTags } from '../../app/features/tags';
 import categories from '../../data/categories.json';
-import AddMedicineModal from './components/AddMedicineModal';
-import EditMedicineModel from './components/EditMedicineModel';
+import AddMedicineModal from './components/medicine/AddMedicineModal';
+import DeleteMedicineModel from './components/medicine/DeleteMedicineModel';
+import EditMedicineModel from './components/medicine/EditMedicineModel';
 
 function Medicine() {
   const dispatch = useDispatch();
   // const navigate = useNavigate();
   const [modalIsOpen, setIsOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [medicine, setMedicine] = useState({});
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [medicine, setMedicine] = useState(null);
 
   const products = useSelector(
     state => state?.medicine?.medicinesHor,
@@ -39,9 +41,14 @@ function Medicine() {
     setIsEditModalOpen(false);
   }
 
-  function handleOpenEditModal(medicine) {
-    setMedicine(medicine);
-    setIsEditModalOpen(true);
+  function handleOpenEditModal(medicine1) {
+    setMedicine(medicine1);
+    setTimeout(() => setIsEditModalOpen(true), 50);
+    // setIsEditModalOpen(true);
+  }
+
+  function closeDeleteModal() {
+    setIsDeleteModalOpen(false);
   }
 
   return (
@@ -99,7 +106,16 @@ function Medicine() {
                   <td>{product.m_price}</td>
                   <td>
                     <button className="btn btn-sm btn-success" onClick={() => handleOpenEditModal(product)}>Edit</button>
-                    <button className="btn btn-sm btn-danger">Delete</button>
+                    <button
+                      className="btn btn-sm btn-danger"
+                      onClick={() => {
+                        setMedicine(product);
+                        setIsDeleteModalOpen(true);
+                      }}
+                    >
+                      Delete
+
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -115,6 +131,9 @@ function Medicine() {
 
       {/* Edit modal */}
       <EditMedicineModel data={{ medicine, isEditModalOpen, closeEditModal }} />
+
+      {/* Delete modal */}
+      <DeleteMedicineModel data={{ isDeleteModalOpen, mid: medicine?.m_id, closeDeleteModal }} />
     </div>
   );
 }

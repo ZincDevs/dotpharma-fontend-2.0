@@ -28,7 +28,7 @@ function Home({ alert: defaultAlert }) {
   return (
     <div className="">
       <ToastContainer />
-      {(showAlert && alert) && (<Alert info={alert} handleCloseAlert={handleCloseAlert} />)}
+      {/* {(showAlert && alert) && (<Alert info={alert} handleCloseAlert={handleCloseAlert} />)} */}
       <div id="qodef-page-wrapper" className="">
         <Header profile={profile} />
         <Outlet />

@@ -24,3 +24,21 @@ export const createMedicine = async (axios, payload, callback) => {
     callback(error);
   }
 };
+
+export const updateMedicine = async (axios, payload, mid, callback) => {
+  try {
+    const { data } = await axios.put(Constants.update_medicine_api(mid), payload);
+    callback(null, data);
+  } catch (error) {
+    callback(error);
+  }
+};
+
+export const deleteMedicine = async (axios, mid, callback) => {
+  try {
+    const { data } = await axios.delete(Constants.delete_medicine_api(mid));
+    callback(null, data);
+  } catch (error) {
+    callback(error);
+  }
+};
