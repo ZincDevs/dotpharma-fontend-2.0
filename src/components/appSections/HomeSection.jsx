@@ -74,10 +74,10 @@ export default function Home({ alert: defaultAlert }) {
                         profile={profile}
                       />
                       <ADsOne />
-                      <ProductsHomeHor
+                      {/* <ProductsHomeHor
                         handleAddToCart={handleAddToCart}
                         handleRemoveFromCart={handleRemoveFromCart}
-                      />
+                      /> */}
                     </div>
                   </div>
                 </div>

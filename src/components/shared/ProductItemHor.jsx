@@ -5,7 +5,7 @@
 import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, FloatingButton } from './Buttons';
-import { ItemFotter, Price } from './Elements';
+import { Price } from './Elements';
 
 export default function ProductItemHor({
   handleAddToCart,
@@ -47,9 +47,9 @@ export default function ProductItemHor({
         <div className="py-2">
           <Button id={m_id} handleOnclick={e => { handleAddToCart(m_id, changeStatus); }} text="Add to cart" icon="bi bi-bag" />
         </div>
-        <div className="py-1">
+        {/* <div className="py-1">
           <ItemFotter />
-        </div>
+        </div> */}
       </div>
     </div>
   );

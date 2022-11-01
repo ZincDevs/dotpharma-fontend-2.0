@@ -12,8 +12,11 @@ export const medicineSlice = createSlice({
     setMedicinesHor: (state, action) => {
       state.medicinesHor = action?.payload?.medicines;
     },
+    setOneMedicine: (state, action) => {
+      state.medicine = action?.payload?.medicine;
+    },
   },
 });
 
-export const { setMedicines, setMedicinesHor } = medicineSlice.actions;
+export const { setMedicines, setMedicinesHor, setOneMedicine } = medicineSlice.actions;
 export default medicineSlice.reducer;

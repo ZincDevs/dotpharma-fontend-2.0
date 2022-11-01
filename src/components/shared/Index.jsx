@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import { ButtonLink, Button, FloatingButton } from './Buttons';
-import { ToolBarTDP, Price, ItemFotter } from './Elements';
+import { ToolBarTDP, Price } from './Elements';
 import ProductItemHor from './ProductItemHor';
 import ProductItem from './ProductItem';
 import AddMedicineForm from './AddMedicineForm';
@@ -122,7 +122,7 @@ export default function Index() {
           <div className="d-flex flex-column">
             <div className="px-1">
               Width discount
-              <ItemFotter />
+              {/* <ItemFotter /> */}
             </div>
           </div>
         </div>

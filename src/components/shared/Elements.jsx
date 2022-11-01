@@ -61,20 +61,20 @@ function Price({ discount, price, center }) {
   );
 }
 
-function ItemFotter({ center }) {
-  return (
-    <div className={`d-flex  item-fotter ${center && 'justify-content-center align-items-center'}`}>
-      <div className="d-flex footer-child">
-        <i className="bi bi-eye px-1" />
-        <a href="#" className="button yith-wcqv-button" data-product_id="3211">Quick View</a>
-      </div>
-      <div className="d-flex justify-content-center align-items-center">
-        <i className="bi bi-heart px-1" />
-        <a href="#" className="button yith-wcqv-button" data-product_id="3211">Quick View</a>
-      </div>
-    </div>
-  );
-}
+// function ItemFotter({ center }) {
+//   return (
+//     <div className={`d-flex  item-fotter ${center && 'justify-content-center align-items-center'}`}>
+//       <div className="d-flex footer-child">
+//         <i className="bi bi-eye px-1" />
+//         <a href="#" className="button yith-wcqv-button" data-product_id="3211">Quick View</a>
+//       </div>
+//       <div className="d-flex justify-content-center align-items-center">
+//         <i className="bi bi-heart px-1" />
+//         <a href="#" className="button yith-wcqv-button" data-product_id="3211">Quick View</a>
+//       </div>
+//     </div>
+//   );
+// }
 
 function Button({ handleOnClick, label, classes }) {
   return (
@@ -117,5 +117,5 @@ export {
   ProgressBar,
   ToolBarTDP,
   Price,
-  ItemFotter,
+  // ItemFotter,
 };

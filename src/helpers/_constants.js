@@ -17,6 +17,7 @@ export default {
 
   cart_api: id => `/cart/${id}`,
   medicines_api: ({ page = 1, limit = 10 }) => `/medicine/getallmedicines?page=${page}&limit=${limit}`,
+  medicines_one_api: mid => `/medicine/findbyid/${mid}`,
 
   my_profile_api: '/user/myprofile',
   doctors_api: '/doctor/findall',
