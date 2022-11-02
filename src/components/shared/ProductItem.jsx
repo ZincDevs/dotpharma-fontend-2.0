@@ -6,7 +6,7 @@ import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
 import { Button, FloatingButton } from './Buttons';
-import { Price } from './Elements';
+import { Price, ItemFotter } from './Elements';
 
 export default function ProductItem({
   handleAddToCart,
@@ -36,7 +36,7 @@ export default function ProductItem({
       <div className="down p-2">
         <div className="p-1">
           <h5 className="text-center">
-            <Link to={`/product/${m_id}`} className="text-center">
+            <Link to={`/product/${m_id}`} className="text-center product-name">
               {m_name}
             </Link>
           </h5>
@@ -47,9 +47,9 @@ export default function ProductItem({
         <div className="py-2 d-flex justify-content-center align-items-center">
           <Button id={m_id} handleOnclick={e => { handleAddToCart(m_id, changeStatus); }} text="Add to cart" icon="bi bi-bag" />
         </div>
-        {/* <div className="py-1 d-flex justify-content-center align-items-center">
-          <ItemFotter />
-        </div> */}
+        <div className="py-1 d-flex justify-content-center align-items-center">
+          <ItemFotter medicine={m_name} />
+        </div>
       </div>
     </div>
   );
