@@ -14,12 +14,20 @@ import slider1 from '../../assets/images/slider1.jpg';
 import slider2 from '../../assets/images/slider2.jpg';
 import slider3 from '../../assets/images/slider3.jpg';
 import slider4 from '../../assets/images/slider4.jpg';
+import slideSmall1 from '../../assets/images/slide-small-1.jpg';
+import slideSmall2 from '../../assets/images/slide-small-2.jpg';
+import slideSmall3 from '../../assets/images/slide-small-3.jpg';
 
 function Banner({ slides }) {
   const [index, setIndex] = useState(0);
+  const [indexSmall, setIndexSmall] = useState(0);
 
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
+  };
+
+  const handleSelectSmall = (selectedIndex, e) => {
+    setIndexSmall(selectedIndex);
   };
   return (
     <section
@@ -94,37 +102,29 @@ function Banner({ slides }) {
                   <div className="elementor-widget-container">
                     <div className="qodef-shortcode qodef-m qodef-mobile-custom-margin-80 qodef-banner qodef-layout--link-button qodef-banner--light ">
                       <div className="qodef-m-image">
-                        <img
-                          src="https://pharmacare.qodeinteractive.com/wp-content/uploads/2021/04/H-2-banner-img-1.jpg"
-                          className="attachment-full size-full"
-                          alt="a"
-                          loading="lazy"
-                          srcSet="https://pharmacare.qodeinteractive.com/wp-content/uploads/2021/04/H-2-banner-img-1.jpg 824w, https://pharmacare.qodeinteractive.com/wp-content/uploads/2021/04/H-2-banner-img-1-300x218.jpg 300w, https://pharmacare.qodeinteractive.com/wp-content/uploads/2021/04/H-2-banner-img-1-768x559.jpg 768w, https://pharmacare.qodeinteractive.com/wp-content/uploads/2021/04/H-2-banner-img-1-600x437.jpg 600w, https://pharmacare.qodeinteractive.com/wp-content/uploads/2021/04/H-2-banner-img-1-800x583.jpg 800w"
-                          sizes="(max-width: 824px) 100vw, 824px"
-                          width="824"
-                          height="600"
-                        />
-                      </div>
-                      <div className="qodef-m-content">
-                        <div className="qodef-m-content-inner">
-                          <h3
-                            className="qodef-m-title"
-                            style={{ marginTop: '110px', maxWidth: '190px' }}
-                          >
-                            Your New Daily Routine
-                           {' '}
-                          </h3>
-                          <div className="qodef-m-button">
-                            <a
-                              className="qodef-shortcode qodef-m  qodef-button qodef-layout--textual  qodef-html--link"
-                              href="https://pharmacare.qodeinteractive.com/product/vichy-liftactiv-supreme-serum-10/"
-                              target="_self"
-                            >
-                              {' '}
-                              <span className="qodef-m-text">Buy Now</span>
-                            </a>
-                          </div>
-                        </div>
+                      <Carousel activeIndex={indexSmall} onSelect={handleSelectSmall}>
+                            <Carousel.Item>
+                              <img
+                                className="d-block w-100"
+                                src={slideSmall1}
+                                alt="First slide"
+                              />
+                            </Carousel.Item>
+                            <Carousel.Item>
+                              <img
+                                className="d-block w-100"
+                                src={slideSmall2}
+                                alt="Second slide"
+                              />
+                            </Carousel.Item>
+                            <Carousel.Item>
+                              <img
+                                className="d-block w-100"
+                                src={slideSmall3}
+                                alt="Third slide"
+                              />
+                            </Carousel.Item>
+                      </Carousel>
                       </div>
                     </div>
                   </div>

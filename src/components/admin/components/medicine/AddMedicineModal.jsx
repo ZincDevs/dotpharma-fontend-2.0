@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/label-has-associated-control */
@@ -6,11 +7,11 @@ import Modal from 'react-bootstrap/Modal';
 import { ToastContainer, toast } from 'react-toastify';
 import { ColorRing } from 'react-loader-spinner';
 import Form from 'react-bootstrap/Form';
-import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
-import FormSelectInput from '../../shared/FromSelectControl';
-import { uploadMedicineImage } from '../../../helpers';
-import { createMedicine } from '../../../api/_medicine';
-import FormButtonSubmit from '../../shared/FormButtonSubmit';
+import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
+import FormSelectInput from '../../../shared/FromSelectControl';
+import { uploadMedicineImage } from '../../../../helpers';
+import { createMedicine } from '../../../../api/_medicine';
+import FormButtonSubmit from '../../../shared/FormButtonSubmit';
 
 function AddMedicineModal({
   data: {
@@ -319,10 +320,10 @@ function AddMedicineModal({
                   };
                   createMedicine(axios, data, (err, data) => {
                     if (err) {
-                      console.log(err);
                       toast.error('Could not add medicine');
                     } else {
                       toast.success('Medicine successfully added!');
+                      location.reload();
                     }
                   });
                 }}

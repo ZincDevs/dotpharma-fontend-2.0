@@ -150,7 +150,7 @@ function OrderHome() {
                     <div className="woocommerce-form-coupon-toggle">
                       <div className="">
                         <div className="woocommerce-billing-fields">
-                          <h3>Derivery information</h3>
+                          <h3>Delivery information</h3>
                           <div className="woocommerce-billing-fields__field-wrapper" />
                         </div>
                       </div>

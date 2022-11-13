@@ -64,7 +64,7 @@ export function TopHeader() {
               <div className="textwidget">
                 <p>
                   <span className="qodef-message-free-shipping">
-                    – FREE SHIPPING FOR ORDERS OVER $30 –
+                    - FREE SHIPPING FOR ORDERS OVER 30,0000 Rwf -
                   </span>
                 </p>
               </div>
@@ -131,10 +131,15 @@ export function ToolbarOne() {
               </Link>
             </li>
             <li className="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-221 qodef--hide-link qodef-menu-item--narrow">
+              <Link to="/dot-clinics">
+                <span className="qodef-menu-item-text">Book appointment</span>
+              </Link>
+            </li>
+            {/* <li className="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-221 qodef--hide-link qodef-menu-item--narrow">
               <Link to="/doctors">
                 <span className="qodef-menu-item-text">Meet Specialist</span>
               </Link>
-            </li>
+            </li> */}
             {/* <li
               className="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-221 qodef--hide-link qodef-menu-item--narrow"
             >

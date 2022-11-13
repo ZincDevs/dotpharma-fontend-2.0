@@ -40,7 +40,7 @@ function SignUpVerificationSent({ email }) {
       ) : (
         <div className="empty-content">
           <h1 className="email-sent"><i className="bi bi-envelope-paper" /></h1>
-          <h3 className="text-1 mt-3">Verfication sent 👍</h3>
+          <h3 className="text-1 mt-3">Verification sent 👍</h3>
           <small className="text-2 d-flex flex-row">
             <span>Verification mail was sent to</span>
             <span className="px-2"><b>{email}</b></span>

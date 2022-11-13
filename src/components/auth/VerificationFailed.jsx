@@ -75,7 +75,7 @@ function VericationFailed({ alert: defaultAlert }) {
             <h1 className="error"><i className="bi bi-envelope-exclamation" /></h1>
             <h3 className="text-1 mt-3">Verification failed 😥</h3>
             <small className="text-2 px-4 text-center">The provided token is invalid or expired. </small>
-            <small className="text-2 px-4 text-center">Please keep in mind that the verfication token is only valid for 5 minutes. </small>
+            <small className="text-2 px-4 text-center">Please keep in mind that the verification token is only valid for 5 minutes. </small>
             <div className="v-comp-1 d-flex justify-content-center align-items-center mt-3">
               <div>
                 <form onSubmit={handleResend}>

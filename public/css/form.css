@@ -13,7 +13,7 @@
 }
 
 .butns-ordery-pay-mode {
-  display: flex;
+  display: flex !important;
 }
 
 .loading-container {

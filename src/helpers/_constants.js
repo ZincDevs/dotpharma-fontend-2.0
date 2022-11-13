@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 export default {
   t_key_name: 'dotpharma-key-c-u',
   login_api: '/user/login',
@@ -16,11 +17,18 @@ export default {
 
   cart_api: id => `/cart/${id}`,
   medicines_api: ({ page = 1, limit = 10 }) => `/medicine/getallmedicines?page=${page}&limit=${limit}`,
+  medicines_one_api: mid => `/medicine/findbyid/${mid}`,
 
   my_profile_api: '/user/myprofile',
   doctors_api: '/doctor/findall',
   appointment_api: '/appointments/makeappointment',
   tag_get_api: '/tags/getall',
   create_medicine_api: '/medicine/createnew',
+  update_medicine_api: mid => `/medicine/updatemedicine/${mid}`,
+  delete_medicine_api: mid => `/medicine/deletemedicine/${mid}`,
   get_pharmacy__api: '/pharmacy/findall',
+  create_pharmacy__api: '/pharmacy/createnew',
+  delete_pharmacy__api: ph_id => `/pharmacy/deletepharmacy/${ph_id}`,
+  update_pharmacy__api: ph_id => `/pharmacy/updatepharmacy/${ph_id}`,
+  get_clinics__api: '/clinics/findall',
 };

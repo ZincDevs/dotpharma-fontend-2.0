@@ -8,6 +8,7 @@ import tagRedicer from './features/tags/_tagSlice';
 import cart from './features/cart';
 import order from './features/order';
 import pharmacyReducer from './features/pharmacy/_pharmacySlice';
+import clinicReducer from './features/clinic/_clinicSlice';
 
 export const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ export const store = configureStore({
     doctor: doctorReducer,
     tag: tagRedicer,
     pharmacy: pharmacyReducer,
+    clinic: clinicReducer,
   },
   logger: true,
 }, applyMiddleware(thunk));
