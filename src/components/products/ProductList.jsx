@@ -64,6 +64,7 @@ export default function ProductList({
   const navigate = useNavigate();
   const products = useSelector(state => state?.medicine?.medicines, shallowEqual);
   // const mProducts = products?.length > 2 ? [products[0], products[1]] : products;
+  console.log(products);
 
   useEffect(() => { getMedicines({ limit: 8 }, dispatch); }, []);
   return (

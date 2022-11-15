@@ -19,7 +19,6 @@ export default function ClinicList() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const clinics = useSelector(state => state.clinic.clinics, shallowEqual);
-  console.log(clinics);
 
   useEffect(() => {
     getClinics(dispatch);
