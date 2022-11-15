@@ -1,9 +1,10 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable max-len */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable no-unsafe-optional-chaining */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import _ from 'lodash';
 import Modal from 'react-bootstrap/Modal';
@@ -25,7 +26,8 @@ import { Button } from '../shared/Buttons';
 
 function MakeOrdder() {
   const [prescription, setPrescription] = useState('');
-  const [phone, setPhone] = useState([]);
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
   const [districts, setDistricts] = useState([]);
   const [district, setDistrict] = useState('');
   const [province, setProvince] = useState('');
@@ -38,13 +40,13 @@ function MakeOrdder() {
   const [vilages, setVilages] = useState([]);
   const [streetNumber, setStreetNumber] = useState('');
   const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [orderedMedices, setOrderedMedicines] = useState([{ medicineName: '', medicineDescription: '', imageUrl: '' }]);
   const dispatch = useDispatch();
   const axios = useAxiosPrivate();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [isUploadingImage, setIsUploadingImage] = useState(false);
-
-  const formSteps = ['Personal Information', 'Medicine Information', 'Review Information', 'Submit'];
+  const formSteps = ['Personal Information', 'Medicine Information', 'Review Information'];
   const [formCurrentStep, setFormCurrentStep] = useState(0);
   function openModal() {
     setIsOpen(true);
@@ -117,14 +119,19 @@ function MakeOrdder() {
     setStreetNumber(e.target.value);
   };
 
+  const scrollToBottom = () => {
+    const element = document.getElementById('order-element');
+    element.scrollTop = element.scrollHeight;
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [orderedMedices.length]);
+
   useEffect(() => {
     setProvinces(data);
     // setProvince(data[0].name);
   }, [provinces, districts, sectors, cells, vilages]);
-
-  // useEffect(() => {
-  //   getTotalPrice();
-  // }, [sum]);
 
   const createOrderEvent = e => {
     e.preventDefault();
@@ -132,12 +139,16 @@ function MakeOrdder() {
   };
 
   return (
-    <div className="order-home-container">
-      <div className="qodef-content-grid py-2 h-75 min">
+    <div className="order-home-container h-75">
+      <div className="qodef-content-grid flex flex-column h-100 pt-2">
         <h5 className="h4" style={{ fontWeight: 'normal', color: '#3ec389' }}>Order medicine form</h5>
-        <div className="d-flex h-100 min-vh-100 gap-3">
+        <div className="d-flex gap-3 h-100 overflow-scroll">
           <div className="w-25 force-main-color-bg p-4 d-flex flex-column gap-2">
-            <h3 className="text-white" style={{ fontWeight: 'bold' }}>Step 1</h3>
+            <h3 className="text-white" style={{ fontWeight: 'bold' }}>
+              Step
+              {' '}
+              {formCurrentStep + 1}
+            </h3>
             <p className="text-white">This will consist of your personal information.</p>
             <div className="d-flex flex-column  justify-content-center pt-2">
               {
@@ -161,253 +172,391 @@ function MakeOrdder() {
            }
             </div>
           </div>
-          <div className="w-75">
+          <div className="w-75 overflow-scroll" id="order-element">
             <ToastContainer />
-            <div>
+            <form>
               {
-                formCurrentStep === 0
+    formCurrentStep === 0
+      && (
+        <div className="flex flex-wrap">
+          <p
+            className="col-6"
+            id="billing_last_name_field"
+            data-priority="20"
+          >
+            <label htmlFor="billing_last_name" className="">
+              Phone number&nbsp;
+              <abbr className="required" title="required">
+                *
+              </abbr>
+            </label>
+            <span className="woocommerce-input-wrapper">
+              <input
+                type="tel"
+                className="input-text"
+                name="billing_last_name"
+                id="billing_last_name"
+                placeholder="Receiver phone number"
+                value={phone}
+                autoComplete="family-name"
+                onChange={handlePhoneChange}
+              />
+            </span>
+          </p>
+          <p
+            className="col-6"
+            id="billing_last_name_field"
+            data-priority="20"
+          >
+            <label htmlFor="billing_last_name" className="">
+              Email&nbsp;
+              <abbr className="required" title="required">
+                *
+              </abbr>
+            </label>
+            <span className="woocommerce-input-wrapper">
+              <input
+                type="tel"
+                className="input-text"
+                name="billing_last_name"
+                id="billing_last_name"
+                placeholder="Receiver email address"
+                value={email}
+                autoComplete="family-name"
+                onChange={handlePhoneChange}
+              />
+            </span>
+          </p>
+          <p
+            className="col-6"
+            id="billing_last_name_field"
+            data-priority="20"
+          >
+            <label htmlFor="billing_last_name" className="">
+              Province&nbsp;
+              <abbr className="required" title="required">
+                *
+              </abbr>
+            </label>
+            <span className="woocommerce-input-wrapper">
+              <select
+                className="input-text address-select"
+                name="billing_last_name"
+                id="billing_last_name"
+                aria-label="Default select example"
+                onChange={e => changeHandler(
+                  e.target.value,
+                  provinces,
+                  'districts',
+                )}
+              >
+                <option>Select province</option>
+                {provinces.map((province, index) => createOption(province.name, index))}
+              </select>
+            </span>
+          </p>
+          <p
+            className="col-6"
+            id="billing_last_name_field"
+            data-priority="20"
+          >
+            <label htmlFor="billing_last_name" className="">
+              District&nbsp;
+              <abbr className="required" title="required">
+                *
+              </abbr>
+            </label>
+            <span className="woocommerce-input-wrapper">
+              <select
+                className="input-text address-select"
+                name="billing_last_name"
+                id="billing_last_name"
+                aria-label="Default select example"
+                onChange={e => changeHandler(
+                  e.target.value,
+                  districts,
+                  'sectors',
+                )}
+              >
+                <option>Select district</option>
+                {districts.map((district, index) => createOption(district.name, index))}
+              </select>
+            </span>
+          </p>
+          <p
+            className="col-6"
+            id="billing_last_name_field"
+            data-priority="20"
+          >
+            <label htmlFor="billing_last_name" className="">
+              Sector&nbsp;
+              <abbr className="required" title="required">
+                *
+              </abbr>
+            </label>
+            <span className="woocommerce-input-wrapper">
+              <select
+                className="input-text address-select"
+                name="billing_last_name"
+                id="billing_last_name"
+                aria-label="Default select example"
+                onChange={e => changeHandler(e.target.value, sectors, 'cells')}
+              >
+                <option>Select district</option>
+                {sectors.map((sector, index) => createOption(sector.name, index))}
+              </select>
+            </span>
+          </p>
+          <p
+            className="col-6"
+            id="billing_last_name_field"
+            data-priority="20"
+          >
+            <label htmlFor="billing_last_name" className="">
+              Cell&nbsp;
+              <abbr className="required" title="required">
+                *
+              </abbr>
+            </label>
+            <span className="woocommerce-input-wrapper">
+              <select
+                className="input-text address-select"
+                name="billing_last_name"
+                id="billing_last_name"
+                aria-label="Default select example"
+                onChange={e => changeHandler(e.target.value, cells, 'villages')}
+              >
+                <option>Select district</option>
+                {cells.map((cell, index) => createOption(cell.name, index))}
+              </select>
+            </span>
+          </p>
+          <p
+            className="col-6"
+            id="billing_last_name_field"
+            data-priority="20"
+          >
+            <label htmlFor="billing_last_name" className="">
+              Village&nbsp;
+              <abbr className="required" title="required">
+                *
+              </abbr>
+            </label>
+            <span className="woocommerce-input-wrapper">
+              <select
+                className="input-text address-select"
+                name="billing_last_name"
+                id="billing_last_name"
+                aria-label="Default select example"
+                onChange={e => {
+                  changeHandler(e.target.value, ['no-child'], 'none');
+                }}
+              >
+                <option>Select village</option>
+                {vilages.map((village, index) => createOption(village.name, index))}
+              </select>
+            </span>
+          </p>
+          <p
+            className="col-6"
+            id="billing_last_name_field"
+            data-priority="20"
+          >
+            <label htmlFor="billing_last_name" className="">
+              Street number&nbsp;
+              <abbr className="required" title="required">
+                *
+              </abbr>
+            </label>
+            <span className="woocommerce-input-wrapper">
+              <input
+                type="text"
+                className="input-text "
+                name="street"
+                id="billing_last_name"
+                placeholder="Enter street number"
+                value={streetNumber}
+                onChange={handleStreetChange}
+                autoComplete="family-name"
+              />
+            </span>
+          </p>
+
+        </div>
+      )
+    }
+              {
+      formCurrentStep === 1 && (
+        <>
+          {
+          orderedMedices.map((data, index) => (
+            <div className="flex flex-wrap" key={index}>
+              <p
+                className="col-6"
+                id="billing_last_name_field"
+                data-priority="20"
+              >
+                <label htmlFor="billing_last_name" className="">
+                  Medicine Name&nbsp;
+                  <abbr className="required" title="required">
+                    *
+                  </abbr>
+                </label>
+                <span className="woocommerce-input-wrapper">
+                  <input
+                    type="tel"
+                    className="input-text"
+                    name="billing_last_name"
+                    id="billing_last_name"
+                    placeholder="Medicine Name"
+                    value={data.medicineName}
+                    autoComplete="family-name"
+                    onChange={e => {
+                      setOrderedMedicines(current => current.map((medicine, idx) => (index === idx ? { medicineName: e.target.value } : medicine)));
+                    }}
+                  />
+                </span>
+              </p>
+              <p
+                className="col-6"
+                id="billing_last_name_field"
+                data-priority="20"
+              >
+                <label htmlFor="billing_last_name" className="">
+                  Medicine Description&nbsp;
+                  <abbr className="required" title="required">
+                    *
+                  </abbr>
+                </label>
+                <span className="woocommerce-input-wrapper">
+                  <input
+                    type="tel"
+                    className="input-text"
+                    name="billing_last_name"
+                    id="billing_last_name"
+                    placeholder="Medicine Description"
+                    value={orderedMedices[index].medicineDescription}
+                    autoComplete="family-name"
+                    onChange={e => {
+                      setOrderedMedicines(current => current.map((medicine, idx) => (index === idx ? { medicineDescription: e.target.value } : medicine)));
+                    }}
+                  />
+                </span>
+              </p>
+              <p
+                className="col-6"
+                id="billing_last_name_field"
+                data-priority="20"
+              >
+                <label htmlFor="billing_last_name" className="">
+                  Prescription
+                </label>
+                <br />
+                <span className="woocommerce-input-wrapper">
+                  <input
+                    type="file"
+                    className="input-text"
+                    name="prescription"
+                    id="prescription"
+                    placeholder="Enter discount"
+                    autoComplete="family-name"
+                    value={orderedMedices[index].imageUrl}
+                    onChange={async e => {
+                      setIsUploadingImage(true);
+                      await uploadMedicineImage(
+                        e.target.files[0],
+                        (err, uploadUrl) => {
+                          setIsUploadingImage(false);
+                          if (err) {
+                            toast.error('Unable to upload image!');
+                          } else {
+                            setOrderedMedicines(current => current.map((medicine, idx) => (index === idx ? { imageUrl: e.target.value } : medicine)));
+                          }
+                        },
+                      );
+                    }}
+                  />
+                </span>
+              </p>
+              {
+                orderedMedices.length > 1
               && (
-              <form className="flex flex-wrap">
-                <p
-                  className="col-6"
-                  id="billing_last_name_field"
-                  data-priority="20"
-                >
-                  <label htmlFor="billing_last_name" className="">
-                    Phone number&nbsp;
-                    <abbr className="required" title="required">
-                      *
-                    </abbr>
-                  </label>
-                  <span className="woocommerce-input-wrapper">
-                    <input
-                      type="tel"
-                      className="input-text"
-                      name="billing_last_name"
-                      id="billing_last_name"
-                      placeholder="Receiver phone number"
-                      value={phone}
-                      autoComplete="family-name"
-                      onChange={handlePhoneChange}
-                    />
-                  </span>
-                </p>
-                <p
-                  className="col-6"
-                  id="billing_last_name_field"
-                  data-priority="20"
-                >
-                  <label htmlFor="billing_last_name" className="">
-                    Province&nbsp;
-                    <abbr className="required" title="required">
-                      *
-                    </abbr>
-                  </label>
-                  <span className="woocommerce-input-wrapper">
-                    <select
-                      className="input-text address-select"
-                      name="billing_last_name"
-                      id="billing_last_name"
-                      aria-label="Default select example"
-                      onChange={e => changeHandler(
-                        e.target.value,
-                        provinces,
-                        'districts',
-                      )}
-                    >
-                      <option>Select province</option>
-                      {provinces.map((province, index) => createOption(province.name, index))}
-                    </select>
-                  </span>
-                </p>
-                <p
-                  className="col-6"
-                  id="billing_last_name_field"
-                  data-priority="20"
-                >
-                  <label htmlFor="billing_last_name" className="">
-                    District&nbsp;
-                    <abbr className="required" title="required">
-                      *
-                    </abbr>
-                  </label>
-                  <span className="woocommerce-input-wrapper">
-                    <select
-                      className="input-text address-select"
-                      name="billing_last_name"
-                      id="billing_last_name"
-                      aria-label="Default select example"
-                      onChange={e => changeHandler(
-                        e.target.value,
-                        districts,
-                        'sectors',
-                      )}
-                    >
-                      <option>Select district</option>
-                      {districts.map((district, index) => createOption(district.name, index))}
-                    </select>
-                  </span>
-                </p>
-                <p
-                  className="col-6"
-                  id="billing_last_name_field"
-                  data-priority="20"
-                >
-                  <label htmlFor="billing_last_name" className="">
-                    Sector&nbsp;
-                    <abbr className="required" title="required">
-                      *
-                    </abbr>
-                  </label>
-                  <span className="woocommerce-input-wrapper">
-                    <select
-                      className="input-text address-select"
-                      name="billing_last_name"
-                      id="billing_last_name"
-                      aria-label="Default select example"
-                      onChange={e => changeHandler(e.target.value, sectors, 'cells')}
-                    >
-                      <option>Select district</option>
-                      {sectors.map((sector, index) => createOption(sector.name, index))}
-                    </select>
-                  </span>
-                </p>
-                <p
-                  className="col-6"
-                  id="billing_last_name_field"
-                  data-priority="20"
-                >
-                  <label htmlFor="billing_last_name" className="">
-                    Cell&nbsp;
-                    <abbr className="required" title="required">
-                      *
-                    </abbr>
-                  </label>
-                  <span className="woocommerce-input-wrapper">
-                    <select
-                      className="input-text address-select"
-                      name="billing_last_name"
-                      id="billing_last_name"
-                      aria-label="Default select example"
-                      onChange={e => changeHandler(e.target.value, cells, 'villages')}
-                    >
-                      <option>Select district</option>
-                      {cells.map((cell, index) => createOption(cell.name, index))}
-                    </select>
-                  </span>
-                </p>
-                <p
-                  className="col-6"
-                  id="billing_last_name_field"
-                  data-priority="20"
-                >
-                  <label htmlFor="billing_last_name" className="">
-                    Village&nbsp;
-                    <abbr className="required" title="required">
-                      *
-                    </abbr>
-                  </label>
-                  <span className="woocommerce-input-wrapper">
-                    <select
-                      className="input-text address-select"
-                      name="billing_last_name"
-                      id="billing_last_name"
-                      aria-label="Default select example"
-                      onChange={e => {
-                        changeHandler(e.target.value, ['no-child'], 'none');
-                      }}
-                    >
-                      <option>Select village</option>
-                      {vilages.map((village, index) => createOption(village.name, index))}
-                    </select>
-                  </span>
-                </p>
-                <p
-                  className="col-6"
-                  id="billing_last_name_field"
-                  data-priority="20"
-                >
-                  <label htmlFor="billing_last_name" className="">
-                    Street number&nbsp;
-                    <abbr className="required" title="required">
-                      *
-                    </abbr>
-                  </label>
-                  <span className="woocommerce-input-wrapper">
-                    <input
-                      type="text"
-                      className="input-text "
-                      name="billing_last_name"
-                      id="billing_last_name"
-                      placeholder=""
-                      value={streetNumber}
-                      onChange={handleStreetChange}
-                      autoComplete="family-name"
-                    />
-                  </span>
-                </p>
-                <p
-                  className="col-6"
-                  id="billing_last_name_field"
-                  data-priority="20"
-                >
-                  <label htmlFor="billing_last_name" className="">
-                    Prescription&nbsp;
-                    <abbr className="required" title="required">
-                      *
-                    </abbr>
-                  </label>
-                  <br />
-                  <span className="woocommerce-input-wrapper">
-                    <input
-                      type="file"
-                      className="input-text"
-                      name="prescription"
-                      id="prescription"
-                      placeholder="Enter discount"
-                      autoComplete="family-name"
-                      onChange={async e => {
-                        setIsUploadingImage(true);
-                        await uploadMedicineImage(
-                          e.target.files[0],
-                          (err, uploadUrl) => {
-                            setIsUploadingImage(false);
-                            if (err) {
-                              toast.error('Unable to upload image!');
-                            } else {
-                              setPrescription(uploadUrl);
-                            }
-                          },
-                        );
-                      }}
-                    />
-                  </span>
-                </p>
-              </form>
+              <p className="flex justify-content-end align-content-end col-6">
+                <Button
+                  text="REMOVE MEDICINE"
+                  handleOnclick={() => setOrderedMedicines(current => current.filter((medicine, idx) => idx !== index))}
+                />
+              </p>
               )
-              }
-              <div className="col-12 flex justify-content-end gap-2 align-items-end">
-                {
+                }
+            </div>
+          ))
+        }
+
+          <div className="px-3">
+            <Button
+              text="ADD MEDICINE"
+              handleOnclick={() => {
+                setOrderedMedicines(current => [...current, { imageUrl: '', medicineDescription: '', medicineName: '' }]);
+                toast.error('Complete the form please');
+              }}
+            />
+          </div>
+        </>
+
+      )
+    }
+              {
+      formCurrentStep === 2 && (
+        <div>
+          <div>
+            <h3>Person Information Details</h3>
+            <div className="flex flex-wrap">
+              <div>
+                <span className="h5">
+                  Telephone Number:
+                </span>
+                <span>
+                  {' '}
+                  {phone}
+                </span>
+              </div>
+              <div />
+            </div>
+          </div>
+        </div>
+      )
+    }
+            </form>
+            <div className="col-12 flex justify-content-end gap-2 align-items-end">
+              {
                   formCurrentStep > 0 && <Button text="Back" handleOnclick={() => setFormCurrentStep(cur => cur - 1)} />
                 }
-                <Button text="Next" handleOnclick={() => setFormCurrentStep(cur => cur + 1)} />
-              </div>
-              <div className="woocommerce-notices-wrapper">
-                <form
-                  name="checkout"
-                  method="post"
-                  className="checkout woocommerce-checkout"
-                  action="https://pharmacare.qodeinteractive.com/checkout/"
-                  encType="multipart/form-data"
-                  noValidate="novalidate"
-                >
+              <Button
+                text="Next"
+                handleOnclick={() => {
+                  if (formCurrentStep < 3) {
+                    setFormCurrentStep(cur => cur + 1);
+                  }
+                }}
+              />
+            </div>
+            <div className="woocommerce-notices-wrapper">
+              <form
+                name="checkout"
+                method="post"
+                className="checkout woocommerce-checkout"
+                action="https://pharmacare.qodeinteractive.com/checkout/"
+                encType="multipart/form-data"
+                noValidate="novalidate"
+              >
 
-                  <div
-                    id="payment"
-                    className="woocommerce-checkout-payment d-flex justify-content-end align-items-end col-12"
-                  >
-                    <div className="form-row place-order flex gap-3">
-                      {/* <button
+                <div
+                  id="payment"
+                  className="woocommerce-checkout-payment d-flex justify-content-end align-items-end col-12"
+                >
+                  <div className="form-row place-order flex gap-3">
+                    {/* <button
                         type="button"
                         className="button alt"
                         name="woocommerce_checkout_place_order"
@@ -419,21 +568,20 @@ function MakeOrdder() {
                         Place order
                       </button> */}
 
-                      <input
-                        type="hidden"
-                        id="woocommerce-process-checkout-nonce"
-                        name="woocommerce-process-checkout-nonce"
-                        value="05b04921d5"
-                      />
-                      <input
-                        type="hidden"
-                        name="_wp_http_referer"
-                        value="/?wc-ajax=update_order_review"
-                      />
-                    </div>
+                    <input
+                      type="hidden"
+                      id="woocommerce-process-checkout-nonce"
+                      name="woocommerce-process-checkout-nonce"
+                      value="05b04921d5"
+                    />
+                    <input
+                      type="hidden"
+                      name="_wp_http_referer"
+                      value="/?wc-ajax=update_order_review"
+                    />
                   </div>
-                </form>
-              </div>
+                </div>
+              </form>
             </div>
             <Modal show={modalIsOpen} onHide={closeModal}>
               <Modal.Header closeButton>
