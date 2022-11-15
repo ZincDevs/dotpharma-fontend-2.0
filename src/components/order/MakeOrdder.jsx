@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable max-len */
 /* eslint-disable react/jsx-no-bind */
@@ -142,14 +143,14 @@ function MakeOrdder() {
     <div className="order-home-container h-75">
       <div className="qodef-content-grid flex flex-column h-100 pt-2">
         <h5 className="h4" style={{ fontWeight: 'normal', color: '#3ec389' }}>Order medicine form</h5>
-        <div className="d-flex gap-3 h-100 overflow-scroll">
+        <div className="d-flex gap-3 h-100 overflow-auto">
           <div className="w-25 force-main-color-bg p-4 d-flex flex-column gap-2">
             <h3 className="text-white" style={{ fontWeight: 'bold' }}>
               Step
               {' '}
               {formCurrentStep + 1}
             </h3>
-            <p className="text-white">This will consist of your personal information.</p>
+            <p className="text-white">{formCurrentStep === 0 ? 'Complete this form with the information about your address.' : formCurrentStep === 1 ? 'You will also complete this form with all medicines you want us to deliver with you.' : 'Finally, you can review all information you have given so that you can submit your order.' }</p>
             <div className="d-flex flex-column  justify-content-center pt-2">
               {
                formSteps.map((step, index) => (
@@ -172,9 +173,9 @@ function MakeOrdder() {
            }
             </div>
           </div>
-          <div className="w-75 overflow-scroll" id="order-element">
+          <div className="w-75 overflow-auto" id="order-element">
             <ToastContainer />
-            <form>
+            <form style={{ minHeight: '70%' }}>
               {
     formCurrentStep === 0
       && (
@@ -223,7 +224,7 @@ function MakeOrdder() {
                 placeholder="Receiver email address"
                 value={email}
                 autoComplete="family-name"
-                onChange={handlePhoneChange}
+                onChange={e => setEmail(e.target.value)}
               />
             </span>
           </p>
@@ -404,15 +405,15 @@ function MakeOrdder() {
                 </label>
                 <span className="woocommerce-input-wrapper">
                   <input
-                    type="tel"
+                    type="text"
                     className="input-text"
-                    name="billing_last_name"
-                    id="billing_last_name"
+                    name="medicine_name"
+                    id="medicine_name"
                     placeholder="Medicine Name"
                     value={data.medicineName}
                     autoComplete="family-name"
                     onChange={e => {
-                      setOrderedMedicines(current => current.map((medicine, idx) => (index === idx ? { medicineName: e.target.value } : medicine)));
+                      setOrderedMedicines(current => current.map((medicine, idx) => (index === idx ? { ...medicine, medicineName: e.target.value } : medicine)));
                     }}
                   />
                 </span>
@@ -430,15 +431,15 @@ function MakeOrdder() {
                 </label>
                 <span className="woocommerce-input-wrapper">
                   <input
-                    type="tel"
-                    className="input-text"
-                    name="billing_last_name"
-                    id="billing_last_name"
+                    type="text"
+                    className="description"
+                    name="medicine_description"
+                    id="medicine_description"
                     placeholder="Medicine Description"
                     value={orderedMedices[index].medicineDescription}
                     autoComplete="family-name"
                     onChange={e => {
-                      setOrderedMedicines(current => current.map((medicine, idx) => (index === idx ? { medicineDescription: e.target.value } : medicine)));
+                      setOrderedMedicines(current => current.map((medicine, idx) => (index === idx ? { ...medicine, medicineDescription: e.target.value } : medicine)));
                     }}
                   />
                 </span>
@@ -498,7 +499,6 @@ function MakeOrdder() {
               text="ADD MEDICINE"
               handleOnclick={() => {
                 setOrderedMedicines(current => [...current, { imageUrl: '', medicineDescription: '', medicineName: '' }]);
-                toast.error('Complete the form please');
               }}
             />
           </div>
@@ -510,18 +510,108 @@ function MakeOrdder() {
       formCurrentStep === 2 && (
         <div>
           <div>
-            <h3>Person Information Details</h3>
-            <div className="flex flex-wrap">
-              <div>
-                <span className="h5">
-                  Telephone Number:
-                </span>
+            <h5 className="font-weight-bold">Personal Information Review</h5>
+            <div className="flex flex-wrap gap-4">
+              <div className="col-5">
                 <span>
+                  Telephone:
+                </span>
+                <span className="" style={{ fontWeight: 'bold' }}>
                   {' '}
                   {phone}
                 </span>
               </div>
-              <div />
+              <div className="col-5">
+                <span>
+                  Email:
+                </span>
+                <span className="" style={{ fontWeight: 'bold' }}>
+                  {' '}
+                  {email}
+                </span>
+              </div>
+              <div className="col-5">
+                <span>
+                  Province:
+                </span>
+                <span className="" style={{ fontWeight: 'bold' }}>
+                  {' '}
+                  {province}
+                </span>
+              </div>
+              <div className="col-5">
+                <span>
+                  District:
+                </span>
+                <span className="" style={{ fontWeight: 'bold' }}>
+                  {' '}
+                  {district}
+                </span>
+              </div>
+              <div className="col-5">
+                <span>
+                  Sector:
+                </span>
+                <span className="" style={{ fontWeight: 'bold' }}>
+                  {' '}
+                  {sector}
+                </span>
+              </div>
+              {' '}
+              <div className="col-5">
+                <span>
+                  Cell:
+                </span>
+                <span className="" style={{ fontWeight: 'bold' }}>
+                  {' '}
+                  {cell}
+                </span>
+              </div>
+              {' '}
+              <div className="col-5">
+                <span>
+                  Village:
+                </span>
+                <span className="" style={{ fontWeight: 'bold' }}>
+                  {' '}
+                  {village}
+                </span>
+              </div>
+              <div className="col-5">
+                <span>
+                  Street number:
+                </span>
+                <span className="" style={{ fontWeight: 'bold' }}>
+                  {' '}
+                  {streetNumber}
+                </span>
+              </div>
+            </div>
+            <div className="ml-3">
+              <Button text="Edit" handleOnclick={() => setFormCurrentStep(0)} />
+            </div>
+            <div>
+              <h5 className="font-weight-bold">Medicines Information Review</h5>
+              <div className="flex flex-wrap gap-4 flex-column px-3">
+                {
+                orderedMedices.map((medicine, index) => (
+                  <div className="flex flex-col row">
+                    <span className="col-12 font-weight-bold">
+                      {index + 1}
+                      {'. '}
+                      {medicine.medicineName}
+                    </span>
+                    <p className="px-4">
+                      {medicine.medicineDescription}
+                    </p>
+                  </div>
+                ))
+              }
+              </div>
+
+              <div className="ml-3">
+                <Button text="Edit" handleOnclick={() => setFormCurrentStep(1)} />
+              </div>
             </div>
           </div>
         </div>
@@ -529,17 +619,22 @@ function MakeOrdder() {
     }
             </form>
             <div className="col-12 flex justify-content-end gap-2 align-items-end">
-              {
-                  formCurrentStep > 0 && <Button text="Back" handleOnclick={() => setFormCurrentStep(cur => cur - 1)} />
-                }
-              <Button
-                text="Next"
-                handleOnclick={() => {
-                  if (formCurrentStep < 3) {
-                    setFormCurrentStep(cur => cur + 1);
-                  }
-                }}
-              />
+              {formCurrentStep !== 2
+                 && (
+                 <>
+                   {
+                formCurrentStep > 0 && <Button text="Back" handleOnclick={() => setFormCurrentStep(cur => cur - 1)} />
+              }
+                   <Button
+                     text="Next"
+                     handleOnclick={() => {
+                       if (formCurrentStep < 3) {
+                         setFormCurrentStep(cur => cur + 1);
+                       }
+                     }}
+                   />
+                 </>
+                 )}
             </div>
             <div className="woocommerce-notices-wrapper">
               <form
@@ -556,18 +651,10 @@ function MakeOrdder() {
                   className="woocommerce-checkout-payment d-flex justify-content-end align-items-end col-12"
                 >
                   <div className="form-row place-order flex gap-3">
-                    {/* <button
-                        type="button"
-                        className="button alt"
-                        name="woocommerce_checkout_place_order"
-                        id="place_order"
-                        value="Place order"
-                        data-value="Place order"
-                        onClick={createOrderEvent}
-                      >
-                        Place order
-                      </button> */}
-
+                    {
+                      formCurrentStep === 2
+                    && <Button text="Place Order" handleOnclick={createOrderEvent} />
+                    }
                     <input
                       type="hidden"
                       id="woocommerce-process-checkout-nonce"
