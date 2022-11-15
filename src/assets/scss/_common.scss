@@ -1,0 +1,27 @@
+.text-green {
+  color: $green;
+}
+
+.bg-green {
+  background-color: $green;
+}
+
+.border-green {
+  border: 1px $green solid;
+}
+
+.border-white {
+  border: 1px white solid;
+}
+
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}

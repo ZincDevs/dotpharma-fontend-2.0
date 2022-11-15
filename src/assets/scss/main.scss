@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap");
 @import "./theme";
 @import "./abstracts/screens";
-@import './abstracts/font_face';
+@import "./abstracts/font_face";
 @import "./abstracts/extends";
 @import "./abstracts/mixins";
 @import "./abstracts/keyframes";
@@ -34,3 +34,5 @@
 // @import "./admin/sidebar.scss";
 // @import "./admin/users.scss";
 
+//Common Classes
+@import "common";

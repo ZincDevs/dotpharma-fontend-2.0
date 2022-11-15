@@ -2535,4 +2535,32 @@ a:hover {
   }
 }
 
+.text-green {
+  color: rgb(11, 218, 108);
+}
+
+.bg-green {
+  background-color: rgb(11, 218, 108);
+}
+
+.border-green {
+  border: 1px rgb(11, 218, 108) solid;
+}
+
+.border-white {
+  border: 1px white solid;
+}
+
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
 /*# sourceMappingURL=style.css.map */
