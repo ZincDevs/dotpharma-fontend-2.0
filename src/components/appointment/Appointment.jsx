@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable react/button-has-type */
 /* eslint-disable no-return-assign */
 /* eslint-disable react/jsx-no-bind */
@@ -12,14 +13,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import _ from 'lodash';
-import Modal from 'react-bootstrap/Modal';
-import key from 'uniqid';
-import { ColorRing } from 'react-loader-spinner';
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate, useLocation } from 'react-router-dom';
-import data from '../../data/addresses.json';
-import FormButtonSubmit from '../shared/FormButtonSubmit';
-import { createOrder } from '../../app/features/order/_orderAction';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 import { createAppointment } from '../../api/_appointment';
 
@@ -28,6 +23,8 @@ function Appointment() {
   const [phone, setPhone] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [date, setDate] = useState('');
+  const [time, setTime] = useState('');
   const dispatch = useDispatch();
   const axios = useAxiosPrivate();
   const navigate = useNavigate();
@@ -36,8 +33,6 @@ function Appointment() {
   const query = new URLSearchParams(search);
   const profile = useSelector(state => state?.user?.MyProfile, shallowEqual);
   const cart = profile?.cart;
-
-  const createOption = (value, key) => <option key={key}>{value}</option>;
 
   const handleNameChange = e => {
     setName(e.target.value);
@@ -57,6 +52,10 @@ function Appointment() {
 
   const createApointmentEvent = async e => {
     e.preventDefault();
+    if (_.isEmpty(email) || _.isEmpty(phone) || _.isEmpty(message) || _.isEmpty(name) || _.isEmpty(date) || _.isEmpty(time)) {
+      toast.error('Please complete all fields');
+      return;
+    }
     const toid = query.get('toid');
     const type = query.get('type');
     const data = {
@@ -64,6 +63,7 @@ function Appointment() {
       docid: type === 'doctor' ? toid : null,
       clid: type === 'clinic' ? toid : null,
       deasese: message,
+      adate: new Date(`${date} ${time}`),
       name,
       phone,
       email,
@@ -106,14 +106,14 @@ function Appointment() {
                     <hr className="form-separator" />
                     <div className="clean" />
                     <div className="clean" />
-                    <form className="checkout_coupon woocommerce-form-coupon">
+                    <form className="row checkout_coupon woocommerce-form-coupon d-flex flex-wrap gap-2">
                       <p
-                        className="form-row-last validate-required"
-                        id="billing_last_name_field"
+                        className="form-row-last validate-required col-5"
+                        id="_field"
                         data-priority="20"
                       >
-                        <label htmlFor="billing_last_name" className="">
-                          Name&nbsp;
+                        <label htmlFor="" className="">
+                          Names&nbsp;
                           <abbr className="required" title="required">
                             *
                           </abbr>
@@ -122,21 +122,21 @@ function Appointment() {
                           <input
                             type="text"
                             className="input-text"
-                            name="billing_last_name"
-                            id="billing_last_name"
+                            name=""
+                            id=""
                             placeholder="Patient name"
                             value={name}
-                            autoComplete="family-name"
+                            autoComplete="off"
                             onChange={handleNameChange}
                           />
                         </span>
                       </p>
                       <p
-                        className=" form-row-last validate-required"
-                        id="billing_last_name_field"
+                        className=" form-row-last validate-required col-5"
+                        id="_field"
                         data-priority="20"
                       >
-                        <label htmlFor="billing_last_name" className="">
+                        <label htmlFor="" className="">
                           Phone number&nbsp;
                           <abbr className="required" title="required">
                             *
@@ -146,21 +146,21 @@ function Appointment() {
                           <input
                             type="tel"
                             className="input-text"
-                            name="billing_last_name"
-                            id="billing_last_name"
+                            name=""
+                            id=""
                             placeholder="Patient phone number"
                             value={phone}
-                            autoComplete="family-name"
+                            autoComplete="off"
                             onChange={handlePhoneChange}
                           />
                         </span>
                       </p>
                       <p
-                        className="form-row-last validate-required"
-                        id="billing_last_name_field"
+                        className="form-row-last validate-required col-5"
+                        id="_field"
                         data-priority="20"
                       >
-                        <label htmlFor="billing_last_name" className="">
+                        <label htmlFor="" className="">
                           Email&nbsp;
                           <abbr className="required" title="required">
                             *
@@ -168,23 +168,48 @@ function Appointment() {
                         </label>
                         <span className="woocommerce-input-wrapper">
                           <input
-                            type="tel"
+                            type="email"
                             className="input-text"
-                            name="billing_last_name"
-                            id="billing_last_name"
+                            name=""
+                            id=""
                             placeholder="Patient email"
                             value={email}
-                            autoComplete="family-name"
+                            autoComplete="off"
                             onChange={handleEmailChange}
                           />
                         </span>
                       </p>
                       <p
-                        className="form-row-last validate-required"
-                        id="billing_last_name_field"
+                        className="form-row-last validate-required d-flex flex-column col-5"
                         data-priority="20"
                       >
-                        <label htmlFor="billing_last_name" className="">
+                        <label htmlFor="" className="">
+                          Choose date and time&nbsp;
+                          <abbr className="required" title="required">
+                            *
+                          </abbr>
+                        </label>
+                        <span className="d-flex justify-content-between " style={{ height: '3.6em' }}>
+                          <input
+                            type={'date'}
+                            className="input-text col-5 h-100"
+                            onChange={e => { setDate(e.target.value); }}
+                          />
+                          <input
+                            type={'time'}
+                            className="input-text col-5 h-100"
+                            onChange={e => {
+                              setTime(e.target.value);
+                            }}
+                          />
+                        </span>
+                      </p>
+                      <p
+                        className="form-row-last validate-required col-10"
+                        id="_field"
+                        data-priority="20"
+                      >
+                        <label htmlFor="" className="">
                           How can we help you&nbsp;
                           <abbr className="required" title="required">
                             *
@@ -193,10 +218,11 @@ function Appointment() {
                         <span className="woocommerce-input-wrapper">
                           <textarea
                             className="input-text"
-                            name="billing_last_name"
-                            id="billing_last_name"
+                            name=""
+                            id=""
+                            value={message}
                             placeholder="Enter message"
-                            autoComplete="family-name"
+                            autoComplete="off"
                             rows={5}
                             onChange={handlePrescription}
                           >

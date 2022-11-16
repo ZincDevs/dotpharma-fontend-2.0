@@ -3,7 +3,6 @@ import { setClinics } from './_clinicSlice';
 import { getClinics as getClinicsApi } from '../../../api';
 
 export const getClinics = dispatch => {
-  console.log('Helloooo');
   dispatch(setClinics({ status: 'pending' }));
   getClinicsApi((err, data) => {
     if (err) {
