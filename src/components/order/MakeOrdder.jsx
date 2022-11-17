@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable consistent-return */
@@ -497,92 +498,96 @@ function MakeOrdder() {
               }
               {
                 formCurrentStep === 2 && (
+                <div className="flex flex-column gap-4">
                   <div>
-                    <div>
+                    <div className="flex gap-3 items-center">
                       <h5 className="font-weight-bold">Personal Information Review</h5>
-                      <div className="flex flex-wrap gap-4">
-                        <div className="col-5">
-                          <span>
-                            Telephone:
-                          </span>
-                          <span className="" style={{ fontWeight: 'bold' }}>
-                            {' '}
-                            {phone}
-                          </span>
-                        </div>
-                        <div className="col-5">
-                          <span>
-                            Email:
-                          </span>
-                          <span className="" style={{ fontWeight: 'bold' }}>
-                            {' '}
-                            {email}
-                          </span>
-                        </div>
-                        <div className="col-5">
-                          <span>
-                            Province:
-                          </span>
-                          <span className="" style={{ fontWeight: 'bold' }}>
-                            {' '}
-                            {province}
-                          </span>
-                        </div>
-                        <div className="col-5">
-                          <span>
-                            District:
-                          </span>
-                          <span className="" style={{ fontWeight: 'bold' }}>
-                            {' '}
-                            {district}
-                          </span>
-                        </div>
-                        <div className="col-5">
-                          <span>
-                            Sector:
-                          </span>
-                          <span className="" style={{ fontWeight: 'bold' }}>
-                            {' '}
-                            {sector}
-                          </span>
-                        </div>
-                        {' '}
-                        <div className="col-5">
-                          <span>
-                            Cell:
-                          </span>
-                          <span className="" style={{ fontWeight: 'bold' }}>
-                            {' '}
-                            {cell}
-                          </span>
-                        </div>
-                        {' '}
-                        <div className="col-5">
-                          <span>
-                            Village:
-                          </span>
-                          <span className="" style={{ fontWeight: 'bold' }}>
-                            {' '}
-                            {village}
-                          </span>
-                        </div>
-                        <div className="col-5">
-                          <span>
-                            Street number:
-                          </span>
-                          <span className="" style={{ fontWeight: 'bold' }}>
-                            {' '}
-                            {streetNumber}
-                          </span>
-                        </div>
+                      <h6 className="font-weight-bold text-danger" style={{ textDecoration: 'underline', cursor: 'pointer' }} onClick={() => setFormCurrentStep(0)}>Edit</h6>
+                    </div>
+                    <div className="flex flex-wrap gap-4">
+                      <div className="col-5">
+                        <span>
+                          Telephone:
+                        </span>
+                        <span className="" style={{ fontWeight: 'bold' }}>
+                          {' '}
+                          {phone}
+                        </span>
                       </div>
-                      <div className="ml-3">
-                        <Button text="Edit" handleOnclick={() => setFormCurrentStep(0)} />
+                      <div className="col-5">
+                        <span>
+                          Email:
+                        </span>
+                        <span className="" style={{ fontWeight: 'bold' }}>
+                          {' '}
+                          {email}
+                        </span>
                       </div>
-                      <div>
-                        <h5 className="font-weight-bold">Medicines Information Review</h5>
-                        <div className="flex flex-wrap gap-4 flex-column px-3">
-                          {
+                      <div className="col-5">
+                        <span>
+                          Province:
+                        </span>
+                        <span className="" style={{ fontWeight: 'bold' }}>
+                          {' '}
+                          {province}
+                        </span>
+                      </div>
+                      <div className="col-5">
+                        <span>
+                          District:
+                        </span>
+                        <span className="" style={{ fontWeight: 'bold' }}>
+                          {' '}
+                          {district}
+                        </span>
+                      </div>
+                      <div className="col-5">
+                        <span>
+                          Sector:
+                        </span>
+                        <span className="" style={{ fontWeight: 'bold' }}>
+                          {' '}
+                          {sector}
+                        </span>
+                      </div>
+                      {' '}
+                      <div className="col-5">
+                        <span>
+                          Cell:
+                        </span>
+                        <span className="" style={{ fontWeight: 'bold' }}>
+                          {' '}
+                          {cell}
+                        </span>
+                      </div>
+                      {' '}
+                      <div className="col-5">
+                        <span>
+                          Village:
+                        </span>
+                        <span className="" style={{ fontWeight: 'bold' }}>
+                          {' '}
+                          {village}
+                        </span>
+                      </div>
+                      <div className="col-5">
+                        <span>
+                          Street number:
+                        </span>
+                        <span className="" style={{ fontWeight: 'bold' }}>
+                          {' '}
+                          {streetNumber}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex gap-3 items-center">
+                      <h5 className="font-weight-bold">Medicines Information Review</h5>
+                      <h6 className="font-weight-bold text-danger" style={{ textDecoration: 'underline', cursor: 'pointer' }} onClick={() => setFormCurrentStep(1)}>Edit</h6>
+                    </div>
+                    <div className="flex flex-wrap gap-4 flex-column px-3">
+                      {
                             orderedMedicines.map((medicine, index) => (
                               <div className="flex flex-col row" key={index}>
                                 <span className="col-12 font-weight-bold">
@@ -596,14 +601,13 @@ function MakeOrdder() {
                               </div>
                             ))
                           }
-                        </div>
+                    </div>
 
-                        <div className="ml-3">
-                          <Button text="Edit" handleOnclick={() => setFormCurrentStep(1)} />
-                        </div>
-                      </div>
+                    <div className="ml-3">
+                      <Button text="Edit" handleOnclick={() => setFormCurrentStep(1)} />
                     </div>
                   </div>
+                </div>
                 )
               }
             </form>
