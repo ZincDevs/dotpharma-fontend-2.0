@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable consistent-return */
 /* eslint-disable react/button-has-type */
 /* eslint-disable no-nested-ternary */
@@ -37,7 +40,7 @@ function MakeOrdder() {
   const [vilages, setVilages] = useState([]);
   const [streetNumber, setStreetNumber] = useState('');
   const [modalIsOpen, setIsOpen] = React.useState(false);
-  const [orderedMedicines, setOrderedMedicines] = useState([{ medicineName: '', medicineDescription: '' }]);
+  const [orderedMedicines, setOrderedMedicines] = useState([]);
   const dispatch = useDispatch();
   const axios = useAxiosPrivate();
   const navigate = useNavigate();
@@ -45,6 +48,9 @@ function MakeOrdder() {
   const [isUploadingImage, setIsUploadingImage] = useState(false);
   const formSteps = ['Personal Information', 'Medicine Information', 'Review Information'];
   const [formCurrentStep, setFormCurrentStep] = useState(0);
+  const [addMedicineModalOpen, setAddMedicineModalOpen] = useState(false);
+  const [medicineName, setMedicineName] = useState('');
+  const [medicineDescription, setMedicineDescription] = useState('');
   function openModal() {
     setIsOpen(true);
   }
@@ -377,7 +383,7 @@ function MakeOrdder() {
                       orderedMedicines.map((data, index) => (
                         <div className="flex flex-wrap" key={index}>
                           <p
-                            className="col-6"
+                            className="col-5"
                             data-priority="20"
                           >
                             <label htmlFor="billing_last_name" className="">
@@ -426,23 +432,20 @@ function MakeOrdder() {
                               />
                             </span>
                           </p>
-                          {
-                            orderedMedicines.length > 1
-                            && (
-                              <p className="flex col-6">
-                                <Button
-                                  text="REMOVE MEDICINE"
-                                  handleOnclick={() => setOrderedMedicines(current => current.filter((medicine, idx) => idx !== index))}
-                                />
-                              </p>
-                            )
-                          }
+                          <p className="flex col-1 flex items-center justify-center">
+                            <i
+                              className="fa-solid fa-close text-white bg-danger p-2"
+                              style={{ height: '30px', cursor: 'pointer' }}
+                              onClick={() => setOrderedMedicines(current => current.filter((medicine, idx) => idx !== index))}
+                            />
+                          </p>
                         </div>
                       ))
                     }
                     <p
                       className="col-6"
                       data-priority="20"
+                      hidden={!orderedMedicines.length}
                     >
                       <label htmlFor="billing_last_name" className="">
                         Prescription
@@ -480,12 +483,12 @@ function MakeOrdder() {
                     </p>
                     <div className="px-3">
                       <Button
-                        text="ADD MEDICINE"
+                        text={`ADD ${!orderedMedicines.length ? '' : 'ANOTHER'} MEDICINE`}
                         handleOnclick={() => {
                           if ([...orderedMedicines].filter(medicine => !_.isEmpty(medicine.medicineDescription) && !_.isEmpty(medicine.medicineName)).length !== orderedMedicines.length) {
                             return toast.error('First Complete the given');
                           }
-                          setOrderedMedicines(current => [...current, { medicineDescription: '', medicineName: '' }]);
+                          setAddMedicineModalOpen(true);
                         }}
                       />
                     </div>
@@ -495,92 +498,96 @@ function MakeOrdder() {
               }
               {
                 formCurrentStep === 2 && (
+                <div className="flex flex-column gap-4">
                   <div>
-                    <div>
+                    <div className="flex gap-3 items-center">
                       <h5 className="font-weight-bold">Personal Information Review</h5>
-                      <div className="flex flex-wrap gap-4">
-                        <div className="col-5">
-                          <span>
-                            Telephone:
-                          </span>
-                          <span className="" style={{ fontWeight: 'bold' }}>
-                            {' '}
-                            {phone}
-                          </span>
-                        </div>
-                        <div className="col-5">
-                          <span>
-                            Email:
-                          </span>
-                          <span className="" style={{ fontWeight: 'bold' }}>
-                            {' '}
-                            {email}
-                          </span>
-                        </div>
-                        <div className="col-5">
-                          <span>
-                            Province:
-                          </span>
-                          <span className="" style={{ fontWeight: 'bold' }}>
-                            {' '}
-                            {province}
-                          </span>
-                        </div>
-                        <div className="col-5">
-                          <span>
-                            District:
-                          </span>
-                          <span className="" style={{ fontWeight: 'bold' }}>
-                            {' '}
-                            {district}
-                          </span>
-                        </div>
-                        <div className="col-5">
-                          <span>
-                            Sector:
-                          </span>
-                          <span className="" style={{ fontWeight: 'bold' }}>
-                            {' '}
-                            {sector}
-                          </span>
-                        </div>
-                        {' '}
-                        <div className="col-5">
-                          <span>
-                            Cell:
-                          </span>
-                          <span className="" style={{ fontWeight: 'bold' }}>
-                            {' '}
-                            {cell}
-                          </span>
-                        </div>
-                        {' '}
-                        <div className="col-5">
-                          <span>
-                            Village:
-                          </span>
-                          <span className="" style={{ fontWeight: 'bold' }}>
-                            {' '}
-                            {village}
-                          </span>
-                        </div>
-                        <div className="col-5">
-                          <span>
-                            Street number:
-                          </span>
-                          <span className="" style={{ fontWeight: 'bold' }}>
-                            {' '}
-                            {streetNumber}
-                          </span>
-                        </div>
+                      <h6 className="font-weight-bold text-danger" style={{ textDecoration: 'underline', cursor: 'pointer' }} onClick={() => setFormCurrentStep(0)}>Edit</h6>
+                    </div>
+                    <div className="flex flex-wrap gap-4">
+                      <div className="col-5">
+                        <span>
+                          Telephone:
+                        </span>
+                        <span className="" style={{ fontWeight: 'bold' }}>
+                          {' '}
+                          {phone}
+                        </span>
                       </div>
-                      <div className="ml-3">
-                        <Button text="Edit" handleOnclick={() => setFormCurrentStep(0)} />
+                      <div className="col-5">
+                        <span>
+                          Email:
+                        </span>
+                        <span className="" style={{ fontWeight: 'bold' }}>
+                          {' '}
+                          {email}
+                        </span>
                       </div>
-                      <div>
-                        <h5 className="font-weight-bold">Medicines Information Review</h5>
-                        <div className="flex flex-wrap gap-4 flex-column px-3">
-                          {
+                      <div className="col-5">
+                        <span>
+                          Province:
+                        </span>
+                        <span className="" style={{ fontWeight: 'bold' }}>
+                          {' '}
+                          {province}
+                        </span>
+                      </div>
+                      <div className="col-5">
+                        <span>
+                          District:
+                        </span>
+                        <span className="" style={{ fontWeight: 'bold' }}>
+                          {' '}
+                          {district}
+                        </span>
+                      </div>
+                      <div className="col-5">
+                        <span>
+                          Sector:
+                        </span>
+                        <span className="" style={{ fontWeight: 'bold' }}>
+                          {' '}
+                          {sector}
+                        </span>
+                      </div>
+                      {' '}
+                      <div className="col-5">
+                        <span>
+                          Cell:
+                        </span>
+                        <span className="" style={{ fontWeight: 'bold' }}>
+                          {' '}
+                          {cell}
+                        </span>
+                      </div>
+                      {' '}
+                      <div className="col-5">
+                        <span>
+                          Village:
+                        </span>
+                        <span className="" style={{ fontWeight: 'bold' }}>
+                          {' '}
+                          {village}
+                        </span>
+                      </div>
+                      <div className="col-5">
+                        <span>
+                          Street number:
+                        </span>
+                        <span className="" style={{ fontWeight: 'bold' }}>
+                          {' '}
+                          {streetNumber}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex gap-3 items-center">
+                      <h5 className="font-weight-bold">Medicines Information Review</h5>
+                      <h6 className="font-weight-bold text-danger" style={{ textDecoration: 'underline', cursor: 'pointer' }} onClick={() => setFormCurrentStep(1)}>Edit</h6>
+                    </div>
+                    <div className="flex flex-wrap gap-4 flex-column px-3">
+                      {
                             orderedMedicines.map((medicine, index) => (
                               <div className="flex flex-col row" key={index}>
                                 <span className="col-12 font-weight-bold">
@@ -594,14 +601,13 @@ function MakeOrdder() {
                               </div>
                             ))
                           }
-                        </div>
+                    </div>
 
-                        <div className="ml-3">
-                          <Button text="Edit" handleOnclick={() => setFormCurrentStep(1)} />
-                        </div>
-                      </div>
+                    <div className="ml-3">
+                      <Button text="Edit" handleOnclick={() => setFormCurrentStep(1)} />
                     </div>
                   </div>
+                </div>
                 )
               }
             </form>
@@ -616,6 +622,7 @@ function MakeOrdder() {
                       text="Next"
                       handleOnclick={() => {
                         if (isUploadingImage) return;
+                        if (!orderedMedicines.length && formCurrentStep === 1) return toast.error('Please add medicine');
                         if (formCurrentStep === 1 && [...orderedMedicines].filter(medicine => !_.isEmpty(medicine.medicineDescription) && !_.isEmpty(medicine.medicineName)).length !== orderedMedicines.length) {
                           return toast.error('Provide all details in medicines you\'ve required');
                         }
@@ -645,7 +652,7 @@ function MakeOrdder() {
                       formCurrentStep === 2
                       && (
                       <div className="col-12 flex justify-content-center align-items-center">
-                        <Button text="Place Order" handleOnclick={createOrderEvent} />
+                        <FormButtonSubmit onClick={createOrderEvent} />
                       </div>
                       )
                     }
@@ -718,6 +725,83 @@ function MakeOrdder() {
                     />
                   </div>
                 )}
+              </Modal.Footer>
+            </Modal>
+            <Modal show={addMedicineModalOpen} onHide={() => setAddMedicineModalOpen(false)}>
+              <Modal.Header closeButton>
+                <Modal.Title>Add Medicine</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <div>
+                  <div className="flex flex-column">
+                    <p
+                      data-priority="20"
+                    >
+                      <label htmlFor="billing_last_name" className="">
+                        Medicine Name&nbsp;
+                        <abbr className="required" title="required">
+                          *
+                        </abbr>
+                      </label>
+                      <span className="woocommerce-input-wrapper">
+                        <input
+                          type="text"
+                          className="input-text"
+                          name="medicine_name"
+                          id="medicine_name"
+                          placeholder="Medicine Name"
+                          value={medicineName}
+                          autoComplete="off"
+                          onChange={e => {
+                            setMedicineName(e.target.value);
+                          }}
+                        />
+                      </span>
+                    </p>
+                    <p
+                      data-priority="20"
+                    >
+                      <label htmlFor="billing_last_name" className="">
+                        Medicine Description&nbsp;
+                        <abbr className="required" title="required">
+                          *
+                        </abbr>
+                      </label>
+                      <span className="woocommerce-input-wrapper">
+                        <input
+                          type="text"
+                          className="description"
+                          name="medicine_description"
+                          id="medicine_description"
+                          placeholder="Medicine Description"
+                          value={medicineDescription}
+                          autoComplete="off"
+                          onChange={e => {
+                            setMedicineDescription(e.target.value);
+                          }}
+                        />
+                      </span>
+                    </p>
+                  </div>
+                </div>
+              </Modal.Body>
+              <Modal.Footer>
+                <div className="butns-ordery-pay-mode">
+                  <div className="horizontal-separator" />
+                  <FormButtonSubmit
+                    onClick={() => {
+                      if (_.isEmpty(medicineName) || _.isEmpty(medicineDescription)) {
+                        toast.error('Provide all details please');
+                        return;
+                      }
+                      setOrderedMedicines(current => [...current, { medicineName, medicineDescription }]);
+                      setMedicineName('');
+                      setMedicineDescription('');
+                      setAddMedicineModalOpen(false);
+                    }}
+                    value="ADD MEDICINE"
+                  />
+                </div>
               </Modal.Footer>
             </Modal>
           </div>
