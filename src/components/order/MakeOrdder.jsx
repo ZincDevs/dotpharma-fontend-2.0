@@ -618,7 +618,7 @@ function MakeOrdder() {
                       text="Next"
                       handleOnclick={() => {
                         if (isUploadingImage) return;
-                        if (!orderedMedicines.length) return toast.error('Please add medicine');
+                        if (!orderedMedicines.length && formCurrentStep === 1) return toast.error('Please add medicine');
                         if (formCurrentStep === 1 && [...orderedMedicines].filter(medicine => !_.isEmpty(medicine.medicineDescription) && !_.isEmpty(medicine.medicineName)).length !== orderedMedicines.length) {
                           return toast.error('Provide all details in medicines you\'ve required');
                         }
