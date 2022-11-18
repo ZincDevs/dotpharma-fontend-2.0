@@ -14,7 +14,9 @@ import { useNavigate } from 'react-router-dom';
 import _ from 'lodash';
 import { ToastContainer, toast } from 'react-toastify';
 import ClinicItem from './ClinicItem';
-
+import {
+  cardiology_b, internal_medecine_b, radiology_b, ophthalmology_b, stomatology_b,
+} from '../../assets';
 import { getClinics } from '../../app/features/clinic';
 
 export default function ClinicList() {
@@ -23,7 +25,8 @@ export default function ClinicList() {
   const [filteredClinics, setFilteredClinics] = useState([]);
   const [currentFilter, setCurrentFilter] = useState('all');
   const clinics = useSelector(state => state.clinic.clinics, shallowEqual);
-  const availableClinics = [{ title: 'All', key: 'all' }, { title: 'Eye Specialists', key: 'eyes' }, { title: 'Surgery Specialists', key: 'surgery' }, { title: 'Skin Specialists', key: 'skin' }, { title: 'Teeth Specialists', key: 'teeth' }, { title: 'Fracture Specailists', key: 'fracture' }];
+  console.log(clinics);
+  const availableClinics = [{ title: 'All', key: 'all' }, { title: 'Ophthalmology', key: 'eyes', icon: ophthalmology_b }, { title: 'Cardiology', key: 'cardiology', icon: cardiology_b }, { title: 'Stomatology', key: 'stomatology', icon: stomatology_b }, { title: 'Radiology', key: 'radiology', icon: radiology_b }, { title: 'Internal Medicine', key: 'internal_medicine', icon: internal_medecine_b }];
   useEffect(() => {
     getClinics(dispatch);
   }, []);
@@ -41,16 +44,40 @@ export default function ClinicList() {
     <div className="qodef-content-grid flex flex-column" style={{ minHeight: '100%' }}>
       <ToastContainer />
       <div className="qodef-shortcode qodef-m qodef-woo-shortcode qodef-woo-product-list qodef-item-layout--info-right qodef-content-increased--no qodef-grid qodef-layout--columns qodef-gutter--small qodef-col-num--2 qodef-item-layout--info-right qodef-filter--on qodef--no-bottom-space qodef-pagination--off qodef-responsive--custom qodef-col-num--1440--2 qodef-col-num--1366--2 qodef-col-num--1024--1 qodef-col-num--768--1 qodef-col-num--680--1 qodef-col-num--480--1">
-        <div className="flex gap-2 py-3 mb-1 flex-wrap">
+        <div className="flex py-3 mb-1 flex-wrap" style={{ borderRadius: '30px' }}>
           {
-            availableClinics.map(clinic => (
+            availableClinics.map((clinic, index) => (
               <span
                 key={clinic.key}
-                className="py-2 px-4 text-white font-weight-normal"
-                style={{ backgroundColor: `${clinic.key === currentFilter ? 'rgba(65, 157, 90,0.8)' : '#207cc6'}`, cursor: 'pointer' }}
+                className="py-2 px-4 text-white font-weight-normal button d-flex flex-column align-items-center justify-content-center gap-3 border"
+                style={{
+                  backgroundColor: `${clinic.key === currentFilter ? '#207cc6' : 'white'}`,
+                  cursor: 'pointer',
+                  borderTopLeftRadius: `${index === 0 ? '7px' : ''}`,
+                  borderBottomLeftRadius: `${index === 0 ? '7px' : ''}`,
+                  borderTopRightRadius: `${index + 1 === availableClinics.length ? '7px' : ''}`,
+                  borderBottomRightRadius: `${index + 1 === availableClinics.length ? '7px' : ''}`,
+                }}
                 onClick={() => setCurrentFilter(clinic.key)}
               >
-                {clinic.title}
+                {
+                  clinic?.icon && (
+                  <img
+                    src={clinic.icon}
+                    alt={clinic.title}
+                    style={{
+                      width: '45px',
+                      maxHeight: '45px',
+                      objectFit: 'contain',
+                      filter: `${clinic.key === currentFilter ? 'brightness(0) invert(1)' : ''}`,
+                      WebkitFilter: `${clinic.key === currentFilter ? 'brightness(0) invert(1)' : ''}`,
+                    }}
+                  />
+                  )
+                }
+                <span style={{ color: `${clinic.key === currentFilter ? 'white' : '#207cc6'}` }}>
+                  {clinic.title}
+                </span>
               </span>
             ))
           }
