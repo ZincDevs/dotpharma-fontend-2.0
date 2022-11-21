@@ -37,7 +37,7 @@ export default function ProductFilter({ handleOnClick }) {
     <div className="product-filter">
       <div className="d-flex col-12">
         {filters.map(({ text, active }) => (
-          <div key={key()} onClick={handleOnClick} className={`px-3 py-3 p-filter-item col-2 d-flex justify-content-center align-items-center  ${active && 'active'}`}>
+          <div key={text} onClick={handleOnClick} className={`px-3 py-3 p-filter-item col-2 d-flex justify-content-center align-items-center  ${active && 'active'}`}>
             {text === 'Categories' ? (
               <Dropdown>
                 <Dropdown.Toggle className="dropdowntex" id="dropdown-basic">
@@ -45,7 +45,7 @@ export default function ProductFilter({ handleOnClick }) {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                  {categories.map(category => (<Dropdown.Item href="#/">{category}</Dropdown.Item>))}
+                  {categories.map(category => (<Dropdown.Item href="#/" key={category}>{category}</Dropdown.Item>))}
 
                   {/* <Dropdown.Item href="#/">Malaria</Dropdown.Item>
                   <Dropdown.Item href="#/">Cancer</Dropdown.Item>

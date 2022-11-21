@@ -61,10 +61,9 @@ export default function ProductList({
   profile,
 }) {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const products = useSelector(state => state?.medicine?.medicines, shallowEqual);
-  // const mProducts = products?.length > 2 ? [products[0], products[1]] : products;
 
+  // const mProducts = products?.length > 2 ? [products[0], products[1]] : products;
   useEffect(() => { getMedicines({ limit: 8 }, dispatch); }, []);
   return (
     <div className="product-lis">
@@ -72,7 +71,7 @@ export default function ProductList({
         <div className="px-1">
           <div className="item-list d-flex col-12 flex-wrap">
             {_.map(products, product => (
-              <div className="col-3 p-1" key={key()}>
+              <div className="col-3 p-1" key={product.m_id}>
                 <Suspense fallback={<ProductPlaceholder />}>
                   <ProductItem
                     handleAddToCart={handleAddToCart}
