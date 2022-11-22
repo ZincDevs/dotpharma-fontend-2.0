@@ -81,15 +81,25 @@ export default function CartMenu({ profile }) {
 
                 </span>
               </div>
-              <div className="qodef-m-action force-main-color-bg">
-                <Link
-                  itemProp="url"
-                  to="/cart"
-                  className="qodef-m-action-link force-main-color-bg"
-                >
-                  View Cart &amp; Checkout
+              <div className="qodef-m-action">
+                {
+                  !cart?.length ? (
+                    <div className="flex items-center justify-center text-center py-3 font-weight-bold" style={{ backgroundColor: '#ccc', color: 'white' }}>
+                      Add medicine  &amp; Checkout
 
-                </Link>
+                    </div>
+                  )
+                    : (
+                      <Link
+                        itemProp="url"
+                        to="/cart"
+                        className="qodef-m-action-link force-main-color-bg"
+                      >
+                        View Cart &amp; Checkout
+
+                      </Link>
+                    )
+                }
               </div>
             </div>
           </div>

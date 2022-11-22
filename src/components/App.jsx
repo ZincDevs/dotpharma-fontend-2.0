@@ -1,7 +1,8 @@
 /* eslint-disable no-lone-blocks */
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import key from 'uniqid';
+import { useSelector } from 'react-redux';
 import Elements from './shared/Index';
 import Login from './auth/Login';
 import Signup from './auth/Signup';
@@ -51,6 +52,7 @@ import ViewProduct from './products/ViewProduct';
 // import AdminPharmacies from './admin/fragments/Pharmacies';
 
 function App() {
+  const user = useSelector(state => state?.user?.MyProfile);
   return (
     <Routes>
       <Route path="/" key={key()} element={<Layout />}>
@@ -100,7 +102,7 @@ function App() {
             <Route path="/product/:pid" key={key()} element={<ViewProduct />} />
             <Route path="/dot-clinics" key={key()} element={<ClinicsList />} />
             <Route element={<RequireAuth />}>
-              <Route path="/cart" key={key()} element={<Cart />} />
+              <Route path="/cart" key={key()} element={user?.cart?.length < 1 ? <Navigate to="/" /> : <Cart />} />
               <Route path="/orders" key={key()} element={<MakeOrdder />} />
               <Route path="/orderpharmacy/:pharmacyid" key={key()} element={<MakeOrdderOnPharmacy />} />
               <Route path="/checkout" key={key()} element={<OrderHome />} />

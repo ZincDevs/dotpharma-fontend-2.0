@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable no-param-reassign */
 /* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
@@ -79,8 +80,8 @@ export default function CartHome() {
                       >
                         <thead>
                           <tr>
-                            <th className="product-remove">&nbsp;</th>
-                            <th className="product-thumbnail">&nbsp;</th>
+                            <th className="product-remove">Action</th>
+                            <th className="product-thumbnail">Image</th>
                             <th className="product-name">Product</th>
                             <th className="product-price">Price</th>
                             <th className="product-quantity">Quantity</th>
@@ -88,10 +89,9 @@ export default function CartHome() {
                           </tr>
                         </thead>
                         <tbody>
-                          {_.map(cart, item => item).map(item => {
+                          {_.map(cart, item => item).map((item, index) => {
                             const mItem = { ...item };
-                            // mItem.quantity = quantity;
-                            return (<CartHomeItem item={mItem} key={key()} />);
+                            return (<CartHomeItem item={mItem} key={index} />);
                           })}
                         </tbody>
                       </table>

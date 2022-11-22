@@ -1,3 +1,6 @@
+/* eslint-disable camelcase */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
@@ -5,14 +8,15 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
-import { updateCart } from '../../api';
+import { removeCart, updateCart } from '../../api';
+import { setMyProfile } from '../../app/features/user/_userSlice';
 
 export default function CartHomeItem({ item, handleTotalPrice, handleChange }) {
-  // console.log(item?.medicine.m_id);
   const price = item?.medicine?.m_price;
+  const user = useSelector(state => state?.user?.MyProfile);
   const discount = item?.medicine?.m_discount;
   const discountPrice = (discount * price) / 100;
-  const finalPrice = !discount || discount === 0 ? price : price - discountPrice;
+  // const finalPrice = !discount || discount === 0 ? price : price - discountPrice;
   const [quantity, setQuantity] = useState(item.c_quantity);
   const axios = useAxiosPrivate();
   const dispatch = useDispatch();
@@ -20,7 +24,7 @@ export default function CartHomeItem({ item, handleTotalPrice, handleChange }) {
     if (parseInt(e.target.value, 10)) {
       setQuantity(parseInt(e.target.value, 10));
       item.c_quantity = parseInt(e.target.value, 10);
-      updateCart(axios, item?.medicine.m_id, parseInt(e.target.value, 10), (err, data) => {
+      updateCart(axios, item?.c_id, parseInt(e.target.value, 10), (err, data) => {
         if (err) {
           console.log(err);
         } else {
@@ -28,22 +32,23 @@ export default function CartHomeItem({ item, handleTotalPrice, handleChange }) {
         }
       });
     }
-
-    // console.log(e.target.value);
   };
-
+  const removeFromCart = () => {
+    removeCart(axios, item?.c_id, (err, data) => {
+      if (err) {
+        console.log(err);
+      } else {
+        const updatedUser = {
+          ...user, cart: user?.cart?.filter(cartItem => cartItem.c_id !== item?.c_id),
+        };
+        dispatch(setMyProfile({ user: { user: { ...updatedUser } } }));
+      }
+    });
+  };
   return (
     <tr className="woocommerce-cart-form__cart-item cart_item">
       <td className="product-remove">
-        <a
-          href="https://pharmacare.qodeinteractive.com/cart/?remove_item=daea32adcae6abcb548134fa98f139f9&amp;_wpnonce=b0b79b91ee"
-          className="remove"
-          aria-label="Remove this item"
-          data-product_id="5575"
-          data-product_sku="089"
-        >
-          X
-        </a>
+        <i className="fa-solid fa-close text-white bg-danger mr-4 p-1 px-2" style={{ cursor: 'pointer', borderRadius: '2px' }} onClick={removeFromCart} />
       </td>
 
       <td className="justift-content-center align-items-center">
