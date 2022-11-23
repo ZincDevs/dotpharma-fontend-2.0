@@ -39,6 +39,28 @@ export default function ProductFilter() {
     setMedicineCont(medicines);
   }, [medicines]);
   const filterMedicineFunction = () => {
+    switch (activeFilter) {
+      case 'Categories':
+        setMedicineCont([]);
+        break;
+      case 'New Products':
+        setMedicineCont(
+          medicines?.filter(medicine => medicine?.m_tags?.includes('New products')),
+        );
+        break;
+      case 'Promotion':
+        setMedicineCont(
+          medicines?.filter(medicine => medicine?.m_tags?.includes('Promotion')),
+        );
+        break;
+      case 'Popular':
+        setMedicineCont(
+          medicines?.filter(medicine => medicine?.m_tags?.includes('Popular')),
+        );
+        break;
+      default:
+        setMedicineCont(medicines);
+    }
   };
   useEffect(() => {
     filterMedicineFunction();
