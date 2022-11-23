@@ -37,7 +37,10 @@ export default function ProductFilter() {
   const filterMedicineFunction = () => {
     switch (activeFilter) {
       case 'Categories':
-        // setMedicineCont([]);
+        if (dropText === 'Categories') break;
+        setMedicineCont(
+          medicines?.filter(medicine => medicine?.m_type === dropText),
+        );
         break;
       case 'New Products':
         setMedicineCont(
@@ -60,7 +63,7 @@ export default function ProductFilter() {
   };
   useEffect(() => {
     filterMedicineFunction();
-  }, [activeFilter]);
+  }, [activeFilter, dropText]);
   return (
     <div className="product-filter">
       <div className="d-flex col-12">
