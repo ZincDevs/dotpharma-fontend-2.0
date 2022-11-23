@@ -68,7 +68,7 @@ export default function ProductFilter() {
           <div
             key={text}
             onClick={() => {
-              if (activeFilter !== 'Categories') {
+              if (text === 'Show all') {
                 setDropText('Categories');
               }
               setActiveFilter(text);
