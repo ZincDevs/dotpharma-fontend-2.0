@@ -73,11 +73,9 @@ export default function Home({ alert: defaultAlert }) {
                         handleRemoveFromCart={handleRemoveFromCart}
                         profile={profile}
                       />
-                      <ADsOne />
-                      {/* <ProductsHomeHor
-                        handleAddToCart={handleAddToCart}
-                        handleRemoveFromCart={handleRemoveFromCart}
-                      /> */}
+                      <div className="flex items-center justify-center">
+                        <ADsOne />
+                      </div>
                     </div>
                   </div>
                 </div>
