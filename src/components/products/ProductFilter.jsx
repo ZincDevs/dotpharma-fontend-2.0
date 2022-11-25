@@ -1,59 +1,97 @@
+/* eslint-disable no-self-compare */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState } from 'react';
-import key from 'uniqid';
+import React, { useState, useEffect, useContext } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
+import { useSelector } from 'react-redux';
+import MedicineContext from '../../context/MedicineProvider';
 import categories from '../../data/categories.json';
 
-export default function ProductFilter({ handleOnClick }) {
-  const [activeFilter, setActiveFilter] = useState('Show All');
+export default function ProductFilter() {
+  const [activeFilter, setActiveFilter] = useState('Show all');
+  const { setMedicineCont } = useContext(MedicineContext);
+  const [dropText, setDropText] = useState('Categories');
   const filters = [{
     text: 'Show all',
-    active: (activeFilter === 'Show All'),
   },
   {
     text: 'Categories',
-    active: (activeFilter === 'Gift Packaging'),
   },
   {
     text: 'New Products',
-    active: (activeFilter === 'New Products'),
   }, {
     text: 'Promotion',
-    active: activeFilter === 'Promotion',
   }, {
     text: 'Popular',
-    active: (activeFilter === 'Popular'),
   },
   {
     text: 'More',
-    active: (activeFilter === 'More'),
   },
   ];
-
+  const { medicines } = useSelector(state => state?.medicine);
+  useEffect(() => {
+    setMedicineCont(medicines);
+  }, [medicines]);
+  const filterMedicineFunction = () => {
+    switch (activeFilter) {
+      case 'Categories':
+        if (dropText === 'Categories') break;
+        setMedicineCont(
+          medicines?.filter(medicine => medicine?.m_type === dropText),
+        );
+        break;
+      case 'New Products':
+        setMedicineCont(
+          medicines?.filter(medicine => medicine?.m_tags?.includes('New products')),
+        );
+        break;
+      case 'Promotion':
+        setMedicineCont(
+          medicines?.filter(medicine => medicine?.m_tags?.includes('Promotion')),
+        );
+        break;
+      case 'Popular':
+        setMedicineCont(
+          medicines?.filter(medicine => medicine?.m_tags?.includes('Popular')),
+        );
+        break;
+      default:
+        setMedicineCont(medicines);
+    }
+  };
+  useEffect(() => {
+    filterMedicineFunction();
+  }, [activeFilter, dropText]);
   return (
     <div className="product-filter">
       <div className="d-flex col-12">
-        {filters.map(({ text, active }) => (
-          <div key={text} onClick={handleOnClick} className={`px-3 py-3 p-filter-item col-2 d-flex justify-content-center align-items-center  ${active && 'active'}`}>
+        {filters.map(({ text }) => (
+          <div
+            key={text}
+            onClick={() => {
+              if (text === 'Show all') {
+                setDropText('Categories');
+              }
+              setActiveFilter(text);
+            }}
+            className={`px-3 py-3 p-filter-item col-2 d-flex justify-content-center align-items-center  ${text === activeFilter && 'active'}`}
+          >
             {text === 'Categories' ? (
               <Dropdown>
                 <Dropdown.Toggle className="dropdowntex" id="dropdown-basic">
-                  {text}
+                  {dropText}
                 </Dropdown.Toggle>
-
                 <Dropdown.Menu>
-                  {categories.map(category => (<Dropdown.Item href="#/" key={category}>{category}</Dropdown.Item>))}
-
-                  {/* <Dropdown.Item href="#/">Malaria</Dropdown.Item>
-                  <Dropdown.Item href="#/">Cancer</Dropdown.Item>
-                  <Dropdown.Item href="#/">Stomac diseases</Dropdown.Item>
-                  <Dropdown.Item href="#/">Diabetic</Dropdown.Item> */}
+                  {categories.map(category => (<Dropdown.Item href="#" key={category} onClick={() => setDropText(category)}>{category}</Dropdown.Item>))}
                 </Dropdown.Menu>
               </Dropdown>
-            ) : <span>{text}</span>}
+            ) : (
+              <span>
+                {text}
+              </span>
+            )}
           </div>
         ))}
       </div>
