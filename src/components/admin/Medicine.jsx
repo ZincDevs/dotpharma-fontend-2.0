@@ -16,7 +16,6 @@ import EditMedicineModel from './components/medicine/EditMedicineModel';
 
 function Medicine() {
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
   const [modalIsOpen, setIsOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -44,7 +43,6 @@ function Medicine() {
   function handleOpenEditModal(medicine1) {
     setMedicine(medicine1);
     setTimeout(() => setIsEditModalOpen(true), 50);
-    // setIsEditModalOpen(true);
   }
 
   function closeDeleteModal() {
@@ -66,7 +64,7 @@ function Medicine() {
               </div>
               <input
                 type="text"
-                className="form-control"
+                className="form-control border-bottom"
                 id="search"
                 placeholder="Type to search..."
               />
@@ -80,20 +78,20 @@ function Medicine() {
           </button>
         </div>
         <div className="table-responsive-md">
-          <table className="table table-actions table-striped table-hover mb-0">
+          <table className="table table-actions table-striped table-hover mb-0 row container">
             <thead>
-              <tr>
-                <th scope="col">Image</th>
-                <th scope="col">Name</th>
-                <th scope="col">Description</th>
-                <th scope="col">Price</th>
-                <th scope="col">Actions</th>
+              <tr className="row">
+                <th className="col-1">Image</th>
+                <th className="col-2">Name</th>
+                <th className="col-7">Description</th>
+                <th className="col-1">Price</th>
+                <th className="col-1">Actions</th>
               </tr>
             </thead>
             <tbody>
               {products?.map(product => (
-                <tr>
-                  <td>
+                <tr className="row" key={product.m_id}>
+                  <td className="col-1">
                     <img
                       src={product.m_image}
                       alt="Medicine"
@@ -101,11 +99,18 @@ function Medicine() {
                       height={50}
                     />
                   </td>
-                  <td>{product.m_name}</td>
-                  <td>{product.m_desciption}</td>
-                  <td>{product.m_price}</td>
-                  <td>
-                    <button className="btn btn-sm btn-success" onClick={() => handleOpenEditModal(product)}>Edit</button>
+                  <td className="col-2">{product.m_name}</td>
+                  <td className="col-7" style={{ minHeight: '15px' }}>
+                    {product.m_desciption}
+                  </td>
+                  <td className="col-1">{product.m_price}</td>
+                  <td className="flex gap-1 col-1 flex-row items-center justify-center">
+                    <button
+                      className="btn btn-sm btn-success"
+                      onClick={() => handleOpenEditModal(product)}
+                    >
+                      Edit
+                    </button>
                     <button
                       className="btn btn-sm btn-danger"
                       onClick={() => {
@@ -114,7 +119,6 @@ function Medicine() {
                       }}
                     >
                       Delete
-
                     </button>
                   </td>
                 </tr>
@@ -124,16 +128,24 @@ function Medicine() {
         </div>
       </div>
       {/* Add modal */}
-      <AddMedicineModal data={{
-        modalIsOpen, closeModal, categories, tags,
-      }}
+      <AddMedicineModal
+        data={{
+          modalIsOpen,
+          closeModal,
+          categories,
+          tags,
+        }}
       />
 
       {/* Edit modal */}
       <EditMedicineModel data={{ medicine, isEditModalOpen, closeEditModal }} />
 
       {/* Delete modal */}
-      <DeleteMedicineModel data={{ isDeleteModalOpen, mid: medicine?.m_id, closeDeleteModal }} />
+      <DeleteMedicineModel
+        data={{
+          isDeleteModalOpen, mid: medicine?.m_id, closeDeleteModal, dispatch,
+        }}
+      />
     </div>
   );
 }

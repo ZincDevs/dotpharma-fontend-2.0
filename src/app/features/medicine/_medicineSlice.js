@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-unsafe-optional-chaining */
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
@@ -15,8 +16,13 @@ export const medicineSlice = createSlice({
     setOneMedicine: (state, action) => {
       state.medicine = action?.payload?.medicine;
     },
+    removeMedicine: (state, action) => {
+      state.medicinesHor = state.medicinesHor?.filter(medicine => medicine.m_id !== action.payload);
+    },
   },
 });
 
-export const { setMedicines, setMedicinesHor, setOneMedicine } = medicineSlice.actions;
+export const {
+  setMedicines, setMedicinesHor, setOneMedicine, removeMedicine,
+} = medicineSlice.actions;
 export default medicineSlice.reducer;
