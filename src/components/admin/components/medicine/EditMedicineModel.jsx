@@ -8,18 +8,21 @@ import Modal from 'react-bootstrap/Modal';
 import { ToastContainer, toast } from 'react-toastify';
 import { ColorRing } from 'react-loader-spinner';
 import Form from 'react-bootstrap/Form';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Dropdown from 'react-bootstrap/Dropdown';
+import _ from 'lodash';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import { updateMedicine } from '../../../../api/_medicine';
 import FormButtonSubmit from '../../../shared/FormButtonSubmit';
 import categories from '../../../../data/categories.json';
+import { updateMedicineRedux } from '../../../../app/features/medicine/_medicineSlice';
 
 function EditMedicineModel({
   data: {
     isEditModalOpen, closeEditModal, medicine,
   },
 }) {
+  const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [properties, setProperties] = useState('');
   const [price, setPrice] = useState('');
@@ -35,8 +38,8 @@ function EditMedicineModel({
   useEffect(() => {
     setName(medicine?.m_name);
     setProperties(medicine?.m_properties);
-    setShortDescription(medicine?.m_short_description);
-    setDescription(medicine?.m_description);
+    setShortDescription(medicine?.m_short_descripption);
+    setDescription(medicine?.m_desciption);
     setPrice(medicine?.m_price);
     setDiscount(medicine?.m_discount);
     setSelectedTags(medicine?.m_tags);
@@ -298,16 +301,31 @@ function EditMedicineModel({
                     description,
                     price,
                     shortdescription,
-                    category: category === 'Select Category' ? null : category,
+                    category: category === 'Select Category' ? '' : category,
                     discount,
                     m_tags: selectedTags,
                   };
+                  if (name === medicine?.m_name && properties === medicine?.m_properties && description === medicine?.m_desciption && price === medicine?.m_price && shortdescription === medicine?.m_short_descripption && category === medicine?.m_type && discount === medicine?.m_discount && _.isEqual(medicine?.m_tags, data.m_tags)) {
+                    toast.info('Nothing has been changed yet!');
+                    return;
+                  }
                   updateMedicine(axios, data, medicine.m_id, (err, data) => {
                     if (err) {
                       toast.error('Could not update medicine');
                     } else {
                       toast.success('Medicine successfully updated!');
-                      location.reload();
+                      dispatch(updateMedicineRedux({
+                        ...medicine,
+                        m_name: name,
+                        m_properties: properties,
+                        m_desciption: description,
+                        m_price: price,
+                        m_short_descripption: shortdescription,
+                        m_type: category,
+                        m_discount: discount,
+                        m_tags: selectedTags,
+                      }));
+                      closeEditModal();
                     }
                   });
                 }}

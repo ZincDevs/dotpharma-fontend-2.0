@@ -19,10 +19,18 @@ export const medicineSlice = createSlice({
     removeMedicine: (state, action) => {
       state.medicinesHor = state.medicinesHor?.filter(medicine => medicine.m_id !== action.payload);
     },
+    updateMedicineRedux: (state, action) => {
+      state.medicinesHor = state.medicinesHor?.map(medicine => {
+        if (medicine.m_id === action.payload?.m_id) {
+          return action.payload;
+        }
+        return medicine;
+      });
+    },
   },
 });
 
 export const {
-  setMedicines, setMedicinesHor, setOneMedicine, removeMedicine,
+  setMedicines, setMedicinesHor, setOneMedicine, removeMedicine, updateMedicineRedux,
 } = medicineSlice.actions;
 export default medicineSlice.reducer;
