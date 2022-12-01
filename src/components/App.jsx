@@ -43,6 +43,7 @@ import ClinicsList from './clinics/Clinics';
 import ViewProduct from './products/ViewProduct';
 import DoctorsAdmin from './admin/Doctors';
 import Doctors from './doctors/Doctors';
+import AdminHome from './admin/AdminHome';
 // import Empty from './shared/Empty';
 
 // Admin components
@@ -86,6 +87,7 @@ function App() {
         <Route element={<PersistLogin />}>
           <Route element={<RequireAuthAdmin />}>
             <Route path="/admin" key={key()} element={<Admin />}>
+              <Route path="home" key={key()} element={<AdminHome />} />
               <Route path="medicines" key={key()} element={<Medicine />} />
               <Route path="orders" key={key()} element={<Orders />} />
               <Route path="clinics" key={key()} element={<Clinics />} />

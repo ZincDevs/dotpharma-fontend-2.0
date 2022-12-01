@@ -31,4 +31,7 @@ export default {
   delete_pharmacy__api: ph_id => `/pharmacy/deletepharmacy/${ph_id}`,
   update_pharmacy__api: ph_id => `/pharmacy/updatepharmacy/${ph_id}`,
   get_clinics__api: '/clinics/findall',
+  create_clinic__api: '/clinics/createclinic',
+  delete_clinic__api: c_id => `/clinics/deleteclinic/${c_id}`,
+  update_clinics__api: c_id => `/clinics/updateclinic/${c_id}`,
 };

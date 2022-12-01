@@ -9,39 +9,46 @@ import { Link } from 'react-router-dom';
 
 function Sidebar() {
   const [currentLink, setCurrentLink] = useState(0);
-  const links = [{
-    name: 'Medicines',
-    iconName:
+  const links = [
+    {
+      name: 'Home',
+      iconName:
+        'fa-solid fa-home',
+
+    },
+    {
+      name: 'Medicines',
+      iconName:
       'fa-solid fa-prescription-bottle-medical',
 
-  },
-  {
-    name: 'Pharmacies',
-    iconName:
+    },
+    {
+      name: 'Pharmacies',
+      iconName:
       'fa-solid fa-house-chimney-medical',
 
-  }, {
-    name: 'Clinics',
-    iconName:
+    }, {
+      name: 'Clinics',
+      iconName:
       'fa-solid fa-circle-h',
 
-  }, {
-    name: 'Doctors',
-    iconName:
+    }, {
+      name: 'Doctors',
+      iconName:
       'fa-solid fa-hospital',
 
-  }, {
-    name: 'Appointments',
-    iconName:
+    }, {
+      name: 'Appointments',
+      iconName:
       'fa-solid fa-hospital',
 
-  },
-  {
-    name: 'Orders',
-    iconName:
+    },
+    {
+      name: 'Orders',
+      iconName:
       'fa-solid fa-cart-shopping',
 
-  }];
+    }];
 
   useEffect(() => {
     links.map((link, index) => {

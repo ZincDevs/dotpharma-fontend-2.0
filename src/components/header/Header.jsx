@@ -143,7 +143,7 @@ export function ToolbarOne() {
               MyProfile?.u_role === 'SUPER_ADMIN'
               && (
               <li className="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-221 qodef--hide-link qodef-menu-item--narrow">
-                <Link to="/admin">
+                <Link to="/admin/home">
                   <span className="qodef-menu-item-text">Admin</span>
                 </Link>
               </li>

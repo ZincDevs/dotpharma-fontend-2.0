@@ -7,35 +7,51 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
-import { getClinics } from '../../app/features/clinic';
-import AddClinicModal from './components/clinics/AddClinicModal';
-import DeleteClinicModal from './components/clinics/DeleteClinicModal';
-import UpdateClinicModal from './components/clinics/UpdateClinicModal';
+import { ToastContainer, toast } from 'react-toastify';
+import { getDoctors } from '../../app/features/doctors';
+import categories from '../../data/categories.json';
+import AddMedicineModal from './components/medicine/AddMedicineModal';
+import DeleteMedicineModel from './components/medicine/DeleteMedicineModel';
+import EditMedicineModel from './components/medicine/EditMedicineModel';
 
-function Clinics() {
+function Doctors() {
   const dispatch = useDispatch();
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [clinic, setClinic] = useState({});
+  const [doctor, setDoctor] = useState(null);
 
-  const clinics = useSelector(
-    state => state?.clinic?.clinics,
+  const products = useSelector(
+    state => state?.medicine?.medicinesHor,
     shallowEqual,
   );
+  const doctors = useSelector(state => state?.tag?.tags, shallowEqual);
 
-  useEffect(() => {
-    getClinics(dispatch);
-  }, []);
+  useEffect(() => { getDoctors({ limit: 8 }, dispatch); }, []);
 
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function closeEditModal() {
+    setIsEditModalOpen(false);
+  }
+
+  function handleOpenEditModal(doctor) {
+    setDoctor(doctor);
+    setTimeout(() => setIsEditModalOpen(true), 50);
+  }
+
+  function closeDeleteModal() {
+    setIsDeleteModalOpen(false);
+  }
   const navigate = useNavigate();
   return (
     <div>
       <ToastContainer />
       <div className="card mb-grid">
         <div className="card-header d-flex justify-content-between align-items-center">
-          <div className="card-header-title">Manage clinics</div>
+          <div className="card-header-title">Manage doctors</div>
           <form className="form-inline form-quicksearch d-none d-md-block mx-auto">
             <div className="input-group">
               <div className="input-group-prepend">
@@ -53,56 +69,58 @@ function Clinics() {
           </form>
           <button
             className="btn btn-sm btn-success"
-            onClick={() => setIsAddModalOpen(true)}
+            onClick={() => setIsOpen(true)}
           >
-            Add clinic
+            Add medicine
           </button>
         </div>
         <div className="table-responsive-md">
           <table className="table table-actions table-striped table-hover mb-0 row container">
             <thead>
               <tr className="row">
-                <th className="col-1 flex items-center justify-center">Image</th>
-                <th className="col-2 flex items-center justify-center">Name</th>
-                <th className="col-2 flex items-center justify-center">Specialized</th>
-                <th className="col-3 flex items-center justify-center">Email</th>
-                <th className="col-2 flex items-center justify-center">Telephone</th>
-                <th className="col-2 flex items-center justify-center">Action</th>
+                <th className="col-1">Image</th>
+                <th className="col-2">Name</th>
+                <th className="col-6">Description</th>
+                <th className="col-1">Price</th>
+                <th className="col-1">Product</th>
+                <th className="col-1">Actions</th>
               </tr>
             </thead>
             <tbody>
-              {clinics?.map(clinic => (
-                <tr className="row" key={clinic.c_id} onClick={() => setClinic(clinic)}>
-                  <td className="col-1 flex items-center justify-center">
+              {doctors?.map(product => (
+                <tr className="row" key={product.m_id}>
+                  <td className="col-1">
                     <img
-                      src={clinic.c_logo}
-                      alt="Clinic"
+                      src={product.m_image}
+                      alt="Medicine"
                       width={50}
                       height={50}
                     />
                   </td>
-                  <td className="col-2 flex items-center justify-center">{clinic.c_name}</td>
-                  <td className="col-2 flex items-center justify-center" style={{ minHeight: '15px' }}>
-                    {clinic.specialized}
+                  <td className="col-2">{product.m_name}</td>
+                  <td className="col-6" style={{ minHeight: '15px' }}>
+                    {product.m_desciption}
                   </td>
-                  <td className="col-3 flex items-center justify-center">{clinic.c_email}</td>
-                  <td className="col-2 flex items-center justify-center">{clinic.c_phonenumber}</td>
-                  <td className="flex gap-1 col-2 flex-row items-center justify-center">
+                  <td className="col-1">{product.m_price}</td>
+                  <td className="col-1 flex items-center justify-center">
                     <button
                       className="btn btn-sm btn-success"
-                      onClick={() => navigate(`/clinic/${clinic.c_phonenumber}`)}
+                      onClick={() => navigate(`/product/${product.m_id}`)}
                     >
                       View
                     </button>
+                  </td>
+                  <td className="flex gap-1 col-1 flex-row items-center justify-center">
                     <button
                       className="btn btn-sm btn-success"
-                      onClick={() => setIsEditModalOpen(true)}
+                      onClick={() => handleOpenEditModal(product)}
                     >
                       Edit
                     </button>
                     <button
                       className="btn btn-sm btn-danger"
                       onClick={() => {
+                        setDoctor(product);
                         setIsDeleteModalOpen(true);
                       }}
                     >
@@ -116,23 +134,26 @@ function Clinics() {
         </div>
       </div>
       {/* Add modal */}
-      <AddClinicModal
+      <AddMedicineModal
         data={{
-          isAddModalOpen, setIsAddModalOpen,
+          modalIsOpen,
+          closeModal,
+          categories,
+          doctor,
         }}
       />
 
       {/* Edit modal */}
-      <UpdateClinicModal data={{ clinic, isEditModalOpen, setIsEditModalOpen }} />
+      <EditMedicineModel data={{ doctor, isEditModalOpen, closeEditModal }} />
 
       {/* Delete modal */}
-      <DeleteClinicModal
+      <DeleteMedicineModel
         data={{
-          isDeleteModalOpen, cid: clinic?.c_id, setIsDeleteModalOpen, dispatch,
+          isDeleteModalOpen, mid: doctor?.m_id, closeDeleteModal, dispatch,
         }}
       />
     </div>
   );
 }
 
-export default Clinics;
+export default Doctors;

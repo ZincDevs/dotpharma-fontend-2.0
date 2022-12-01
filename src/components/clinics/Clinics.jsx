@@ -10,7 +10,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import _ from 'lodash';
 import { ToastContainer, toast } from 'react-toastify';
 import ClinicItem from './ClinicItem';
@@ -21,11 +20,9 @@ import { getClinics } from '../../app/features/clinic';
 
 export default function ClinicList() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [filteredClinics, setFilteredClinics] = useState([]);
   const [currentFilter, setCurrentFilter] = useState('all');
   const clinics = useSelector(state => state.clinic.clinics, shallowEqual);
-  console.log(clinics);
   const availableClinics = [{ title: 'All', key: 'all' }, { title: 'Ophthalmology', key: 'eyes', icon: ophthalmology_b }, { title: 'Cardiology', key: 'cardiology', icon: cardiology_b }, { title: 'Stomatology', key: 'stomatology', icon: stomatology_b }, { title: 'Radiology', key: 'radiology', icon: radiology_b }, { title: 'Internal Medicine', key: 'internal_medicine', icon: internal_medecine_b }];
   useEffect(() => {
     getClinics(dispatch);
