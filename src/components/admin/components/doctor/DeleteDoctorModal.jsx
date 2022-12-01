@@ -9,13 +9,15 @@ import { ToastContainer, toast } from 'react-toastify';
 import { ColorRing } from 'react-loader-spinner';
 import { useDispatch } from 'react-redux';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
-import { deletePharmacy } from '../../../../api/_pharmacies';
 import FormButtonSubmit from '../../../shared/FormButtonSubmit';
-import { deletePharmacyRedux } from '../../../../app/features/pharmacy/_pharmacySlice';
+import { deleteClinic } from '../../../../api/_clinics';
+import { deleteClinicRedux } from '../../../../app/features/clinic/_clinicSlice';
+import { deleteDoctor } from '../../../../api/_doctor';
+import { deleteDoctorRedux } from '../../../../app/features/doctors/_doctorSlice';
 
 function DeleteDoctorModal({
   data: {
-    isDeleteModalOpen, closeDeleteModal, phid,
+    isDeleteModalOpen, setIsDeleteModalOpen, did,
   },
 }) {
   const axios = useAxiosPrivate();
@@ -24,12 +26,12 @@ function DeleteDoctorModal({
   return (
     <div>
       <ToastContainer />
-      <Modal size="lg" show={isDeleteModalOpen} onHide={closeDeleteModal}>
+      <Modal size="lg" show={isDeleteModalOpen} onHide={() => setIsDeleteModalOpen(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Delete medicine</Modal.Title>
+          <Modal.Title>Delete doctor</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>Are you sure you want to delete this medicine</p>
+          <p>Are you sure you want to delete this doctor</p>
         </Modal.Body>
         <Modal.Footer>
           {loading ? (
@@ -56,15 +58,15 @@ function DeleteDoctorModal({
             <div className="butns-ordery-pay-mode">
               <div className="horizontal-separator" />
               <FormButtonSubmit
-                value="Delete pharmacy"
+                value="Delete doctor"
                 onClick={e => {
-                  deletePharmacy(axios, phid, (err, data) => {
+                  deleteDoctor(axios, did, (err, data) => {
                     if (err) {
-                      toast.error('Could not delete pharmacy');
+                      toast.error('Could not delete doctor. Try providing all information');
                     } else {
-                      toast.success('Pharmacy successfully deleted!');
-                      dispatch(deletePharmacyRedux(phid));
-                      closeDeleteModal();
+                      toast.success('Doctor successfully deleted!');
+                      dispatch(deleteDoctorRedux(did));
+                      setIsDeleteModalOpen(false);
                     }
                   });
                 }}

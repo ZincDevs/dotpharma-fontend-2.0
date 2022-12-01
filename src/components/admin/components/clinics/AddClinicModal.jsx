@@ -9,7 +9,6 @@ import { ColorRing } from 'react-loader-spinner';
 import { useDispatch } from 'react-redux';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import { uploadMedicineImage } from '../../../../helpers';
-import { createPharmacy } from '../../../../api/_pharmacies';
 import FormButtonSubmit from '../../../shared/FormButtonSubmit';
 import { createClinic } from '../../../../api/_clinics';
 import { createClinicRedux } from '../../../../app/features/clinic/_clinicSlice';

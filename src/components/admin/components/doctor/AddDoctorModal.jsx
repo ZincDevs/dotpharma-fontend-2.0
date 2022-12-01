@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
@@ -6,34 +7,37 @@ import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { ToastContainer, toast } from 'react-toastify';
 import { ColorRing } from 'react-loader-spinner';
-import Form from 'react-bootstrap/Form';
+import { useDispatch } from 'react-redux';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import { uploadMedicineImage } from '../../../../helpers';
-import { createPharmacy } from '../../../../api/_pharmacies';
 import FormButtonSubmit from '../../../shared/FormButtonSubmit';
-import { getPharmacies } from '../../../../app/features/pharmacy';
+import { createClinic } from '../../../../api/_clinics';
+import { createClinicRedux } from '../../../../app/features/clinic/_clinicSlice';
+import { createDoctor } from '../../../../api/_doctor';
+import { createDoctorRedux } from '../../../../app/features/doctors/_doctorSlice';
 
 function AddDoctorModal({
   data: {
-    modalIsOpen, closeModal,
+    isAddModalOpen, setIsAddModalOpen,
   },
 }) {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const [logo, setLogo] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
   const [email, setEmail] = useState('');
-  const [website, setWebSite] = useState('');
-  const [address, setAddress] = useState('');
+  const [specialized, setSpecialized] = useState('');
+  const [clinic, setClinic] = useState('');
   const [isUploadingImage, setIsUploadingImage] = useState(false);
   const axios = useAxiosPrivate();
   const loading = false;
 
+  const dispatch = useDispatch();
   return (
     <div>
       <ToastContainer />
-      <Modal size="lg" show={modalIsOpen} onHide={closeModal}>
+      <Modal size="lg" show={isAddModalOpen} onHide={() => setIsAddModalOpen(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Add pharmacy</Modal.Title>
+          <Modal.Title>Add Doctor</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form className="checkout_coupon woocommerce-form-coupon">
@@ -43,7 +47,7 @@ function AddDoctorModal({
               data-priority="20"
             >
               <label htmlFor="billing_last_name" className="">
-                Pharmacy name&nbsp;
+                Doctor name&nbsp;
                 <abbr className="required" title="required">
                   *
                 </abbr>
@@ -54,7 +58,7 @@ function AddDoctorModal({
                   className="input-text"
                   name="billing_last_name"
                   id="billing_last_name"
-                  placeholder="Pharmacy name"
+                  placeholder="Doctor name"
                   value={name}
                   onChange={e => setName(e.target.value)}
                 />
@@ -67,7 +71,7 @@ function AddDoctorModal({
               data-priority="20"
             >
               <label htmlFor="billing_last_name" className="">
-                Pharmacy phone&nbsp;
+                Telephone&nbsp;
                 <abbr className="required" title="required">
                   *
                 </abbr>
@@ -78,7 +82,7 @@ function AddDoctorModal({
                   className="input-text"
                   name="billing_last_name"
                   id="billing_last_name"
-                  placeholder="Pharmacy phone number"
+                  placeholder="Doctor's phone number"
                   value={phone}
                   onChange={e => setPhone(e.target.value)}
                 />
@@ -90,7 +94,7 @@ function AddDoctorModal({
               data-priority="20"
             >
               <label htmlFor="billing_last_name" className="">
-                Pharmacy email&nbsp;
+                Doctor email&nbsp;
                 <abbr className="required" title="required">
                   *
                 </abbr>
@@ -101,7 +105,7 @@ function AddDoctorModal({
                   className="input-text"
                   name="billing_last_name"
                   id="billing_last_name"
-                  placeholder="Pharmacy email"
+                  placeholder="Doctor's email"
                   value={email}
                   onChange={e => setEmail(e.target.value)}
                 />
@@ -113,7 +117,7 @@ function AddDoctorModal({
               data-priority="20"
             >
               <label htmlFor="billing_last_name" className="">
-                Pharmacy website&nbsp;
+                Speciality&nbsp;
                 <abbr className="required" title="required">
                   *
                 </abbr>
@@ -124,20 +128,19 @@ function AddDoctorModal({
                   className="input-text"
                   name="billing_last_name"
                   id="billing_last_name"
-                  placeholder="Pharmacy website"
-                  value={website}
-                  onChange={e => setWebSite(e.target.value)}
+                  placeholder="Doctor's speciality"
+                  value={specialized}
+                  onChange={e => setSpecialized(e.target.value)}
                 />
               </span>
             </p>
-
             <p
               className=" form-row-last validate-required"
               id="billing_last_name_field"
               data-priority="20"
             >
               <label htmlFor="billing_last_name" className="">
-                Pharmacy address&nbsp;
+                Clinic&nbsp;
                 <abbr className="required" title="required">
                   *
                 </abbr>
@@ -148,20 +151,19 @@ function AddDoctorModal({
                   className="input-text"
                   name="billing_last_name"
                   id="billing_last_name"
-                  placeholder="Pharmacy address"
-                  value={address}
-                  onChange={e => setAddress(e.target.value)}
+                  placeholder="Doctor's clinic ex: King Faisal"
+                  value={clinic}
+                  onChange={e => setClinic(e.target.value)}
                 />
               </span>
             </p>
-
             <p
               className="form-row-last validate-required"
               id="billing_last_name_field"
               data-priority="20"
             >
               <label htmlFor="billing_last_name" className="">
-                Pharmacy logo&nbsp;
+                Doctor's image&nbsp;
                 <abbr className="required" title="required">
                   *
                 </abbr>
@@ -172,9 +174,6 @@ function AddDoctorModal({
                   type="file"
                   className="input-text"
                   name="billing_last_name"
-                  id="billing_last_name"
-                  placeholder="Enter discount"
-                  autoComplete="family-name"
                   onChange={async e => {
                     setIsUploadingImage(true);
                     toast.info('Uploading image...!');
@@ -185,7 +184,7 @@ function AddDoctorModal({
                         if (err) {
                           toast.error('Unable to upload image!');
                         } else {
-                          setLogo(uploadUrl);
+                          setImageUrl(uploadUrl);
                         }
                       },
                     );
@@ -224,21 +223,20 @@ function AddDoctorModal({
                 dissable={isUploadingImage}
                 onClick={e => {
                   const data = {
-                    name,
-                    email,
-                    phone,
-                    website,
-                    address,
-                    logo,
+                    dname: name,
+                    demail: email,
+                    dphone: phone,
+                    dimage: imageUrl,
+                    speciality: specialized,
+                    clinic,
                   };
-                  createPharmacy(axios, data, (err, data) => {
+                  createDoctor(axios, data, (err, data) => {
                     if (err) {
-                      toast.error('Could not add pharmacy');
+                      toast.error('Could not add doctor. Check your data and try again!');
                     } else {
-                      toast.success('Pharmacy successfully added!');
-                      closeModal();
-                      // getPharmacies(dispatch);
-                      location.reload();
+                      toast.success('Doctor successfully added!');
+                      dispatch(createDoctorRedux(data));
+                      setIsAddModalOpen(false);
                     }
                   });
                 }}

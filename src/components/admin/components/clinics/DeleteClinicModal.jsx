@@ -9,15 +9,13 @@ import { ToastContainer, toast } from 'react-toastify';
 import { ColorRing } from 'react-loader-spinner';
 import { useDispatch } from 'react-redux';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
-import { deletePharmacy } from '../../../../api/_pharmacies';
 import FormButtonSubmit from '../../../shared/FormButtonSubmit';
-import { deletePharmacyRedux } from '../../../../app/features/pharmacy/_pharmacySlice';
 import { deleteClinic } from '../../../../api/_clinics';
 import { deleteClinicRedux } from '../../../../app/features/clinic/_clinicSlice';
 
 function DeleteClinicModal({
   data: {
-    isDeleteModalOpen, setIsDeleteModalOpen, cid,
+    isDeleteModalOpen, setIsDeleteModalOpen, did,
   },
 }) {
   const axios = useAxiosPrivate();
@@ -60,12 +58,12 @@ function DeleteClinicModal({
               <FormButtonSubmit
                 value="Delete clinic"
                 onClick={e => {
-                  deleteClinic(axios, cid, (err, data) => {
+                  deleteClinic(axios, did, (err, data) => {
                     if (err) {
                       toast.error('Could not delete clinic');
                     } else {
                       toast.success('Clinic successfully deleted!');
-                      dispatch(deleteClinicRedux(cid));
+                      dispatch(deleteClinicRedux(did));
                       setIsDeleteModalOpen(false);
                     }
                   });

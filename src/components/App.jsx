@@ -44,15 +44,6 @@ import ViewProduct from './products/ViewProduct';
 import DoctorsAdmin from './admin/Doctors';
 import Doctors from './doctors/Doctors';
 import AdminHome from './admin/AdminHome';
-// import Empty from './shared/Empty';
-
-// Admin components
-// import Dashboard from './admin/Dashboard';
-// import AdminHome from './admin/fragments/Home';
-// import AdminUsers from './admin/fragments/Users';
-// import AdminMedicines from './admin/fragments/Medicines';
-// import AdminOrders from './admin/fragments/Orders';
-// import AdminPharmacies from './admin/fragments/Pharmacies';
 
 function App() {
   const user = useSelector(state => state?.user?.MyProfile);

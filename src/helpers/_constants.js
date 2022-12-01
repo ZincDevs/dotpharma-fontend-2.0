@@ -21,6 +21,9 @@ export default {
 
   my_profile_api: '/user/myprofile',
   doctors_api: '/doctor/findall',
+  create__doctor_api: '/doctor/createdoctor',
+  update__doctor_api: did => `/doctor/updatedoctor/${did}`,
+  delete__doctor_api: did => `/doctor/deletedoctor/${did}`,
   appointment_api: '/appointments/makeappointment',
   tag_get_api: '/tags/getall',
   create_medicine_api: '/medicine/createnew',
