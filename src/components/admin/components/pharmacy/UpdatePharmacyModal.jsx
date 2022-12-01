@@ -1,18 +1,22 @@
+/* eslint-disable max-len */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { ToastContainer, toast } from 'react-toastify';
 import { ColorRing } from 'react-loader-spinner';
+import { useDispatch } from 'react-redux';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import { updatePharmacy } from '../../../../api/_pharmacies';
 import FormButtonSubmit from '../../../shared/FormButtonSubmit';
+import { updateMedicineRedux } from '../../../../app/features/medicine/_medicineSlice';
+import { updatePharmacyRedux } from '../../../../app/features/pharmacy/_pharmacySlice';
 
-function EditPharmacyModal({
+function UpdatePharmacyModal({
   data: {
-    modalIsOpen, closeModal, pharmacy,
+    isEditModalOpen, setIsEditModalOpen, pharmacy,
   },
 }) {
   const [name, setName] = useState('');
@@ -23,13 +27,20 @@ function EditPharmacyModal({
   const [isUploadingImage, setIsUploadingImage] = useState(false);
   const axios = useAxiosPrivate();
   const loading = false;
-
+  useEffect(() => {
+    setName(pharmacy?.ph_name);
+    setPhone(pharmacy?.ph_phone);
+    setEmail(pharmacy?.ph_email);
+    setAddress(pharmacy?.ph_address);
+    setWebSite(pharmacy?.ph_website);
+  }, [pharmacy]);
+  const dispatch = useDispatch();
   return (
     <div>
       <ToastContainer />
-      <Modal size="lg" show={modalIsOpen} onHide={closeModal}>
+      <Modal size="lg" show={isEditModalOpen} onHide={() => setIsEditModalOpen(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Add pharmacy</Modal.Title>
+          <Modal.Title>Update pharmacy</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form className="checkout_coupon woocommerce-form-coupon">
@@ -188,14 +199,17 @@ function EditPharmacyModal({
                     website,
                     address,
                   };
-                  updatePharmacy(axios, data, (err, data) => {
+                  updatePharmacy(axios, pharmacy?.ph_id, data, (err, data) => {
                     if (err) {
-                      toast.error('Could not add pharmacy');
+                      toast.error('Pharmacy failed to update. Consider provinding all data.');
                     } else {
-                      toast.success('Pharmacy successfully added!');
-                      closeModal();
-                      // getPharmacies(dispatch);
-                      location.reload();
+                      toast.success('Pharmacy successfully updated!');
+                      dispatch(
+                        updatePharmacyRedux({
+                          ...pharmacy, ph_name: name, ph_address: address, ph_email: email, ph_website: website,
+                        }),
+                      );
+                      setIsEditModalOpen(false);
                     }
                   });
                 }}
@@ -208,4 +222,4 @@ function EditPharmacyModal({
   );
 }
 
-export default EditPharmacyModal;
+export default UpdatePharmacyModal;

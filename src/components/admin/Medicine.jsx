@@ -6,6 +6,7 @@
 /* eslint-disable react/button-has-type */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { getMedicinesHor } from '../../app/features/medicine';
 import { getTags } from '../../app/features/tags';
@@ -48,7 +49,7 @@ function Medicine() {
   function closeDeleteModal() {
     setIsDeleteModalOpen(false);
   }
-
+  const navigate = useNavigate();
   return (
     <div>
       <ToastContainer />
@@ -83,8 +84,9 @@ function Medicine() {
               <tr className="row">
                 <th className="col-1">Image</th>
                 <th className="col-2">Name</th>
-                <th className="col-7">Description</th>
+                <th className="col-6">Description</th>
                 <th className="col-1">Price</th>
+                <th className="col-1">Product</th>
                 <th className="col-1">Actions</th>
               </tr>
             </thead>
@@ -100,10 +102,18 @@ function Medicine() {
                     />
                   </td>
                   <td className="col-2">{product.m_name}</td>
-                  <td className="col-7" style={{ minHeight: '15px' }}>
+                  <td className="col-6" style={{ minHeight: '15px' }}>
                     {product.m_desciption}
                   </td>
                   <td className="col-1">{product.m_price}</td>
+                  <td className="col-1 flex items-center justify-center">
+                    <button
+                      className="btn btn-sm btn-success"
+                      onClick={() => navigate(`/product/${product.m_id}`)}
+                    >
+                      View
+                    </button>
+                  </td>
                   <td className="flex gap-1 col-1 flex-row items-center justify-center">
                     <button
                       className="btn btn-sm btn-success"

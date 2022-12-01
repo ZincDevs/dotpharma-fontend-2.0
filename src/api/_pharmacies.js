@@ -37,9 +37,9 @@ export const deletePharmacy = async (axios, phid, callback) => {
   }
 };
 
-export const updatePharmacy = async (axios, phid, callback) => {
+export const updatePharmacy = async (axios, phid, dataOb, callback) => {
   try {
-    const { data } = await axios.put(update_pharmacy__api(phid));
+    const { data } = await axios.put(update_pharmacy__api(phid), dataOb);
     callback(null, data);
   } catch (error) {
     callback(error);
