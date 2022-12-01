@@ -8,21 +8,14 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useEffect } from 'react';
-import $ from 'jquery';
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
 import Dropdown from 'react-bootstrap/Dropdown';
-import axios from 'axios';
-import Logo from '../shared/Logo';
-import { ToolBarTDP } from '../shared/Elements';
-import { ButtonIcon } from '../shared/Buttons';
 import useAuth from '../../hooks/useAuth';
 import LogoOg from '../../assets/images/logoOg.png';
 import CartMenu from '../Cart/CartMenu';
-import { logout } from '../../app/features/user/_userSlice';
-import { Constants } from '../../helpers';
 import useLogout from '../../hooks/useLogout';
 
 export function TopHeader() {
@@ -95,6 +88,7 @@ export function TopHeader() {
     </div>
   );
 }
+
 export function LogoH() {
   return (
     <Link className="qodef-header-logo-link qodef-height--set" to="/">
@@ -110,6 +104,7 @@ export function LogoH() {
 }
 
 export function ToolbarOne() {
+  const { MyProfile } = useSelector(state => state?.user);
   return (
     <div className="qodef-standard-header-bottom-wrapper force-main-color-bg">
       <div className="qodef-standard-header-bottom-inner qodef-content-grid ">
@@ -144,6 +139,16 @@ export function ToolbarOne() {
                 <span className="qodef-menu-item-text">Meet Specialist</span>
               </Link>
             </li>
+            {
+              MyProfile?.u_role === 'SUPER_ADMIN'
+              && (
+              <li className="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-221 qodef--hide-link qodef-menu-item--narrow">
+                <Link to="/admin">
+                  <span className="qodef-menu-item-text">Admin</span>
+                </Link>
+              </li>
+              )
+            }
           </ul>
         </nav>
         <div className="qodef-widget-holder">
