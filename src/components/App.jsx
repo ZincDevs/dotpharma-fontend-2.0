@@ -41,6 +41,8 @@ import AdminLogin from './auth/AdminLogin';
 import Pharmacy from './pharmacies/Pharmacy';
 import ClinicsList from './clinics/Clinics';
 import ViewProduct from './products/ViewProduct';
+import DoctorsAdmin from './admin/Doctors';
+import Doctors from './doctors/Doctors';
 // import Empty from './shared/Empty';
 
 // Admin components
@@ -88,6 +90,7 @@ function App() {
               <Route path="orders" key={key()} element={<Orders />} />
               <Route path="clinics" key={key()} element={<Clinics />} />
               <Route path="Pharmacies" key={key()} element={<Pharmacies />} />
+              <Route path="doctors" key={key()} element={<DoctorsAdmin />} />
               <Route
                 path="appointments"
                 key={key()}
@@ -97,10 +100,10 @@ function App() {
           </Route>
           <Route path="/" key={key()} element={<Home />}>
             <Route path="/" key={key()} element={<HomeSection />} />
-            {/* <Route path="/doctors" key={key()} element={<Doctors />} /> */}
             <Route path="/dot-pharmacies" key={key()} element={<Pharmacy />} />
             <Route path="/product/:pid" key={key()} element={<ViewProduct />} />
             <Route path="/dot-clinics" key={key()} element={<ClinicsList />} />
+            <Route path="/doctors" key={key()} element={<Doctors />} />
             <Route element={<RequireAuth />}>
               <Route path="/cart" key={key()} element={user?.cart?.length < 1 ? <Navigate to="/" /> : <Cart />} />
               <Route path="/orders" key={key()} element={<MakeOrdder />} />

@@ -12,14 +12,10 @@ import { useNavigate } from 'react-router-dom';
 import _ from 'lodash';
 import { ToastContainer, toast } from 'react-toastify';
 import { ProductPlaceholder } from '../shared/Placeholder';
-// import ProductItem, { ProductItemHor } from '../shared/ProductItem';
-// import ProductItemHor from '../shared/ProductItemHor';
-import { getPharmacies } from '../../app/features/pharmacy';
-import PharmacyItem from './PharmacyItem';
 import { addToCart, removeCart } from '../../api/index';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 import { getMyProfile } from '../../app/features/user';
-import { getMedicines, getMedicinesHor } from '../../app/features/medicine';
+import { getMedicinesHor } from '../../app/features/medicine';
 
 const ProductItem = React.lazy(() => import('../shared/ProductItem'));
 

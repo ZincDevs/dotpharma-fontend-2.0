@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 
 function DoctorItem({ doctor }) {
   return (
-
     <div className="qodef-e qodef-grid-item qodef-item--full new product type-product post-384 status-publish first instock product_cat-allergies product_tag-newest has-post-thumbnail shipping-taxable purchasable product-type-simple">
       <div className="qodef-woo-product-inner">
         <div className="qodef-woo-product-image">

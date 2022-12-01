@@ -139,20 +139,11 @@ export function ToolbarOne() {
                 <span className="qodef-menu-item-text">Book appointment</span>
               </Link>
             </li>
-            {/* <li className="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-221 qodef--hide-link qodef-menu-item--narrow">
+            <li className="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-221 qodef--hide-link qodef-menu-item--narrow">
               <Link to="/doctors">
                 <span className="qodef-menu-item-text">Meet Specialist</span>
               </Link>
-            </li> */}
-            {/* <li
-              className="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-221 qodef--hide-link qodef-menu-item--narrow"
-            >
-              <Link to="/appointment">
-                <span className="qodef-menu-item-text">
-                  Book Appointment
-                </span>
-              </Link>
-            </li> */}
+            </li>
           </ul>
         </nav>
         <div className="qodef-widget-holder">
