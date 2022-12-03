@@ -6,7 +6,7 @@ import medicineReducer from './features/medicine/_medicineSlice';
 import doctorReducer from './features/doctors/_doctorSlice';
 import tagRedicer from './features/tags/_tagSlice';
 import cart from './features/cart';
-import order from './features/order';
+import orderReducer from './features/order/_orderSlice';
 import pharmacyReducer from './features/pharmacy/_pharmacySlice';
 import clinicReducer from './features/clinic/_clinicSlice';
 import appointmentReducer from './features/appointment/_appointmentSlice';
@@ -17,7 +17,7 @@ export const store = configureStore({
     user: userReducer,
     medicine: medicineReducer,
     cart,
-    order,
+    order: orderReducer,
     doctor: doctorReducer,
     tag: tagRedicer,
     pharmacy: pharmacyReducer,

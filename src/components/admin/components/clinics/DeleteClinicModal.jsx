@@ -15,7 +15,7 @@ import { deleteClinicRedux } from '../../../../app/features/clinic/_clinicSlice'
 
 function DeleteClinicModal({
   data: {
-    isDeleteModalOpen, setIsDeleteModalOpen, did,
+    isDeleteModalOpen, setIsDeleteModalOpen, cid,
   },
 }) {
   const axios = useAxiosPrivate();
@@ -58,12 +58,12 @@ function DeleteClinicModal({
               <FormButtonSubmit
                 value="Delete clinic"
                 onClick={e => {
-                  deleteClinic(axios, did, (err, data) => {
+                  deleteClinic(axios, cid, (err, data) => {
                     if (err) {
                       toast.error('Could not delete clinic');
                     } else {
                       toast.success('Clinic successfully deleted!');
-                      dispatch(deleteClinicRedux(did));
+                      dispatch(deleteClinicRedux(cid));
                       setIsDeleteModalOpen(false);
                     }
                   });

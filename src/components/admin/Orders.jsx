@@ -8,27 +8,31 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import { getClinics } from '../../app/features/clinic';
-import AddClinicModal from './components/clinics/AddClinicModal';
-import DeleteClinicModal from './components/clinics/DeleteClinicModal';
-import UpdateClinicModal from './components/clinics/UpdateClinicModal';
+import { getOrders } from '../../app/features/order';
+import { getAllPatients } from '../../app/features/patient';
+import useAxiosPrivate from '../../hooks/useAxiosPrivate';
+import AcceptOrderModal from './components/order/AcceptOrderModal';
+import DeleteOrderModal from './components/order/DeleteOrderModal';
+import RejectOrderModal from './components/order/RejectOrderModal';
+import UpdateOrderModal from './components/order/UpdateOrderModal';
 
 function Orders() {
   const dispatch = useDispatch();
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const axios = useAxiosPrivate();
+  const [isAcceptModalOpen, setIsAcceptModalOpen] = useState(false);
+  const [isRejectModalOpen, setIsRejectModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [order, setOrder] = useState({});
 
   const orders = useSelector(
-    state => state?.clinic?.clinics,
+    state => state?.order?.orders,
     shallowEqual,
   );
-
   useEffect(() => {
-    getClinics(dispatch);
+    getOrders(dispatch, axios);
+    getAllPatients(dispatch, axios);
   }, []);
-
   const navigate = useNavigate();
   return (
     <div>
@@ -52,8 +56,7 @@ function Orders() {
             </div>
           </form>
           <button
-            className="btn btn-sm btn-success"
-            onClick={() => setIsAddModalOpen(true)}
+            className="btn btn-sm btn-success disabled"
           >
             Add order
           </button>
@@ -62,41 +65,53 @@ function Orders() {
           <table className="table table-actions table-striped table-hover mb-0 row container">
             <thead>
               <tr className="row">
-                <th className="col-1 flex items-center justify-center">Image</th>
-                <th className="col-2 flex items-center justify-center">Name</th>
-                <th className="col-2 flex items-center justify-center">Specialized</th>
-                <th className="col-3 flex items-center justify-center">Email</th>
-                <th className="col-2 flex items-center justify-center">Telephone</th>
-                <th className="col-2 flex items-center justify-center">Action</th>
+                <th className="col-2 flex items-center justify-center">Code</th>
+                <th className="col-1 flex items-center justify-center">Prescription</th>
+                <th className="col-1 flex items-center justify-center">Telephone</th>
+                <th className="col-1 flex items-center justify-center">Payment Amount</th>
+                <th className="col-1 flex items-center justify-center">Medicine</th>
+                <th className="col-1 flex items-center justify-center">Pharmacy</th>
+                <th className="col-1 flex items-center justify-center">Paid</th>
+                <th className="col-1 flex items-center justify-center">Status</th>
+                <th className="col-3 flex items-center justify-center">Actions</th>
               </tr>
             </thead>
             <tbody>
-              {orders?.map(clinic => (
-                <tr className="row" key={clinic.c_id} onClick={() => setOrder(clinic)}>
-                  <td className="col-1 flex items-center justify-center">
-                    <img
-                      src={clinic.c_logo}
-                      alt="Clinic"
-                      width={50}
-                      height={50}
-                    />
+              {orders?.map(order => (
+                <tr className="row" key={order.o_id} onClick={() => setOrder(order)}>
+                  <td className="col-2 flex items-center justify-center text-center">{order.o_referencecode}</td>
+                  <td className="col-1 flex items-center justify-center text-center" style={{ minHeight: '15px' }}>
+                    {order.o_prescription ? `<a href=${order.o_prescription} target='_blank'>Link</a>` : 'N/A'}
                   </td>
-                  <td className="col-2 flex items-center justify-center">{clinic.c_name}</td>
-                  <td className="col-2 flex items-center justify-center" style={{ minHeight: '15px' }}>
-                    {clinic.specialized}
-                  </td>
-                  <td className="col-3 flex items-center justify-center">{clinic.c_email}</td>
-                  <td className="col-2 flex items-center justify-center">{clinic.c_phonenumber}</td>
-                  <td className="flex gap-1 col-2 flex-row items-center justify-center">
+                  <td className="col-1 flex items-center justify-center text-center" style={{ wordBreak: 'break-all' }}>{(order.o_address).split(',')[0]}</td>
+                  <td className="col-1 flex items-center justify-center text-center" style={{ wordBreak: 'break-all' }}>{order.o_paymentamout}</td>
+                  <td className="col-1 flex items-center justify-center text-center" style={{ wordBreak: 'break-all' }}>{JSON.parse(order.o_medicines).medicineName}</td>
+                  <td className="col-1 flex items-center justify-center text-center" style={{ wordBreak: 'break-all' }}>{order.o_pharmacy ? order.o_pharmacy : 'N/A'}</td>
+                  <td className="col-1 flex items-center justify-center text-center" style={{ wordBreak: 'break-all' }}>{order.o_paid ? 'YES' : 'NO'}</td>
+                  <td className="col-1 flex items-center justify-center text-center" style={{ wordBreak: 'break-all' }}>{order.o_status}</td>
+                  <td className="flex gap-1 col-3 flex-row items-center justify-center">
                     <button
                       className="btn btn-sm btn-success"
-                      onClick={() => navigate(`/clinic/${clinic.c_id}`)}
+                      onClick={() => setIsAcceptModalOpen(true)}
+                    >
+                      Accept
+                    </button>
+                    {' '}
+                    <button
+                      className="btn btn-sm btn-danger"
+                      onClick={() => setIsRejectModalOpen(true)}
+                    >
+                      Reject
+                    </button>
+                    <button
+                      className="btn btn-sm btn-success"
+                      onClick={() => navigate(`/order/${order.o_id}`)}
                     >
                       View
                     </button>
                     <button
                       className="btn btn-sm btn-success"
-                      onClick={() => setIsEditModalOpen(true)}
+                      onClick={() => alert('Still some issues to resolve')}
                     >
                       Edit
                     </button>
@@ -116,19 +131,25 @@ function Orders() {
         </div>
       </div>
       {/* Add modal */}
-      <AddClinicModal
+      <AcceptOrderModal
         data={{
-          isAddModalOpen, setIsAddModalOpen,
+          isAcceptModalOpen, setIsAcceptModalOpen, o_id: order?.o_id,
+        }}
+      />
+      {/* Reject modal */}
+      <RejectOrderModal
+        data={{
+          isRejectModalOpen, setIsRejectModalOpen, o_id: order?.o_id,
         }}
       />
 
       {/* Edit modal */}
-      <UpdateClinicModal data={{ order, isEditModalOpen, setIsEditModalOpen }} />
+      <UpdateOrderModal data={{ order, isEditModalOpen, setIsEditModalOpen }} />
 
       {/* Delete modal */}
-      <DeleteClinicModal
+      <DeleteOrderModal
         data={{
-          isDeleteModalOpen, cid: order?.c_id, setIsDeleteModalOpen, dispatch,
+          isDeleteModalOpen, setIsDeleteModalOpen, oid: order?.o_id,
         }}
       />
     </div>

@@ -10,6 +10,7 @@ import { getPharmacies } from './_pharmacies';
 import { getClinics } from './_clinics';
 import { getAppointments } from './_appointment';
 import { getAllPatients } from './_patient';
+import { getAllOrders } from './_order';
 
 export {
   logIn,
@@ -31,4 +32,5 @@ export {
   getMedicineById,
   getAppointments,
   getAllPatients,
+  getAllOrders,
 };

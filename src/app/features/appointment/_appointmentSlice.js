@@ -38,14 +38,11 @@ export const appointementSlice = createSlice({
     deleteAppointmentRedux: (state, action) => {
       state.appointments = state.appointments?.filter(appointement => appointement.c_id !== action.payload);
     },
-    createAppointmentRedux: (state, action) => {
-      state.appointments = [action.payload, ...state.appointments];
-    },
   },
 });
 
 export const {
-  setAppointments, acceptAppointmentRedux, deleteAppointmentRedux, createAppointmentRedux, rejectAppointmentRedux,
+  setAppointments, acceptAppointmentRedux, deleteAppointmentRedux, rejectAppointmentRedux,
 } = appointementSlice.actions;
 export default appointementSlice.reducer;
 

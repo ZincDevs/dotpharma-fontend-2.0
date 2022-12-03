@@ -1,39 +1,43 @@
+/* eslint-disable max-len */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { ToastContainer, toast } from 'react-toastify';
 import { ColorRing } from 'react-loader-spinner';
-import Form from 'react-bootstrap/Form';
+import { useDispatch } from 'react-redux';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
-import { uploadMedicineImage } from '../../../../helpers';
-import { createPharmacy } from '../../../../api/_pharmacies';
 import FormButtonSubmit from '../../../shared/FormButtonSubmit';
-import { getPharmacies } from '../../../../app/features/pharmacy';
+import { updateClinicRedux } from '../../../../app/features/clinic/_clinicSlice';
+import { updateClinic } from '../../../../api/_clinics';
 
-function ConfirmOrderModal({
+function UpdateOrderModal({
   data: {
-    modalIsOpen, closeModal,
+    isEditModalOpen, setIsEditModalOpen, clinic,
   },
 }) {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const [logo, setLogo] = useState('');
   const [email, setEmail] = useState('');
-  const [website, setWebSite] = useState('');
-  const [address, setAddress] = useState('');
+  const [specialization, setSpecialization] = useState('');
   const [isUploadingImage, setIsUploadingImage] = useState(false);
   const axios = useAxiosPrivate();
   const loading = false;
-
+  useEffect(() => {
+    setName(clinic?.c_name);
+    setPhone(clinic?.c_phonenumber);
+    setEmail(clinic?.c_email);
+    setSpecialization(clinic?.specialized);
+  }, [clinic]);
+  const dispatch = useDispatch();
   return (
     <div>
       <ToastContainer />
-      <Modal size="lg" show={modalIsOpen} onHide={closeModal}>
+      <Modal size="lg" show={isEditModalOpen} onHide={() => setIsEditModalOpen(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Add pharmacy</Modal.Title>
+          <Modal.Title>Update clinic</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form className="checkout_coupon woocommerce-form-coupon">
@@ -43,7 +47,7 @@ function ConfirmOrderModal({
               data-priority="20"
             >
               <label htmlFor="billing_last_name" className="">
-                Pharmacy name&nbsp;
+                Clinic name&nbsp;
                 <abbr className="required" title="required">
                   *
                 </abbr>
@@ -67,7 +71,7 @@ function ConfirmOrderModal({
               data-priority="20"
             >
               <label htmlFor="billing_last_name" className="">
-                Pharmacy phone&nbsp;
+                Clinic phone&nbsp;
                 <abbr className="required" title="required">
                   *
                 </abbr>
@@ -90,7 +94,7 @@ function ConfirmOrderModal({
               data-priority="20"
             >
               <label htmlFor="billing_last_name" className="">
-                Pharmacy email&nbsp;
+                Clinic email&nbsp;
                 <abbr className="required" title="required">
                   *
                 </abbr>
@@ -113,7 +117,7 @@ function ConfirmOrderModal({
               data-priority="20"
             >
               <label htmlFor="billing_last_name" className="">
-                Pharmacy website&nbsp;
+                Clinic specialization&nbsp;
                 <abbr className="required" title="required">
                   *
                 </abbr>
@@ -125,71 +129,8 @@ function ConfirmOrderModal({
                   name="billing_last_name"
                   id="billing_last_name"
                   placeholder="Pharmacy website"
-                  value={website}
-                  onChange={e => setWebSite(e.target.value)}
-                />
-              </span>
-            </p>
-
-            <p
-              className=" form-row-last validate-required"
-              id="billing_last_name_field"
-              data-priority="20"
-            >
-              <label htmlFor="billing_last_name" className="">
-                Pharmacy address&nbsp;
-                <abbr className="required" title="required">
-                  *
-                </abbr>
-              </label>
-              <span className="woocommerce-input-wrapper">
-                <input
-                  type="text"
-                  className="input-text"
-                  name="billing_last_name"
-                  id="billing_last_name"
-                  placeholder="Pharmacy address"
-                  value={address}
-                  onChange={e => setAddress(e.target.value)}
-                />
-              </span>
-            </p>
-
-            <p
-              className="form-row-last validate-required"
-              id="billing_last_name_field"
-              data-priority="20"
-            >
-              <label htmlFor="billing_last_name" className="">
-                Pharmacy logo&nbsp;
-                <abbr className="required" title="required">
-                  *
-                </abbr>
-              </label>
-              <br />
-              <span className="woocommerce-input-wrapper">
-                <input
-                  type="file"
-                  className="input-text"
-                  name="billing_last_name"
-                  id="billing_last_name"
-                  placeholder="Enter discount"
-                  autoComplete="family-name"
-                  onChange={async e => {
-                    setIsUploadingImage(true);
-                    toast.info('Uploading image...!');
-                    await uploadMedicineImage(
-                      e.target.files[0],
-                      (err, uploadUrl) => {
-                        setIsUploadingImage(false);
-                        if (err) {
-                          toast.error('Unable to upload image!');
-                        } else {
-                          setLogo(uploadUrl);
-                        }
-                      },
-                    );
-                  }}
+                  value={specialization}
+                  onChange={e => setSpecialization(e.target.value)}
                 />
               </span>
             </p>
@@ -220,25 +161,26 @@ function ConfirmOrderModal({
             <div className="butns-ordery-pay-mode">
               <div className="horizontal-separator" />
               <FormButtonSubmit
-                value="Save pharmacy"
+                value="Save clinic"
                 dissable={isUploadingImage}
                 onClick={e => {
                   const data = {
                     name,
                     email,
                     phone,
-                    website,
-                    address,
-                    logo,
+                    specialization,
                   };
-                  createPharmacy(axios, data, (err, data) => {
+                  updateClinic(axios, clinic?.c_id, data, (err, data) => {
                     if (err) {
-                      toast.error('Could not add pharmacy');
+                      toast.error('Clinic failed to update. Consider provinding all data.');
                     } else {
-                      toast.success('Pharmacy successfully added!');
-                      closeModal();
-                      // getPharmacies(dispatch);
-                      location.reload();
+                      toast.success('Clinic successfully updated!');
+                      dispatch(
+                        updateClinicRedux({
+                          ...clinic, c_name: name, c_email: email, specialized: specialization, c_phonenumber: phone,
+                        }),
+                      );
+                      setIsEditModalOpen(false);
                     }
                   });
                 }}
@@ -251,4 +193,4 @@ function ConfirmOrderModal({
   );
 }
 
-export default ConfirmOrderModal;
+export default UpdateOrderModal;

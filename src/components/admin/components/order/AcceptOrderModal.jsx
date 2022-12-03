@@ -11,12 +11,12 @@ import { ColorRing } from 'react-loader-spinner';
 import { useDispatch } from 'react-redux';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import FormButtonSubmit from '../../../shared/FormButtonSubmit';
-import { deleteOrder } from '../../../../api/_order';
-import { deleteOrderRedux } from '../../../../app/features/order/_orderSlice';
+import { acceptOrder } from '../../../../api/_order';
+import { acceptOrderRedux } from '../../../../app/features/order/_orderSlice';
 
-function DeleteOrderModal({
+function AcceptOrderModal({
   data: {
-    isDeleteModalOpen, setIsDeleteModalOpen, oid,
+    isAcceptModalOpen, setIsAcceptModalOpen, o_id,
   },
 }) {
   const axios = useAxiosPrivate();
@@ -25,12 +25,12 @@ function DeleteOrderModal({
   return (
     <div>
       <ToastContainer />
-      <Modal size="lg" show={isDeleteModalOpen} onHide={() => setIsDeleteModalOpen(false)}>
+      <Modal size="lg" show={isAcceptModalOpen} onHide={() => setIsAcceptModalOpen(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Delete order</Modal.Title>
+          <Modal.Title>Accept order</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>Are you sure you want to delete this order</p>
+          <p>Are you sure you want to accept this order</p>
         </Modal.Body>
         <Modal.Footer>
           {loading ? (
@@ -57,15 +57,15 @@ function DeleteOrderModal({
             <div className="butns-ordery-pay-mode">
               <div className="horizontal-separator" />
               <FormButtonSubmit
-                value="Delete order"
+                value="Accept order"
                 onClick={e => {
-                  deleteOrder(axios, oid, (err, data) => {
+                  acceptOrder(axios, o_id, (err, data) => {
                     if (err) {
-                      toast.error('Could not delete order');
+                      toast.error('Could not accept order');
                     } else {
-                      toast.success('Order deletion successfully!');
-                      dispatch(deleteOrderRedux(oid));
-                      setIsDeleteModalOpen(false);
+                      toast.success('Order successfully accepted!');
+                      dispatch(acceptOrderRedux(o_id));
+                      setIsAcceptModalOpen(false);
                     }
                   });
                 }}
@@ -78,4 +78,4 @@ function DeleteOrderModal({
   );
 }
 
-export default DeleteOrderModal;
+export default AcceptOrderModal;
