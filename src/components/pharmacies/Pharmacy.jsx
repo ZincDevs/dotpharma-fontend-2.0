@@ -61,7 +61,7 @@ export default function Pharmacy() {
   };
   useEffect(() => { getMedicinesHor({ limit: 2, page: 2 }, dispatch); }, []);
   return (
-    <div className="doctors-list">
+    <div className="qodef-content-grid flex flex-column pt-2" style={{ minHeight: '100%' }}>
       <ToastContainer />
       <div className="product-lis">
         <div className="d-flex flex-column">
