@@ -8,6 +8,8 @@ import { getDoctors } from './_doctor';
 import { getTags } from './_tags';
 import { getPharmacies } from './_pharmacies';
 import { getClinics } from './_clinics';
+import { getAppointments } from './_appointment';
+import { getAllPatients } from './_patient';
 
 export {
   logIn,
@@ -27,4 +29,6 @@ export {
   getPharmacies,
   getClinics,
   getMedicineById,
+  getAppointments,
+  getAllPatients,
 };

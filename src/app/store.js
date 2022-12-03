@@ -9,6 +9,8 @@ import cart from './features/cart';
 import order from './features/order';
 import pharmacyReducer from './features/pharmacy/_pharmacySlice';
 import clinicReducer from './features/clinic/_clinicSlice';
+import appointmentReducer from './features/appointment/_appointmentSlice';
+import patientReducer from './features/patient/_patientSlice';
 
 export const store = configureStore({
   reducer: {
@@ -20,6 +22,8 @@ export const store = configureStore({
     tag: tagRedicer,
     pharmacy: pharmacyReducer,
     clinic: clinicReducer,
+    appointment: appointmentReducer,
+    patient: patientReducer,
   },
   logger: true,
 }, applyMiddleware(thunk));

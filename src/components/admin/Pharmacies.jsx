@@ -8,6 +8,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { getPharmacies } from '../../app/features/pharmacy';
 import AddPharmacyModal from './components/pharmacy/AddPharmacy';
@@ -20,6 +21,7 @@ function Pharmacies() {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [pharmacy, setPharmacy] = useState({});
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const pharmacies = useSelector(
     state => state?.pharmacy?.pharmacies,
@@ -96,7 +98,7 @@ function Pharmacies() {
                   </td>
                   <td>{pharmacy.ph_phone}</td>
                   <td>
-                    <button className="btn btn-sm btn-success" >View</button>
+                    <button className="btn btn-sm btn-success" onClick={() => navigate(`/pharmacy/${pharmacy.ph_id}`)} >View</button>
                   </td>
                   <td>
                     <button

@@ -7,55 +7,41 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import { getMedicinesHor } from '../../app/features/medicine';
-import { getTags } from '../../app/features/tags';
-import categories from '../../data/categories.json';
-import AddMedicineModal from './components/medicine/AddMedicineModal';
-import DeleteMedicineModel from './components/medicine/DeleteMedicineModel';
-import EditMedicineModel from './components/medicine/EditMedicineModel';
+import { ToastContainer } from 'react-toastify';
+import { getAppointments } from '../../app/features/appointment';
+import { getAllPatients } from '../../app/features/patient';
+import useAxiosPrivate from '../../hooks/useAxiosPrivate';
+import AddClinicModal from './components/clinics/AddClinicModal';
+import DeleteClinicModal from './components/clinics/DeleteClinicModal';
+import UpdateClinicModal from './components/clinics/UpdateClinicModal';
+import { foundPatient, getDate } from './components/shared_functions/findPatient';
 
-function Appointments() {
+function Clinics() {
   const dispatch = useDispatch();
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [medicine, setMedicine] = useState(null);
+  const [appointment, setAppointment] = useState({});
+  const axios = useAxiosPrivate();
 
-  const products = useSelector(
-    state => state?.medicine?.medicinesHor,
+  const appointments = useSelector(
+    state => state?.appointment?.appointments,
     shallowEqual,
   );
-  const tags = useSelector(state => state?.tag?.tags, shallowEqual);
+  const patients = useSelector(state => state?.patient?.allPatients);
 
   useEffect(() => {
-    getMedicinesHor({ limit: 2, page: 2 }, dispatch);
-    getTags(dispatch);
+    getAppointments({ limit: 8 }, dispatch, axios);
+    getAllPatients(dispatch, axios);
   }, []);
 
-  function closeModal() {
-    setIsOpen(false);
-  }
-
-  function closeEditModal() {
-    setIsEditModalOpen(false);
-  }
-
-  function handleOpenEditModal(medicine1) {
-    setMedicine(medicine1);
-    setTimeout(() => setIsEditModalOpen(true), 50);
-  }
-
-  function closeDeleteModal() {
-    setIsDeleteModalOpen(false);
-  }
   const navigate = useNavigate();
   return (
     <div>
       <ToastContainer />
       <div className="card mb-grid">
         <div className="card-header d-flex justify-content-between align-items-center">
-          <div className="card-header-title">Manage medicines</div>
+          <div className="card-header-title">Manage appointments</div>
           <form className="form-inline form-quicksearch d-none d-md-block mx-auto">
             <div className="input-group">
               <div className="input-group-prepend">
@@ -72,59 +58,74 @@ function Appointments() {
             </div>
           </form>
           <button
-            className="btn btn-sm btn-success"
-            onClick={() => setIsOpen(true)}
+            className="btn btn-sm btn-success disabled"
+            onClick={() => setIsAddModalOpen(true)}
           >
-            Add medicine
+            Add appointment
           </button>
         </div>
         <div className="table-responsive-md">
           <table className="table table-actions table-striped table-hover mb-0 row container">
             <thead>
               <tr className="row">
-                <th className="col-1">Image</th>
-                <th className="col-2">Name</th>
-                <th className="col-6">Description</th>
-                <th className="col-1">Price</th>
-                <th className="col-1">Product</th>
-                <th className="col-1">Actions</th>
+                <th className="col-1 flex items-center justify-center">Patient Name</th>
+                <th className="col-1 flex items-center justify-center">Patient Telephone</th>
+                <th className="col-3 flex items-center justify-center">Disease</th>
+                <th className="col-1 flex items-center justify-center">Created At</th>
+                <th className="col-1 flex items-center justify-center">Start At</th>
+                <th className="col-1 flex items-center justify-center">Appointment Status</th>
+                <th className="col-1 flex items-center justify-center">Accept</th>
+                <th className="col-1 flex items-center justify-center">Reject</th>
+                <th className="col-2 flex items-center justify-center">Actions</th>
               </tr>
             </thead>
             <tbody>
-              {products?.map(product => (
-                <tr className="row" key={product.m_id}>
-                  <td className="col-1">
-                    <img
-                      src={product.m_image}
-                      alt="Medicine"
-                      width={50}
-                      height={50}
-                    />
+              {appointments?.map(appointment => (
+                <tr className="row" key={appointment.a_id} onClick={() => setAppointment(appointment)}>
+                  <td className="col-1 flex items-center justify-center" style={{ minHeight: '20px', wordBreak: 'break-all' }}>
+                    {foundPatient(patients, appointment.p_id)?.p_email}
                   </td>
-                  <td className="col-2">{product.m_name}</td>
-                  <td className="col-6" style={{ minHeight: '15px' }}>
-                    {product.m_desciption}
+                  <td className="col-1 flex items-center justify-center">
+                    {foundPatient(patients, appointment.p_id)?.p_phonenumber}
                   </td>
-                  <td className="col-1">{product.m_price}</td>
+                  <td className="col-3 flex items-center justify-center" style={{ minHeight: '15px' }}>
+                    {appointment.a_desease}
+                  </td>
+                  <td className="col-1 flex items-center justify-center text-center">{getDate(appointment.createdAt)}</td>
+                  <td className="col-1 flex items-center justify-center text-center">{getDate(appointment.a_date)}</td>
+                  <td className="col-1 flex items-center justify-center">{appointment.a_status}</td>
                   <td className="col-1 flex items-center justify-center">
                     <button
                       className="btn btn-sm btn-success"
-                      onClick={() => navigate(`/product/${product.m_id}`)}
+                      onClick={() => navigate(`/appointment/${appointment.c_id}`)}
+                    >
+                      Accept
+                    </button>
+                  </td>
+                  <td className="col-1 flex items-center justify-center">
+                    <button
+                      className="btn btn-sm btn-danger"
+                      onClick={() => navigate(`/appointment/${appointment.c_id}`)}
+                    >
+                      Reject
+                    </button>
+                  </td>
+                  <td className="flex gap-1 col-2 flex-row items-center justify-center">
+                    <button
+                      className="btn btn-sm btn-success"
+                      onClick={() => navigate(`/appointment/${appointment.a_id}`)}
                     >
                       View
                     </button>
-                  </td>
-                  <td className="flex gap-1 col-1 flex-row items-center justify-center">
                     <button
                       className="btn btn-sm btn-success"
-                      onClick={() => handleOpenEditModal(product)}
+                      onClick={() => setIsEditModalOpen(true)}
                     >
                       Edit
                     </button>
                     <button
                       className="btn btn-sm btn-danger"
                       onClick={() => {
-                        setMedicine(product);
                         setIsDeleteModalOpen(true);
                       }}
                     >
@@ -138,26 +139,23 @@ function Appointments() {
         </div>
       </div>
       {/* Add modal */}
-      <AddMedicineModal
+      <AddClinicModal
         data={{
-          modalIsOpen,
-          closeModal,
-          categories,
-          tags,
+          isAddModalOpen, setIsAddModalOpen,
         }}
       />
 
       {/* Edit modal */}
-      <EditMedicineModel data={{ medicine, isEditModalOpen, closeEditModal }} />
+      <UpdateClinicModal data={{ appointment, isEditModalOpen, setIsEditModalOpen }} />
 
       {/* Delete modal */}
-      <DeleteMedicineModel
+      <DeleteClinicModal
         data={{
-          isDeleteModalOpen, mid: medicine?.m_id, closeDeleteModal, dispatch,
+          isDeleteModalOpen, cid: appointment?.a_id, setIsDeleteModalOpen, dispatch,
         }}
       />
     </div>
   );
 }
 
-export default Appointments;
+export default Clinics;

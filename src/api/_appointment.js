@@ -3,12 +3,21 @@
 import { Constants } from '../helpers';
 
 const {
-  appointment_api,
+  appointment_api, get_appointments__api,
 } = Constants;
 
 export const createAppointment = async (axios, payload, callback) => {
   try {
     const { data } = await axios.post(appointment_api, payload);
+    callback(null, data);
+  } catch (error) {
+    callback(error);
+  }
+};
+
+export const getAppointments = async (pagination, callback, axios) => {
+  try {
+    const { data } = await axios.get(get_appointments__api);
     callback(null, data);
   } catch (error) {
     callback(error);

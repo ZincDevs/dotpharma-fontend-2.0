@@ -90,7 +90,7 @@ function Clinics() {
                   <td className="flex gap-1 col-2 flex-row items-center justify-center">
                     <button
                       className="btn btn-sm btn-success"
-                      onClick={() => navigate(`/clinic/${clinic.c_phonenumber}`)}
+                      onClick={() => navigate(`/clinic/${clinic.c_id}`)}
                     >
                       View
                     </button>

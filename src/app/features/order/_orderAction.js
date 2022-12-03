@@ -4,8 +4,6 @@ import { CREATE_ORDER } from './_types';
 import { Constants } from '../../../helpers';
 
 export const createOrderAction = async orderData => async dispatch => {
-  // authorization
-  console.log(orderData);
   try {
     const data = await axios.post(Constants.create_order, orderData);
     dispatch({

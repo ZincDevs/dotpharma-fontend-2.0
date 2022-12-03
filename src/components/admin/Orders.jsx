@@ -7,55 +7,35 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import { getMedicinesHor } from '../../app/features/medicine';
-import { getTags } from '../../app/features/tags';
-import categories from '../../data/categories.json';
-import AddMedicineModal from './components/medicine/AddMedicineModal';
-import DeleteMedicineModel from './components/medicine/DeleteMedicineModel';
-import EditMedicineModel from './components/medicine/EditMedicineModel';
+import { ToastContainer } from 'react-toastify';
+import { getClinics } from '../../app/features/clinic';
+import AddClinicModal from './components/clinics/AddClinicModal';
+import DeleteClinicModal from './components/clinics/DeleteClinicModal';
+import UpdateClinicModal from './components/clinics/UpdateClinicModal';
 
 function Orders() {
   const dispatch = useDispatch();
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [medicine, setMedicine] = useState(null);
+  const [order, setOrder] = useState({});
 
-  const products = useSelector(
-    state => state?.medicine?.medicinesHor,
+  const orders = useSelector(
+    state => state?.clinic?.clinics,
     shallowEqual,
   );
-  const tags = useSelector(state => state?.tag?.tags, shallowEqual);
 
   useEffect(() => {
-    getMedicinesHor({ limit: 2, page: 2 }, dispatch);
-    getTags(dispatch);
+    getClinics(dispatch);
   }, []);
 
-  function closeModal() {
-    setIsOpen(false);
-  }
-
-  function closeEditModal() {
-    setIsEditModalOpen(false);
-  }
-
-  function handleOpenEditModal(medicine1) {
-    setMedicine(medicine1);
-    setTimeout(() => setIsEditModalOpen(true), 50);
-  }
-
-  function closeDeleteModal() {
-    setIsDeleteModalOpen(false);
-  }
   const navigate = useNavigate();
   return (
     <div>
       <ToastContainer />
       <div className="card mb-grid">
         <div className="card-header d-flex justify-content-between align-items-center">
-          <div className="card-header-title">Manage medicines</div>
+          <div className="card-header-title">Manage orders</div>
           <form className="form-inline form-quicksearch d-none d-md-block mx-auto">
             <div className="input-group">
               <div className="input-group-prepend">
@@ -73,58 +53,56 @@ function Orders() {
           </form>
           <button
             className="btn btn-sm btn-success"
-            onClick={() => setIsOpen(true)}
+            onClick={() => setIsAddModalOpen(true)}
           >
-            Add medicine
+            Add order
           </button>
         </div>
         <div className="table-responsive-md">
           <table className="table table-actions table-striped table-hover mb-0 row container">
             <thead>
               <tr className="row">
-                <th className="col-1">Image</th>
-                <th className="col-2">Name</th>
-                <th className="col-6">Description</th>
-                <th className="col-1">Price</th>
-                <th className="col-1">Product</th>
-                <th className="col-1">Actions</th>
+                <th className="col-1 flex items-center justify-center">Image</th>
+                <th className="col-2 flex items-center justify-center">Name</th>
+                <th className="col-2 flex items-center justify-center">Specialized</th>
+                <th className="col-3 flex items-center justify-center">Email</th>
+                <th className="col-2 flex items-center justify-center">Telephone</th>
+                <th className="col-2 flex items-center justify-center">Action</th>
               </tr>
             </thead>
             <tbody>
-              {products?.map(product => (
-                <tr className="row" key={product.m_id}>
-                  <td className="col-1">
+              {orders?.map(clinic => (
+                <tr className="row" key={clinic.c_id} onClick={() => setOrder(clinic)}>
+                  <td className="col-1 flex items-center justify-center">
                     <img
-                      src={product.m_image}
-                      alt="Medicine"
+                      src={clinic.c_logo}
+                      alt="Clinic"
                       width={50}
                       height={50}
                     />
                   </td>
-                  <td className="col-2">{product.m_name}</td>
-                  <td className="col-6" style={{ minHeight: '15px' }}>
-                    {product.m_desciption}
+                  <td className="col-2 flex items-center justify-center">{clinic.c_name}</td>
+                  <td className="col-2 flex items-center justify-center" style={{ minHeight: '15px' }}>
+                    {clinic.specialized}
                   </td>
-                  <td className="col-1">{product.m_price}</td>
-                  <td className="col-1 flex items-center justify-center">
+                  <td className="col-3 flex items-center justify-center">{clinic.c_email}</td>
+                  <td className="col-2 flex items-center justify-center">{clinic.c_phonenumber}</td>
+                  <td className="flex gap-1 col-2 flex-row items-center justify-center">
                     <button
                       className="btn btn-sm btn-success"
-                      onClick={() => navigate(`/product/${product.m_id}`)}
+                      onClick={() => navigate(`/clinic/${clinic.c_id}`)}
                     >
                       View
                     </button>
-                  </td>
-                  <td className="flex gap-1 col-1 flex-row items-center justify-center">
                     <button
                       className="btn btn-sm btn-success"
-                      onClick={() => handleOpenEditModal(product)}
+                      onClick={() => setIsEditModalOpen(true)}
                     >
                       Edit
                     </button>
                     <button
                       className="btn btn-sm btn-danger"
                       onClick={() => {
-                        setMedicine(product);
                         setIsDeleteModalOpen(true);
                       }}
                     >
@@ -138,22 +116,19 @@ function Orders() {
         </div>
       </div>
       {/* Add modal */}
-      <AddMedicineModal
+      <AddClinicModal
         data={{
-          modalIsOpen,
-          closeModal,
-          categories,
-          tags,
+          isAddModalOpen, setIsAddModalOpen,
         }}
       />
 
       {/* Edit modal */}
-      <EditMedicineModel data={{ medicine, isEditModalOpen, closeEditModal }} />
+      <UpdateClinicModal data={{ order, isEditModalOpen, setIsEditModalOpen }} />
 
       {/* Delete modal */}
-      <DeleteMedicineModel
+      <DeleteClinicModal
         data={{
-          isDeleteModalOpen, mid: medicine?.m_id, closeDeleteModal, dispatch,
+          isDeleteModalOpen, cid: order?.c_id, setIsDeleteModalOpen, dispatch,
         }}
       />
     </div>

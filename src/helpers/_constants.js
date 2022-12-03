@@ -20,10 +20,12 @@ export default {
   medicines_one_api: mid => `/medicine/findbyid/${mid}`,
 
   my_profile_api: '/user/myprofile',
+  get__all_patients: '/patient/allpatients',
   doctors_api: '/doctor/findall',
   create__doctor_api: '/doctor/createdoctor',
   update__doctor_api: did => `/doctor/updatedoctor/${did}`,
   delete__doctor_api: did => `/doctor/deletedoctor/${did}`,
+  get_appointments__api: '/appointments/findall',
   appointment_api: '/appointments/makeappointment',
   tag_get_api: '/tags/getall',
   create_medicine_api: '/medicine/createnew',
