@@ -27,6 +27,8 @@ export default {
   delete__doctor_api: did => `/doctor/deletedoctor/${did}`,
   get_appointments__api: '/appointments/findall',
   appointment_api: '/appointments/makeappointment',
+  accept_appointment_api: aid => `/appointments/approveappointment/${aid}`,
+  reject_appointment_api: aid => `/appointments/rejectappointment/${aid}`,
   tag_get_api: '/tags/getall',
   create_medicine_api: '/medicine/createnew',
   update_medicine_api: mid => `/medicine/updatemedicine/${mid}`,

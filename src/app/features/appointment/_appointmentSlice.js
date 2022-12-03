@@ -10,12 +10,31 @@ export const appointementSlice = createSlice({
     setAppointments: (state, action) => {
       state.appointments = action?.payload?.appointments;
     },
-    updateAppintmentRedux: (state, action) => {
+    acceptAppointmentRedux: (state, action) => {
       state.appointments = state.appointments.map(appointement => {
-        if (appointement.c_id === action.payload.c_id) return action.payload;
+        if (appointement.a_id === action.payload) {
+          return {
+            ...appointement,
+            a_status: 'approved',
+
+          };
+        }
         return appointement;
       });
     },
+    rejectAppointmentRedux: (state, action) => {
+      state.appointments = state.appointments.map(appointement => {
+        if (appointement.a_id === action.payload) {
+          return {
+            ...appointement,
+            a_status: 'rejected',
+
+          };
+        }
+        return appointement;
+      });
+    },
+
     deleteAppointmentRedux: (state, action) => {
       state.appointments = state.appointments?.filter(appointement => appointement.c_id !== action.payload);
     },
@@ -26,7 +45,7 @@ export const appointementSlice = createSlice({
 });
 
 export const {
-  setAppointments, updateAppintmentRedux, deleteAppointmentRedux, createAppointmentRedux,
+  setAppointments, acceptAppointmentRedux, deleteAppointmentRedux, createAppointmentRedux, rejectAppointmentRedux,
 } = appointementSlice.actions;
 export default appointementSlice.reducer;
 

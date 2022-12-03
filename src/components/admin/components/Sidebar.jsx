@@ -35,12 +35,12 @@ function Sidebar() {
     }, {
       name: 'Doctors',
       iconName:
-      'fa-solid fa-hospital',
+      'fa-solid fa-user-doctor',
 
     }, {
       name: 'Appointments',
       iconName:
-      'fa-solid fa-hospital',
+      'fa-solid fa-calendar',
 
     },
     {

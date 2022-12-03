@@ -11,16 +11,14 @@ import { ToastContainer } from 'react-toastify';
 import { getAppointments } from '../../app/features/appointment';
 import { getAllPatients } from '../../app/features/patient';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
-import AddClinicModal from './components/clinics/AddClinicModal';
-import DeleteClinicModal from './components/clinics/DeleteClinicModal';
-import UpdateClinicModal from './components/clinics/UpdateClinicModal';
+import AcceptAppointmentModal from './components/appointment/AcceptAppointmentModal';
+import RejectAppointmentModal from './components/appointment/RejectAppointmentModal';
 import { foundPatient, getDate } from './components/shared_functions/findPatient';
 
 function Clinics() {
   const dispatch = useDispatch();
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isAcceptAppointmentModalOpen, setIsAcceptAppointmentModalOpen] = useState(false);
+  const [isRejectAppointmentModalOpen, setIsRejectppointmentModalOpen] = useState(false);
   const [appointment, setAppointment] = useState({});
   const axios = useAxiosPrivate();
 
@@ -59,7 +57,7 @@ function Clinics() {
           </form>
           <button
             className="btn btn-sm btn-success disabled"
-            onClick={() => setIsAddModalOpen(true)}
+            onClick={() => setIsAcceptAppointmentModalOpen(true)}
           >
             Add appointment
           </button>
@@ -68,21 +66,21 @@ function Clinics() {
           <table className="table table-actions table-striped table-hover mb-0 row container">
             <thead>
               <tr className="row">
-                <th className="col-1 flex items-center justify-center">Patient Name</th>
-                <th className="col-1 flex items-center justify-center">Patient Telephone</th>
+                <th className="col-2 flex items-center justify-center text-center">Patient Email</th>
+                <th className="col-1 flex items-center justify-center text-center">Patient Telephone</th>
                 <th className="col-3 flex items-center justify-center">Disease</th>
                 <th className="col-1 flex items-center justify-center">Created At</th>
                 <th className="col-1 flex items-center justify-center">Start At</th>
-                <th className="col-1 flex items-center justify-center">Appointment Status</th>
+                <th className="col-1 flex items-center justify-center text-center">Appointment Status</th>
                 <th className="col-1 flex items-center justify-center">Accept</th>
                 <th className="col-1 flex items-center justify-center">Reject</th>
-                <th className="col-2 flex items-center justify-center">Actions</th>
+                <th className="col-1 flex items-center justify-center">View</th>
               </tr>
             </thead>
             <tbody>
               {appointments?.map(appointment => (
                 <tr className="row" key={appointment.a_id} onClick={() => setAppointment(appointment)}>
-                  <td className="col-1 flex items-center justify-center" style={{ minHeight: '20px', wordBreak: 'break-all' }}>
+                  <td className="col-2 flex items-center justify-center" style={{ minHeight: '20px', wordBreak: 'break-all' }}>
                     {foundPatient(patients, appointment.p_id)?.p_email}
                   </td>
                   <td className="col-1 flex items-center justify-center">
@@ -93,11 +91,11 @@ function Clinics() {
                   </td>
                   <td className="col-1 flex items-center justify-center text-center">{getDate(appointment.createdAt)}</td>
                   <td className="col-1 flex items-center justify-center text-center">{getDate(appointment.a_date)}</td>
-                  <td className="col-1 flex items-center justify-center">{appointment.a_status}</td>
+                  <td className="col-1 flex items-center justify-center text-center">{appointment.a_status}</td>
                   <td className="col-1 flex items-center justify-center">
                     <button
                       className="btn btn-sm btn-success"
-                      onClick={() => navigate(`/appointment/${appointment.c_id}`)}
+                      onClick={() => setIsAcceptAppointmentModalOpen(true)}
                     >
                       Accept
                     </button>
@@ -105,31 +103,17 @@ function Clinics() {
                   <td className="col-1 flex items-center justify-center">
                     <button
                       className="btn btn-sm btn-danger"
-                      onClick={() => navigate(`/appointment/${appointment.c_id}`)}
+                      onClick={() => setIsRejectppointmentModalOpen(true)}
                     >
                       Reject
                     </button>
                   </td>
-                  <td className="flex gap-1 col-2 flex-row items-center justify-center">
+                  <td className="flex gap-1 col-1 flex-row items-center justify-center">
                     <button
                       className="btn btn-sm btn-success"
                       onClick={() => navigate(`/appointment/${appointment.a_id}`)}
                     >
                       View
-                    </button>
-                    <button
-                      className="btn btn-sm btn-success"
-                      onClick={() => setIsEditModalOpen(true)}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      className="btn btn-sm btn-danger"
-                      onClick={() => {
-                        setIsDeleteModalOpen(true);
-                      }}
-                    >
-                      Delete
                     </button>
                   </td>
                 </tr>
@@ -138,20 +122,16 @@ function Clinics() {
           </table>
         </div>
       </div>
-      {/* Add modal */}
-      <AddClinicModal
+      {/* Accept modal */}
+      <AcceptAppointmentModal
         data={{
-          isAddModalOpen, setIsAddModalOpen,
+          isAcceptAppointmentModalOpen, setIsAcceptAppointmentModalOpen, a_id: appointment.a_id,
         }}
       />
-
-      {/* Edit modal */}
-      <UpdateClinicModal data={{ appointment, isEditModalOpen, setIsEditModalOpen }} />
-
-      {/* Delete modal */}
-      <DeleteClinicModal
+      {/* Reject modal */}
+      <RejectAppointmentModal
         data={{
-          isDeleteModalOpen, cid: appointment?.a_id, setIsDeleteModalOpen, dispatch,
+          isRejectAppointmentModalOpen, setIsRejectppointmentModalOpen, a_id: appointment.a_id,
         }}
       />
     </div>
