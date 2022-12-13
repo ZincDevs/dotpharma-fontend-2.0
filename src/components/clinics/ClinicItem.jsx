@@ -4,13 +4,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function ClinicItem({ clinic }) {
-  /*
-  c_email: "info@pharmacieconseil.org"
-c_id: "f0910cb3-5921-49c7-bf37-56484eef07c3"
-c_logo: "https://www.pharmacieconseil.org/img/131.png"
-c_name: "PHARMACIE CONSEIL"
-c_phonenumber: "+(250) 788381219"
-  */
   return (
     <div className="qodef-e qodef-grid-item qodef-item--full new product type-product post-384 status-publish first instock product_cat-allergies product_tag-newest has-post-thumbnail shipping-taxable purchasable product-type-simple">
       <div className="qodef-woo-product-inner">

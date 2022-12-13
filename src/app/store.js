@@ -6,20 +6,24 @@ import medicineReducer from './features/medicine/_medicineSlice';
 import doctorReducer from './features/doctors/_doctorSlice';
 import tagRedicer from './features/tags/_tagSlice';
 import cart from './features/cart';
-import order from './features/order';
+import orderReducer from './features/order/_orderSlice';
 import pharmacyReducer from './features/pharmacy/_pharmacySlice';
 import clinicReducer from './features/clinic/_clinicSlice';
+import appointmentReducer from './features/appointment/_appointmentSlice';
+import patientReducer from './features/patient/_patientSlice';
 
 export const store = configureStore({
   reducer: {
     user: userReducer,
     medicine: medicineReducer,
     cart,
-    order,
+    order: orderReducer,
     doctor: doctorReducer,
     tag: tagRedicer,
     pharmacy: pharmacyReducer,
     clinic: clinicReducer,
+    appointment: appointmentReducer,
+    patient: patientReducer,
   },
   logger: true,
 }, applyMiddleware(thunk));

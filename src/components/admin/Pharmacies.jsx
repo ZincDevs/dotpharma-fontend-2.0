@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable react/jsx-tag-spacing */
 /* eslint-disable no-unused-vars */
@@ -6,10 +8,12 @@
 import React, { useState, useEffect } from 'react';
 
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { getPharmacies } from '../../app/features/pharmacy';
 import AddPharmacyModal from './components/pharmacy/AddPharmacy';
 import DeletePharmacyModal from './components/pharmacy/DeletePharmacyModal';
+import UpdatePharmacyModal from './components/pharmacy/UpdatePharmacyModal';
 
 function Pharmacies() {
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -17,6 +21,7 @@ function Pharmacies() {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [pharmacy, setPharmacy] = useState({});
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const pharmacies = useSelector(
     state => state?.pharmacy?.pharmacies,
@@ -67,18 +72,18 @@ function Pharmacies() {
           <table className="table table-actions table-striped table-hover mb-0">
             <thead>
               <tr>
-                <th scope="col">Logo</th>
-                <th scope="col">Name</th>
-                <th scope="col">email</th>
-                <th scope="col">phone number</th>
-                <th scope="col">Orders</th>
-                <th scope="col">Actions</th>
+                <th scope="col-1">Logo</th>
+                <th scope="col-1">Name</th>
+                <th scope="col-1">email</th>
+                <th scope="col-1">phone number</th>
+                <th scope="col-1">Orders</th>
+                <th scope="col-1">Actions</th>
               </tr>
             </thead>
             <tbody>
               {pharmacies?.map(pharmacy => (
-                <tr>
-                  <td>
+                <tr onClick={() => setPharmacy(pharmacy)} key={pharmacy?.ph_id}>
+                  <td >
                     <img
                       src={pharmacy.ph_logo}
                       alt="Medicine"
@@ -87,19 +92,25 @@ function Pharmacies() {
                     />
                   </td>
                   <td>{pharmacy.ph_name}</td>
-                  <td>{pharmacy.ph_email}</td>
+                  <td>
+                    {pharmacy.ph_email}
+                    1
+                  </td>
                   <td>{pharmacy.ph_phone}</td>
                   <td>
-                    {' '}
-                    <button className="btn btn-sm btn-success" >View</button>
-                    {' '}
+                    <button className="btn btn-sm btn-success" onClick={() => navigate(`/pharmacy/${pharmacy.ph_id}`)} >View</button>
                   </td>
                   <td>
-                    <button className="btn btn-sm btn-success" >Edit</button>
+                    <button
+                      className="btn btn-sm btn-success"
+                      onClick={() => setIsEditModalOpen(true)}
+                    >
+                      Edit
+
+                    </button>
                     <button
                       className="btn btn-sm btn-danger"
                       onClick={() => {
-                        setPharmacy(pharmacy);
                         setIsDeleteModalOpen(true);
                       }}
                     >
@@ -120,11 +131,11 @@ function Pharmacies() {
       />
 
       {/* Edit modal */}
-      {/* <EditMedicineModel data={{ medicine, isEditModalOpen, closeEditModal }} /> */}
+      <UpdatePharmacyModal data={{ pharmacy, isEditModalOpen, setIsEditModalOpen }} />
 
       {/* Delete modal */}
       <DeletePharmacyModal data={{ isDeleteModalOpen, phid: pharmacy.ph_id, closeDeleteModal }} />
-    </div>
+    </div >
   );
 }
 

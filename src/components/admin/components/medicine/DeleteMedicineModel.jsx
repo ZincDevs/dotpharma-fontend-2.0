@@ -3,20 +3,18 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { ToastContainer, toast } from 'react-toastify';
 import { ColorRing } from 'react-loader-spinner';
-import Form from 'react-bootstrap/Form';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
-import FormSelectInput from '../../../shared/FromSelectControl';
-import { uploadMedicineImage } from '../../../../helpers';
 import { deleteMedicine } from '../../../../api/_medicine';
 import FormButtonSubmit from '../../../shared/FormButtonSubmit';
+import { removeMedicine } from '../../../../app/features/medicine/_medicineSlice';
 
 function DeleteMedicineModel({
   data: {
-    isDeleteModalOpen, closeDeleteModal, mid,
+    isDeleteModalOpen, closeDeleteModal, mid, dispatch,
   },
 }) {
   const axios = useAxiosPrivate();
@@ -60,10 +58,12 @@ function DeleteMedicineModel({
                 onClick={e => {
                   deleteMedicine(axios, mid, (err, data) => {
                     if (err) {
+                      closeDeleteModal();
                       toast.error('Could not delete medicine');
                     } else {
+                      closeDeleteModal();
+                      dispatch(removeMedicine(mid));
                       toast.success('Medicine successfully deleted!');
-                      location.reload();
                     }
                   });
                 }}

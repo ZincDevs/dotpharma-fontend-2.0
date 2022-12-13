@@ -41,15 +41,9 @@ import AdminLogin from './auth/AdminLogin';
 import Pharmacy from './pharmacies/Pharmacy';
 import ClinicsList from './clinics/Clinics';
 import ViewProduct from './products/ViewProduct';
-// import Empty from './shared/Empty';
-
-// Admin components
-// import Dashboard from './admin/Dashboard';
-// import AdminHome from './admin/fragments/Home';
-// import AdminUsers from './admin/fragments/Users';
-// import AdminMedicines from './admin/fragments/Medicines';
-// import AdminOrders from './admin/fragments/Orders';
-// import AdminPharmacies from './admin/fragments/Pharmacies';
+import DoctorsAdmin from './admin/Doctors';
+import Doctors from './doctors/Doctors';
+import AdminHome from './admin/AdminHome';
 
 function App() {
   const user = useSelector(state => state?.user?.MyProfile);
@@ -84,10 +78,12 @@ function App() {
         <Route element={<PersistLogin />}>
           <Route element={<RequireAuthAdmin />}>
             <Route path="/admin" key={key()} element={<Admin />}>
+              <Route path="home" key={key()} element={<AdminHome />} />
               <Route path="medicines" key={key()} element={<Medicine />} />
               <Route path="orders" key={key()} element={<Orders />} />
               <Route path="clinics" key={key()} element={<Clinics />} />
               <Route path="Pharmacies" key={key()} element={<Pharmacies />} />
+              <Route path="doctors" key={key()} element={<DoctorsAdmin />} />
               <Route
                 path="appointments"
                 key={key()}
@@ -97,10 +93,10 @@ function App() {
           </Route>
           <Route path="/" key={key()} element={<Home />}>
             <Route path="/" key={key()} element={<HomeSection />} />
-            {/* <Route path="/doctors" key={key()} element={<Doctors />} /> */}
             <Route path="/dot-pharmacies" key={key()} element={<Pharmacy />} />
             <Route path="/product/:pid" key={key()} element={<ViewProduct />} />
             <Route path="/dot-clinics" key={key()} element={<ClinicsList />} />
+            <Route path="/doctors" key={key()} element={<Doctors />} />
             <Route element={<RequireAuth />}>
               <Route path="/cart" key={key()} element={user?.cart?.length < 1 ? <Navigate to="/" /> : <Cart />} />
               <Route path="/orders" key={key()} element={<MakeOrdder />} />

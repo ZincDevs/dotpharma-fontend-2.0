@@ -7,9 +7,11 @@ import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { ToastContainer, toast } from 'react-toastify';
 import { ColorRing } from 'react-loader-spinner';
+import { useDispatch } from 'react-redux';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import { deletePharmacy } from '../../../../api/_pharmacies';
 import FormButtonSubmit from '../../../shared/FormButtonSubmit';
+import { deletePharmacyRedux } from '../../../../app/features/pharmacy/_pharmacySlice';
 
 function DeletePharmacyModal({
   data: {
@@ -18,6 +20,7 @@ function DeletePharmacyModal({
 }) {
   const axios = useAxiosPrivate();
   const loading = false;
+  const dispatch = useDispatch();
   return (
     <div>
       <ToastContainer />
@@ -60,7 +63,8 @@ function DeletePharmacyModal({
                       toast.error('Could not delete pharmacy');
                     } else {
                       toast.success('Pharmacy successfully deleted!');
-                      location.reload();
+                      dispatch(deletePharmacyRedux(phid));
+                      closeDeleteModal();
                     }
                   });
                 }}

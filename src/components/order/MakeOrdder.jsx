@@ -19,7 +19,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import data from '../../data/addresses.json';
 import FormButtonSubmit from '../shared/FormButtonSubmit';
-import { createOrder } from '../../app/features/order/_orderAction';
+import { createOrder } from '../../app/features/order';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 import { uploadMedicineImage } from '../../helpers';
 import { Button } from '../shared/Buttons';
