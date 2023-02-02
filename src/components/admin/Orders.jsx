@@ -9,6 +9,7 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { getOrders } from '../../app/features/order';
+import { getMedicinesHor } from '../../app/features/medicine';
 import { getAllPatients } from '../../app/features/patient';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 import AcceptOrderModal from './components/order/AcceptOrderModal';
@@ -29,10 +30,17 @@ function Orders() {
     state => state?.order?.orders,
     shallowEqual,
   );
+  const products = useSelector(
+    state => state?.medicine?.medicinesHor,
+    shallowEqual,
+  );
+
   useEffect(() => {
     getOrders(dispatch, axios);
+    getMedicinesHor({ limit: 2, page: 2 }, dispatch);
     getAllPatients(dispatch, axios);
   }, []);
+  // console.log(products);
   const navigate = useNavigate();
   return (
     <div>
@@ -69,7 +77,7 @@ function Orders() {
                 <th className="col-1 flex items-center justify-center">Prescription</th>
                 <th className="col-1 flex items-center justify-center">Telephone</th>
                 <th className="col-1 flex items-center justify-center">Payment Amount</th>
-                <th className="col-1 flex items-center justify-center">Medicine</th>
+                <th className="col-1 flex items-center justify-center">Products</th>
                 <th className="col-1 flex items-center justify-center">Pharmacy</th>
                 <th className="col-1 flex items-center justify-center">Paid</th>
                 <th className="col-1 flex items-center justify-center">Status</th>
@@ -80,15 +88,25 @@ function Orders() {
               {orders?.map(order => (
                 <tr className="row" key={order.o_id} onClick={() => setOrder(order)}>
                   <td className="col-2 flex items-center justify-center text-center">{order.o_referencecode}</td>
+
                   <td className="col-1 flex items-center justify-center text-center" style={{ minHeight: '15px' }}>
                     {order.o_prescription ? `<a href=${order.o_prescription} target='_blank'>Link</a>` : 'N/A'}
                   </td>
+
                   <td className="col-1 flex items-center justify-center text-center" style={{ wordBreak: 'break-all' }}>{(order.o_address).split(',')[0]}</td>
+                  {/* order.o_medicines[0] */}
                   <td className="col-1 flex items-center justify-center text-center" style={{ wordBreak: 'break-all' }}>{order.o_paymentamout}</td>
-                  <td className="col-1 flex items-center justify-center text-center" style={{ wordBreak: 'break-all' }}>{JSON.parse(order.o_medicines).medicineName}</td>
+                  <td className="col-1 flex items-center justify-center text-center" style={{ wordBreak: 'break-all' }}>
+                    {order?.o_medicines.map(m => {
+                      const ordereredProd = products?.filter(p => p.m_id === m);
+                      return <p key={m}>{ordereredProd.map(med => <span key={med.m_id}>{med.m_name}</span>)}</p>;
+                    })}
+
+                  </td>
                   <td className="col-1 flex items-center justify-center text-center" style={{ wordBreak: 'break-all' }}>{order.o_pharmacy ? order.o_pharmacy : 'N/A'}</td>
                   <td className="col-1 flex items-center justify-center text-center" style={{ wordBreak: 'break-all' }}>{order.o_paid ? 'YES' : 'NO'}</td>
                   <td className="col-1 flex items-center justify-center text-center" style={{ wordBreak: 'break-all' }}>{order.o_status}</td>
+
                   <td className="flex gap-1 col-3 flex-row items-center justify-center">
                     <button
                       className="btn btn-sm btn-success"
@@ -102,18 +120,6 @@ function Orders() {
                       onClick={() => setIsRejectModalOpen(true)}
                     >
                       Reject
-                    </button>
-                    <button
-                      className="btn btn-sm btn-success"
-                      onClick={() => navigate(`/order/${order.o_id}`)}
-                    >
-                      View
-                    </button>
-                    <button
-                      className="btn btn-sm btn-success"
-                      onClick={() => alert('Still some issues to resolve')}
-                    >
-                      Edit
                     </button>
                     <button
                       className="btn btn-sm btn-danger"
