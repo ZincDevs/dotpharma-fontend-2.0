@@ -90,7 +90,7 @@ function Orders() {
                   <td className="col-2 flex items-center justify-center text-center">{order.o_referencecode}</td>
 
                   <td className="col-1 flex items-center justify-center text-center" style={{ minHeight: '15px' }}>
-                    {order.o_prescription ? `<a href=${order.o_prescription} target='_blank'>Link</a>` : 'N/A'}
+                    <a href={order.o_prescription ? `${order.o_prescription}` : '#'} target="_blank" rel="noreferrer">Link</a>
                   </td>
 
                   <td className="col-1 flex items-center justify-center text-center" style={{ wordBreak: 'break-all' }}>{(order.o_address).split(',')[0]}</td>
