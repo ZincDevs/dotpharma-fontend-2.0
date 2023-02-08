@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import Banner from '../banner/Banner';
-import ProductsHome, { ProductsHomeHor } from '../products/ProductsHome';
+import ProductsHome from '../products/ProductsHome';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 import Alert from '../shared/Alert';
 import { addToCart, removeCart } from '../../api/index';
