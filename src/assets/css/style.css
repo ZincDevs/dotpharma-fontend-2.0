@@ -433,6 +433,9 @@
   .product-item {
     width: 220px;
   }
+  .p-filter-item {
+    max-width: 100% ;
+  }
 }
 
 @media (max-width:599px){
@@ -440,6 +443,7 @@
     width: 100%;
   }
 }
+
 
 
 .product-item .item-desc {

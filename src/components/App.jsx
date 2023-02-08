@@ -4,6 +4,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import key from 'uniqid';
 import { useSelector } from 'react-redux';
 import '../assets/css/product.css';
+import '../assets/css/orderforms.css';
 import Elements from './shared/Index';
 
 import Login from './auth/Login';

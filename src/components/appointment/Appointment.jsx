@@ -106,9 +106,9 @@ function Appointment() {
                     <hr className="form-separator" />
                     <div className="clean" />
                     <div className="clean" />
-                    <form className="row checkout_coupon woocommerce-form-coupon d-flex flex-wrap gap-2">
+                    <form className="checkout_coupon woocommerce-form-coupon flex-wrap gap-2 form-appo-mobile">
                       <p
-                        className="form-row-last validate-required col-5"
+                        className="form-row-last validate-required col-5 p-mobile"
                         id="_field"
                         data-priority="20"
                       >
@@ -132,7 +132,7 @@ function Appointment() {
                         </span>
                       </p>
                       <p
-                        className=" form-row-last validate-required col-5"
+                        className=" form-row-last validate-required col-5 p-mobile"
                         id="_field"
                         data-priority="20"
                       >
@@ -156,7 +156,7 @@ function Appointment() {
                         </span>
                       </p>
                       <p
-                        className="form-row-last validate-required col-5"
+                        className="form-row-last validate-required col-5 p-mobile"
                         id="_field"
                         data-priority="20"
                       >
@@ -189,7 +189,7 @@ function Appointment() {
                             *
                           </abbr>
                         </label>
-                        <span className="d-flex justify-content-between " style={{ height: '3.6em' }}>
+                        <span className="d-flex justify-content-between p-date-time-mobile" style={{ height: '3.6em' }}>
                           <input
                             type={'date'}
                             className="input-text col-5 h-100"
@@ -205,7 +205,7 @@ function Appointment() {
                         </span>
                       </p>
                       <p
-                        className="form-row-last validate-required col-10"
+                        className="form-row-last validate-required col-10 p-mobile"
                         id="_field"
                         data-priority="20"
                       >

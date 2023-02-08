@@ -1,0 +1,32 @@
+.form-order-med{
+ /* min-height: 70% */
+}
+
+.form-appo-mobile{
+display: flex;
+}
+
+@media (max-width: 767px) {
+  .steps-bar {
+    display: none;
+    width: 0;
+    max-width: 0;
+    visibility: hidden;
+  }
+
+  .form-container-mobile, .form-appo-mobile, .p-date-time-mobile {
+    display: block !important;
+  }
+  .input-text {
+    min-width: 100% !important;
+  }
+
+  .col-6
+  {
+    min-width: 100% !important;
+  }
+
+  .p-mobile {
+    max-width: 100% !important;
+  }
+}

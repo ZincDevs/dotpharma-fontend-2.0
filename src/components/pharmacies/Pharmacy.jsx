@@ -66,9 +66,9 @@ export default function Pharmacy() {
       <div className="product-lis">
         <div className="d-flex flex-column">
           <div className="px-1">
-            <div className="item-list d-flex col-12 flex-wrap">
+            <div className="item-list d-flex flex-wrap">
               {_.map(pharmacies, product => (
-                <div className="col-3 p-1" key={key()}>
+                <div className="p-1" key={key()}>
                   <Suspense fallback={<ProductPlaceholder />}>
                     <ProductItem
                       handleAddToCart={handleAddToCart}

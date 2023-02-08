@@ -129,7 +129,7 @@ function MakeOrdder() {
       <div className="qodef-content-grid flex flex-column h-100 pt-2">
         <h5 className="h4" style={{ fontWeight: 'normal', color: '#3ec389' }}>Order medicine form</h5>
         <div className="d-flex gap-3 h-100 overflow-auto">
-          <div className="w-25 force-main-color-bg p-4 d-flex flex-column gap-2">
+          <div className="w-25 force-main-color-bg p-4 d-flex flex-column gap-2 steps-bar">
             <h3 className="text-white" style={{ fontWeight: 'bold' }}>
               Step
               {' '}
@@ -158,13 +158,13 @@ function MakeOrdder() {
               }
             </div>
           </div>
-          <div className="w-75 overflow-auto" id="order-element">
+          <div className="w-75" id="order-element">
             <ToastContainer />
-            <form style={{ minHeight: '70%' }}>
+            <form className="form-order-med">
               {
                 formCurrentStep === 0
                 && (
-                  <div className="flex flex-wrap">
+                  <div className="flex flex-wrap form-container-mobile">
                     <p
                       className="col-6"
                       data-priority="20"
