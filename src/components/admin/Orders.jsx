@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable no-lone-blocks */
 /* eslint-disable no-unused-vars */
 /* eslint-disable max-len */
@@ -90,7 +91,7 @@ function Orders() {
                   <td className="col-2 flex items-center justify-center text-center">{order.o_referencecode}</td>
 
                   <td className="col-1 flex items-center justify-center text-center" style={{ minHeight: '15px' }}>
-                    <a href={order.o_prescription ? `${order.o_prescription.replace('.pdf', '.jpg')}` : '#'} target="_blank" rel="noreferrer">Open prescription</a>
+                    <a href={order.o_prescription ? order.o_prescription.includes('.pdf') ? `${order.o_prescription.replace('.pdf', '.jpg')}` : `${order.o_prescription}` : '#'} target="_blank" rel="noreferrer">Open prescription</a>
                   </td>
 
                   <td className="col-1 flex items-center justify-center text-center" style={{ wordBreak: 'break-all' }}>{(order.o_address).split(',')[0]}</td>

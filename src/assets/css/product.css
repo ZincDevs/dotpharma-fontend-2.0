@@ -1,0 +1,68 @@
+.woocommerce-product-gallery {
+    opacity: 1; transition: opacity 0.25s ease-in-out 0s;
+}
+
+.img-div-container-gallery {
+  position: relative; overflow: hidden;
+}
+
+.zoomImg {
+    position: absolute; top: -183.642px; left: -364.784px; opacity: 0; width: 900px; height: 691px; border: none; max-width: none; max-height: none;
+}
+
+.link-orde-on-whatsap, .fa-whatsapp {
+  color:#66bc89 !important;
+  font-size: 15px !important ;
+}
+
+.div-empty {
+  height: 3.5rem;
+}
+
+.product-lis {
+  margin-bottom: 2rem;
+}
+
+.footer-container {
+  margin-top: 3rem;
+  padding: 1rem;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #66bc89;
+}
+.logo-container {
+  color: #fff;
+}
+
+.mobile-menu {
+  background-color: #297146cf;
+  z-index: 10000;
+  position: absolute;
+  left:0;
+  right:0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  top: 0;
+  padding: 1rem;
+  padding: 1rem;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+/* .product-name {
+  font-size: 1rem !important;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  width:150px !important;
+} */
+
+.qodef-m-navigation {
+  margin-top: 1rem;
+}
+
+.menu-item-6777 {
+  margin-bottom: 0.5rem;
+}

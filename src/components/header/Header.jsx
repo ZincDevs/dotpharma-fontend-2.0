@@ -17,6 +17,7 @@ import useAuth from '../../hooks/useAuth';
 import LogoOg from '../../assets/images/logoOg.png';
 import CartMenu from '../Cart/CartMenu';
 import useLogout from '../../hooks/useLogout';
+import HeaderMobile from './hder';
 
 export function TopHeader() {
   return (
@@ -269,6 +270,7 @@ export default function Header({ profile }) {
       <TopHeader profile={profile} />
       {/* Header */}
       <HeaderContent profile={profile} />
+      <HeaderMobile logo={LogoOg} profile={profile} />
     </div>
   );
 }

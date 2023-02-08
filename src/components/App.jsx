@@ -3,7 +3,9 @@ import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import key from 'uniqid';
 import { useSelector } from 'react-redux';
+import '../assets/css/product.css';
 import Elements from './shared/Index';
+
 import Login from './auth/Login';
 import Signup from './auth/Signup';
 import ForgotPassword from './auth/ForgotPassword';

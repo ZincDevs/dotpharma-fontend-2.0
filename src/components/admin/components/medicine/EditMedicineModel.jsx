@@ -16,6 +16,7 @@ import { updateMedicine } from '../../../../api/_medicine';
 import FormButtonSubmit from '../../../shared/FormButtonSubmit';
 import categories from '../../../../data/categories.json';
 import { updateMedicineRedux } from '../../../../app/features/medicine/_medicineSlice';
+import { uploadMedicineImage } from '../../../../helpers';
 
 function EditMedicineModel({
   data: {
@@ -30,9 +31,11 @@ function EditMedicineModel({
   const [shortdescription, setShortDescription] = useState('');
   const [discount, setDiscount] = useState('');
   const [category, setCategory] = useState('');
+  const [image, setImage] = useState('');
   const [selectedTags, setSelectedTags] = useState([]);
   const [dropText, setDropText] = useState('Select Category');
   const { tags } = useSelector(state => state?.tag);
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
   const axios = useAxiosPrivate();
   const loading = false;
   useEffect(() => {
@@ -43,6 +46,7 @@ function EditMedicineModel({
     setPrice(medicine?.m_price);
     setDiscount(medicine?.m_discount);
     setSelectedTags(medicine?.m_tags);
+    setImage(medicine?.m_image);
     if (categories?.includes(medicine?.m_type)) {
       const idx = categories?.indexOf(medicine?.m_type);
       setDropText(categories[idx]);
@@ -238,6 +242,44 @@ function EditMedicineModel({
                 </Dropdown.Menu>
               </Dropdown>
             </p>
+            <p
+              className="form-row-last validate-required"
+              id="billing_last_name_field"
+              data-priority="20"
+            >
+              <label htmlFor="billing_last_name" className="">
+                Medicine image&nbsp;
+                <abbr className="required" title="required">
+                  *
+                </abbr>
+              </label>
+              <br />
+              <span className="woocommerce-input-wrapper">
+                <input
+                  type="file"
+                  className="input-text"
+                  name="billing_last_name"
+                  id="billing_last_name"
+                  placeholder="Enter discount"
+                  autoComplete="family-name"
+                  onChange={async e => {
+                    setIsUploadingImage(true);
+                    toast.info('Uploading image...!');
+                    await uploadMedicineImage(
+                      e.target.files[0],
+                      (err, uploadUrl) => {
+                        setIsUploadingImage(false);
+                        if (err) {
+                          toast.error('Unable to upload image!');
+                        } else {
+                          setImage(uploadUrl);
+                        }
+                      },
+                    );
+                  }}
+                />
+              </span>
+            </p>
             <div
               className="form-row-last validate-required"
               id="billing_last_name_field"
@@ -324,6 +366,7 @@ function EditMedicineModel({
                         m_type: category,
                         m_discount: discount,
                         m_tags: selectedTags,
+                        m_image: image,
                       }));
                       closeEditModal();
                     }

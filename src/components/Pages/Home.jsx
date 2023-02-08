@@ -9,6 +9,7 @@ import Header from '../header/Header';
 import { getMyProfile } from '../../app/features/user';
 import Alert from '../shared/Alert';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
+import Footer from '../shared/Footer';
 
 function Home({ alert: defaultAlert }) {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ function Home({ alert: defaultAlert }) {
       <div id="qodef-page-wrapper" className="">
         <Header profile={profile} />
         <Outlet />
+        <Footer />
       </div>
     </div>
   );

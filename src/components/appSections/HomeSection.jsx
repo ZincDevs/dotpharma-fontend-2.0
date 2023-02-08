@@ -10,7 +10,7 @@ import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 import Alert from '../shared/Alert';
 import { addToCart, removeCart } from '../../api/index';
 import { getMyProfile } from '../../app/features/user';
-import { ADsOne } from '../ADs/ADs';
+// import { ADsOne } from '../ADs/ADs';
 
 export default function Home({ alert: defaultAlert }) {
   const dispatch = useDispatch();
@@ -74,7 +74,7 @@ export default function Home({ alert: defaultAlert }) {
                         profile={profile}
                       />
                       <div className="flex items-center justify-center">
-                        <ADsOne />
+                        {/* <ADsOne /> */}
                       </div>
                     </div>
                   </div>

@@ -12,49 +12,6 @@ import { getMedicines, getMedicinesHor } from '../../app/features/medicine';
 import MedicineContext from '../../context/MedicineProvider';
 
 const ProductItem = React.lazy(() => import('../shared/ProductItem'));
-const ProductItemHor = React.lazy(() => import('../shared/ProductItemHor'));
-
-export function ProductListHor({
-  handleAddToCart,
-  handleRemoveFromCart,
-  profile,
-}) {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const products = useSelector(state => state?.medicine?.medicinesHor, shallowEqual);
-  // products;
-  useEffect(() => { getMedicinesHor({ limit: 2, page: 2 }, dispatch); }, []);
-  return (
-    <div className="d-flex flex-column">
-      <div className="px-1">
-        <div className="item-list d-flex col-12 flex-wrap">
-          {_.map(products, product => (
-            <div className="p-1 col-12" key={key()}>
-              <Suspense fallback={<ProductPlaceholder />}>
-                <ProductItemHor
-                  handleAddToCart={handleAddToCart}
-                  handleRemooveFromCart={handleRemoveFromCart}
-                  productDetails={product}
-                  profile={profile}
-                />
-              </Suspense>
-            </div>
-          ))}
-          {/* <div className="p-1">
-            <ProductItemHor
-              handleAddToCart={handleAddToCart}
-              handleRemooveFromCart={handleRemoveFromCart}
-              productDetails={{  }}
-            />
-          </div>
-          <div className="p-1">
-            <ProductItemHor />
-          </div> */}
-        </div>
-      </div>
-    </div>
-  );
-}
 
 export default function ProductList({
   handleAddToCart,
@@ -73,7 +30,7 @@ export default function ProductList({
         <div className="px-1">
           <div className="item-list d-flex col-12 flex-wrap">
             {_.map(medicineCont, product => (
-              <div className="col-3 p-1" key={product.m_id}>
+              <div className="p-1" key={product.m_id}>
                 <Suspense fallback={<ProductPlaceholder />}>
                   <ProductItem
                     handleAddToCart={handleAddToCart}
@@ -87,6 +44,7 @@ export default function ProductList({
           </div>
         </div>
       </div>
+      <div className="div-empty" />
     </div>
   );
 }

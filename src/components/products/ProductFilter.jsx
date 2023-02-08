@@ -66,7 +66,7 @@ export default function ProductFilter() {
   }, [activeFilter, dropText]);
   return (
     <div className="product-filter">
-      <div className="d-flex col-12">
+      <div className="d-md-flex col-12">
         {filters.map(({ text }) => (
           <div
             key={text}
@@ -76,7 +76,7 @@ export default function ProductFilter() {
               }
               setActiveFilter(text);
             }}
-            className={`px-3 py-3 p-filter-item col-2 d-flex justify-content-center align-items-center  ${text === activeFilter && 'active'}`}
+            className={`px-3 py-3 p-filter-item col-sm-2 d-flex justify-content-center align-items-center  ${text === activeFilter && 'active'}`}
           >
             {text === 'Categories' ? (
               <Dropdown>

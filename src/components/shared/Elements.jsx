@@ -37,19 +37,19 @@ function ToolBarTDP({
 }
 
 function Price({ discount, price, center }) {
-  const discountPrice = (discount * price) / 100;
+  // const discountPrice = (discount * price) / 100;
   const finalPrice = (!discount || discount === 0) ? price : price - discount;
   return (
     <div className={`d-flex ${center && 'justify-content-center align-items-center'}`}>
       <div className="qodef-woo-product-price price">
-        {discount && (
+        {/* {discount && (
           <del aria-hidden="true">
             <span className="woocommerce-Price-amount amount">
               <span className="woocommerce-Price-currencySymbol">$</span>
               {discountPrice}
             </span>
           </del>
-        )}
+        )} */}
         <ins>
           <span className="woocommerce-Price-amount amount">
             {finalPrice}
@@ -65,7 +65,7 @@ function ItemFotter({ center, medicine }) {
   return (
     <div className={`d-flex  item-fotter ${center && 'justify-content-center align-items-center'}`}>
       <div className="d-flex footer-child">
-        <a href={`https://wa.me/250790696369?text=Hello at Dotpharma, I would like to order the product: ${medicine}`} className="button" target="_blank" rel="noreferrer">
+        <a href={`https://wa.me/250790696369?text=Hello at Dotpharma, I would like to order the product: ${medicine}`} className="button link-orde-on-whatsap" target="_blank" rel="noreferrer">
           <i className="fa-brands fa-whatsapp" />
           {' '}
           {' '}

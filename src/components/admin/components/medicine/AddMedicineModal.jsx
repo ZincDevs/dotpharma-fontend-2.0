@@ -318,14 +318,26 @@ function AddMedicineModal({
                     discount,
                     tags,
                   };
-                  createMedicine(axios, data, (err, data) => {
-                    if (err) {
-                      toast.error('Could not add medicine');
-                    } else {
-                      toast.success('Medicine successfully added!');
-                      location.reload();
-                    }
-                  });
+                  if (data.name.length > 0
+                    && data.properties.length > 0
+                    && data.category.length > 0
+                    && data.description.length > 0
+                    && data.image.length > 0
+                    && `${data.price}`.length > 0
+                    && data.shortdescription.length > 0
+                    && data.category.length > 0
+                  ) {
+                    createMedicine(axios, data, (err, data) => {
+                      if (err) {
+                        toast.error('Could not add medicine');
+                      } else {
+                        toast.success('Medicine successfully added!');
+                        location.reload();
+                      }
+                    });
+                  } else {
+                    toast.error('Fill all fields');
+                  }
                 }}
               />
             </div>

@@ -323,7 +323,7 @@ function MakeOrdder() {
                         </select>
                       </span>
                     </p>
-                    <p
+                    {/* <p
                       className="col-6"
                       data-priority="20"
                     >
@@ -348,7 +348,7 @@ function MakeOrdder() {
                           {vilages.map((village, index) => createOption(village.name, index))}
                         </select>
                       </span>
-                    </p>
+                    </p> */}
                     <p
                       className="col-6"
                       data-priority="20"
@@ -632,7 +632,6 @@ function MakeOrdder() {
                         || _.isEmpty(district)
                         || _.isEmpty(sector)
                         || _.isEmpty(cell)
-                        || _.isEmpty(village)
                         || _.isEmpty(streetNumber)
                         ) {
                           toast.error('Please provide all information!');
