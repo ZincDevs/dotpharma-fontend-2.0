@@ -33,17 +33,23 @@ function OrderPaymeny() {
   const [loadingCreateOrder, setLoadingCreateOrder] = useState(false);
   const [showConfirmPayment, setShowConfirmPayment] = useState(false);
   const [ref, setRef] = useState('');
-  const orderData = JSON.parse(sessionStorage.getItem('orderdata'));
+  const orderData = JSON.parse(sessionStorage.getItem('orderdata') || '{}');
   const axios = useAxiosPrivate();
   const navigate = useNavigate();
   const profile = useSelector(state => state?.user?.MyProfile, shallowEqual);
   const cart = profile?.cart;
 
+  useEffect(() => {
+    if (_.isEmpty(orderData)) {
+      navigate('/');
+    }
+  }, []);
+
   const initiatePayment = async () => {
     setLoadingCreatePayment(true);
     await createPayment(
       {
-        amount: 100,
+        amount: orderData.totalamount,
         number: phone,
       },
       (err, data) => {
