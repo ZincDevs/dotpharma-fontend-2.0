@@ -7,7 +7,7 @@ import { getAllOrders } from '../../../api';
 export const createOrder = async (axios, payload, callback) => {
   try {
     const { data } = await axios.post(Constants.create_order, payload);
-    callback(null, data);
+    await callback(null, data);
   } catch (error) {
     callback(error);
   }
@@ -16,7 +16,6 @@ export const createOrder = async (axios, payload, callback) => {
 export const getOrders = (dispatch, axios) => {
   getAllOrders(axios, (err, data) => {
     if (err) {
-      console.log(err);
       dispatch(setOrders({ status: 'fail', message: 'Something went wrong.😞' }));
     } else {
       dispatch(setOrders({ orders: data, status: 'success' }));

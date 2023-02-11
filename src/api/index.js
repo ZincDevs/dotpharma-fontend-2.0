@@ -11,6 +11,7 @@ import { getClinics } from './_clinics';
 import { getAppointments } from './_appointment';
 import { getAllPatients } from './_patient';
 import { getAllOrders } from './_order';
+import { createPayment, verifypayment } from './_payment';
 
 export {
   logIn,
@@ -33,4 +34,6 @@ export {
   getAppointments,
   getAllPatients,
   getAllOrders,
+  createPayment,
+  verifypayment,
 };

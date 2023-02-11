@@ -45,4 +45,6 @@ export default {
   create_clinic__api: '/clinics/createclinic',
   delete_clinic__api: c_id => `/clinics/deleteclinic/${c_id}`,
   update_clinics__api: c_id => `/clinics/updateclinic/${c_id}`,
+  create_payment: '/payment/createpayment',
+  verfy_payment: '/payment/verifypayment?ref=',
 };

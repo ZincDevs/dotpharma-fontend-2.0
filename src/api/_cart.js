@@ -23,10 +23,14 @@ export const updateCart = async (axios, c_id, quantity, callback) => {
   }
 };
 
-export const removeCart = async (axios, c_id, callback) => {
+export const removeCart = async (axios, cart, callback) => {
   try {
-    const { data } = await axios.delete(cart_api(c_id));
-    callback(null, data);
+    const resData = [];
+    cart.forEach(async c => {
+      const { data } = await axios.delete(cart_api(c.c_id));
+      resData.push(data);
+    });
+    callback(null, resData);
   } catch (error) {
     callback(error);
   }

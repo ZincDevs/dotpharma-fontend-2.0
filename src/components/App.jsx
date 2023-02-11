@@ -47,6 +47,7 @@ import ViewProduct from './products/ViewProduct';
 import DoctorsAdmin from './admin/Doctors';
 import Doctors from './doctors/Doctors';
 import AdminHome from './admin/AdminHome';
+import OrderPaymeny from './order/OrderPayment';
 
 function App() {
   const user = useSelector(state => state?.user?.MyProfile);
@@ -105,6 +106,7 @@ function App() {
               <Route path="/orders" key={key()} element={<MakeOrdder />} />
               <Route path="/orderpharmacy/:pharmacyid" key={key()} element={<MakeOrdderOnPharmacy />} />
               <Route path="/checkout" key={key()} element={<OrderHome />} />
+              <Route path="/payment" key={key()} element={<OrderPaymeny />} />
               <Route
                 path="/appointment"
                 key={key()}

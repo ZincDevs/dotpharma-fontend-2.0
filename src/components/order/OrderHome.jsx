@@ -35,7 +35,6 @@ function OrderHome() {
   const [provinces, setProvinces] = useState([]);
   const [sectors, setSectors] = useState([]);
   const [cells, setCells] = useState([]);
-  const [vilages, setVilages] = useState([]);
   const [streetNumber, setStreetNumber] = useState('');
   const [sum, setSum] = useState(0);
   const [modalIsOpen, setIsOpen] = React.useState(false);
@@ -75,10 +74,6 @@ function OrderHome() {
       case 'cells':
         setCells(levels);
         setCell(level);
-        break;
-      case 'villages':
-        setVilages(levels);
-        setVillage(level);
         break;
       default:
     }
@@ -122,7 +117,7 @@ function OrderHome() {
   useEffect(() => {
     setProvinces(data);
     // setProvince(data[0].name);
-  }, [provinces, districts, sectors, cells, vilages]);
+  }, [provinces, districts, sectors, cells]);
 
   useEffect(() => {
     getTotalPrice();
@@ -159,24 +154,6 @@ function OrderHome() {
                     <div className="clean" />
                     <div className="clean" />
                     <form className="checkout_coupon woocommerce-form-coupon">
-                      {/* <p
-                        className=" form-row-last validate-required"
-                        id="billing_last_name_field"
-                        data-priority="20"
-                      >
-                        <label htmlFor="billing_last_name" className="">
-                          Name&nbsp;
-                          <abbr className="required" title="required">
-                            *
-                          </abbr>
-                        </label>
-                        <span className="woocommerce-input-wrapper">
-                          <FormTextInput
-                            value={name}
-                            onChange={handleNameChange}
-                          />
-                        </span>
-                      </p> */}
                       <p
                         className=" form-row-last validate-required"
                         id="billing_last_name_field"
@@ -305,7 +282,7 @@ function OrderHome() {
                           </select>
                         </span>
                       </p>
-                      <p
+                      {/* <p
                         className="form-row-last validate-required"
                         id="billing_last_name_field"
                         data-priority="20"
@@ -330,7 +307,7 @@ function OrderHome() {
                             {vilages.map((village, index) => createOption(village.name, index))}
                           </select>
                         </span>
-                      </p>
+                      </p> */}
                       <p
                         className="form-row-last validate-required"
                         id="billing_last_name_field"
@@ -338,9 +315,6 @@ function OrderHome() {
                       >
                         <label htmlFor="billing_last_name" className="">
                           Street number&nbsp;
-                          <abbr className="required" title="required">
-                            *
-                          </abbr>
                         </label>
                         <span className="woocommerce-input-wrapper">
                           <input
@@ -501,14 +475,13 @@ function OrderHome() {
                   || _.isEmpty(district)
                   || _.isEmpty(sector)
                   || _.isEmpty(cell)
-                  || _.isEmpty(village)
                   ) {
                     toast.error('Please provide all information!');
                     setIsOpen(false);
                     return;
                   }
                   setLoading(true);
-                  const refCode = `ORDER-${Math.random(10000, 99999)}-${Date.now().toString().substring(Date.now().toString().length - 4, Date.now().toString().length - 1)}`;
+                  const refCode = `ORDER-${Math.floor(Math.random(10000, 99999))}-${Date.now().toString().substring(Date.now().toString().length - 4, Date.now().toString().length - 1)}`;
                   const medicines = profile.cart
                     .map(e => e.medicine.m_id);
                   const address = [
@@ -517,7 +490,6 @@ function OrderHome() {
                     district,
                     sector,
                     cell,
-                    village,
                     streetNumber,
                   ].join(',');
 
@@ -529,18 +501,11 @@ function OrderHome() {
                     totalamount: sum,
                     type: 'Medine-Order',
                   };
-                  await createOrder(axios, data, (e, data) => {
-                    setLoading(false);
-                    setIsOpen(false);
-                    if (e) {
-                      toast.error('Could not create order!');
-                    } else {
-                      toast.success('Your order was submitted successfully!');
-                    }
-                    setTimeout(() => navigate('/'), 5500);
-                  });
+
+                  sessionStorage.setItem('orderdata', JSON.stringify(data));
+                  navigate('/payment');
                 }}
-                value="Submit order"
+                value="Proceed to payment"
               />
             </div>
           )}
