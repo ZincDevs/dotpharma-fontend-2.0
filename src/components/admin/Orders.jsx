@@ -1,3 +1,4 @@
+/* eslint-disable no-unsafe-optional-chaining */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-lone-blocks */
 /* eslint-disable no-unused-vars */
@@ -70,45 +71,47 @@ function Orders() {
             Add order
           </button>
         </div>
-        <div className="table-responsive-md">
-          <table className="table table-actions table-striped table-hover mb-0 row container">
+        <div>
+          <table className="table table-striped">
             <thead>
-              <tr className="row">
-                <th className="col-2 flex items-center justify-center">Code</th>
-                <th className="col-1 flex items-center justify-center">Prescription</th>
-                <th className="col-1 flex items-center justify-center">Telephone</th>
-                <th className="col-1 flex items-center justify-center">Payment Amount</th>
-                <th className="col-1 flex items-center justify-center">Products</th>
-                <th className="col-1 flex items-center justify-center">Pharmacy</th>
-                <th className="col-1 flex items-center justify-center">Paid</th>
-                <th className="col-1 flex items-center justify-center">Status</th>
-                <th className="col-3 flex items-center justify-center">Actions</th>
+              <tr>
+                <th className="">Code</th>
+                <th className="">Prescription</th>
+                <th className="">Telephone</th>
+                <th className="">Payment Amount</th>
+                <th className="">Products</th>
+                <th className="">Pharmacy</th>
+                <th className="">Paid</th>
+                <th className="">Payment reference</th>
+                <th className="">Status</th>
+                <th className="">Actions</th>
               </tr>
             </thead>
             <tbody>
               {orders?.map(order => (
-                <tr className="row" key={order.o_id} onClick={() => setOrder(order)}>
-                  <td className="col-2 flex items-center justify-center text-center">{order.o_referencecode}</td>
+                <tr className="" key={order.o_id} onClick={() => setOrder(order)}>
+                  <td className="">{order.o_referencecode}</td>
 
-                  <td className="col-1 flex items-center justify-center text-center" style={{ minHeight: '15px' }}>
+                  <td className="" style={{ minHeight: '15px' }}>
                     <a href={order.o_prescription ? order.o_prescription.includes('.pdf') ? `${order.o_prescription.replace('.pdf', '.jpg')}` : `${order.o_prescription}` : '#'} target="_blank" rel="noreferrer">Open prescription</a>
                   </td>
 
-                  <td className="col-1 flex items-center justify-center text-center" style={{ wordBreak: 'break-all' }}>{(order.o_address).split(',')[0]}</td>
+                  <td className="" style={{ wordBreak: 'break-all' }}>{(order?.o_address)?.split(',')[0]}</td>
                   {/* order.o_medicines[0] */}
-                  <td className="col-1 flex items-center justify-center text-center" style={{ wordBreak: 'break-all' }}>{order.o_paymentamout}</td>
-                  <td className="col-1 flex items-center justify-center text-center" style={{ wordBreak: 'break-all' }}>
-                    {order?.o_medicines.map(m => {
+                  <td className="" style={{ wordBreak: 'break-all' }}>{order.o_paymentamout}</td>
+                  <td className="" style={{ wordBreak: 'break-all' }}>
+                    {order?.o_medicines?.map(m => {
                       const ordereredProd = products?.filter(p => p.m_id === m);
-                      return <p key={m}>{ordereredProd.map(med => <span key={med.m_id}>{med.m_name}</span>)}</p>;
+                      return <p key={m}>{ordereredProd?.map(med => <span key={med.m_id}>{med.m_name}</span>)}</p>;
                     })}
 
                   </td>
-                  <td className="col-1 flex items-center justify-center text-center" style={{ wordBreak: 'break-all' }}>{order.o_pharmacy ? order.o_pharmacy : 'N/A'}</td>
-                  <td className="col-1 flex items-center justify-center text-center" style={{ wordBreak: 'break-all' }}>{order.o_paid ? 'YES' : 'NO'}</td>
-                  <td className="col-1 flex items-center justify-center text-center" style={{ wordBreak: 'break-all' }}>{order.o_status}</td>
+                  <td className="" style={{ wordBreak: 'break-all' }}>{order.o_pharmacy ? order.o_pharmacy : 'N/A'}</td>
+                  <td className="" style={{ wordBreak: 'break-all' }}>{order.o_paid ? 'YES' : 'NO'}</td>
+                  <td className="" style={{ wordBreak: 'break-all' }}>{order.o_payment_ref}</td>
+                  <td className="" style={{ wordBreak: 'break-all' }}>{order.o_status}</td>
 
-                  <td className="flex gap-1 col-3 flex-row items-center justify-center">
+                  <td className="">
                     <button
                       className="btn btn-sm btn-success"
                       onClick={() => setIsAcceptModalOpen(true)}
@@ -122,14 +125,14 @@ function Orders() {
                     >
                       Reject
                     </button>
-                    <button
+                    {/* <button
                       className="btn btn-sm btn-danger"
                       onClick={() => {
                         setIsDeleteModalOpen(true);
                       }}
                     >
                       Delete
-                    </button>
+                    </button> */}
                   </td>
                 </tr>
               ))}

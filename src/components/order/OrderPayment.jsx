@@ -225,6 +225,7 @@ function OrderPaymeny() {
                       setShowConfirmPayment(false);
                       toast.error('Error occured while initiating payment');
                     } else if (data.paymentStatus === 'successful') {
+                      orderData.ref = ref;
                       await createOrder(axios, orderData, async (e, data) => {
                         setLoadingCreateOrder(false);
                         setShowConfirmPayment(false);
