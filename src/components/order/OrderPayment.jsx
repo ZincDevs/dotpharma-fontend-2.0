@@ -124,7 +124,6 @@ function OrderPaymeny() {
                         name="checkout"
                         method="post"
                         className="checkout woocommerce-checkout"
-                        action="https://pharmacare.qodeinteractive.com/checkout/"
                         encType="multipart/form-data"
                         noValidate="novalidate"
                       >

@@ -15,8 +15,6 @@ export default function CartHomeItem({ item, handleTotalPrice, handleChange }) {
   const price = item?.medicine?.m_price;
   const user = useSelector(state => state?.user?.MyProfile);
   const discount = item?.medicine?.m_discount;
-  const discountPrice = (discount * price) / 100;
-  // const finalPrice = !discount || discount === 0 ? price : price - discountPrice;
   const [quantity, setQuantity] = useState(item.c_quantity);
   const axios = useAxiosPrivate();
   const dispatch = useDispatch();
@@ -26,9 +24,9 @@ export default function CartHomeItem({ item, handleTotalPrice, handleChange }) {
       item.c_quantity = parseInt(e.target.value, 10);
       updateCart(axios, item?.c_id, parseInt(e.target.value, 10), (err, data) => {
         if (err) {
-          console.log(err);
+          console.log('Hellllo error', err);
         } else {
-          console.log(data);
+          console.log('Hellllo success', data);
         }
       });
     }
@@ -76,12 +74,6 @@ export default function CartHomeItem({ item, handleTotalPrice, handleChange }) {
       <td className="product-quantity" data-title="Quantity">
         <span className="qodef-quantity-label">Quantity</span>
         <div className="qodef-quantity-buttons quantity">
-          <label
-            className="screen-reader-text"
-            htmlFor="quantity_631a397b80b73"
-          >
-            Cetirizine 45mg Film-coated Tablets quantity
-          </label>
           <input
             type="number"
             id="quantity_631a397b80b73"

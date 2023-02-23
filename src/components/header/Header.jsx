@@ -75,13 +75,13 @@ export function TopHeader() {
               id="text-8"
               className="widget widget_text qodef-top-bar-widget"
             >
-              <div className="textwidget">
+              {/* <div className="textwidget">
                 <p>
                   <Link to="/" className="qodef-top-header-link">
                     FAQ
                   </Link>
                 </p>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

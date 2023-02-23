@@ -38,7 +38,7 @@ function Footer() {
                 <div id="text-13" className="widget widget_text" data-area="footer_bottom_area_column_3">
                   {' '}
                   <div className="textwidget">
-                    <p className="qodef-copyright-text qodef-text-right qodef-768-left"><a href="https://pharmacare.qodeinteractive.com/contact/">Contact Us</a></p>
+                    <p className="qodef-copyright-text qodef-text-right qodef-768-left"><a href="https://www.dotpharma.rw/contact-us/" target="_blank" rel="noreferrer">Contact Us</a></p>
                   </div>
                 </div>
               </div>

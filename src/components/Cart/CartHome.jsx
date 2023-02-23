@@ -43,7 +43,7 @@ export default function CartHome() {
                 <a
                   itemProp="url"
                   className="qodef-breadcrumbs-link"
-                  href="https://pharmacare.qodeinteractive.com/"
+                  href="/"
                 >
                   <span itemProp="title">Home</span>
                 </a>

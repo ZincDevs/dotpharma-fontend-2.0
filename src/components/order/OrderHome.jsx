@@ -53,14 +53,6 @@ function OrderHome() {
 
   const profile = useSelector(state => state?.user?.MyProfile, shallowEqual);
   const cart = profile?.cart;
-  const getTotalPrice = () => {
-    let mSum = 0;
-    _.forEach(cart, value => {
-      mSum += Number(value.medicine.m_price * value.c_quantity);
-    });
-    setSum(mSum);
-  };
-
   const mapDataToSelects = (levels, leveltype, level) => {
     switch (leveltype) {
       case 'districts':
@@ -120,14 +112,15 @@ function OrderHome() {
   }, [provinces, districts, sectors, cells]);
 
   useEffect(() => {
-    getTotalPrice();
-  }, [sum]);
+    // getTotalPrice();
+    const total = cart ? cart[cart?.length - 1].totalCartAmount : 0;
+    setSum(total);
+  }, [cart]);
 
   const createOrderEvent = e => {
     e.preventDefault();
     openModal();
   };
-
   return (
     <div className="order-home-container">
       <ToastContainer />
@@ -282,32 +275,6 @@ function OrderHome() {
                           </select>
                         </span>
                       </p>
-                      {/* <p
-                        className="form-row-last validate-required"
-                        id="billing_last_name_field"
-                        data-priority="20"
-                      >
-                        <label htmlFor="billing_last_name" className="">
-                          Village&nbsp;
-                          <abbr className="required" title="required">
-                            *
-                          </abbr>
-                        </label>
-                        <span className="woocommerce-input-wrapper">
-                          <select
-                            className="input-text address-select"
-                            name="billing_last_name"
-                            id="billing_last_name"
-                            aria-label="Default select example"
-                            onChange={e => {
-                              changeHandler(e.target.value, ['no-child'], 'none');
-                            }}
-                          >
-                            <option>Select village</option>
-                            {vilages.map((village, index) => createOption(village.name, index))}
-                          </select>
-                        </span>
-                      </p> */}
                       <p
                         className="form-row-last validate-required"
                         id="billing_last_name_field"
@@ -336,7 +303,6 @@ function OrderHome() {
                         name="checkout"
                         method="post"
                         className="checkout woocommerce-checkout"
-                        action="https://pharmacare.qodeinteractive.com/checkout/"
                         encType="multipart/form-data"
                         noValidate="novalidate"
                       >
@@ -353,7 +319,7 @@ function OrderHome() {
                               </tr>
                             </thead>
                             <tbody>
-                              {_.map(cart, item => (
+                              {_.map(cart, item => (!item.totalCartAmount ? (
                                 <tr className="cart_item">
                                   <td className="product-name">
                                     {item?.medicine?.m_name}
@@ -376,7 +342,7 @@ function OrderHome() {
                                     {' '}
                                   </td>
                                 </tr>
-                              ))}
+                              ) : ''))}
                             </tbody>
                             <tfoot>
                               <tr className="order-total">
