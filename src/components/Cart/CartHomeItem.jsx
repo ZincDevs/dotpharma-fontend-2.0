@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable camelcase */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -27,6 +28,7 @@ export default function CartHomeItem({ item, handleTotalPrice, handleChange }) {
           console.log('Hellllo error', err);
         } else {
           console.log('Hellllo success', data);
+          location.reload();
         }
       });
     }
@@ -40,6 +42,7 @@ export default function CartHomeItem({ item, handleTotalPrice, handleChange }) {
           ...user, cart: user?.cart?.filter(cartItem => cartItem.c_id !== item?.c_id),
         };
         dispatch(setMyProfile({ user: { user: { ...updatedUser } } }));
+        location.reload();
       }
     });
   };

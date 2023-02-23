@@ -49,12 +49,13 @@ function OrderPaymeny() {
     setLoadingCreatePayment(true);
     await createPayment(
       {
-        amount: orderData.totalamount,
+        amount: 100,
         number: phone,
       },
       (err, data) => {
         setLoadingCreatePayment(false);
         if (err) {
+          console.log(err);
           toast.error('Error occured while initiating payment');
         } else {
           setRef(data.ref);
@@ -216,40 +217,44 @@ function OrderPaymeny() {
               <div className="horizontal-separator" />
               <FormButtonSubmit
                 onClick={async e => {
-                  setLoadingCreateOrder(true);
-                  await verifypayment(ref, async (err, data) => {
-                    if (err) {
-                      console.log(err);
-                      setLoadingCreateOrder(false);
-                      setShowConfirmPayment(false);
-                      toast.error('Error occured while initiating payment');
-                    } else if (data.paymentStatus === 'successful') {
-                      orderData.ref = ref;
-                      await createOrder(axios, orderData, async (e, data) => {
-                        setLoadingCreateOrder(false);
-                        setShowConfirmPayment(false);
-                        if (e) {
-                          console.log('Error creating order', e);
-                          toast.error('Could not create order!');
-                        } else {
-                          await removeCart(axios, cart, () => {});
-                          toast.success(
-                            'Your order was submitted successfully!',
-                          );
-                        }
-                        setTimeout(() => navigate('/'), 5500);
-                      });
-                    } else if (data.paymentStatus === 'failed') {
-                      toast.error('Your payment was not successfull!');
-                      setShowConfirmPayment(false);
-                      setTimeout(() => navigate('/'), 5500);
-                    } else if (data.paymentStatus === 'pending') {
-                      setLoadingCreateOrder(false);
-                      toast.info(
-                        'Please confirm the payment before subimmiting order!',
+                  await createOrder(axios, orderData, async (e, data) => {
+                    setLoadingCreateOrder(false);
+                    // setShowConfirmPayment(false);
+                    if (e) {
+                      console.log('Error creating order', e);
+                      toast.error('Could not create order!');
+                    } else {
+                      await removeCart(axios, cart, () => {});
+                      toast.success(
+                        'Your order was submitted successfully!',
                       );
                     }
+                    setTimeout(() => navigate('/'), 5500);
                   });
+
+                  //                   setLoadingCreateOrder(true);
+                  //                   await verifypayment(ref, async (err, data) => {
+                  //                     if (err) {
+                  //                       console.log(err);
+                  //                       setLoadingCreateOrder(false);
+                  //                       setShowConfirmPayment(false);
+                  //                       toast.error('Error occured while initiating payment');
+                  //                     } else if (data.paymentStatus === 'successful') {
+                  //                       orderData.ref = ref;
+
+                  // // Create order
+
+                  //                     } else if (data.paymentStatus === 'failed') {
+                  //                       toast.error('Your payment was not successfull!');
+                  //                       setShowConfirmPayment(false);
+                  //                       setTimeout(() => navigate('/'), 5500);
+                  //                     } else if (data.paymentStatus === 'pending') {
+                  //                       setLoadingCreateOrder(false);
+                  //                       toast.info(
+                  //                         'Please confirm the payment before subimmiting order!',
+                  //                       );
+                  //                     }
+                  //                   });
                 }}
                 value="Confirm order"
               />

@@ -1,3 +1,5 @@
+/* eslint-disable consistent-return */
+/* eslint-disable prefer-arrow-callback */
 /* eslint-disable no-unsafe-optional-chaining */
 /* eslint-disable react/button-has-type */
 /* eslint-disable no-return-assign */
@@ -446,10 +448,14 @@ function OrderHome() {
                     setIsOpen(false);
                     return;
                   }
-                  setLoading(true);
+                  // setLoading(true);
                   const refCode = `ORDER-${Math.floor(Math.random(10000, 99999))}-${Date.now().toString().substring(Date.now().toString().length - 4, Date.now().toString().length - 1)}`;
                   const medicines = profile.cart
-                    .map(e => e.medicine.m_id);
+                    .map(function (e) {
+                      if (!e.totalCartAmount) {
+                        return e.medicine.m_id;
+                      }
+                    });
                   const address = [
                     phone,
                     province,
@@ -461,6 +467,7 @@ function OrderHome() {
 
                   const data = {
                     p_id: profile.u_id,
+                    p_email: profile.u_email,
                     refcode: refCode,
                     medicines,
                     address,

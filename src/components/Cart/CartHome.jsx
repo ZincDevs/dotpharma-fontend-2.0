@@ -91,7 +91,7 @@ export default function CartHome() {
                         <tbody>
                           {_.map(cart, item => item).map((item, index) => {
                             const mItem = { ...item };
-                            return (<CartHomeItem item={mItem} key={index} />);
+                            return !mItem.totalCartAmount ? (<CartHomeItem item={mItem} key={index} />) : '';
                           })}
                         </tbody>
                       </table>

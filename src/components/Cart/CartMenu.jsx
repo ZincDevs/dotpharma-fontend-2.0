@@ -1,21 +1,29 @@
+/* eslint-disable no-unsafe-optional-chaining */
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
 import CartMenuItem from './CartMenuItem';
 
 export default function CartMenu({ profile }) {
   const cart = profile?.cart;
-  const totalPrice = items => {
-    if (!items) return 0;
-    let p = 0;
-    items.forEach(item => {
-      p += parseInt(item?.medicine?.m_price, 10);
-    });
-    return p;
-  };
-  const total = totalPrice(cart);
-  const count = cart?.length || 0;
+  const [sum, setSum] = useState(0);
+  // const totalPrice = items => {
+  //   if (!items) return 0;
+  //   let p = 0;
+  //   items.forEach(item => {
+  //     p += parseInt(item?.medicine?.m_price, 10);
+  //   });
+  //   return p;
+  // };
+  // const total = totalPrice(cart);
+  const count = cart?.length - 1 || 0;
+
+  useEffect(() => {
+    // getTotalPrice();
+    const total = cart ? cart[cart?.length - 1]?.totalCartAmount : 0;
+    setSum(total);
+  }, [cart]);
 
   return (
     <div
@@ -34,7 +42,7 @@ export default function CartMenu({ profile }) {
                 <i className="bi bi-cart" style={{ fontSize: '45px' }} />
 
               </span>
-              {(count > 0) && (<span className="qodef-m-opener-count force-main-color">{count}</span>)}
+              {(count > 1) && (<span className="qodef-m-opener-count force-main-color">{count}</span>)}
             </span>
 
             <span className="qodef-cart-text-holder">
@@ -42,7 +50,7 @@ export default function CartMenu({ profile }) {
               <span className="qodef-m-order-amount">
                 <span className="woocommerce-Price-amount amount">
                   <bdi>
-                    {total}
+                    {sum}
                     <span
                       className="woocommerce-Price-currencySymbol"
                       style={{ marginLeft: '5px' }}
@@ -58,18 +66,18 @@ export default function CartMenu({ profile }) {
           <div className="qodef-m-dropdown">
             <div className="qodef-m-dropdown-inner">
               <div className="qodef-woo-dropdown-items">
-                {_.map(cart, item => (
+                {_.map(cart, item => (!item.totalCartAmount ? (
                   <CartMenuItem
                     item={item}
                   />
-                ))}
+                ) : ''))}
               </div>
               <div className="qodef-m-order-details">
                 <h5 className="qodef-m-order-label">Total:</h5>
                 <span className="qodef-m-order-amount">
                   <span className="woocommerce-Price-amount amount">
                     <bdi>
-                      {total}
+                      {sum}
                       <span
                         className="woocommerce-Price-currencySymbol"
                         style={{ marginLeft: '5px' }}
