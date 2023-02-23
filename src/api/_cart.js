@@ -24,12 +24,26 @@ export const updateCart = async (axios, c_id, quantity, callback) => {
 };
 
 export const removeCart = async (axios, cart, callback) => {
+  console.log(cart);
   try {
     const resData = [];
     cart.forEach(async c => {
       const { data } = await axios.delete(cart_api(c.c_id));
       resData.push(data);
     });
+    callback(null, resData);
+  } catch (error) {
+    callback(error);
+  }
+};
+
+export const removeCartById = async (axios, cart_id, callback) => {
+  try {
+    const resData = [];
+
+    const { data } = await axios.delete(cart_api(cart_id));
+    resData.push(data);
+
     callback(null, resData);
   } catch (error) {
     callback(error);

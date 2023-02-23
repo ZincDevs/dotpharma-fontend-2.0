@@ -8,7 +8,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
-import { removeCart, updateCart } from '../../api';
+import { removeCartById, updateCart } from '../../api';
 import { setMyProfile } from '../../app/features/user/_userSlice';
 
 export default function CartHomeItem({ item, handleTotalPrice, handleChange }) {
@@ -34,7 +34,7 @@ export default function CartHomeItem({ item, handleTotalPrice, handleChange }) {
     }
   };
   const removeFromCart = () => {
-    removeCart(axios, item?.c_id, (err, data) => {
+    removeCartById(axios, item?.c_id, (err, data) => {
       if (err) {
         console.log(err);
       } else {

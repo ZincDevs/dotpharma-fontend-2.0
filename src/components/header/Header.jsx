@@ -62,7 +62,7 @@ export function TopHeader() {
               <div className="textwidget">
                 <p>
                   <span className="qodef-message-free-shipping">
-                    - FREE SHIPPING FOR ORDERS OVER 30,0000 Rwf -
+                    - FREE DELIVERY FOR ORDERS OVER 30,0000 Rwf -
                   </span>
                 </p>
               </div>
