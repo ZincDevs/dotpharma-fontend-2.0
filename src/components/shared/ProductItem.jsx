@@ -26,11 +26,11 @@ export default function ProductItem({
   return (
     <div className="product-item">
       <div className="top">
-        {m_discount && (
+        {/* {m_discount && (
         <div className="disc">
           <FloatingButton link="/" text="-2%" icon="bi bi-bag" />
         </div>
-        )}
+        )} */}
         <img src={m_image} alt="item" />
       </div>
       <div className="down p-2">
