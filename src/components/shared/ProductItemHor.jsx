@@ -24,12 +24,12 @@ export default function ProductItemHor({
   };
   return (
     <div className="product-item hor d-flex py-4">
-      <div className="top col-5">
+      {/* <div className="top col-5">
         <div className="disc">
           <FloatingButton link="/" text="-2%" icon="bi bi-bag" />
         </div>
         <img src={m_image} alt="item" />
-      </div>
+      </div> */}
       <div className="down px-3 w-100">
         <div className="p-1">
           <h5>
