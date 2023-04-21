@@ -35,7 +35,7 @@ export default function ClinicList() {
       setFilteredClinics(clinics);
       return;
     }
-    setFilteredClinics(clinics?.filter(clinic => clinic.specialized === currentFilter));
+    setFilteredClinics(clinics?.filter(clinic => clinic.specialized.toLowerCase() === currentFilter.toLowerCase()));
   }, [currentFilter]);
   return (
     <div className="qodef-content-grid flex flex-column" style={{ minHeight: '100%' }}>

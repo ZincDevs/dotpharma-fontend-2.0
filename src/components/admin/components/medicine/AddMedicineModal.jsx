@@ -7,11 +7,13 @@ import Modal from 'react-bootstrap/Modal';
 import { ToastContainer, toast } from 'react-toastify';
 import { ColorRing } from 'react-loader-spinner';
 import Form from 'react-bootstrap/Form';
+import { useDispatch, shallowEqual } from 'react-redux';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import FormSelectInput from '../../../shared/FromSelectControl';
 import { uploadMedicineImage } from '../../../../helpers';
 import { createMedicine } from '../../../../api/_medicine';
 import FormButtonSubmit from '../../../shared/FormButtonSubmit';
+import { getMedicinesHor } from '../../../../app/features/medicine';
 
 function AddMedicineModal({
   data: {
@@ -30,6 +32,7 @@ function AddMedicineModal({
   const [isUploadingImage, setIsUploadingImage] = useState(false);
   const axios = useAxiosPrivate();
   const loading = false;
+  const dispatch = useDispatch();
 
   const handleTagCheck = (tag, checked) => {
     if (checked) {
@@ -324,7 +327,7 @@ function AddMedicineModal({
                       toast.error('Could not add medicine');
                     } else {
                       toast.success('Medicine successfully added!');
-                      location.reload();
+                      getMedicinesHor({ limit: 2, page: 2 }, dispatch);
                     }
                   });
                 }}

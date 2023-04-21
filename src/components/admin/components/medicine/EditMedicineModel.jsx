@@ -269,6 +269,7 @@ function EditMedicineModel({
                       e.target.files[0],
                       (err, uploadUrl) => {
                         setIsUploadingImage(false);
+                        console.log(`Url======> ${uploadUrl}`);
                         if (err) {
                           toast.error('Unable to upload image!');
                         } else {
@@ -337,6 +338,7 @@ function EditMedicineModel({
               <FormButtonSubmit
                 value="Save medicine"
                 onClick={e => {
+                  console.log(`Url======> ${image}`);
                   const data = {
                     name,
                     properties,
@@ -346,11 +348,8 @@ function EditMedicineModel({
                     category: category === 'Select Category' ? '' : category,
                     discount,
                     m_tags: selectedTags,
+                    image,
                   };
-                  if (name === medicine?.m_name && properties === medicine?.m_properties && description === medicine?.m_desciption && price === medicine?.m_price && shortdescription === medicine?.m_short_descripption && category === medicine?.m_type && discount === medicine?.m_discount && _.isEqual(medicine?.m_tags, data.m_tags)) {
-                    toast.info('Nothing has been changed yet!');
-                    return;
-                  }
                   updateMedicine(axios, data, medicine.m_id, (err, data) => {
                     if (err) {
                       toast.error('Could not update medicine');

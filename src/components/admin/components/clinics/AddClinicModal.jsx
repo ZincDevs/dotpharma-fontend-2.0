@@ -12,6 +12,7 @@ import { uploadMedicineImage } from '../../../../helpers';
 import FormButtonSubmit from '../../../shared/FormButtonSubmit';
 import { createClinic } from '../../../../api/_clinics';
 import { createClinicRedux } from '../../../../app/features/clinic/_clinicSlice';
+import FormSelectInput from '../../../shared/FromSelectControl';
 
 function AddClinicModal({
   data: {
@@ -22,7 +23,7 @@ function AddClinicModal({
   const [phone, setPhone] = useState('');
   const [logo, setLogo] = useState('');
   const [email, setEmail] = useState('');
-  const [specialized, setSpecialized] = useState('');
+  const [specialized, setSpecialized] = useState('OPHTHALMOLOGY');
   const [isUploadingImage, setIsUploadingImage] = useState(false);
   const axios = useAxiosPrivate();
   const loading = false;
@@ -108,7 +109,7 @@ function AddClinicModal({
               </span>
             </p>
             <p
-              className=" form-row-last validate-required"
+              className="form-row-last validate-required"
               id="billing_last_name_field"
               data-priority="20"
             >
@@ -119,13 +120,9 @@ function AddClinicModal({
                 </abbr>
               </label>
               <span className="woocommerce-input-wrapper">
-                <input
-                  type="text"
-                  className="input-text"
-                  name="billing_last_name"
-                  id="billing_last_name"
-                  placeholder="Clinic specialization"
-                  value={specialized}
+                <FormSelectInput
+                  options={['OPHTHALMOLOGY', 'CARDIOLOGY', 'STOMATOLOGY', 'RADIOLOGY', 'INTERNAL MEDICINE']}
+                  placeholder="Select category"
                   onChange={e => setSpecialized(e.target.value)}
                 />
               </span>
@@ -192,7 +189,7 @@ function AddClinicModal({
             <div className="butns-ordery-pay-mode">
               <div className="horizontal-separator" />
               <FormButtonSubmit
-                value="Save pharmacy"
+                value="Save clinic"
                 dissable={isUploadingImage}
                 onClick={e => {
                   const data = {
