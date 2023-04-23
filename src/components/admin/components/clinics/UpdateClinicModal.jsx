@@ -114,29 +114,6 @@ function UpdateClinicModal({
               </span>
             </p>
             <p
-              className=" form-row-last validate-required"
-              id="billing_last_name_field"
-              data-priority="20"
-            >
-              <label htmlFor="billing_last_name" className="">
-                Clinic specialization&nbsp;
-                <abbr className="required" title="required">
-                  *
-                </abbr>
-              </label>
-              <span className="woocommerce-input-wrapper">
-                <input
-                  type="text"
-                  className="input-text"
-                  name="billing_last_name"
-                  id="billing_last_name"
-                  placeholder="Pharmacy website"
-                  value={specialized}
-                  onChange={e => setSpecialization(e.target.value)}
-                />
-              </span>
-            </p>
-            <p
               className="form-row-last validate-required"
               id="billing_last_name_field"
               data-priority="20"
