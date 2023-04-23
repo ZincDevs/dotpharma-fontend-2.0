@@ -8,10 +8,12 @@ import Modal from 'react-bootstrap/Modal';
 import { ToastContainer, toast } from 'react-toastify';
 import { ColorRing } from 'react-loader-spinner';
 import { useDispatch } from 'react-redux';
+import _ from 'lodash';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import FormButtonSubmit from '../../../shared/FormButtonSubmit';
 import { updateClinicRedux } from '../../../../app/features/clinic/_clinicSlice';
 import { updateClinic } from '../../../../api/_clinics';
+import FormSelectInput from '../../../shared/FromSelectControl';
 
 function UpdateClinicModal({
   data: {
@@ -21,7 +23,7 @@ function UpdateClinicModal({
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
-  const [specialization, setSpecialization] = useState('');
+  const [specialized, setSpecialization] = useState('');
   const [isUploadingImage, setIsUploadingImage] = useState(false);
   const axios = useAxiosPrivate();
   const loading = false;
@@ -129,7 +131,26 @@ function UpdateClinicModal({
                   name="billing_last_name"
                   id="billing_last_name"
                   placeholder="Pharmacy website"
-                  value={specialization}
+                  value={specialized}
+                  onChange={e => setSpecialization(e.target.value)}
+                />
+              </span>
+            </p>
+            <p
+              className="form-row-last validate-required"
+              id="billing_last_name_field"
+              data-priority="20"
+            >
+              <label htmlFor="billing_last_name" className="">
+                Clinic specialization&nbsp;
+                <abbr className="required" title="required">
+                  *
+                </abbr>
+              </label>
+              <span className="woocommerce-input-wrapper">
+                <FormSelectInput
+                  options={['OPHTHALMOLOGY', 'CARDIOLOGY', 'STOMATOLOGY', 'RADIOLOGY', 'INTERNAL MEDICINE']}
+                  placeholder="Select category"
                   onChange={e => setSpecialization(e.target.value)}
                 />
               </span>
@@ -168,7 +189,7 @@ function UpdateClinicModal({
                     name,
                     email,
                     phone,
-                    specialization,
+                    specialized,
                   };
                   updateClinic(axios, clinic?.c_id, data, (err, data) => {
                     if (err) {
@@ -177,7 +198,7 @@ function UpdateClinicModal({
                       toast.success('Clinic successfully updated!');
                       dispatch(
                         updateClinicRedux({
-                          ...clinic, c_name: name, c_email: email, specialized: specialization, c_phonenumber: phone,
+                          ...clinic, c_name: name, c_email: email, specialized, c_phonenumber: phone,
                         }),
                       );
                       setIsEditModalOpen(false);

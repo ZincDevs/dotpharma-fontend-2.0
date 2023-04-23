@@ -23,7 +23,7 @@ export default function ClinicList() {
   const [filteredClinics, setFilteredClinics] = useState([]);
   const [currentFilter, setCurrentFilter] = useState('all');
   const clinics = useSelector(state => state.clinic.clinics, shallowEqual);
-  const availableClinics = [{ title: 'All', key: 'all' }, { title: 'Ophthalmology', key: 'eyes', icon: ophthalmology_b }, { title: 'Cardiology', key: 'cardiology', icon: cardiology_b }, { title: 'Stomatology', key: 'stomatology', icon: stomatology_b }, { title: 'Radiology', key: 'radiology', icon: radiology_b }, { title: 'Internal Medicine', key: 'internal_medicine', icon: internal_medecine_b }];
+  const availableClinics = [{ title: 'All', key: 'all' }, { title: 'Ophthalmology', key: 'Ophthalmology', icon: ophthalmology_b }, { title: 'Cardiology', key: 'Cardiology', icon: cardiology_b }, { title: 'Stomatology', key: 'Stomatology', icon: stomatology_b }, { title: 'Radiology', key: 'Radiology', icon: radiology_b }, { title: 'Internal Medicine', key: 'Internal Medicine', icon: internal_medecine_b }];
   useEffect(() => {
     getClinics(dispatch);
   }, []);

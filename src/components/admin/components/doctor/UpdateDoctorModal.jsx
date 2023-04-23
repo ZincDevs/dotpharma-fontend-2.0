@@ -15,6 +15,7 @@ import { updateClinicRedux } from '../../../../app/features/clinic/_clinicSlice'
 import { updateClinic } from '../../../../api/_clinics';
 import { updateDoctor } from '../../../../api/_doctor';
 import { updateDoctorRedux } from '../../../../app/features/doctors/_doctorSlice';
+import FormSelectInput from '../../../shared/FromSelectControl';
 
 function UpdateDoctorModal({
   data: {
@@ -147,6 +148,46 @@ function UpdateDoctorModal({
               data-priority="20"
             >
               <label htmlFor="billing_last_name" className="">
+                Speciality&nbsp;
+                <abbr className="required" title="required">
+                  *
+                </abbr>
+              </label>
+              <span className="woocommerce-input-wrapper">
+                <FormSelectInput
+                  options={[
+                    'Allergy and immunology',
+                    'Anesthesiology',
+                    'Dermatology',
+                    'Diagnostic radiology',
+                    'Emergency medicine',
+                    'Family medicine',
+                    'Internal medicine',
+                    'Medical genetics',
+                    'Neurology',
+                    'Nuclear medicine',
+                    'Obstetrics and gynecology',
+                    'Ophthalmology',
+                    'Pathology',
+                    'Pediatrics',
+                    'Physical medicine and rehabilitation',
+                    'Preventive medicine',
+                    'Psychiatry',
+                    'Radiation oncology',
+                    'Surgery',
+                    'Urology',
+                  ]}
+                  placeholder="Select category"
+                  onChange={e => specialization(e.target.value)}
+                />
+              </span>
+            </p>
+            <p
+              className=" form-row-last validate-required"
+              id="billing_last_name_field"
+              data-priority="20"
+            >
+              <label htmlFor="billing_last_name" className="">
                 Doctor's clinic&nbsp;
                 <abbr className="required" title="required">
                   *
@@ -214,7 +255,7 @@ function UpdateDoctorModal({
             <div className="butns-ordery-pay-mode">
               <div className="horizontal-separator" />
               <FormButtonSubmit
-                value="Save doctor"
+                value="Update doctor"
                 dissable={isUploadingImage}
                 onClick={e => {
                   const data = {

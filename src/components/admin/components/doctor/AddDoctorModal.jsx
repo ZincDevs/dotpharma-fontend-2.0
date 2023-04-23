@@ -15,6 +15,7 @@ import { createClinic } from '../../../../api/_clinics';
 import { createClinicRedux } from '../../../../app/features/clinic/_clinicSlice';
 import { createDoctor } from '../../../../api/_doctor';
 import { createDoctorRedux } from '../../../../app/features/doctors/_doctorSlice';
+import FormSelectInput from '../../../shared/FromSelectControl';
 
 function AddDoctorModal({
   data: {
@@ -123,13 +124,30 @@ function AddDoctorModal({
                 </abbr>
               </label>
               <span className="woocommerce-input-wrapper">
-                <input
-                  type="text"
-                  className="input-text"
-                  name="billing_last_name"
-                  id="billing_last_name"
-                  placeholder="Doctor's speciality"
-                  value={specialized}
+                <FormSelectInput
+                  options={[
+                    'Allergy and immunology',
+                    'Anesthesiology',
+                    'Dermatology',
+                    'Diagnostic radiology',
+                    'Emergency medicine',
+                    'Family medicine',
+                    'Internal medicine',
+                    'Medical genetics',
+                    'Neurology',
+                    'Nuclear medicine',
+                    'Obstetrics and gynecology',
+                    'Ophthalmology',
+                    'Pathology',
+                    'Pediatrics',
+                    'Physical medicine and rehabilitation',
+                    'Preventive medicine',
+                    'Psychiatry',
+                    'Radiation oncology',
+                    'Surgery',
+                    'Urology',
+                  ]}
+                  placeholder="Select category"
                   onChange={e => setSpecialized(e.target.value)}
                 />
               </span>
@@ -219,7 +237,7 @@ function AddDoctorModal({
             <div className="butns-ordery-pay-mode">
               <div className="horizontal-separator" />
               <FormButtonSubmit
-                value="Save pharmacy"
+                value="Save doctor"
                 dissable={isUploadingImage}
                 onClick={e => {
                   const data = {
