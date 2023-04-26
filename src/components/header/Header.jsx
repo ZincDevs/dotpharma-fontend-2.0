@@ -35,19 +35,6 @@ export function TopHeader() {
                     {' '}
                     Info : +250 790 696 369
                   </a>
-                  <span className="qodef-separator-top-header" />
-                  <Link to="/about" className="qodef-top-header-link">
-                    {' '}
-                    About
-                  </Link>
-                  <span className="qodef-separator-top-header" />
-                  <Link
-                    to="/delivery-information"
-                    className="qodef-top-header-link"
-                  >
-                    {' '}
-                    Delivery information
-                  </Link>
                 </p>
               </div>
             </div>

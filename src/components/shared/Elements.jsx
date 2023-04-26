@@ -69,7 +69,7 @@ function ItemFotter({ center, medicine }) {
           <i className="fa-brands fa-whatsapp" />
           {' '}
           {' '}
-          Order on whatapp
+          Order on whatsapp
 
         </a>
       </div>
