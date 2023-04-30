@@ -28,7 +28,7 @@ export default function CartHomeItem({ item, handleTotalPrice, handleChange }) {
           console.log('Hellllo error', err);
         } else {
           console.log('Hellllo success', data);
-          location.reload();
+          // location.reload();
         }
       });
     }
@@ -42,7 +42,7 @@ export default function CartHomeItem({ item, handleTotalPrice, handleChange }) {
           ...user, cart: user?.cart?.filter(cartItem => cartItem.c_id !== item?.c_id),
         };
         dispatch(setMyProfile({ user: { user: { ...updatedUser } } }));
-        location.reload();
+        // location.reload();
       }
     });
   };

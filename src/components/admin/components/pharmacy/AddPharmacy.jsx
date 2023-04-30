@@ -238,7 +238,7 @@ function AddPharmacyModal({
                       toast.success('Pharmacy successfully added!');
                       closeModal();
                       // getPharmacies(dispatch);
-                      location.reload();
+                      // location.reload();
                     }
                   });
                 }}

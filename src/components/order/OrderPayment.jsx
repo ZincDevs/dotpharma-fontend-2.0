@@ -28,7 +28,7 @@ import FormTextInput from '../shared/FormTextInput';
 import { createPayment, verifypayment, removeCart } from '../../api';
 
 function OrderPaymeny() {
-  const [phone, setPhone] = useState([]);
+  const [phone, setPhone] = useState('');
   const [loadingCreatePayment, setLoadingCreatePayment] = useState(false);
   const [loadingCreateOrder, setLoadingCreateOrder] = useState(false);
   const [showConfirmPayment, setShowConfirmPayment] = useState(false);

@@ -126,7 +126,7 @@ function UpdateClinicModal({
               </label>
               <span className="woocommerce-input-wrapper">
                 <FormSelectInput
-                  options={['OPHTHALMOLOGY', 'CARDIOLOGY', 'STOMATOLOGY', 'RADIOLOGY', 'INTERNAL MEDICINE']}
+                  options={['Choose category', 'OPHTHALMOLOGY', 'CARDIOLOGY', 'STOMATOLOGY', 'RADIOLOGY', 'INTERNAL MEDICINE']}
                   placeholder="Select category"
                   onChange={e => setSpecialization(e.target.value)}
                 />
