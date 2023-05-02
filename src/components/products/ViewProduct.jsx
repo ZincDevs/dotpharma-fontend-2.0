@@ -10,6 +10,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import _ from 'lodash';
 import { getOneMedicine } from '../../app/features/medicine';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 import { addToCart, removeCart } from '../../api/index';
@@ -28,6 +29,10 @@ function ViewProduct() {
   const profile = useSelector(state => state?.user?.MyProfile, shallowEqual);
   const handleAddToCart = () => {
     // changeStatus('pending');
+    if (_.some(profile?.cart, cartItem => cartItem.m_id === pid)) {
+      toast.warning('Product is already added!');
+      return;
+    }
     addToCart(axios, pid, err => {
       if (err) {
         // changeStatus('fail');

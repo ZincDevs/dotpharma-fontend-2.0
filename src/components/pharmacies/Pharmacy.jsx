@@ -26,6 +26,10 @@ export default function Pharmacy() {
   const axios = useAxiosPrivate();
   const profile = useSelector(state => state?.user?.MyProfile, shallowEqual);
   const handleAddToCart = (m_id, changeStatus) => {
+    if (_.some(profile?.cart, cartItem => cartItem.m_id === m_id)) {
+      toast.warning('Product is already added!');
+      return;
+    }
     // const m_id = e.target?.id;
     changeStatus('pending');
     addToCart(axios, m_id, err => {

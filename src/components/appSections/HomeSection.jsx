@@ -4,6 +4,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
+import _ from 'lodash';
 import Banner from '../banner/Banner';
 import ProductsHome from '../products/ProductsHome';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
@@ -20,6 +21,10 @@ export default function Home({ alert: defaultAlert }) {
   const profile = useSelector(state => state?.user?.MyProfile, shallowEqual);
   const handleAddToCart = (m_id, changeStatus) => {
     // const m_id = e.target?.id;
+    if (_.some(profile?.cart, cartItem => cartItem.m_id === m_id)) {
+      toast.warning('Product is already added!');
+      return;
+    }
     changeStatus('pending');
     addToCart(axios, m_id, err => {
       if (err) {
