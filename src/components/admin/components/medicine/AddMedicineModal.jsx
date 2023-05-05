@@ -328,6 +328,7 @@ function AddMedicineModal({
                     } else {
                       toast.success('Medicine successfully added!');
                       getMedicinesHor({ limit: 2, page: 2 }, dispatch);
+                      closeModal();
                     }
                   });
                 }}
