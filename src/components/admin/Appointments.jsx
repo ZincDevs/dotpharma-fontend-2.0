@@ -62,58 +62,50 @@ function Clinics() {
             Add appointment
           </button>
         </div>
-        <div className="table-responsive-md">
-          <table className="table table-actions table-striped table-hover mb-0 row container">
+        {/* table-responsive-md */}
+        <div className="">
+          <table className="table table-striped">
             <thead>
-              <tr className="row">
-                <th className="col-2 flex items-center justify-center text-center">Patient Email</th>
-                <th className="col-1 flex items-center justify-center text-center">Patient Telephone</th>
-                <th className="col-3 flex items-center justify-center">Disease</th>
-                <th className="col-1 flex items-center justify-center">Created At</th>
-                <th className="col-1 flex items-center justify-center">Start At</th>
-                <th className="col-1 flex items-center justify-center text-center">Appointment Status</th>
-                <th className="col-1 flex items-center justify-center">Accept</th>
-                <th className="col-1 flex items-center justify-center">Reject</th>
-                <th className="col-1 flex items-center justify-center">View</th>
-              </tr>
+              <th className="">Patient Email</th>
+              <th className="">Patient Telephone</th>
+              <th className=" ">Disease</th>
+              <th className="">Created At</th>
+              <th className="">Start At</th>
+              <th className="">Appointment Status</th>
+              <th className="">Accept</th>
+              <th className="">Reject</th>
             </thead>
             <tbody>
               {appointments?.map(appointment => (
-                <tr className="row" key={appointment.a_id} onClick={() => setAppointment(appointment)}>
-                  <td className="col-2 flex items-center justify-center" style={{ minHeight: '20px', wordBreak: 'break-all' }}>
+                <tr className="" key={appointment.a_id} onClick={() => setAppointment(appointment)}>
+                  <td className="" style={{ minHeight: '20px', wordBreak: 'break-all' }}>
                     {foundPatient(patients, appointment.p_id)?.p_email}
                   </td>
-                  <td className="col-1 flex items-center justify-center">
+                  <td className="">
                     {foundPatient(patients, appointment.p_id)?.p_phonenumber}
                   </td>
-                  <td className="col-3 flex items-center justify-center" style={{ minHeight: '15px' }}>
+                  <td className="" style={{ minHeight: '15px' }}>
                     {appointment.a_desease}
                   </td>
-                  <td className="col-1 flex items-center justify-center text-center">{getDate(appointment.createdAt)}</td>
-                  <td className="col-1 flex items-center justify-center text-center">{getDate(appointment.a_date)}</td>
-                  <td className="col-1 flex items-center justify-center text-center">{appointment.a_status}</td>
-                  <td className="col-1 flex items-center justify-center">
+                  <td className="">{getDate(appointment.createdAt)}</td>
+                  <td className="">{getDate(appointment.a_date)}</td>
+                  <td className="">{appointment.a_status}</td>
+                  <td className="">
                     <button
                       className="btn btn-sm btn-success"
                       onClick={() => setIsAcceptAppointmentModalOpen(true)}
+                      disabled={appointment.a_status === 'approved' || appointment.a_status === 'rejected'}
                     >
                       Accept
                     </button>
                   </td>
-                  <td className="col-1 flex items-center justify-center">
+                  <td className="">
                     <button
                       className="btn btn-sm btn-danger"
                       onClick={() => setIsRejectppointmentModalOpen(true)}
+                      disabled={appointment.a_status === 'approved' || appointment.a_status === 'rejected'}
                     >
                       Reject
-                    </button>
-                  </td>
-                  <td className="flex gap-1 col-1 flex-row items-center justify-center">
-                    <button
-                      className="btn btn-sm btn-success"
-                      onClick={() => navigate(`/appointment/${appointment.a_id}`)}
-                    >
-                      View
                     </button>
                   </td>
                 </tr>

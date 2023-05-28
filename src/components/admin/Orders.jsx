@@ -8,7 +8,7 @@
 /* eslint-disable react/button-has-type */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { getOrders } from '../../app/features/order';
 import { getMedicinesHor } from '../../app/features/medicine';
@@ -27,9 +27,14 @@ function Orders() {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [order, setOrder] = useState({});
+  // const { oid } = useParams();
+  // const oid = searchParams.get('oid') || '';
+  const query = new URLSearchParams(useLocation().search);
+
+  console.log('Oid', query.get('oid'));
 
   const orders = useSelector(
-    state => state?.order?.orders,
+    state => (query.get('oid') ? state?.order?.orders?.filter(order => order.o_id === query.get('oid')) : state?.order?.orders),
     shallowEqual,
   );
   const products = useSelector(
@@ -44,6 +49,8 @@ function Orders() {
   }, []);
   // console.log(products);
   const navigate = useNavigate();
+  // console.log()
+  // orders = orders?.filter(order => order.o_id === oid);
   return (
     <div>
       <ToastContainer />

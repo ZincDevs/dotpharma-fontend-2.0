@@ -16,7 +16,7 @@ import _ from 'lodash';
 import Modal from 'react-bootstrap/Modal';
 import { ColorRing } from 'react-loader-spinner';
 import { ToastContainer, toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import data from '../../data/addresses.json';
 import FormButtonSubmit from '../shared/FormButtonSubmit';
 import { createOrder } from '../../app/features/order';
@@ -598,6 +598,11 @@ function MakeOrdder() {
                                 <p className="px-4">
                                   {medicine.medicineDescription}
                                 </p>
+                                <p className="px-4">
+                                  Prescription:
+                                  {' '}
+                                  <a href={prescription} target="_blank" rel="noreferrer">Click to view</a>
+                                </p>
                               </div>
                             ))
                           }
@@ -689,7 +694,7 @@ function MakeOrdder() {
                       onClick={async e => {
                         setLoading(true);
                         const refCode = `ORDER-${Math.random(10000, 99999)}-${Date.now().toString().substring(Date.now().toString().length - 4, Date.now().toString().length - 1)}`;
-                        const medicines = orderedMedicines;
+                        const medicines = [orderedMedicines[0].medicineName, orderedMedicines[0].medicineDescription];
                         const address = [
                           phone,
                           province,

@@ -14,6 +14,7 @@ import FormButtonSubmit from '../../../shared/FormButtonSubmit';
 import { updateClinicRedux } from '../../../../app/features/clinic/_clinicSlice';
 import { updateClinic } from '../../../../api/_clinics';
 import FormSelectInput from '../../../shared/FromSelectControl';
+import { uploadMedicineImage } from '../../../../helpers';
 
 function UpdateClinicModal({
   data: {
@@ -24,6 +25,7 @@ function UpdateClinicModal({
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [specialized, setSpecialization] = useState('');
+  const [logo, setLogo] = useState('');
   const [isUploadingImage, setIsUploadingImage] = useState(false);
   const axios = useAxiosPrivate();
   const loading = false;
@@ -32,6 +34,7 @@ function UpdateClinicModal({
     setPhone(clinic?.c_phonenumber);
     setEmail(clinic?.c_email);
     setSpecialization(clinic?.specialized);
+    setLogo(clinic?.c_logo);
   }, [clinic]);
   const dispatch = useDispatch();
   return (
@@ -132,6 +135,41 @@ function UpdateClinicModal({
                 />
               </span>
             </p>
+            <p
+              className="form-row-last validate-required"
+              id="billing_last_name_field"
+              data-priority="20"
+            >
+              <label htmlFor="billing_last_name" className="">
+                Clinic logo&nbsp;
+                <abbr className="required" title="required">
+                  *
+                </abbr>
+              </label>
+              <br />
+              <span className="woocommerce-input-wrapper">
+                <input
+                  type="file"
+                  className="input-text"
+                  name="billing_last_name"
+                  onChange={async e => {
+                    setIsUploadingImage(true);
+                    toast.info('Uploading image...!');
+                    await uploadMedicineImage(
+                      e.target.files[0],
+                      (err, uploadUrl) => {
+                        setIsUploadingImage(false);
+                        if (err) {
+                          toast.error('Unable to upload image!');
+                        } else {
+                          setLogo(uploadUrl);
+                        }
+                      },
+                    );
+                  }}
+                />
+              </span>
+            </p>
           </form>
         </Modal.Body>
         <Modal.Footer>
@@ -167,6 +205,7 @@ function UpdateClinicModal({
                     email,
                     phone,
                     specialized,
+                    logo,
                   };
                   updateClinic(axios, clinic?.c_id, data, (err, data) => {
                     if (err) {
@@ -175,7 +214,7 @@ function UpdateClinicModal({
                       toast.success('Clinic successfully updated!');
                       dispatch(
                         updateClinicRedux({
-                          ...clinic, c_name: name, c_email: email, specialized, c_phonenumber: phone,
+                          ...clinic, c_name: name, c_email: email, specialized, c_phonenumber: phone, c_logo: logo,
                         }),
                       );
                       setIsEditModalOpen(false);
