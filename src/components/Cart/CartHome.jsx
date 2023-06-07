@@ -70,7 +70,7 @@ export default function CartHome() {
                     <div className="woocommerce-notices-wrapper" />
                     <form
                       className="woocommerce-cart-form"
-                      action="https://pharmacare.qodeinteractive.com/cart/"
+                      action=""
                       method="post"
                     >
 

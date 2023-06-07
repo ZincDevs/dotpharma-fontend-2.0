@@ -45,6 +45,9 @@ export default {
   create_clinic__api: '/clinics/createclinic',
   delete_clinic__api: c_id => `/clinics/deleteclinic/${c_id}`,
   update_clinics__api: c_id => `/clinics/updateclinic/${c_id}`,
+  get_clinic_insurances__api: cid => `clinics/findclinicinsuraces/${cid}`,
+  get_insurances__api: 'clinics/findallinsurances',
   create_payment: '/payment/createpayment',
   verfy_payment: '/payment/verifypayment?ref=',
+  add_clinic_insurance: 'clinics/addinsurancetoclinic/',
 };

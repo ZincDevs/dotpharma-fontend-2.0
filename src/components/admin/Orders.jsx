@@ -31,8 +31,6 @@ function Orders() {
   // const oid = searchParams.get('oid') || '';
   const query = new URLSearchParams(useLocation().search);
 
-  console.log('Oid', query.get('oid'));
-
   const orders = useSelector(
     state => (query.get('oid') ? state?.order?.orders?.filter(order => order.o_id === query.get('oid')) : state?.order?.orders),
     shallowEqual,

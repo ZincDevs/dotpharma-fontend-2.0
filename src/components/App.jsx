@@ -48,6 +48,7 @@ import DoctorsAdmin from './admin/Doctors';
 import Doctors from './doctors/Doctors';
 import AdminHome from './admin/AdminHome';
 import OrderPaymeny from './order/OrderPayment';
+import ClinicDetails from './admin/ClinicDetails';
 
 function App() {
   const user = useSelector(state => state?.user?.MyProfile);
@@ -92,6 +93,11 @@ function App() {
                 path="appointments"
                 key={key()}
                 element={<Appointments />}
+              />
+              <Route
+                path="clinic/:clinicid"
+                key={key()}
+                element={<ClinicDetails />}
               />
             </Route>
           </Route>

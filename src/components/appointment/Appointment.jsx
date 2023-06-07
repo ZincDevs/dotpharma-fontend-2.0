@@ -17,6 +17,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate, useLocation } from 'react-router-dom';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 import { createAppointment } from '../../api/_appointment';
+import { getClinicInsurance } from '../../app/features/clinic';
 
 function Appointment() {
   const [message, setMessage] = useState('');
@@ -31,8 +32,13 @@ function Appointment() {
   const [loading, setLoading] = useState(false);
   let { search } = useLocation();
   const query = new URLSearchParams(search);
+  useEffect(() => {
+    const query1 = new URLSearchParams(search);
+    getClinicInsurance(dispatch, query1.get('toid'));
+  }, []);
+
   const profile = useSelector(state => state?.user?.MyProfile, shallowEqual);
-  const cart = profile?.cart;
+  const clinicInsurances = useSelector(state => state.clinicInsurances?.clinicInsurances);
 
   const handleNameChange = e => {
     setName(e.target.value);
@@ -177,6 +183,33 @@ function Appointment() {
                             autoComplete="off"
                             onChange={handleEmailChange}
                           />
+                        </span>
+                      </p>
+                      <p
+                        className="form-row-last validate-required col-5 p-mobile"
+                        id="_field"
+                        data-priority="20"
+                      >
+                        <label htmlFor="" className="">
+                          Choose insurance&nbsp;
+                          <abbr className="required" title="required">
+                            *
+                          </abbr>
+                        </label>
+                        <span className="woocommerce-input-wrapper">
+                          <select
+                            type="email"
+                            className="input-text"
+                            name=""
+                            id=""
+                            placeholder="Patient email"
+                            value={email}
+                            autoComplete="off"
+                            onChange={handleEmailChange}
+                          >
+                            <option value="">Choose insurance</option>
+                            {clinicInsurances?.map(insurance => (<option value={insurance.id}>{insurance.insurance_name}</option>))}
+                          </select>
                         </span>
                       </p>
                       <p

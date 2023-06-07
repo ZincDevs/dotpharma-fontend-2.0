@@ -66,3 +66,9 @@
 .menu-item-6777 {
   margin-bottom: 0.5rem;
 }
+
+.insurance-contaier{
+  padding: 1rem;
+  height: 16rem;
+  overflow: scroll;
+}

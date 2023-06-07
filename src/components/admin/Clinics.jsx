@@ -9,6 +9,7 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { getClinics } from '../../app/features/clinic';
+import { setClinic as setSingleClinic } from '../../app/features/clinic/_clinicSlice';
 import AddClinicModal from './components/clinics/AddClinicModal';
 import DeleteClinicModal from './components/clinics/DeleteClinicModal';
 import UpdateClinicModal from './components/clinics/UpdateClinicModal';
@@ -90,7 +91,10 @@ function Clinics() {
                   <td className="flex gap-1 col-2 flex-row items-center justify-center">
                     <button
                       className="btn btn-sm btn-success"
-                      onClick={() => navigate(`/clinic/${clinic.c_id}`)}
+                      onClick={() => {
+                        dispatch(setSingleClinic(clinic));
+                        navigate(`/admin/clinic/${clinic.c_id}`);
+                      }}
                     >
                       View
                     </button>
