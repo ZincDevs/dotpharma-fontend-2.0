@@ -49,72 +49,72 @@ export default function Doctors({
       icon: cardiology_b,
     },
     { title: 'Nutritionist', key: 'Nutritionist', icon: stomatology_b },
-    { title: 'psychologist', key: 'psychologist', icon: radiology_b },
-    {
-      title: 'Therapist',
-      key: 'Therapist',
-      icon: internal_medecine_b,
-    },
-    {
-      title: 'Counselor',
-      key: 'Counselor',
-      icon: internal_medecine_b,
-    },
-    {
-      title: 'ife coach',
-      key: 'ife coach',
-      icon: internal_medecine_b,
-    },
-    {
-      title: 'Internist',
-      key: 'Internist',
-      icon: internal_medecine_b,
-    },
-    {
-      title: 'Dermatologist',
-      key: 'Dermatologist',
-      icon: internal_medecine_b,
-    },
-    {
-      title: 'Cardiologist',
-      key: 'Cardiologist',
-      icon: internal_medecine_b,
-    },
-    {
-      title: 'Ophtalmologist',
-      key: 'Ophtalmologist',
-      icon: internal_medecine_b,
-    },
-    {
-      title: 'Neurologist',
-      key: 'Neurologist',
-      icon: internal_medecine_b,
-    },
-    {
-      title: 'Pediatrician',
-      key: 'Pediatrician',
-      icon: internal_medecine_b,
-    },
-    {
-      title: 'Neurologist',
-      key: 'Neurologist',
-      icon: internal_medecine_b,
-    },
-    {
-      title: 'ENT specialist',
-      key: 'ENT specialist',
-      icon: internal_medecine_b,
-    },
-    {
-      title: 'Dentist',
-      key: 'Dentist',
-      icon: internal_medecine_b,
-    },
-    {
-      title: 'Urologist',
-      key: 'Urologist',
-      icon: internal_medecine_b,
-    },
+    // { title: 'psychologist', key: 'psychologist', icon: radiology_b },
+    // {
+    //   title: 'Therapist',
+    //   key: 'Therapist',
+    //   icon: internal_medecine_b,
+    // },
+    // {
+    //   title: 'Counselor',
+    //   key: 'Counselor',
+    //   icon: internal_medecine_b,
+    // },
+    // {
+    //   title: 'ife coach',
+    //   key: 'ife coach',
+    //   icon: internal_medecine_b,
+    // },
+    // {
+    //   title: 'Internist',
+    //   key: 'Internist',
+    //   icon: internal_medecine_b,
+    // },
+    // {
+    //   title: 'Dermatologist',
+    //   key: 'Dermatologist',
+    //   icon: internal_medecine_b,
+    // },
+    // {
+    //   title: 'Cardiologist',
+    //   key: 'Cardiologist',
+    //   icon: internal_medecine_b,
+    // },
+    // {
+    //   title: 'Ophtalmologist',
+    //   key: 'Ophtalmologist',
+    //   icon: internal_medecine_b,
+    // },
+    // {
+    //   title: 'Neurologist',
+    //   key: 'Neurologist',
+    //   icon: internal_medecine_b,
+    // },
+    // {
+    //   title: 'Pediatrician',
+    //   key: 'Pediatrician',
+    //   icon: internal_medecine_b,
+    // },
+    // {
+    //   title: 'Neurologist',
+    //   key: 'Neurologist',
+    //   icon: internal_medecine_b,
+    // },
+    // {
+    //   title: 'ENT specialist',
+    //   key: 'ENT specialist',
+    //   icon: internal_medecine_b,
+    // },
+    // {
+    //   title: 'Dentist',
+    //   key: 'Dentist',
+    //   icon: internal_medecine_b,
+    // },
+    // {
+    //   title: 'Urologist',
+    //   key: 'Urologist',
+    //   icon: internal_medecine_b,
+    // },
   ];
   useEffect(() => {
     getDoctors({ limit: 8 }, dispatch);
