@@ -12,14 +12,14 @@ export const mobileNavs = [
     label: 'Order medicine',
     link: '/orders',
   },
-  {
-    label: 'Book appointment',
-    link: '/dot-clinics',
-  },
-  {
-    label: 'Meet specialists',
-    link: '/doctors',
-  },
+  // {
+  //   label: 'Book appointment',
+  //   link: '/dot-clinics',
+  // },
+  // {
+  //   label: 'Meet specialists',
+  //   link: '/doctors',
+  // },
   {
     label: 'Order on whatsap',
     link: 'https://wa.me/250790696369',

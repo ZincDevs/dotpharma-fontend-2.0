@@ -34,7 +34,9 @@ function Appointment() {
   const query = new URLSearchParams(search);
   useEffect(() => {
     const query1 = new URLSearchParams(search);
-    getClinicInsurance(dispatch, query1.get('toid'));
+    if (query1.get('type') === 'clinic') {
+      getClinicInsurance(dispatch, query1.get('toid'));
+    }
   }, []);
 
   const profile = useSelector(state => state?.user?.MyProfile, shallowEqual);
@@ -185,33 +187,35 @@ function Appointment() {
                           />
                         </span>
                       </p>
-                      <p
-                        className="form-row-last validate-required col-5 p-mobile"
-                        id="_field"
-                        data-priority="20"
-                      >
-                        <label htmlFor="" className="">
-                          Choose insurance&nbsp;
-                          <abbr className="required" title="required">
-                            *
-                          </abbr>
-                        </label>
-                        <span className="woocommerce-input-wrapper">
-                          <select
-                            type="email"
-                            className="input-text"
-                            name=""
-                            id=""
-                            placeholder="Patient email"
-                            value={email}
-                            autoComplete="off"
-                            onChange={handleEmailChange}
-                          >
-                            <option value="">Choose insurance</option>
-                            {clinicInsurances?.map(insurance => (<option value={insurance.id}>{insurance.insurance_name}</option>))}
-                          </select>
-                        </span>
-                      </p>
+                      {query.get('type') === 'clinic' ? (
+                        <p
+                          className="form-row-last validate-required col-5 p-mobile"
+                          id="_field"
+                          data-priority="20"
+                        >
+                          <label htmlFor="" className="">
+                            Choose insurance&nbsp;
+                            <abbr className="required" title="required">
+                              *
+                            </abbr>
+                          </label>
+                          <span className="woocommerce-input-wrapper">
+                            <select
+                              type="email"
+                              className="input-text"
+                              name=""
+                              id=""
+                              placeholder="Patient email"
+                              value={email}
+                              autoComplete="off"
+                              onChange={handleEmailChange}
+                            >
+                              <option value="">Choose insurance</option>
+                              {clinicInsurances?.map(insurance => (<option value={insurance.id}>{insurance.insurance_name}</option>))}
+                            </select>
+                          </span>
+                        </p>
+                      ) : '' }
                       <p
                         className="form-row-last validate-required d-flex flex-column col-5"
                         data-priority="20"
@@ -243,7 +247,7 @@ function Appointment() {
                         data-priority="20"
                       >
                         <label htmlFor="" className="">
-                          How can we help you&nbsp;
+                          Send message to doctor &nbsp;
                           <abbr className="required" title="required">
                             *
                           </abbr>

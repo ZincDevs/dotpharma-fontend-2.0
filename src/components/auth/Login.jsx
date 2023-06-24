@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable max-len */
@@ -6,6 +7,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+// import { compose } from 'redux';
 import {
   Email, Password, TCPRemember,
 } from '../shared/Input';
@@ -19,7 +21,7 @@ function Login({ alert: defaultAlert }) {
   const { setAuth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location?.state?.from?.pathname || '/';
+  const from = `${location?.state?.from?.pathname}${location?.state?.from?.search}` || '/';
   const [status, setStatus] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -51,6 +53,7 @@ function Login({ alert: defaultAlert }) {
 
   const handleLogin = e => {
     e.preventDefault();
+    console.log('Hellllloooooo ', from);
     const data = { email, password };
     setStatus('pending');
     logIn(data, (err, data) => {
