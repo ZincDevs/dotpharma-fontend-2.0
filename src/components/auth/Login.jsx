@@ -21,7 +21,7 @@ function Login({ alert: defaultAlert }) {
   const { setAuth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const from = `${location?.state?.from?.pathname}${location?.state?.from?.search}` || '/';
+  const from = (location?.state?.from?.pathname && location?.state?.from?.search) ? `${location?.state?.from?.pathname}${location?.state?.from?.search}` : '/';
   const [status, setStatus] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();

@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 import { removeCartById, updateCart } from '../../api';
 import { setMyProfile } from '../../app/features/user/_userSlice';
+import { getMyProfile } from '../../app/features/user';
 
 export default function CartHomeItem({ item, handleTotalPrice, handleChange }) {
   const price = item?.medicine?.m_price;
@@ -38,11 +39,12 @@ export default function CartHomeItem({ item, handleTotalPrice, handleChange }) {
       if (err) {
         console.log(err);
       } else {
-        const updatedUser = {
-          ...user, cart: user?.cart?.filter(cartItem => cartItem.c_id !== item?.c_id),
-        };
-        dispatch(setMyProfile({ user: { user: { ...updatedUser } } }));
+        // const updatedUser = {
+        //   ...user, cart: user?.cart?.filter(cartItem => cartItem.c_id !== item?.c_id),
+        // };
+        // dispatch(setMyProfile({ user: { user: { ...updatedUser } } }));
         // location.reload();
+        getMyProfile(dispatch, axios);
       }
     });
   };
