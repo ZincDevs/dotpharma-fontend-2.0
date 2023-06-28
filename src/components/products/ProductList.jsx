@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import React, { Suspense, useEffect, useContext } from 'react';
+import React, {
+  Suspense, useEffect, useContext, useState,
+} from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import key from 'uniqid';
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +12,7 @@ import { ProductPlaceholder } from '../shared/Placeholder';
 // import ProductItemHor from '../shared/ProductItemHor';
 import { getMedicines, getMedicinesHor } from '../../app/features/medicine';
 import MedicineContext from '../../context/MedicineProvider';
+import Pagination from '../shared/Pagination';
 
 const ProductItem = React.lazy(() => import('../shared/ProductItem'));
 
@@ -21,15 +24,25 @@ export default function ProductList({
   const dispatch = useDispatch();
   // const products = useSelector(state => state?.medicine?.medicines, shallowEqual);
   const { medicineCont } = useContext(MedicineContext);
+  const [page, setPage] = useState(1);
+  const [totalRows, setTotalRows] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(16);
 
   // const mProducts = products?.length > 2 ? [products[0], products[1]] : products;
-  useEffect(() => { getMedicines({ limit: 8 }, dispatch); }, []);
+  // console.log('Medicine count ===== ', medicineCont?.count);
+  useEffect(() => { getMedicines({ limit: itemsPerPage, page }, dispatch); }, []);
+  const handlePageClick = event => {
+    setPage(Number(event.selected) + 1);
+    console.log('Selected ===== ', page);
+    getMedicines({ limit: itemsPerPage, page }, dispatch);
+  };
+
   return (
     <div className="product-lis">
       <div className="d-flex flex-column">
         <div className="px-1">
           <div className="item-list d-flex col-12 flex-wrap">
-            {_.map(medicineCont, product => (
+            {_.map(medicineCont?.medicines, product => (
               <div className="p-1" key={product.m_id}>
                 <Suspense fallback={<ProductPlaceholder />}>
                   <ProductItem
@@ -42,6 +55,11 @@ export default function ProductList({
               </div>
             ))}
           </div>
+          <Pagination
+            handlePageClick={handlePageClick}
+            totalRows={28}
+            itemsPerPage={itemsPerPage}
+          />
         </div>
       </div>
       <div className="div-empty" />

@@ -72,3 +72,30 @@
   height: 16rem;
   overflow: scroll;
 }
+
+.pagination{
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.page-num {
+  box-shadow: 0px 0px 10px rgba(72, 109, 108, 0.714);
+  background-color: rgb(65, 157, 90);
+  margin: 5px;
+  width: 30px;
+  height: 30px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+}
+.page-num>a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.active {
+  background-color: rgba(51, 156, 79, 0.7);
+}

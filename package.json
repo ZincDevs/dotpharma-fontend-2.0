@@ -37,6 +37,7 @@
     "react-form-input-validation": "^2.1.0",
     "react-google-login": "^5.2.2",
     "react-loader-spinner": "*",
+    "react-paginate": "^8.2.0",
     "react-redux": "^7.2.8",
     "react-router-dom": "^6.3.0",
     "react-scripts": "^5.0.1",

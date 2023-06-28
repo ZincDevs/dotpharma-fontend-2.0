@@ -6,10 +6,11 @@ import { sortMedines } from '../../../helpers';
 export const getMedicines = ({ page, limit }, dispatch) => {
   dispatch(setMedicines({ status: 'pending' }));
   getMedicinesApi({ page, limit }, (err, data) => {
+    console.log(data.count);
     if (err) {
       dispatch(setMedicines({ status: 'fail', message: 'Something went wrong.😞' }));
     } else {
-      dispatch(setMedicines({ medicines: [...data.sort(sortMedines)], status: 'success' }));
+      dispatch(setMedicines({ medicines: [...data.medicines.sort(sortMedines)], status: 'success', count: data.count }));
     }
   });
 };
