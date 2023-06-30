@@ -28,15 +28,12 @@ export default function ProductList({
   const [totalRows, setTotalRows] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(16);
 
-  // const mProducts = products?.length > 2 ? [products[0], products[1]] : products;
-  // console.log('Medicine count ===== ', medicineCont?.count);
   useEffect(() => { getMedicines({ limit: itemsPerPage, page }, dispatch); }, []);
   const handlePageClick = event => {
     setPage(Number(event.selected) + 1);
-    console.log('Selected ===== ', page);
     getMedicines({ limit: itemsPerPage, page }, dispatch);
   };
-
+  console.log('Medicine cont=====', medicineCont?.count);
   return (
     <div className="product-lis">
       <div className="d-flex flex-column">
@@ -57,7 +54,7 @@ export default function ProductList({
           </div>
           <Pagination
             handlePageClick={handlePageClick}
-            totalRows={28}
+            totalRows={medicineCont?.count || 1}
             itemsPerPage={itemsPerPage}
           />
         </div>

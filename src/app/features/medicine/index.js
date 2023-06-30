@@ -27,6 +27,7 @@ export const getOneMedicine = (mid, dispatch) => {
 };
 
 export const getMedicinesHor = ({ page, limit }, dispatch) => {
+  console.log('Hellllloooooo=========');
   dispatch(setMedicinesHor({ status: 'pending' }));
   getMedicinesApi({ page, limit }, (err, data) => {
     if (err) {

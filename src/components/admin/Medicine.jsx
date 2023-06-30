@@ -8,12 +8,13 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-import { getMedicinesHor } from '../../app/features/medicine';
+import { getMedicines } from '../../app/features/medicine';
 import { getTags } from '../../app/features/tags';
 import categories from '../../data/categories.json';
 import AddMedicineModal from './components/medicine/AddMedicineModal';
 import DeleteMedicineModel from './components/medicine/DeleteMedicineModel';
 import EditMedicineModel from './components/medicine/EditMedicineModel';
+import Pagination from '../shared/Pagination';
 
 function Medicine() {
   const dispatch = useDispatch();
@@ -21,17 +22,24 @@ function Medicine() {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [medicine, setMedicine] = useState(null);
+  const [itemsPerPage, setItemsPerPage] = useState(16);
+  const [page, setPage] = useState(1);
 
   const products = useSelector(
-    state => state?.medicine?.medicinesHor,
+    state => state?.medicine?.medicines,
     shallowEqual,
   );
   const tags = useSelector(state => state?.tag?.tags, shallowEqual);
 
   useEffect(() => {
-    getMedicinesHor({ limit: 2, page: 2 }, dispatch);
+    getMedicines({ limit: itemsPerPage, page }, dispatch);
     getTags(dispatch);
   }, []);
+
+  const handlePageClick = event => {
+    setPage(Number(event.selected) + 1);
+    getMedicines({ limit: itemsPerPage, page }, dispatch);
+  };
 
   function closeModal() {
     setIsOpen(false);
@@ -50,6 +58,7 @@ function Medicine() {
     setIsDeleteModalOpen(false);
   }
   const navigate = useNavigate();
+  console.log(products);
   return (
     <div>
       <ToastContainer />
@@ -91,7 +100,7 @@ function Medicine() {
               </tr>
             </thead>
             <tbody>
-              {products?.map(product => (
+              {(products?.medicines instanceof Array) && products?.medicines?.map(product => (
                 <tr className="row" key={product.m_id}>
                   <td className="col-1">
                     <img
@@ -136,6 +145,11 @@ function Medicine() {
             </tbody>
           </table>
         </div>
+        <Pagination
+          handlePageClick={handlePageClick}
+          totalRows={products?.count || 1}
+          itemsPerPage={itemsPerPage}
+        />
       </div>
       {/* Add modal */}
       <AddMedicineModal
