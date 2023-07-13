@@ -6,6 +6,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useSelector } from 'react-redux';
+import _ from 'lodash';
 import MedicineContext from '../../context/MedicineProvider';
 import categories from '../../data/categories.json';
 
@@ -30,31 +31,39 @@ export default function ProductFilter() {
     text: 'More',
   },
   ];
-  const { medicines } = useSelector(state => state?.medicine);
+  const medicines = useSelector(state => state?.medicine?.medicines);
   useEffect(() => {
     setMedicineCont(medicines);
   }, [medicines]);
+
   const filterMedicineFunction = () => {
+    let meds = [];
     switch (activeFilter) {
       case 'Categories':
         if (dropText === 'Categories') break;
+        meds = medicines?.medicines?.filter(medicine => medicine?.m_type === dropText);
         setMedicineCont(
-          medicines?.filter(medicine => medicine?.m_type === dropText),
+          { medicines: meds, status: 'success', count: medicines?.count }
+          ,
         );
         break;
       case 'New Products':
+        meds = medicines?.medicines?.filter(medicine => medicine?.m_tags && _.includes(medicine?.m_tags, 'New products'));
+
         setMedicineCont(
-          medicines?.filter(medicine => medicine?.m_tags?.includes('New products')),
+          { medicines: meds, status: 'success', count: medicines?.count },
         );
         break;
       case 'Promotion':
+        meds = medicines?.medicines?.filter(medicine => medicine?.m_tags && _.includes(medicine?.m_tags, 'Promotion'));
         setMedicineCont(
-          medicines?.filter(medicine => medicine?.m_tags?.includes('Promotion')),
+          { medicines: meds, status: 'success', count: medicines?.count },
         );
         break;
       case 'Popular':
+        meds = medicines?.medicines?.filter(medicine => medicine?.m_tags && _.includes(medicine?.m_tags, 'Popular'));
         setMedicineCont(
-          medicines?.filter(medicine => medicine?.m_tags?.includes('Popular')),
+          { medicines: meds, status: 'success', count: medicines?.count },
         );
         break;
       default:

@@ -3,7 +3,7 @@
 import React, {
   Suspense, useEffect, useContext, useState,
 } from 'react';
-import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import key from 'uniqid';
 import { useNavigate } from 'react-router-dom';
 import _ from 'lodash';
@@ -33,7 +33,7 @@ export default function ProductList({
     setPage(Number(event.selected) + 1);
     getMedicines({ limit: itemsPerPage, page }, dispatch);
   };
-  console.log('Medicine cont=====', medicineCont?.count);
+  console.log('Medicine cont=====', medicineCont);
   return (
     <div className="product-lis">
       <div className="d-flex flex-column">
