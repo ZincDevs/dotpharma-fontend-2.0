@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { setMedicines, setMedicinesHor, setOneMedicine } from './_medicineSlice';
-import { getMedicines as getMedicinesApi, getMedicineById } from '../../../api';
+import { getMedicines as getMedicinesApi, getMedicineById, getPharmacyMedicines } from '../../../api';
 import { sortMedines } from '../../../helpers';
 
 export const getMedicines = ({ page, limit }, dispatch) => {
@@ -26,10 +26,10 @@ export const getOneMedicine = (mid, dispatch) => {
   });
 };
 
-export const getMedicinesHor = ({ page, limit }, dispatch) => {
+export const getMedicinesHor = dispatch => {
   console.log('Hellllloooooo=========');
   dispatch(setMedicinesHor({ status: 'pending' }));
-  getMedicinesApi({ page, limit }, (err, data) => {
+  getPharmacyMedicines((err, data) => {
     if (err) {
       dispatch(setMedicinesHor({ status: 'fail', message: 'Something went wrong.😞' }));
     } else {

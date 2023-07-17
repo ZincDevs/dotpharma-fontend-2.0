@@ -22,7 +22,7 @@ const ProductItem = React.lazy(() => import('../shared/ProductItem'));
 export default function Pharmacy() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const pharmacies = useSelector(state => state?.medicine?.medicinesHor, shallowEqual);
+  const pharmacies = useSelector(state => state?.medicine?.medicines?.medicines, shallowEqual);
   const axios = useAxiosPrivate();
   const profile = useSelector(state => state?.user?.MyProfile, shallowEqual);
   const handleAddToCart = (m_id, changeStatus) => {
@@ -48,6 +48,7 @@ export default function Pharmacy() {
   // const handleCloseAlert = () => {
   //   setShowAlert(false);
   // };
+  console.log('Pharmacies====', pharmacies);
   const handleRemoveFromCart = (e, changeStatus) => {
     const c_id = e.target?.id;
     changeStatus('pending');
@@ -63,7 +64,7 @@ export default function Pharmacy() {
       }
     });
   };
-  useEffect(() => { getMedicinesHor({ limit: 2, page: 2 }, dispatch); }, []);
+  useEffect(() => { getMedicinesHor(dispatch); }, []);
   return (
     <div className="qodef-content-grid flex flex-column pt-2" style={{ minHeight: '100%' }}>
       <ToastContainer />

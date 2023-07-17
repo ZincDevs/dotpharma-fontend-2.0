@@ -18,6 +18,15 @@ export const getMedicines = async (pagination, callback) => {
   }
 };
 
+export const getPharmacyMedicines = async callback => {
+  try {
+    const { data } = await axios.get(medicines_api());
+    callback(null, data);
+  } catch (error) {
+    callback(error);
+  }
+};
+
 export const getMedicineById = async (mid, callback) => {
   try {
     const { data } = await axios.get(medicines_one_api(mid));

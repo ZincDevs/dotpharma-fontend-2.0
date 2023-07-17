@@ -2,7 +2,7 @@ import {
   logIn, signUp, refreshToken, googleAuth, adminLogin,
 } from './_auth';
 import { verifyUser, resentVerification, getMyProfile } from './_user';
-import { getMedicines, getMedicineById } from './_medicine';
+import { getMedicines, getMedicineById, getPharmacyMedicines } from './_medicine';
 import {
   addToCart, removeCart, updateCart, removeCartById,
 } from './_cart';
@@ -41,4 +41,5 @@ export {
   verifypayment,
   getClinicInsurances,
   getAllInsurances,
+  getPharmacyMedicines,
 };
