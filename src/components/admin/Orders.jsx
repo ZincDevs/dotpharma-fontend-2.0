@@ -42,7 +42,7 @@ function Orders() {
 
   useEffect(() => {
     getOrders(dispatch, axios);
-    getMedicinesHor({ limit: 2, page: 2 }, dispatch);
+    getMedicinesHor(dispatch);
     getAllPatients(dispatch, axios);
   }, []);
   // console.log(products);
