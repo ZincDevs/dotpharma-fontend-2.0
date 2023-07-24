@@ -24,16 +24,17 @@ export default function ProductList({
   const dispatch = useDispatch();
   // const products = useSelector(state => state?.medicine?.medicines, shallowEqual);
   const { medicineCont } = useContext(MedicineContext);
-  const [page, setPage] = useState(1);
+  // const [page, setPage] = useState(1);
   const [totalRows, setTotalRows] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(16);
 
-  useEffect(() => { getMedicines({ limit: itemsPerPage, page }, dispatch); }, []);
+  useEffect(() => { getMedicines({ limit: itemsPerPage, page: 1 }, dispatch); }, []);
   const handlePageClick = event => {
-    setPage(Number(event.selected) + 1);
-    getMedicines({ limit: itemsPerPage, page }, dispatch);
+    console.log(`Page number===================${Number(event.selected) + 1}`);
+
+    //  setPage();
+    getMedicines({ limit: itemsPerPage, page: Number(event.selected) + 1 }, dispatch);
   };
-  console.log('Medicine cont=====', medicineCont);
   return (
     <div className="product-lis">
       <div className="d-flex flex-column">
