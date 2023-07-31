@@ -14,6 +14,7 @@ import { getAppointments } from './_appointment';
 import { getAllPatients } from './_patient';
 import { getAllOrders } from './_order';
 import { createPayment, verifypayment } from './_payment';
+import { getHealthTips, createHealthTip, deleteHealthTips } from './_healthTips';
 
 export {
   logIn,
@@ -42,4 +43,7 @@ export {
   getClinicInsurances,
   getAllInsurances,
   getPharmacyMedicines,
+  getHealthTips,
+  createHealthTip,
+  deleteHealthTips,
 };

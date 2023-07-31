@@ -48,7 +48,13 @@ function Sidebar() {
       iconName:
       'fa-solid fa-cart-shopping',
 
-    }];
+    },
+    {
+      name: 'Healthtips',
+      iconName:
+      'fa fa-lightbulb-o',
+    },
+  ];
 
   useEffect(() => {
     links.map((link, index) => {

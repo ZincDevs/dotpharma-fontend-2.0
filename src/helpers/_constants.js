@@ -50,4 +50,8 @@ export default {
   create_payment: '/payment/createpayment',
   verfy_payment: '/payment/verifypayment?ref=',
   add_clinic_insurance: 'clinics/addinsurancetoclinic/',
+  get_health_tips: '/healthtips/getall',
+  create_health_tip: '/healthtips/createnew',
+  delete_healthtip_api: hid => `/healthtips/deletetip/${hid}`,
+
 };

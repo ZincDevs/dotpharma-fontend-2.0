@@ -48,7 +48,6 @@ export default function Pharmacy() {
   // const handleCloseAlert = () => {
   //   setShowAlert(false);
   // };
-  console.log('Pharmacies====', pharmacies);
   const handleRemoveFromCart = (e, changeStatus) => {
     const c_id = e.target?.id;
     changeStatus('pending');

@@ -4,7 +4,6 @@ import ReactPaginate from 'react-paginate';
 
 function Pagination({ handlePageClick, totalRows, itemsPerPage }) {
   const pageCount = Math.ceil(totalRows / itemsPerPage);
-  console.log('Page count', pageCount);
   return (
     <ReactPaginate
       breakLabel="..."

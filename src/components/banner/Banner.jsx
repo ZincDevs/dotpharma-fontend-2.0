@@ -7,6 +7,7 @@
 /* eslint-disable react/jsx-indent */
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import key from 'uniqid';
 import Carousel from 'react-bootstrap/Carousel';
 import BannerItem from './items/Banner.item';
@@ -29,6 +30,7 @@ function Banner({ slides }) {
   const handleSelectSmall = (selectedIndex, e) => {
     setIndexSmall(selectedIndex);
   };
+  const hTips = useSelector(state => state.healthTips?.healthtips);
   return (
     <section
       className="elementor-section elementor-top-section elementor-element elementor-element-9262bb8 elementor-section-full_width qodef-elementor-content-grid elementor-section-height-default elementor-section-height-default"
@@ -102,29 +104,22 @@ function Banner({ slides }) {
                   <div className="elementor-widget-container">
                     <div className="qodef-shortcode qodef-m qodef-mobile-custom-margin-80 qodef-banner qodef-layout--link-button qodef-banner--light ">
                       <div className="qodef-m-image">
-                      <Carousel activeIndex={indexSmall} onSelect={handleSelectSmall}>
+                        <Carousel activeIndex={indexSmall} onSelect={handleSelectSmall}>
+                          {hTips ? hTips?.map(tip => (
                             <Carousel.Item>
                               <img
                                 className="d-block w-100"
-                                src={slideSmall1}
+                                src={tip?.h_image}
                                 alt="First slide"
                               />
                             </Carousel.Item>
+                          )) : (
                             <Carousel.Item>
-                              <img
-                                className="d-block w-100"
-                                src={slideSmall2}
-                                alt="Second slide"
-                              />
+                            Loading
                             </Carousel.Item>
-                            <Carousel.Item>
-                              <img
-                                className="d-block w-100"
-                                src={slideSmall3}
-                                alt="Third slide"
-                              />
-                            </Carousel.Item>
-                      </Carousel>
+                          )}
+
+                        </Carousel>
                       </div>
                     </div>
                   </div>

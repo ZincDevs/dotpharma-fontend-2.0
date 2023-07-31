@@ -30,8 +30,6 @@ export default function ProductList({
 
   useEffect(() => { getMedicines({ limit: itemsPerPage, page: 1 }, dispatch); }, []);
   const handlePageClick = event => {
-    console.log(`Page number===================${Number(event.selected) + 1}`);
-
     //  setPage();
     getMedicines({ limit: itemsPerPage, page: Number(event.selected) + 1 }, dispatch);
   };

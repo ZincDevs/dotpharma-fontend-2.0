@@ -99,3 +99,9 @@
 .active {
   background-color: rgba(51, 156, 79, 0.7);
 }
+
+.health-tips-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}

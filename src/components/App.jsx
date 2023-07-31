@@ -1,8 +1,8 @@
 /* eslint-disable no-lone-blocks */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import key from 'uniqid';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import '../assets/css/product.css';
 import '../assets/css/orderforms.css';
 import Elements from './shared/Index';
@@ -49,9 +49,18 @@ import Doctors from './doctors/Doctors';
 import AdminHome from './admin/AdminHome';
 import OrderPaymeny from './order/OrderPayment';
 import ClinicDetails from './admin/ClinicDetails';
+import { getHealthTips } from '../app/features/healthtips';
+import TipsList from './HealthTips/Tips';
+import HealthTipsManage from './admin/HealthTips';
 
 function App() {
   const user = useSelector(state => state?.user?.MyProfile);
+  const dispatch = useDispatch();
+  // Load health tips
+  useEffect(() => {
+    getHealthTips(dispatch);
+  }, []);
+
   return (
     <Routes>
       <Route path="/" key={key()} element={<Layout />}>
@@ -89,6 +98,7 @@ function App() {
               <Route path="clinics" key={key()} element={<Clinics />} />
               <Route path="Pharmacies" key={key()} element={<Pharmacies />} />
               <Route path="doctors" key={key()} element={<DoctorsAdmin />} />
+              <Route path="healthtips" key={key()} element={<HealthTipsManage />} />
               <Route
                 path="appointments"
                 key={key()}
@@ -107,6 +117,7 @@ function App() {
             <Route path="/product/:pid" key={key()} element={<ViewProduct />} />
             <Route path="/dot-clinics" key={key()} element={<ClinicsList />} />
             <Route path="/doctors" key={key()} element={<Doctors />} />
+            <Route path="/healhthtips" key={key()} element={<TipsList />} />
             <Route element={<RequireAuth />}>
               <Route path="/cart" key={key()} element={user?.cart?.length < 1 ? <Navigate to="/" /> : <Cart />} />
               <Route path="/orders" key={key()} element={<MakeOrdder />} />

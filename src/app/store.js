@@ -13,6 +13,7 @@ import {
 } from './features/clinic/_clinicSlice';
 import appointmentReducer from './features/appointment/_appointmentSlice';
 import patientReducer from './features/patient/_patientSlice';
+import healthTips from './features/healthtips/_healthTipsSlice';
 
 export const store = configureStore({
   reducer: {
@@ -29,6 +30,7 @@ export const store = configureStore({
     singleClinic: singleClinicReducer,
     clinicInsurances: clinicInsurancesReducer,
     allInsurances: allInsurancesReduser,
+    healthTips,
   },
   logger: true,
 }, applyMiddleware(thunk));
