@@ -88,6 +88,7 @@ function Orders() {
                 <th className="">Pharmacy</th>
                 <th className="">Paid</th>
                 <th className="">Payment reference</th>
+                <th className="">Order date</th>
                 <th className="">Status</th>
                 <th className="">Actions</th>
               </tr>
@@ -114,6 +115,7 @@ function Orders() {
                   <td className="" style={{ wordBreak: 'break-all' }}>{order.o_pharmacy ? order.o_pharmacy : 'N/A'}</td>
                   <td className="" style={{ wordBreak: 'break-all' }}>{order.o_paid ? 'YES' : 'NO'}</td>
                   <td className="" style={{ wordBreak: 'break-all' }}>{order.o_payment_ref}</td>
+                  <td className="" style={{ wordBreak: 'break-all' }}>{new Date(order.createdAt).toLocaleString('en-GB')}</td>
                   <td className="" style={{ wordBreak: 'break-all' }}>{order.o_status}</td>
 
                   <td className="">
