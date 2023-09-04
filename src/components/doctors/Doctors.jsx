@@ -7,7 +7,7 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import React, { Suspense, useEffect } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import key from 'uniqid';
 import { useNavigate } from 'react-router-dom';
@@ -16,11 +16,11 @@ import { ProductPlaceholder } from '../shared/Placeholder';
 // import ProductItem, { ProductItemHor } from '../shared/ProductItem';
 // import ProductItemHor from '../shared/ProductItemHor';
 import {
-  cardiology_b,
+  pharmacist,
   internal_medecine_b,
   radiology_b,
-  ophthalmology_b,
-  stomatology_b,
+  nutritionist,
+  genecologist,
 } from '../../assets';
 import { getDoctors } from '../../app/features/doctors';
 import DoctorItem from './DoctorItem';
@@ -36,19 +36,20 @@ export default function Doctors({
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const doctors = useSelector(state => state?.doctor?.doctors, shallowEqual);
+  const [currentFilter, setCurrentFilter] = useState('all');
   const availableClinics = [
-    { title: 'All', key: 'all' },
+    { title: 'All', key: 'All' },
     {
       title: 'Pharmacist',
       key: 'Pharmacist',
-      icon: ophthalmology_b,
+      icon: pharmacist,
     },
     {
       title: 'Gynecologist&Obstetrician',
       key: 'Gynecologist&Obstetrician',
-      icon: cardiology_b,
+      icon: genecologist,
     },
-    { title: 'Nutritionist', key: 'Nutritionist', icon: stomatology_b },
+    { title: 'Nutritionist', key: 'Nutritionist', icon: nutritionist },
     // { title: 'psychologist', key: 'psychologist', icon: radiology_b },
     // {
     //   title: 'Therapist',
@@ -135,7 +136,7 @@ export default function Doctors({
             className="py-2 px-4 text-white font-weight-normal button d-flex flex-column align-items-center justify-content-center gap-3 border"
             style={{
               backgroundColor: `${
-                clinic.key === 'currentFilter' ? '#207cc6' : 'white'
+                clinic.key === currentFilter ? '#207cc6' : 'white'
               }`,
               cursor: 'pointer',
               borderTopLeftRadius: `${index === 0 ? '7px' : ''}`,
@@ -147,7 +148,7 @@ export default function Doctors({
                 index + 1 === availableClinics.length ? '7px' : ''
               }`,
             }}
-            // onClick={() => setCurrentFilter(clinic.key)}
+            onClick={() => setCurrentFilter(clinic.key)}
           >
             {clinic?.icon && (
               <img
@@ -158,12 +159,12 @@ export default function Doctors({
                   maxHeight: '45px',
                   objectFit: 'contain',
                   filter: `${
-                    clinic.key === 'currentFilter'
+                    clinic.key === currentFilter
                       ? 'brightness(0) invert(1)'
                       : ''
                   }`,
                   WebkitFilter: `${
-                    clinic.key === 'currentFilter'
+                    clinic.key === currentFilter
                       ? 'brightness(0) invert(1)'
                       : ''
                   }`,

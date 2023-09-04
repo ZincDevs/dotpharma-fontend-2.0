@@ -14,6 +14,9 @@ import stomatology_info from './images/hc/stomatology_info.png';
 import radiology_info from './images/hc/radiology_clinika_info.png';
 import internal_medecine_info from './images/hc/neurology_info.png';
 import ophthalmology_info from './images/hc/opthalmology_info.png';
+import genecologist from './images/genecologist-speciality.svg';
+import pharmacist from './images/pharmacitst-speciality.svg';
+import nutritionist from './images/nutritionist-speciality.svg';
 
 export {
   logo,
@@ -29,4 +32,7 @@ export {
   radiology_info,
   internal_medecine_info,
   ophthalmology_info,
+  genecologist,
+  pharmacist,
+  nutritionist,
 };

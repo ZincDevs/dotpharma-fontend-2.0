@@ -146,6 +146,7 @@ function AddDoctorModal({
                     'Radiation oncology',
                     'Surgery',
                     'Urology',
+                    'Pharmacist',
                   ]}
                   placeholder="Select category"
                   onChange={e => setSpecialized(e.target.value)}
