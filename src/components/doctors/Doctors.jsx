@@ -174,7 +174,7 @@ export default function Doctors({
             <span
               style={{
                 color: `${
-                  clinic.key === 'currentFilter' ? 'white' : '#207cc6'
+                  clinic.key === currentFilter ? 'white' : '#207cc6'
                 }`,
               }}
             >
