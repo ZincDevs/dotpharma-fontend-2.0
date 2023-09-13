@@ -66,6 +66,7 @@ function Clinics() {
         <div className="">
           <table className="table table-striped">
             <thead>
+              <th className="">Patient name</th>
               <th className="">Patient Email</th>
               <th className="">Patient Telephone</th>
               <th className=" ">Disease</th>
@@ -79,16 +80,19 @@ function Clinics() {
               {appointments?.map(appointment => (
                 <tr className="" key={appointment.a_id} onClick={() => setAppointment(appointment)}>
                   <td className="" style={{ minHeight: '20px', wordBreak: 'break-all' }}>
-                    {foundPatient(patients, appointment.p_id)?.p_email}
+                    {appointment.p_name}
                   </td>
                   <td className="">
-                    {foundPatient(patients, appointment.p_id)?.p_phonenumber}
+                    {appointment.p_email}
+                  </td>
+                  <td className="">
+                    {appointment.p_phonenumber}
                   </td>
                   <td className="" style={{ minHeight: '15px' }}>
                     {appointment.a_desease}
                   </td>
-                  <td className="">{getDate(appointment.createdAt)}</td>
-                  <td className="">{getDate(appointment.a_date)}</td>
+                  <td className="">{new Date(appointment.createdAt).toLocaleString('en-GB')}</td>
+                  <td className="">{new Date(appointment.a_date).toLocaleString('en-GB')}</td>
                   <td className="">{appointment.a_status}</td>
                   <td className="">
                     <button

@@ -46,7 +46,7 @@ export default function Doctors({
     },
     {
       title: 'Gynecologist&Obstetrician',
-      key: 'Gynecologist&Obstetrician',
+      key: 'gynecologist and obstetrician',
       icon: genecologist,
     },
     { title: 'Nutritionist', key: 'Nutritionist', icon: nutritionist },
@@ -117,9 +117,21 @@ export default function Doctors({
     //   icon: internal_medecine_b,
     // },
   ];
+  const [filteredDoctors, setFilteredDoctors] = useState([]);
   useEffect(() => {
     getDoctors({ limit: 8 }, dispatch);
   }, []);
+
+  useEffect(() => {
+    setFilteredDoctors(doctors);
+  }, [doctors]);
+  useEffect(() => {
+    if (currentFilter === 'All') {
+      setFilteredDoctors(doctors);
+      return;
+    }
+    setFilteredDoctors(doctors?.filter(doctors => doctors.d_speciality.toLowerCase() === currentFilter.toLowerCase()));
+  }, [currentFilter]);
 
   return (
     <div
@@ -185,7 +197,7 @@ export default function Doctors({
       </div>
       <div className="qodef-shortcode qodef-m qodef-woo-shortcode qodef-woo-product-list qodef-item-layout--info-right qodef-content-increased--no qodef-grid qodef-layout--columns qodef-gutter--small qodef-col-num--2 qodef-item-layout--info-right qodef-filter--on qodef--no-bottom-space qodef-pagination--off qodef-responsive--custom qodef-col-num--1440--2 qodef-col-num--1366--2 qodef-col-num--1024--1 qodef-col-num--768--1 qodef-col-num--680--1 qodef-col-num--480--1">
         <div className="qodef-grid-inner clear">
-          {doctors?.map(doctor => (
+          {filteredDoctors?.map(doctor => (
             <DoctorItem doctor={doctor} />
           ))}
         </div>
